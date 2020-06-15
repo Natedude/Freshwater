@@ -7,9 +7,15 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.rout('/about')
+
+@app.route('/about')
 def about():
     return render_template("about_team.html")
+
+
+@app.route('/profile/<name>')
+def profile(name):
+    return render_template("about_" + name + ".html")
 
 
 if __name__ == "__main__":
