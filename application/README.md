@@ -18,7 +18,7 @@ You are free to organize the contents of the folder as you see fit. But remember
 
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Used to serve as REST API server
 * [Gunicorn](https://gunicorn.org) - Used to handle our HTTP server
-* [NGINX](https://nginx.org/en/) - Used to handle out HTTP proxy server
+* [NGINX](https://nginx.org/en/) - Used to handle our HTTP proxy server
 
 ------------------------------------------------------------
 
@@ -29,7 +29,7 @@ You are free to organize the contents of the folder as you see fit. But remember
 git clone https://github.com/CSC-648-SFSU/csc648-su20-team01.git
 ```
 
-## Instalation
+## Installation
 Install anaconda 3 in your system
 https://www.anaconda.com/products/individual
 
