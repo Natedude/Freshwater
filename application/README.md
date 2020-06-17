@@ -7,3 +7,57 @@ You are free to organize the contents of the folder as you see fit. But remember
 
 ## Please use the rest of the README.md to store important information for your team's application.
 
+
+# Our Website
+
+* [San Francisco State Of Code](http://35.226.13.177:8000)
+
+------------------------------------------------------------
+
+## Built With
+
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Used to serve as REST API server
+* [Gunicorn](https://gunicorn.org) - Used to handle our HTTP server
+* [NGINX](https://nginx.org/en/) - Used to handle out HTTP proxy server
+
+------------------------------------------------------------
+
+# Deploy on your computer
+
+## Clone the repository
+```
+git clone https://github.com/CSC-648-SFSU/csc648-su20-team01.git
+```
+
+## Instalation
+Install anaconda 3 in your system
+https://www.anaconda.com/products/individual
+
+Then create new environment
+
+```
+conda env create -f sfsc.yml
+```
+
+Activate the environment
+```
+conda activate sfsc
+```
+---------------------------------------
+## Deployment
+
+```
+gunicorn --bind 0.0.0.0:8000 wsgi:app
+```
+
+---------------------------------------
+
+## Contributors
+
+* [Luis Chumpitaz](https://github.com/luisdiaz1997) - Team Lead
+* [Garret](https://github.com/enigmatized) - Database & Backend
+* [Nathan Hildum](https://github.com/Natedude) - Backend, Discord Manager, & Documentation Editor
+* [Zachary](https://github.com/Area-Turtle) - Backend and SQL
+* [Gouri Jamakhandi](https://github.com/gourijamakhandi) - Front End Developer
+* [Xinwei Fan](https://github.com/IvyFan19) - Front End Developer
+* [Katthak Shah](https://github.com/KatthakS) - Full Stack Developer & Github Master
