@@ -18,7 +18,7 @@ ssh -i ssh_keys/souza -l souza 35.226.13.177
 
 4. Database URL or IP and port used.
 ```
-35.235.89.112
+35.235.89.112:8000
 ```
 5. Database username: root
 6. Database password: csc848-648-star
