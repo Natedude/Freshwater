@@ -13,6 +13,7 @@ souza
 3. Login to the google cloud
 
 ```
+chmod 400 ssh_keys/souza
 ssh -i ssh_keys/souza -l souza 35.226.13.177
 ```
 
