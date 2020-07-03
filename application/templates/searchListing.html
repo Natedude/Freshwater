@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title></title>
+
+    <script>
+  </script>
+  </head>
+
+
+  
+  <body>
+         {%if friends %}
+         <table>
+             <thead>
+                 <tr>
+                     <th> email</th>
+                 </tr>
+             </thead>
+            <tbody>
+                {% fpr row in friends %}
+                <tr>
+                    <td>{{  row.email  }}</td>
+                </tr>
+            </tbody>
+
+         </table>
+  </body>
+
+
+
+  <footer></footer>
