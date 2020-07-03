@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from app import config
+from res import config
 
 
 app = Flask(__name__)
