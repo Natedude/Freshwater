@@ -7,7 +7,7 @@ CLOUDSQL_PASSWORD = 'abc123'
 CLOUDSQL_DATABASE = 'testsql'
 CLOUDSQL_CONNECTION_NAME = 'my-project-250617:us-central1:testsql'
 LOCAL_SQLALCHEMY_DATABASE_URI = (
-    'mysql+pymysql://{nam}:{pas}@10.128.0.3:3306/{dbn}').format (
+    'mysql+pymysql://{nam}:{pas}@34.68.91.201:3306/{dbn}').format (
     nam=CLOUDSQL_USER,
     pas=CLOUDSQL_PASSWORD,
     dbn=CLOUDSQL_DATABASE,
