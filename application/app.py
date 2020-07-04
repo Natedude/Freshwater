@@ -5,7 +5,7 @@ from res import config
 
 app = Flask(__name__)
 #app.config.from_object (config)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/CSC'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/CSC'
 db = SQLAlchemy (app)
 
 
