@@ -34,17 +34,16 @@ def home():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template("searchListing.html")
-    # if request.method=='POST':
-    #     form = request.form
-    #     search_value = form['search_value']
-    #     if search_value == "":
-    #         all_listings = Users.query.all()#Variable name listing, but is returning all Users
-    #         return render_template('searchListing.html', listing=all_listings, pageTitle='All Users')#TODO reproduce entire Database
-    #     else:
-    #         search = "%{0}%".format(search_value)
-    #         results = Users.query.filter(Users.email.like(search)).all()
-    #         return render_template('searchListing.html', listing=results, )
+    if request.method=='POST':
+         form = request.form
+         search_value = form['search_string']
+         if search_value == "":
+             all_listings = Users.query.all()#Variable name listing, but is returning all Users
+             return render_template('searchListing.html', listing=all_listings, pageTitle='All Users')
+         else:
+             search = "%{}%".format(search_value)
+             results = Users.query.filter(Users.email.like(search)).all()
+             return render_template('searchListing.html', listing=results )
     
 
 
