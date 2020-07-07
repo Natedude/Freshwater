@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
-from res import config
+
 
 
 app = Flask(__name__)
