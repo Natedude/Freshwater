@@ -2,19 +2,13 @@ from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
 
 
-
 app = Flask(__name__)
-#app.config.from_object (config)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/CSC'
 db = SQLAlchemy (app)
 
 
 
-
-
-
-
-class Users(db.Model):
+class Users(db.Model): #Main User Db All registered Users will be stored here
     __tablename__="Users"
     id=db.Column(db.Integer, primary_key=True)
     email=db.Column(db.String)
@@ -25,6 +19,21 @@ class Users(db.Model):
 
     def __str__(self):
         return "(s)Username: " + self.email + " : " + self.password
+
+
+class Image(db.Model): #Db where all Image paths are stored
+    __tablename__="Image" #Name of table
+    id=db.Column(db.Integer, primary_key=True) 
+    fkIdUser = Column(db.Integer) #All images must be associted with the Onwer(/User)'s ID
+    fkEmail=db.Column(db.String)  #Email can also be used as a forigen key
+    fkIdPost=Column(db.Integer) #Forgien Key for the associated Post
+    sellOrRent=db.Column(db.String) #Informs us if a sell or Someone looking to rent our a unit
+    path=db.Column(db.String) #Relative file path of image
+
+    def dict(self):
+        return {"fkEmail" : self.fkEmail, "path" : self.path}
+
+
 
 
 # class Post(db.Model):
@@ -58,7 +67,11 @@ def search():
          else:
              search = "%{}%".format(search_value)
              results = Users.query.filter(Users.email.like(search)).all()
-             return render_template('searchListing.html', listing=results, title='test result page' )
+             images = Image.query.all()  #order_by(FlashcardQuestion.ID)
+             lst = [ x.dict() for x in images]
+             lst.sort(key=lambda x: x["fkEmail"])
+             data = json.dumps(lst)
+             return render_template('searchListing.html', listing=results, title='test result page', lis =lst, images=data )
     
 
 

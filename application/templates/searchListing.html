@@ -3,9 +3,12 @@
 
   <head>
     <title>{{ title }}</title>
-
     <script>
-  </script>
+            var text =  JSON.parse({{ images|tojson|safe }});
+            var question = document.getElementById("fkEmail");
+            var image= document.getElementById("image");
+        
+    </script>
   </head>
 
 
@@ -18,14 +21,22 @@
             <tr>
                 <th>email</th>
                 <th>password</th>
+                <th>Has Image</th>
             </tr>
         </thead>
     </table>
     <tbody>
         {%for row in listing %}
         <tr>
-            <td>{{row.email}}</td>
-            <td>{{row.password}}</td>
+            <td>{{ row.email }}</td>
+            <td>{{ row.password }}</td>
+            {% for r in images %}
+            <td>{{ if r.fkemail == row.email  }} 
+                {{r.path }}
+            </td>
+            {% endif %}
+            {% endfor %}
+            <br>
         </tr>
         {% endfor %}
     </tbody>
