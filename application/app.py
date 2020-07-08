@@ -71,7 +71,7 @@ def search():
              #st = [ x.dict() for x in images]
              #lst.sort(key=lambda x: x["fkEmail"])
              #data = json.dumps(lst)
-             return render_template('searchListing.html', listing=results, title='test result page',  images=images.dict() )
+             return render_template('searchListing.html', listing=results, title='test result page',  images=jasonify(images) )
     
 
 
