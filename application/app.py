@@ -27,18 +27,18 @@ class Users(db.Model):
         return "(s)Username: " + self.email + " : " + self.password
 
 
-class Post(db.Model):
-    __tablename__="Post"
-    id=db.Column(db.Integer, primary_key=True)
-    fkid=db.Column(db.Integer)
-    fkemail=db.Column(db.String)
-    image=db.Column(db.string)
+# class Post(db.Model):
+#     __tablename__="Post"
+#     id=db.Column(db.Integer, primary_key=True)
+#     fkid=db.Column(db.Integer)
+#     fkemail=db.Column(db.String)
+#     image=db.Column(db.string)
 
-    def __repr__(self):
-        return "(r)Username: " + self.email + " : " + str(self.image)
+#     def __repr__(self):
+#         return "(r)Username: " + self.email + " : " + str(self.image)
 
-    def __str__(self):
-        return "(s)Username: " + self.email + " : " + self.image
+#     def __str__(self):
+#         return "(s)Username: " + self.email + " : " + self.image
 
 
 
