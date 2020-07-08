@@ -30,6 +30,12 @@ class Image(db.Model): #Db where all Image paths are stored
     sellOrRent=db.Column(db.String) #Informs us if a sell or Someone looking to rent our a unit
     path=db.Column(db.String) #Relative file path of image
 
+    def __repr__(self):
+        return "(r)fkEmail: " + self.fkEmail + " : " + str(self.path)
+
+    def __str__(self):
+        return "(s)fkEmail: " + self.fkEmail + " : " + self.path
+
     def dict(self):
         return {"fkEmail" : self.fkEmail, "path" : self.path}
 
