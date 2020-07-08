@@ -24,9 +24,9 @@ class Users(db.Model): #Main User Db All registered Users will be stored here
 class Image(db.Model): #Db where all Image paths are stored
     __tablename__="Image" #Name of table
     id=db.Column(db.Integer, primary_key=True) 
-    fkIdUser = Column(db.Integer) #All images must be associted with the Onwer(/User)'s ID
+    fkIdUser=db.Column(db.Integer) #All images must be associted with the Onwer(/User)'s ID
     fkEmail=db.Column(db.String)  #Email can also be used as a forigen key
-    fkIdPost=Column(db.Integer) #Forgien Key for the associated Post
+    fkIdPost=db.Column(db.Integer) #Forgien Key for the associated Post
     sellOrRent=db.Column(db.String) #Informs us if a sell or Someone looking to rent our a unit
     path=db.Column(db.String) #Relative file path of image
 
