@@ -31,10 +31,9 @@
             <td>{{ row.email }}</td>
             <td>{{ row.password }}</td>
             {% for r in images %}
-            <td>{{ if r.fkEmail == row.email  }} 
-                {{r.path }}
-            </td>
-            {% endif %}
+                {% if r.fkEmail == row.email  %} 
+                    <td>{{ r.path }}</td>    
+                {% endif %}
             {% endfor %}
             <br>
         </tr>
