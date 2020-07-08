@@ -75,7 +75,7 @@ def search():
          search_value = form['search_string']
          if search_value == "":
              all_listings = Users.query.all()#Variable name listing, but is returning all Users
-             return render_template('searchListing.html', listing=all_listings, pageTitle='All Users')
+             return render_template('searchListing.html', listing=all_listings, title='All Users', images=None )
          else:
              search = "%{}%".format(search_value)
              results = Users.query.filter(Users.email.like(search)).all()
