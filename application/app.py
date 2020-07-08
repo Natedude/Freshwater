@@ -72,17 +72,17 @@ def home():
 def search():
     if request.method=='POST':
          form = request.form
-         search_value = form['search_string']
-         if search_value == "":
+         search_value = form['search_string']#Variable typed into website to search
+         if search_value == "":#If Empty prints entire DB TODO: print all DBs
              all_listings = Users.query.all()#Variable name listing, but is returning all Users
              return render_template('searchListing.html', listing=all_listings, title='All Users', images=None )
          else:
              search = "%{}%".format(search_value)
-             results = Users.query.filter(Users.email.like(search)).all()
-             images = Image.query.all() 
-             lst = [ x.dict() for x in images]
-             lst.sort(key=lambda x: x["id"])
-             data = json.dumps(lst)
+             results = Users.query.filter(Users.email.like(search)).all()#Apply a like sql search on email names
+             images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
+             lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
+             lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
+             data = json.dumps(lst)#Convert to Json String
              return render_template('searchListing.html', listing=results, title='test result page',  images=json.loads(data) )
     
 
