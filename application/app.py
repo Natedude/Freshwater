@@ -1,6 +1,8 @@
 from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
 import json
+from marshmallow import Schema, fields, ValidationError, pre_load
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/CSC'
@@ -82,7 +84,7 @@ def search():
              lst = [ x.dict() for x in images]
              lst.sort(key=lambda x: x["id"])
              data = json.dumps(lst)
-             return render_template('searchListing.html', listing=results, title='test result page',  images=images )
+             return render_template('searchListing.html', listing=results, title='test result page',  images=data )
     
 
 
