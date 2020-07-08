@@ -37,7 +37,7 @@
                     {% for key, value in dict.items() %}
                             {% if key|e == "fkEmail"  %}
                                 {% if value|e == row.email  %} 
-                                    <td> <img src="{{ dict['path'] }}"> {{ dict['path'] }} </td> 
+                                    <td> <img src={{ dict[path] }}> {{ dict['path'] }} </td> 
                                 {% endif %}
                             {% else %}
                             <!--<td>{{ value|e }} test</td>-->   
