@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, g, jasonify
+from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -68,10 +68,10 @@ def search():
              search = "%{}%".format(search_value)
              results = Users.query.filter(Users.email.like(search)).all()
              images = Image.query.all() 
-             #st = [ x.dict() for x in images]
-             #lst.sort(key=lambda x: x["fkEmail"])
-             #data = json.dumps(lst)
-             return render_template('searchListing.html', listing=results, title='test result page',  images=jasonify(images) )
+             st = [ x.dict() for x in images]
+             lst.sort(key=lambda x: x["fkEmail"])
+             data = json.dumps(lst)
+             return render_template('searchListing.html', listing=results, title='test result page',  images=data )
     
 
 
