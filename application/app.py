@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/CSC'
