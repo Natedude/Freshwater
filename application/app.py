@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect, g
+from flask import Flask, render_template, session, request, redirect, g, jasonify
 from flask_sqlalchemy import SQLAlchemy
 import json
 
