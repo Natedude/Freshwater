@@ -11,7 +11,7 @@
 
   
 <h3>{{ title }}</h3>
-{% if lsiting %}
+{% if listing %}
 
     <table>
         <thead>
@@ -22,7 +22,7 @@
         </thead>
     </table>
     <tbody>
-        {%for row in lsiting %}
+        {%for row in listing %}
         <tr>
             <td>{{row.email}}</td>
             <td>{{row.password}}</td>
