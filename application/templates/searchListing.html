@@ -34,11 +34,15 @@
             <td>{{ row.password }}</td>
             {% if images %}
                 {% for dict in images %}
-                        {% if dict['fkEmail'] == row.email  %} 
-                        <td>{{ dict['path'] }} yes</td> 
-                         {% else %}
-                         <td>{{ dict }} test</td>   
-                        {% endif %}
+                    {% for key, value in dict %}
+                            {% if key|e == "fkEmail"  %}
+                                {% if value|e == row.email  %} 
+                                    <td> dict[path]  yes</td> 
+                                {% endif %}
+                            {% else %}
+                            <td>{{ value|e }} test</td>   
+                            {% endif %}
+                    {% endfor %}
                 {% endfor %}
             {% endif %}
             <br>
