@@ -63,7 +63,6 @@ class Image(db.Model): #Db where all Image paths are stored
 #         return "(s)Username: " + self.email + " : " + self.image
 
 
-
 @app.route('/', methods =['GET', 'POST'])
 def home():
     return render_template("home.html")
