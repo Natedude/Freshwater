@@ -35,9 +35,9 @@
             {% if images %}
                 {% for dict in images %}
                         {% if dict['fkEmail'] == row.email  %} 
-                        <td>{{ rows['path'] }} yes</td> -->
+                        <td>{{ dict['path'] }} yes</td> 
                          {% else %}
-                         <td>Do nothing</td>   
+                         <td>{{ dict['fkEmail']  }} test</td>   
                         {% endif %}
                 {% endfor %}
             {% endif %}
