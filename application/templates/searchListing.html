@@ -16,6 +16,7 @@
 <h3>{{ title }}</h3>
 {% if listing %}
 
+<h1>{{ images }}</h1>
     <table>
         <thead>
             <tr>
@@ -33,7 +34,7 @@
             {% if images %}
                 {% for rows in images %}
                     {% if rows.fkEmail == row.email  %} 
-                        <td>{{ rows.path }}</td>    
+                        <td>{{ rows.path }} yes</td>    
                     {% endif %}
                 {% endfor %}
             {% endif %}
