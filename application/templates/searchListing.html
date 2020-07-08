@@ -34,7 +34,7 @@
             <td>{{ row.password }}</td>
             {% if images %}
                 {% for rows in images %}
-                    {% if rows.fkEmail == row.email  %} 
+                    {% if rows['fkEmail'] == row.email  %} 
                         <td>{{ rows.path }} yes</td>    
                     {% endif %}
                 {% endfor %}
