@@ -68,10 +68,10 @@ def search():
              search = "%{}%".format(search_value)
              results = Users.query.filter(Users.email.like(search)).all()
              images = Image.query.all() 
-             lst = [ x.dict() for x in images]
-             lst.sort(key=lambda x: x["fkEmail"])
+             #st = [ x.dict() for x in images]
+             #lst.sort(key=lambda x: x["fkEmail"])
              #data = json.dumps(lst)
-             return render_template('searchListing.html', listing=results, title='test result page', lis =lst, images=images )
+             return render_template('searchListing.html', listing=results, title='test result page',  images=images )
     
 
 
