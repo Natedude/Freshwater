@@ -27,6 +27,20 @@ class Users(db.Model):
         return "(s)Username: " + self.email + " : " + self.password
 
 
+class Post(db.Model):
+    __tablename__="Post"
+    id=db.Column(db.Integer, primary_key=True)
+    fkid=db.Column(db.Integer)
+    fkemail=db.Column(db.String)
+    image=db.Column(db.string)
+
+    def __repr__(self):
+        return "(r)Username: " + self.email + " : " + str(self.image)
+
+    def __str__(self):
+        return "(s)Username: " + self.email + " : " + self.image
+
+
 
 @app.route('/', methods =['GET', 'POST'])
 def home():
@@ -44,7 +58,7 @@ def search():
          else:
              search = "%{}%".format(search_value)
              results = Users.query.filter(Users.email.like(search)).all()
-             return render_template('searchListing.html', listing=results )
+             return render_template('searchListing.html', listing=results, title='test result page' )
     
 
 

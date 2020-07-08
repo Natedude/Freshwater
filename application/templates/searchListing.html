@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>Tester</title>
+    <title>{{ title }}</title>
 
     <script>
   </script>
@@ -10,8 +10,24 @@
 
 
   
-<h3>{{ listing }}</h3>
+<h3>{{ title }}</h3>
+{% if lsiting %}
 
+    <table>
+        <thead>
+            <tr>
+                <th>email</th>
+                <th>password</th>
+            </tr>
+        </thead>
+    </table>
+    <tbody>
+        {%for row in lsiting %}
+        <tr>
+            <td>{{row.email}}</td>
+            <td>{{row.password}}</td>
+        </tr>
+    </tbody>
 
 
   <footer></footer>
