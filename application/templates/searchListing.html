@@ -34,7 +34,7 @@
             <td>{{ row.password }}</td>
             {% if images %}
                 {% for dict in images %}
-                    {% for key, value in dict %}
+                    {% for key, value in dict.items() %}
                             {% if key|e == "fkEmail"  %}
                                 {% if value|e == row.email  %} 
                                     <td> dict[path]  yes</td> 
