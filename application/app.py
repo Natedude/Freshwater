@@ -145,7 +145,7 @@ def search2():
                 lstImages=[]
                 for postResult in results:
                     for dictionImage in lst:
-                        if dictionImage['fkIdPost'] == postResult['id']:
+                        if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
                             lstImages.append(dictionImage)
                 if len(lstImages)==0:
                     return render_template('searchListing.html', listing=results, title='test result page',  images=None )
