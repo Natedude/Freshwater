@@ -31,6 +31,13 @@ class Message(db.Model):
     message=db.Column(db.String)
     timeCreated=db.Column(db.DateTime, default=datetime.utcnow)
 
+    def dict(self):
+        return {"id" : self.id, 
+        "fkSender" : self.fkSender,
+        "fkReciever" : self.fkReciever,
+        "message" : self.message,
+        "timeCreated" : self.timeCreated}
+
 
 
 class Image(db.Model): #Db where all Image paths are stored
@@ -78,6 +85,22 @@ class Post(db.Model):
     petsAllowed=db.Column(db.Integer) 
     postalCode=db.Column(db.Integer)
 
+    def dict(self):
+        return {"id" : self.id, 
+        "fkId" : self.fkId,
+        "fkEmail" : self.fkEmail,
+        "sellOrRent" : self.sellOrRent,
+        "city" : self.city, 
+        "street" : self.street,
+        "houseNum" : self.houseNum,
+        "gps" : self.gps,
+        "description" : self.description,
+        "price" : self.price, 
+        "roomNum" : self.roomNum,
+        "adminAppr" : self.adminAppr,
+        "timeCreated" : self.timeCreated, 
+        "petsAllowed" : self.petsAllowed,
+        "postalCode" : self.postalCode}
 
 
 @app.route('/', methods =['GET', 'POST'])
