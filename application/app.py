@@ -132,12 +132,12 @@ def search2():
          search_value = form['search_string']#Variable typed into website to search
          if search_value == "":#If Empty prints entire DB TODO: print all DBs
              all_listings = Users.query.all()#Variable name listing, but is returning all Users
-             return render_template('searchListing.html', listing=all_listings, title='All Users', images=None )
+             return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
          else:
              search = "%{}%".format(search_value)
              results = Post.query.filter(Post.description.like(search)).all()#Apply a like sql search on email names
              if len(results) == 0:
-                return render_template('searchListing.html', listing=None, title='Nothing found Search Empty',  images=None ) 
+                return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
              else:
                 images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
                 lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
@@ -148,10 +148,10 @@ def search2():
                         if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
                             lstImages.append(dictionImage)
                 if len(lstImages)==0:
-                    return render_template('searchListing.html', listing=results, title='test result page',  images=None )
+                    return render_template('searchListing2.html', listing=results, title='test result page',  images=None )
                 else:
                     data = json.dumps(lstImages)#Convert to Json String            
-                    return render_template('searchListing.html', listing=results, title='test result page',  images=json.loads(data) )
+                    return render_template('searchListing2.html', listing=results, title='test result page',  images=json.loads(data) )
 
 
 
