@@ -35,8 +35,8 @@
             {% if images %}
                 {% for dict in images %}
                     {% for key, value in dict.items() %}
-                            {% if key|e == "fkIdPost"  %}
-                                {% if value|e == row.id  %} 
+                            {% if key|e == "fkEmail"  %}
+                                {% if value|e == row.email  %} 
                                     {% set img = dict['path'] %}
                                     <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
                                 {% endif %}
