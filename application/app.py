@@ -192,7 +192,8 @@ def search3():
                             "petsAllowed" : postResult.petsAllowed,
                             "postalCode" : postResult.postalCode,
                             'path': dictionImage['path']})
-                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(frontendReadyPost) )
+                data=json.dumps(frontendReadyPost)
+                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(data) )
 
 
 
