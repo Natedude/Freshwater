@@ -171,11 +171,11 @@ def search3():
                 #data = json.dumps( self.postMaker(results, Image) )#Convert to Json String            
                 images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
                 lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
-                imgList = lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
+                lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
                 frontendReadyPost=[]
                 dbPost=results
                 for postResult in dbPost:#Loops through all posts
-                    for dictionImage in imgList:
+                    for dictionImage in lst:
                         if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
                             frontendReadyPost.append({
                             'email': postResult.fkEmail,
