@@ -188,7 +188,6 @@ def search3():
                             "price" : postResult.price, 
                             "roomNum" : postResult.roomNum,
                             "adminAppr" : postResult.adminAppr,
-                            "timeCreated" : postResult.timeCreated, 
                             "petsAllowed" : postResult.petsAllowed,
                             "postalCode" : postResult.postalCode,
                             'path': dictionImage['path']})
