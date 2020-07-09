@@ -157,19 +157,42 @@ def search2():
 @app.route('/search3', methods=['GET', 'POST'])
 def search3():
     if request.method=='POST':
-         form = request.form
-         search_value = form['search_string']#Variable typed into website to search
-         if search_value == "":#If Empty prints entire DB TODO: print all DBs
-             all_listings = Users.query.all()#Variable name listing, but is returning all Users
-             return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
-         else:
-             search = "%{}%".format(search_value)
-             results = Post.query.filter(Post.description.like(search)).all()#Apply a like sql search on email names
-             if len(results) == 0:
+        form = request.form
+        search_value = form['search_string']#Variable typed into website to search
+        if search_value == "":#If Empty prints entire DB TODO: print all DBs
+            all_listings = Users.query.all()#Variable name listing, but is returning all Users
+            return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
+        else:
+            search = "%{}%".format(search_value)
+            results = Post.query.filter(Post.description.like(search)).all()#Apply a like sql search on email names
+            if len(results) == 0:
                 return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
-             else:
-                data = json.dumps(self.postMaker(results, Image))#Convert to Json String            
-                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(data) )
+            else:
+                #data = json.dumps( self.postMaker(results, Image) )#Convert to Json String            
+                images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
+                lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
+                imgList = lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
+                frontendReadyPost=[]
+                dbPost=results
+                for postResult in dbPost:#Loops through all posts
+                    for dictionImage in imgList:
+                        if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
+                            frontendReadyPost.append({
+                            'email': postResult.fkEmail,
+                            "sellOrRent" : postResult.sellOrRent,
+                            "city" : postResult.city, 
+                            "street" : postResult.street,
+                            "houseNum" : postResult.houseNum,
+                            "gps" : postResult.gps,
+                            "description" : postResult.description,
+                            "price" : postResult.price, 
+                            "roomNum" : postResult.roomNum,
+                            "adminAppr" : postResult.adminAppr,
+                            "timeCreated" : postResult.timeCreated, 
+                            "petsAllowed" : postResult.petsAllowed,
+                            "postalCode" : postResult.postalCode,
+                            'path': dictionImage['path']})
+                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(frontendReadyPost) )
 
 
 
@@ -195,7 +218,6 @@ def postMaker(self, dbPost, dbImage):
                     "postalCode" : postResult.postalCode,
                     'path': dictionImage['path']})    
     return frontendReadyPost
-
 
 
 def dbTolst(self, db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
