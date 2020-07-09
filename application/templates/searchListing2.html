@@ -21,22 +21,22 @@
     <table>
         <thead>
             <tr>
-                <th>email</th>
-                <th>password</th>
-                <th>Has Image</th>
+                <th>id</th>
+                <th>description</th>
+                <th>has Image</th>
             </tr>
         </thead>
     </table>
     <tbody>
         {%for row in listing %}
         <tr>
-            <td>{{ row.email }}</td>
-            <td>{{ row.password }}</td>
+            <td>{{ row.id }}</td>
+            <td>{{ row.description }}</td>
             {% if images %}
                 {% for dict in images %}
                     {% for key, value in dict.items() %}
-                            {% if key|e == "fkEmail"  %}
-                                {% if value|e == row.email  %} 
+                            {% if key|e == "fkIdPost"  %}
+                                {% if value|e == row.id  %} 
                                     {% set img = dict['path'] %}
                                     <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
                                 {% endif %}
