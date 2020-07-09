@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect, g
 from flask_sqlalchemy import SQLAlchemy
 import json
 from marshmallow import Schema, fields, ValidationError, pre_load
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/CSC'
@@ -21,6 +21,16 @@ class Users(db.Model): #Main User Db All registered Users will be stored here
 
     def __str__(self):
         return "(s)Username: " + self.email + " : " + self.password
+
+
+
+class Message(db.Model):
+    __tablename__="Message"
+    id=db.Column(db.Integer, primary_key=True)
+    fkSender=db.Column(db.String)
+    fkReciever=db.Column(db.String)
+    message=db.Column(db.String)
+    timeCreated=db.Column(db.DateTime, default=datetime.utcnow)
 
 
 class Image(db.Model): #Db where all Image paths are stored
@@ -84,7 +94,15 @@ def search():
              lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
              data = json.dumps(lst)#Convert to Json String
              return render_template('searchListing.html', listing=results, title='test result page',  images=json.loads(data) )
-    
+
+
+def dbTolst(self, db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
+    entireDb = db.query.all()
+    lst = [ x.dict() for x in entireDb]#make sure db in use has working dict function within its class
+    lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
+    data = json.dumps(lst)#Convert to Json String
+    return json.loads(data)
+
 
 
 @app.route('/searchListing')
