@@ -192,7 +192,7 @@ def search3():
                             "postalCode" : postResult.postalCode,
                             'path': dictionImage['path']})
                 data=json.dumps(frontendReadyPost)
-                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(data) )
+                return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) )
 
 
 
