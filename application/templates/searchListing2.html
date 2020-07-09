@@ -39,6 +39,8 @@
                             Am I getting here?
                             a {{ row.id }} b {{ row['id'] }} c {{ value|e }} d
                                 {% if value|e == row.id  %} 
+                                    Am I getting here
+                                    e{{ dict.path }} f {{ dict['path'] }} g
                                     {% set img = dict['path'] %}
                                     <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
                                 {% endif %}
