@@ -37,6 +37,7 @@
                     {% for key, value in dict.items() %}
                             {% if key|e == "fkIdPost"  %}
                             Am I getting here?
+                            a {{ row.id }} b {{ row['id'] }} c {{ vale|e }}
                                 {% if value|e == row.id  %} 
                                     {% set img = dict['path'] %}
                                     <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
