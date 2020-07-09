@@ -169,7 +169,7 @@ def search3():
                 return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
              else:
                 data = json.dumps(self.postMaker(results, Image))#Convert to Json String            
-                return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) )
+                return render_template('searchListing2.html', listing=None, title='test result page',  images=json.loads(data) )
 
 
 
