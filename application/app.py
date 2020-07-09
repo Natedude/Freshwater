@@ -23,7 +23,6 @@ class Users(db.Model): #Main User Db All registered Users will be stored here
         return "(s)Username: " + self.email + " : " + self.password
 
 
-
 class Message(db.Model):
     __tablename__="Message"
     id=db.Column(db.Integer, primary_key=True)
@@ -31,6 +30,7 @@ class Message(db.Model):
     fkReciever=db.Column(db.String)
     message=db.Column(db.String)
     timeCreated=db.Column(db.DateTime, default=datetime.utcnow)
+
 
 
 class Image(db.Model): #Db where all Image paths are stored
@@ -59,18 +59,25 @@ class Image(db.Model): #Db where all Image paths are stored
 
 
 
-# class Post(db.Model):
-#     __tablename__="Post"
-#     id=db.Column(db.Integer, primary_key=True)
-#     fkid=db.Column(db.Integer)
-#     fkemail=db.Column(db.String)
-#     image=db.Column(db.string)
 
-#     def __repr__(self):
-#         return "(r)Username: " + self.email + " : " + str(self.image)
+class Post(db.Model):
+    __tablename__="Post"
+    id=db.Column(db.Integer, primary_key=True)
+    fkId=db.Column(db.Integer)
+    fkEmail=db.Column(db.String)
+    sellOrRent=db.Column(db.string)
+    city=db.Column(db.string) 
+    street=db.Column(db.string) 
+    houseNum=db.Column(db.Integer) 
+    gps=db.Column(db.string) 
+    description=db.Column(db.string) 
+    price=db.Column(db.Integer) 
+    roomNum=db.Column(db.Integer) 
+    adminAppr=db.Column(db.Integer) 
+    timeCreated=db.Column(db.DateTime, default=datetime.utcnow) 
+    petsAllowed=db.Column(db.Integer) 
+    postalCode=db.Column(db.Integer)
 
-#     def __str__(self):
-#         return "(s)Username: " + self.email + " : " + self.image
 
 
 @app.route('/', methods =['GET', 'POST'])
