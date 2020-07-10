@@ -42,7 +42,7 @@
     <!--  -->
     <!--  -->
 <!-- Dropdown --> 
-  <section class="container2" style="width: 80%;
+<form method="POST" class="container2" style="width: 80%;
   height: 200px;
   background: aqua;
   margin: auto;
@@ -51,7 +51,8 @@
     height: 200px;
     background: red;
     float: left;">
-      <select id='selUser' style='width: 200px;'>
+    
+      <select id='buyOrRent' style='width: 200px;'>
         <option value='0'>Rent or Buy?</option> 
         <option value='1'>Rent</option> 
         <option value='2'>Buy</option> 
@@ -60,7 +61,7 @@
       <div id='result'></div>
       <!--  -->
       <!-- Dropdown 2--> 
-      <select id='selUser2' style='width: 200px;'>
+      <select id='numRooms' style='width: 200px;'>
         <option value='0'># of Bedrooms</option> 
         <option value='1'>1</option> 
         <option value='2'>2</option>
@@ -78,13 +79,13 @@
     <div class="search" style ="margin-left: 15%;
     height: 200px;
     background: black;">
-      <form method="POST">
+      
         <input type="text" autofocus="autofocus" name="search_string" placeholder="Search..">
         <br>
-        <input type="submit" formaction="/search3" value="Submit">
+        <input type="submit" formaction="/search4 value="Submit">
       </form>
     </div>
-  </section>
+  
     <!-- <div class="container">
       <h1>CSC 848-648</h1>
       <h2>Team Members</h2>

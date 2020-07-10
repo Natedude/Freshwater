@@ -154,6 +154,46 @@ def search2():
                     return render_template('searchListing2.html', listing=results, title='test result page',  images=json.loads(data) )
 
 
+def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None):
+
+    listingTypedRes = Listing.query.filter(Listing.description.like(userTypedSearch))
+    if numRooms != None:
+        listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
+    #ToDO Create a between a between for price
+    return listingTypedRes.all() 
+
+@app.route('/API/Search', methods=['GET', 'POST'])
+def searchAPI():
+    if request.method=='POST':
+        form = request.form
+        userTypedSearch = form['search_string']#Variable typed into website to search
+        numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
+        buyOrRent = form['buyOrRent']
+        if buyOrRent == '0':
+            buyOrRent=None
+        results = backendSearch(numRooms=numRooms, buyOrRent=buyOrRent, userTypedSearch=userTypedSearch, price=None)#ToDO change price
+        return results
+    else:
+        return '[]'
+
+@app.route('/search4', methods=['GET', 'POST'])
+def search4():
+    if request.method=='POST':
+        form = request.form
+        userTypedSearch = form['search_string']#Variable typed into website to search
+        numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
+        buyOrRent = form['buyOrRent']
+        if buyOrRent == '0':
+            buyOrRent=None
+        results = backendSearch(numRooms=numRooms, buyOrRent=buyOrRent, userTypedSearch=userTypedSearch, price=None)#ToDO change price
+        return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(results) ) 
+    else:
+        return '[]'
+ 
+        
+
+
+
 @app.route('/search3', methods=['GET', 'POST'])
 def search3():
     if request.method=='POST':
@@ -196,8 +236,8 @@ def search3():
 
 
 
-def postMaker(self, dbPost, dbImage):
-    imgList = self.dbTolst(dbImage)#Returns a list of dictionaries
+def postMaker(dbPost, dbImage):
+    imgList = dbTolst(dbImage)#Returns a list of dictionaries
     frontendReadyPost=[]
     for postResult in dbPost:#Loops through all posts
         for dictionImage in imgList:
@@ -220,7 +260,7 @@ def postMaker(self, dbPost, dbImage):
     return frontendReadyPost
 
 
-def dbTolst(self, db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
+def dbTolst(db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
     entireDb = db.query.all()
     lst = [ x.dict() for x in entireDb]#make sure db in use has working dict function within its class
     lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
