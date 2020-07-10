@@ -67,8 +67,8 @@ class Image(db.Model): #Db where all Image paths are stored
 
 
 
-class Post(db.Model):
-    __tablename__="Post"
+class Listing(db.Model):
+    __tablename__="Listing"
     id=db.Column(db.Integer, primary_key=True)
     fkId=db.Column(db.Integer)
     fkEmail=db.Column(db.String)
@@ -135,7 +135,7 @@ def search2():
              return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
          else:
              search = "%{}%".format(search_value)
-             results = Post.query.filter(Post.description.like(search)).all()#Apply a like sql search on email names
+             results = Listing.query.filter(Listing.description.like(search)).all()#Apply a like sql search on email names
              if len(results) == 0:
                 return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
              else:
@@ -164,7 +164,7 @@ def search3():
             return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
         else:
             search = "%{}%".format(search_value)
-            results = Post.query.filter(Post.description.like(search)).all()#Apply a like sql search on email names
+            results = Listing.query.filter(Listing.description.like(search)).all()#Apply a like sql search on email names
             if len(results) == 0:
                 return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
             else:
