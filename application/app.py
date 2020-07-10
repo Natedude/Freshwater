@@ -187,7 +187,7 @@ def search4():
         if buyOrRent == '0':
             buyOrRent=None
         results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search, price=None)#ToDO change price
-        lstResults=dbTolst(results)
+        lstResults=queryedTolst(results)
         data=json.dumps(lstResults)
         return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
     else:
@@ -266,6 +266,13 @@ def postMaker(dbPost, dbImage):
 def dbTolst(db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
     entireDb = db.query.all()
     lst = [ x.dict() for x in entireDb]#make sure db in use has working dict function within its class
+    lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
+    return lst#Remember this needs to be jsonfied to pass it to html
+
+
+
+def queryedTolst(db): #This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
+    lst = [ x.dict() for x in db]#make sure db in use has working dict function within its class
     lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
     return lst#Remember this needs to be jsonfied to pass it to html
 
