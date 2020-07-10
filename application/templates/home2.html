@@ -41,23 +41,32 @@
     </nav>
     <!--  -->
     <!--  -->
-    <div class="wrapper">
-      <div class="search_box">
-          <div class="dropdown">
-              <div class="default_option">All</div>  
-              <ul>
-                <li>All</li>
-                <li>Buy</li>
-                <li>Rent</li>
-              </ul>
-          </div>
-          <div class="search_field">
-            <input type="text" class="input" placeholder="Search">
-            <i class="fas fa-search"></i>
-        </div>
-      </div>
-  </div>
+<!-- Dropdown --> 
+    <select id='selUser' style='width: 200px;'>
+      <option value='0'>Rent or Buy?</option> 
+      <option value='1'>Rent</option> 
+      <option value='2'>Buy</option> 
+    </select>
+    <input type='button' value='Seleted option' id='but_read'>
+    <br/>
+    <div id='result'></div>
     <!--  -->
+    <!-- Dropdown 2--> 
+    <select id='selUser2' style='width: 200px;'>
+      <option value='0'># of Bedrooms</option> 
+      <option value='1'>1</option> 
+      <option value='2'>2</option>
+      <option value='3'>3</option> 
+      <option value='4'>4</option>
+      <option value='5'>5</option> 
+      <option value='6'>6 and more</option> 
+    </select>
+    <input type='button' value='Seleted option' id='but_read2'>
+    <br/>
+    <div id='result2'></div>
+    <!--  -->
+
+
     <div class="search">
       <form method="POST">
         <input type="text" autofocus="autofocus" name="search_string" placeholder="Search..">
