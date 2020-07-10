@@ -156,7 +156,7 @@ def search2():
 
 def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None):
     listingTypedRes = Listing.query.filter(Listing.description.like(userTypedSearch))
-    if numRooms != None:
+    if (numRooms != None) and (numRooms != 0) and (numRooms != '0') :
         listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
     #ToDO Create a between a between for price
     return listingTypedRes.all() 
