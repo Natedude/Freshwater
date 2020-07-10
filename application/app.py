@@ -181,11 +181,12 @@ def search4():
     if request.method=='POST':
         form = request.form
         userTypedSearch = form['search_string']#Variable typed into website to search
+        search = "%{}%".format(userTypedSearch)
         numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
         buyOrRent = form['buyOrRent']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=userTypedSearch, price=None)#ToDO change price
+        results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search, price=None)#ToDO change price
         return render_template('searchListing3.html', listing=None, title='test result page',  images=results ) 
     else:
         return '[]'
