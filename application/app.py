@@ -186,7 +186,7 @@ def search4():
         if buyOrRent == '0':
             buyOrRent=None
         results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=userTypedSearch, price=None)#ToDO change price
-        return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(results) ) 
+        return render_template('searchListing3.html', listing=None, title='test result page',  images=results ) 
     else:
         return '[]'
  
