@@ -155,7 +155,6 @@ def search2():
 
 
 def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None):
-
     listingTypedRes = Listing.query.filter(Listing.description.like(userTypedSearch))
     if numRooms != None:
         listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
@@ -186,7 +185,7 @@ def search4():
         buyOrRent = form['buyOrRent']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search, price=None)#ToDO change price
+        results = backendSearch(numRooms=numRooms, buyOrRent=None, userTypedSearch=search, price=None)#ToDO change price
         lstResults=postMaker(results, Image)
         data=json.dumps(lstResults)
         return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
