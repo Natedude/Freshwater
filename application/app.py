@@ -171,7 +171,7 @@ def searchAPI():
         buyOrRent = form['buyOrRent']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=numRooms, buyOrRent=buyOrRent, userTypedSearch=userTypedSearch, price=None)#ToDO change price
+        results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=userTypedSearch, price=None)#ToDO change price
         return results
     else:
         return '[]'
@@ -185,7 +185,7 @@ def search4():
         buyOrRent = form['buyOrRent']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=numRooms, buyOrRent=buyOrRent, userTypedSearch=userTypedSearch, price=None)#ToDO change price
+        results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=userTypedSearch, price=None)#ToDO change price
         return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(results) ) 
     else:
         return '[]'
