@@ -17,33 +17,26 @@
     <h2> {{ images }}</h2>
     {% if images %}
     <section name="headerTitles" style="display:flex; flex-direction: row;">
-        <header>
-            <table>
-                <thead > 
-                    <tr>
-                        <th>description</th>
-                        <th>price</th>
-                        <th>rooms</th>
-                        <th>has Image</th>
-                    </tr>
-                </thead>
-            </table>
+        <header style="flex: 1">
+                    <div>description</div>
+                    <div>price</div>
+                    <div>rooms</div>
+                    <div>has Image</div>
+
         </header>
         {%for row in images %}
         
-    </section>        
-    <section  style="display:flex; flex-direction: row;">
             
                 <div>{{ row.description }}</div>
                 <div>{{ row.price }}</div>
-                    <div>{{ row.rooms }}</div>
+                <div>{{ row.rooms }}</div>
                 {% set img = row['path'] %}
                 <div> <img src= {{ img }} style="width:128px;height:128px;"></div> 
             <br>
             <br>
-        </section>
-            {% endfor %}
         
+            {% endfor %}
+    </section>   
     {% endif %}
     
 </body>
