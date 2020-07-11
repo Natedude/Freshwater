@@ -164,11 +164,11 @@ def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=Non
     if (numRooms != None) and (numRooms != 0) and (numRooms != '0') :
         listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
     #ToDO Create a between a between for price
-    if (numRooms != None):
+    if (housingTyp != None):
         listingTypedRes = listingTypedRes.filter(Listing.houseType.like(housingTyp))
     return listingTypedRes.all() 
 
-@app.route('/API/Search', methods=['GET', 'POST'])
+@app.route('/API/Search', methods=['GET', 'POST'])#TODO update to match search4
 def searchAPI():
     if request.method=='POST':
         form = request.form
@@ -186,17 +186,25 @@ def searchAPI():
 def search4():
     if request.method=='POST':
         form = request.form
-        userTypedSearch = form['search_string']#Variable typed into website to search
-        search = "%{}%".format(userTypedSearch)
-        numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
-        buyOrRent = form['buyOrRent']
         housingType = form['housingType']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=numRooms, buyOrRent=None, userTypedSearch=search, price=None, housingTyp=housingType)#ToDO change price
-        lstResults=postMaker(results, Image)
-        data=json.dumps(lstResults)
-        return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
+        userTypedSearch = form['search_string']#Variable typed into website to search
+        if userTypedSearch == "" and buyOrRent==None:#If Empty prints entire DB TODO: print all DBs
+            all_listings = Listing.query.all()#Variable name listing, but is returning all Users
+            all_users = Users.query.all()
+            all_messages = Users.query.all()
+            lstResults=postMaker(all_listings, Image)
+            data=json.dumps(lstResults)
+            return render_template('searchListing3.html', title='Entire DataBase', images=json.loads(data), users=all_users, message=all_messages  )
+        else:
+            search = "%{}%".format(userTypedSearch)
+            #numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
+            #buyOrRent = form['buyOrRent']
+            results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search, price=None, housingTyp=housingType)#ToDO change price
+            lstResults=postMaker(results, Image)
+            data=json.dumps(lstResults)
+            return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
     else:
         return '[]'
  
