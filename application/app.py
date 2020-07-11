@@ -165,7 +165,7 @@ def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=Non
         listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
     #ToDO Create a between a between for price
     if (numRooms != None):
-        listingTypedRes = listingTypedRes.filter(Listing.housingType.like(housingTyp))
+        listingTypedRes = listingTypedRes.filter(Listing.houseType.like(housingTyp))
     return listingTypedRes.all() 
 
 @app.route('/API/Search', methods=['GET', 'POST'])
