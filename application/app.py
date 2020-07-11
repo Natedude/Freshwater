@@ -193,7 +193,7 @@ def search4():
         if userTypedSearch == "" and housingType==None:#If Empty prints entire DB TODO: print all DBs
             all_listings = Listing.query.all()#Variable name listing, but is returning all Users
             all_users = Users.query.all()
-            all_messages = Users.query.all()
+            all_messages = Message.query.all()
             lstResults=postMaker(all_listings, Image)
             data=json.dumps(lstResults)
             return render_template('searchListing3.html', title='Entire DataBase', images=json.loads(data), users=all_users, message=all_messages  )
