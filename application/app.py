@@ -112,52 +112,6 @@ def home():
     return render_template("home2.html")
 
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-    if request.method=='POST':
-         form = request.form
-         search_value = form['search_string']#Variable typed into website to search
-         if search_value == "":#If Empty prints entire DB TODO: print all DBs
-             all_listings = Users.query.all()#Variable name listing, but is returning all Users
-             return render_template('searchListing.html', listing=all_listings, title='All Users', images=None )
-         else:
-             search = "%{}%".format(search_value)
-             results = Users.query.filter(Users.email.like(search)).all()#Apply a like sql search on email names
-             images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
-             lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
-             lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
-             data = json.dumps(lst)#Convert to Json String
-             return render_template('searchListing.html', listing=results, title='test result page',  images=json.loads(data) )
-
-@app.route('/search2', methods=['GET', 'POST'])
-def search2():
-    if request.method=='POST':
-         form = request.form
-         search_value = form['search_string']#Variable typed into website to search
-         if search_value == "":#If Empty prints entire DB TODO: print all DBs
-             all_listings = Users.query.all()#Variable name listing, but is returning all Users
-             return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
-         else:
-             search = "%{}%".format(search_value)
-             results = Listing.query.filter(Listing.description.like(search)).all()#Apply a like sql search on email names
-             if len(results) == 0:
-                return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
-             else:
-                images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
-                lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
-                lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
-                lstImages=[]
-                for postResult in results:
-                    for dictionImage in lst:
-                        if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
-                            lstImages.append(dictionImage)
-                if len(lstImages)==0:
-                    return render_template('searchListing2.html', listing=results, title='test result page',  images=None )
-                else:
-                    data = json.dumps(lstImages)#Convert to Json String            
-                    return render_template('searchListing2.html', listing=results, title='test result page',  images=json.loads(data) )
-
-
 def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingTyp=None):
     #if (userTypedSearch != None) and (userTypedSearch != ""):
     listingTypedRes = Listing.query.filter(Listing.description.like(userTypedSearch))
@@ -208,53 +162,6 @@ def search4():
     else:
         return '[]'
  
-        
-
-
-
-@app.route('/search3', methods=['GET', 'POST'])
-def search3():
-    if request.method=='POST':
-        form = request.form
-        search_value = form['search_string']#Variable typed into website to search
-        if search_value == "":#If Empty prints entire DB TODO: print all DBs
-            all_listings = Users.query.all()#Variable name listing, but is returning all Users
-            return render_template('searchListing2.html', listing=all_listings, title='All Users', images=None )
-        else:
-            search = "%{}%".format(search_value)
-            results = Listing.query.filter(Listing.description.like(search)).all()#Apply a like sql search on email names
-            if len(results) == 0:
-                return render_template('searchListing2.html', listing=None, title='Nothing found Search Empty',  images=None ) 
-            else:
-                #data = json.dumps( self.postMaker(results, Image) )#Convert to Json String            
-                images = Image.query.all()#Taking the entire DB.. TODO in a more effcient way later 
-                lst = [ x.dict() for x in images]#Putting each element in a row in a dictionary, each row has its own dictionary, list of dictionaries 
-                lst.sort(key=lambda x: x["id"])#Orders our list of dictionaries with id from smallest to largest
-                frontendReadyPost=[]
-                dbPost=results
-                for postResult in dbPost:#Loops through all posts
-                    for dictionImage in lst:
-                        if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
-                            frontendReadyPost.append({
-                            'email': postResult.fkEmail,
-                            "title" : postResult.title,
-                            "houseType" : postResult.houseType,
-                            "sellOrRent" : postResult.sellOrRent,
-                            "city" : postResult.city, 
-                            "street" : postResult.street,
-                            "houseNum" : postResult.houseNum,
-                            "gps" : postResult.gps,
-                            "description" : postResult.description,
-                            "price" : postResult.price, 
-                            "roomNum" : postResult.roomNum,
-                            "adminAppr" : postResult.adminAppr,
-                            "petsAllowed" : postResult.petsAllowed,
-                            "postalCode" : postResult.postalCode,
-                            'path': dictionImage['path']})
-                data=json.dumps(frontendReadyPost)
-                return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) )
-
-
 
 def postMaker(dbPost, dbImage):
     imgList = dbTolst(dbImage)#Returns a list of dictionaries
@@ -296,10 +203,6 @@ def queryedTolst(db): #This Function takes in a table from db and returns a list
     return lst#Remember this needs to be jsonfied to pass it to html
 
 
-
-@app.route('/searchListing')
-def searchListing():
-    return render_template("searchListing.html")
 
 @app.route('/about')
 def about():
