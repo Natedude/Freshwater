@@ -38,10 +38,13 @@
             {% endfor %}
     </section>   
     {% endif %}
-    {% if users %}
+    {% if entireDB %}
+        {% if users %}
+        {{ users }}
+        {% endif %}
+        {% if message %}
+        {{ message }}
+        {% endif %}
     {% endif %}
-    {% if message %}
-    {% endif %}
-
 </body>
   <footer></footer>
