@@ -17,19 +17,21 @@
     <h2> {{ images }}</h2>
     {% if images %}
     <section style="display:flex; flex-direction: row;">
-    <h1></h1>
-    {%for row in images %}
-        <table>
-            <thead>
-                <tr>
-                    <th>description</th>
-                    <th>price</th>
-                    <th>rooms</th>
-                    <th>has Image</th>
-                </tr>
-            </thead>
-        </table>
+        <header>
+            <table>
+                <thead style="flex: 1"> 
+                    <tr>
+                        <th>description</th>
+                        <th>price</th>
+                        <th>rooms</th>
+                        <th>has Image</th>
+                    </tr>
+                </thead>
+            </table>
+        </header>
+        {%for row in images %}
         <tbody>
+            
             <tr>
                 <td>{{ row.description }}</td>
                 <td>{{ row.price }}</td>
