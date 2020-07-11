@@ -136,34 +136,34 @@ def searchAPI():
     else:
         return '[]'
 
-@app.route('/search4', methods=['GET', 'POST'])
+@app.route('/search4', methods=['GET', 'POST'])#Special search function for vertical prototype. Logic will need to change for future version
 def search4():
     if request.method=='POST':
-        form = request.form
-        housingType = form['housingType']
-        if housingType == '0':
+        form = request.form#Gets info from HTML form
+        housingType = form['housingType']#returns a string
+        if housingType == '0':#if housingType == '0' means user did not specify a type
             housingType=None
         userTypedSearch = form['search_string']#Variable typed into website to search
-        if userTypedSearch == "" and housingType==None:#If Empty prints entire DB TODO: print all DBs
-            all_listings = Listing.query.all()#Variable name listing, but is returning all Users
+        if userTypedSearch == "" and housingType==None:#If Empty prints entire DB for vertical Prototype Version only
+            all_listings = Listing.query.all()
             all_users = Users.query.all()
             all_messages = Message.query.all()
             lstResults=postMaker(all_listings, Image)
             data=json.dumps(lstResults)
-            return render_template('searchListing3.html', title='Entire DataBase', images=json.loads(data), users=all_users, message=all_messages  )
+            return render_template('searchListing.html', title='Entire DataBase', images=json.loads(data), users=all_users, message=all_messages  )
         else:
             search = "%{}%".format(userTypedSearch)
             #numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
-            #buyOrRent = form['buyOrRent']
+            #buyOrRent = form['buyOrRent']#Not numRooms are not needed for VerticalPrototype but will be in future
             results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search, price=None, housingTyp=housingType)#ToDO change price
-            lstResults=postMaker(results, Image)
-            data=json.dumps(lstResults)
-            return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
+            lstResults=postMaker(results, Image)#returns a list of dictionaries matching images with associated posts
+            data=json.dumps(lstResults)#Converts to Json type, Note that Alchemey objects sometimes need to go through this proccess
+            return render_template('searchListing.html', listing=None, title='test result page',  images=json.loads(data) ) 
     else:
         return '[]'
  
 
-def postMaker(dbPost, dbImage):
+def postMaker(dbPost, dbImage): #Takes in Alchemy objects and returns python list of dictionaries for Post/Image db tables. Returns similiar to Json 
     imgList = dbTolst(dbImage)#Returns a list of dictionaries
     frontendReadyPost=[]
     for postResult in dbPost:#Loops through all posts
