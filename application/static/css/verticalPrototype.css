@@ -18,11 +18,10 @@
 }
 
 .imgs-column {
-  background-color: blue;
-  height: 100px;
+  height: auto;
 }
 
 .descript-column {
   background-color: green;
-  height: 100px;
+  height: auto;
 }
