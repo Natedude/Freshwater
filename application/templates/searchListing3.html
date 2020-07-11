@@ -30,21 +30,21 @@
             </table>
         </header>
         {%for row in images %}
-        <tbody>
+        
     </section>        
     <section  style="display:flex; flex-direction: row;">
-            <tr>
-                <td>{{ row.description }}</td>
-                <td>{{ row.price }}</td>
-                <td>{{ row.rooms }}</td>
+            
+                <div>{{ row.description }}</div>
+                <div>{{ row.price }}</div>
+                    <div>{{ row.rooms }}</div>
                 {% set img = row['path'] %}
-                <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
-            </tr>
+                <div> <img src= {{ img }} style="width:128px;height:128px;"></div> 
             <br>
             <br>
+        </section>
             {% endfor %}
-        </tbody>
+        
     {% endif %}
-    </section>
+    
 </body>
   <footer></footer>
