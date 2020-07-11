@@ -12,36 +12,38 @@
   </head>
 
 
-<body style="display:flex;">
-<h3>{{ title }}</h3>
-<h2> {{ images }}</h2>
-{% if images %}
-<h1></h1>
-    <table>
-        <thead>
+<body >
+    <h3>{{ title }}</h3>
+    <h2> {{ images }}</h2>
+    {% if images %}
+    <section style="display:flex; flex-direction: row;">
+    <h1></h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>description</th>
+                    <th>price</th>
+                    <th>rooms</th>
+                    <th>has Image</th>
+                </tr>
+            </thead>
+        </table>
+        <tbody>
+            {%for row in images %}
             <tr>
-                <th>id</th>
-                <th>description</th>
-                <th>price</th>
-                <th>rooms</th>
-                <th>has Image</th>
+                <td>{{ row.id }}</td>
+                <td>{{ row.description }}</td>
+                <td>{{ row.price }}</td>
+                <td>{{ row.rooms }}</td>
+                {% set img = row['path'] %}
+                <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
             </tr>
-        </thead>
-    </table>
-    <tbody>
-        {%for row in images %}
-        <tr>
-            <td>{{ row.id }}</td>
-            <td>{{ row.description }}</td>
-            <td>{{ row.price }}</td>
-            <td>{{ row.rooms }}</td>
-            {% set img = row['path'] %}
-            <td> <img src= {{ img }} style="width:128px;height:128px;"></td> 
-        </tr>
-        <br>
-        <br>
-        {% endfor %}
-    </tbody>
-{% endif %}
+            <br>
+            <br>
+            {% endfor %}
+        </tbody>
+    {% endif %}
+    </section>
 </body>
   <footer></footer>
