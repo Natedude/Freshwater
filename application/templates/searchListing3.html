@@ -16,10 +16,10 @@
     <h3>{{ title }}</h3>
     <h2> {{ images }}</h2>
     {% if images %}
-    <section style="display:flex; flex-direction: row;">
+    <section name="headerTitles" style="display:flex; flex-direction: row;">
         <header>
             <table>
-                <thead style="flex: 1"> 
+                <thead > 
                     <tr>
                         <th>description</th>
                         <th>price</th>
@@ -31,7 +31,8 @@
         </header>
         {%for row in images %}
         <tbody>
-            
+    </section>        
+    <section  style="display:flex; flex-direction: row;">
             <tr>
                 <td>{{ row.description }}</td>
                 <td>{{ row.price }}</td>
