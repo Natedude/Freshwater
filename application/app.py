@@ -187,10 +187,10 @@ def search4():
     if request.method=='POST':
         form = request.form
         housingType = form['housingType']
-        if buyOrRent == '0':
-            buyOrRent=None
+        if housingType == '0':
+            housingType=None
         userTypedSearch = form['search_string']#Variable typed into website to search
-        if userTypedSearch == "" and buyOrRent==None:#If Empty prints entire DB TODO: print all DBs
+        if userTypedSearch == "" and housingType==None:#If Empty prints entire DB TODO: print all DBs
             all_listings = Listing.query.all()#Variable name listing, but is returning all Users
             all_users = Users.query.all()
             all_messages = Users.query.all()
