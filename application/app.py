@@ -158,11 +158,14 @@ def search2():
                     return render_template('searchListing2.html', listing=results, title='test result page',  images=json.loads(data) )
 
 
-def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None):
+def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingTyp=None):
+    #if (userTypedSearch != None) and (userTypedSearch != ""):
     listingTypedRes = Listing.query.filter(Listing.description.like(userTypedSearch))
     if (numRooms != None) and (numRooms != 0) and (numRooms != '0') :
         listingTypedRes = listingTypedRes.filter(Listing.roomNum.like(numRooms))
     #ToDO Create a between a between for price
+    if (numRooms != None):
+        listingTypedRes = listingTypedRes.filter(Listing.housingType.like(housingTyp))
     return listingTypedRes.all() 
 
 @app.route('/API/Search', methods=['GET', 'POST'])
@@ -187,9 +190,10 @@ def search4():
         search = "%{}%".format(userTypedSearch)
         numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
         buyOrRent = form['buyOrRent']
+        housingType = form['housingType']
         if buyOrRent == '0':
             buyOrRent=None
-        results = backendSearch(numRooms=numRooms, buyOrRent=None, userTypedSearch=search, price=None)#ToDO change price
+        results = backendSearch(numRooms=numRooms, buyOrRent=None, userTypedSearch=search, price=None, housingTyp=housingType)#ToDO change price
         lstResults=postMaker(results, Image)
         data=json.dumps(lstResults)
         return render_template('searchListing3.html', listing=None, title='test result page',  images=json.loads(data) ) 
