@@ -72,6 +72,8 @@ class Listing(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     fkId=db.Column(db.Integer)
     fkEmail=db.Column(db.String)
+    title=db.Column(db.String)
+    houseType=db.Column(db.String)
     sellOrRent=db.Column(db.String)
     city=db.Column(db.String) 
     street=db.Column(db.String) 
@@ -89,6 +91,8 @@ class Listing(db.Model):
         return {"id" : self.id, 
         "fkId" : self.fkId,
         "fkEmail" : self.fkEmail,
+        "title" : self.title,
+        "houseType" : self.houseType,
         "sellOrRent" : self.sellOrRent,
         "city" : self.city, 
         "street" : self.street,
@@ -221,6 +225,8 @@ def search3():
                         if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
                             frontendReadyPost.append({
                             'email': postResult.fkEmail,
+                            "title" : postResult.title,
+                            "houseType" : postResult.houseType,
                             "sellOrRent" : postResult.sellOrRent,
                             "city" : postResult.city, 
                             "street" : postResult.street,
@@ -246,6 +252,8 @@ def postMaker(dbPost, dbImage):
             if dictionImage['fkIdPost'] == postResult.id:#Note that postResult is not a dictionary, Its an alchemey object
                 frontendReadyPost.append({
                     'email': postResult.fkEmail,
+                    "title" : postResult.title,
+                    "houseType" : postResult.houseType,
                     "sellOrRent" : postResult.sellOrRent,
                     "city" : postResult.city, 
                     "street" : postResult.street,
