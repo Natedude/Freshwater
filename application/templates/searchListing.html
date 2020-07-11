@@ -41,29 +41,8 @@
       </div>
       {% endfor %}
 
-
-    <section name="headerTitles" style="display:flex; flex-direction: row;">
-        <header>
-                    <div>description</div>
-                    <div>price</div>
-                    <div>rooms</div>
-                    <div>has Image</div>
-
-        </header>
-        {%for row in images %}
-        
-        <div  style="flex: 1">
-                <div>{{ row.description }}</div>
-                <div>{{ row.price }}</div>
-                <div>{{ row.rooms }}</div>
-                {% set img = row['path'] %}
-                <div> <img src= {{ img }} style="width:128px;height:128px;"></div> 
-            <br>
-            <br>
-        </div>
-            {% endfor %}
-    </section>   
     {% endif %}
+    <!--The below is here and only prints of the search is completely empty-->
         {% if users %}
         {{ users }}
         {% endif %}
