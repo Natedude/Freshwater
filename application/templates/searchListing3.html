@@ -18,10 +18,10 @@
     {% if images %}
     <section style="display:flex; flex-direction: row;">
     <h1></h1>
+    {%for row in images %}
         <table>
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>description</th>
                     <th>price</th>
                     <th>rooms</th>
@@ -30,9 +30,7 @@
             </thead>
         </table>
         <tbody>
-            {%for row in images %}
             <tr>
-                <td>{{ row.id }}</td>
                 <td>{{ row.description }}</td>
                 <td>{{ row.price }}</td>
                 <td>{{ row.rooms }}</td>
