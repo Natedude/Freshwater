@@ -107,16 +107,10 @@ class Listing(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("home_query.html")
+    return render_template("home_search.html")
 
 
-@app.route('/query', methods=['GET', 'POST'])
-def query():
-    data = ["TEST"]
-    return render_template("home_query.html", data)
-
-
-def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingTyp=None):
+def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingType=None):
     # if (userTypedSearch != None) and (userTypedSearch != ""):
     listingTypedRes = Listing.query.filter(
         Listing.description.like(userTypedSearch))
@@ -124,9 +118,9 @@ def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=Non
         listingTypedRes = listingTypedRes.filter(
             Listing.roomNum.like(numRooms))
     # ToDO Create a between a between for price
-    if (housingTyp != None):
+    if (housingType != None):
         listingTypedRes = listingTypedRes.filter(
-            Listing.houseType.like(housingTyp))
+            Listing.houseType.like(housingType))
     return listingTypedRes.all()
 
 
@@ -149,7 +143,30 @@ def searchAPI():
         return '[]'
 
 
+@app.route('/query', methods=['GET', 'POST'])
+def query():
+    if request.method == 'GET':
+        print("***********************************query******")
+        args = request.args
+        for k, v in args.items():
+            print(f"{k}: {v}")
+        # access as a dictionary and key = 'search_string'
+        s = args['search_string']
+        if s == "":  # and housingType == None:
+            all_listings = Listing.query.all()
+            lstResults = postMaker(all_listings, Image)
+        else:
+            search = "%{}%".format(s)
+            results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search,
+                                    price=None, housingType='House')  # ToDO change price
+            # returns a list of dictionaries matching images with associated posts
+            lstResults = postMaker(results, Image)
+        pretty_print_results_dictionaries_list(lstResults)
+    return render_template("home_search.html")
+
 # Special search function for vertical prototype. Logic will need to change for future version
+
+
 @app.route('/search4', methods=['GET', 'POST'])
 def search4():
     if request.method == 'POST':
@@ -176,7 +193,7 @@ def search4():
             # numRooms = form['numRooms']#TODO  add if statement for 0 value or 6(or more)
             # buyOrRent = form['buyOrRent']#Not numRooms are not needed for VerticalPrototype but will be in future
             results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search,
-                                    price=None, housingTyp=housingType)  # ToDO change price
+                                    price=None, housingType=housingType)  # ToDO change price
             # returns a list of dictionaries matching images with associated posts
             lstResults = postMaker(results, Image)
             # Converts to Json type, Note that Alchemey objects sometimes need to go through this proccess
