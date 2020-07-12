@@ -47,7 +47,7 @@ conda activate sfsc
 ## Deployment
 
 ```
-gunicorn --bind 0.0.0.0:8000 wsgi:app
+gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
 
 ---------------------------------------
