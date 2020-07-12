@@ -6,7 +6,8 @@ from datetime import datetime
 import pprint  # for logging and pretty printing dictionary objects when debugging
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3307/CSC'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/CSC'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3307/CSC'
 db = SQLAlchemy(app)
 
 
@@ -146,7 +147,7 @@ def searchAPI():
 @app.route('/query', methods=['GET', 'POST'])
 def query():
     if request.method == 'GET':
-        print("***********************************query******")
+        print("***********************************query***********************************")
         args = request.args
         for k, v in args.items():
             print(f"{k}: {v}")
@@ -154,15 +155,15 @@ def query():
         s = args['search_string']
         if s == "":  # and housingType == None:
             all_listings = Listing.query.all()
-            lstResults = postMaker(all_listings, Image)
+            results_list_of_dicts = postMaker(all_listings, Image)
         else:
             search = "%{}%".format(s)
             results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search,
-                                    price=None, housingType='House')  # ToDO change price
+                                    price=None, housingType=None)  # ToDO change price
             # returns a list of dictionaries matching images with associated posts
-            lstResults = postMaker(results, Image)
-        pretty_print_results_dictionaries_list(lstResults)
-    return render_template("home_search.html")
+            results_list_of_dicts = postMaker(results, Image)
+        pretty_print_results_dictionaries_list(results_list_of_dicts)
+    return render_template("home_search.html", results_list_of_dicts=results_list_of_dicts)
 
 # Special search function for vertical prototype. Logic will need to change for future version
 
@@ -222,18 +223,18 @@ def postMaker(dbPost, dbImage):  # Takes in Alchemy objects and returns python l
                 frontendReadyPost.append(
                     {
                         'id': postResult.id,
-                        'email': postResult.fkEmail,
+                        # 'email': postResult.fkEmail,
                         "title": postResult.title,
                         "houseType": postResult.houseType,
-                        "sellOrRent": postResult.sellOrRent,
+                        # "sellOrRent": postResult.sellOrRent,
                         "city": postResult.city,
                         "street": postResult.street,
                         "houseNum": postResult.houseNum,
-                        "gps": postResult.gps,
+                        # "gps": postResult.gps,
                         "description": postResult.description,
                         "price": postResult.price,
-                        "roomNum": postResult.roomNum,
-                        "adminAppr": postResult.adminAppr,
+                        # "roomNum": postResult.roomNum,
+                        # "adminAppr": postResult.adminAppr,
                         # "timeCreated" : postResult.timeCreated, #ToDO Need to convert to string, datetime object does not covert directly with json.loads
                         "petsAllowed": postResult.petsAllowed,
                         "postalCode": postResult.postalCode,

@@ -62,22 +62,30 @@
         </b-navbar>
 
         <div class="container">
-            <div class="row center-block">
+
+            <!-- Card Template -->
+            <!-- <div class="row">
                 <b-card img-src="https://static.thenounproject.com/png/330148-200.png" img-alt="Card image" img-left
                     class="mb-3">
                     <b-card-text>
                         Some quick example text to build on the card and make up the bulk of the card's content.
                     </b-card-text>
                 </b-card>
-            </div>
+            </div> -->
+
+            {% for listing in results_list_of_dicts %}
             <div class="row">
-                <b-card img-src="https://static.thenounproject.com/png/330148-200.png" img-alt="Card image" img-left
-                    class="mb-3">
+                <b-card img-src="{{listing.path}}" img-alt="Card image" img-left class="mb-3" img-height="128px">
                     <b-card-text>
-                        Some quick example text to build on the card and make up the bulk of the card's content.
+                        <h2>{{listing.title}}</h2>
+                        <h3>${{listing.price}}</h3>
+                        {{listing.description}}
                     </b-card-text>
                 </b-card>
             </div>
+
+            {% endfor %}
+
         </div>
     </div>
 
