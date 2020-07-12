@@ -108,7 +108,7 @@ class Listing(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("home_search.html")
+    return render_template("home.html")
 
 
 def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingType=None):
@@ -166,7 +166,7 @@ def query():
             # returns a list of dictionaries matching images with associated posts
             results_list_of_dicts = postMaker(results, Image)
         pretty_print_results_dictionaries_list(results_list_of_dicts)
-    return render_template("home_search.html", results_list_of_dicts=results_list_of_dicts)
+    return render_template("home.html", results_list_of_dicts=results_list_of_dicts)
 
 # Special search function for vertical prototype. Logic will need to change for future version
 
