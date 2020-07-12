@@ -107,7 +107,13 @@ class Listing(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("home2.html")
+    return render_template("home_query.html")
+
+
+@app.route('/query', methods=['GET', 'POST'])
+def query():
+    data = ["TEST"]
+    return render_template("home_query.html", data)
 
 
 def backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=None, price=None, housingTyp=None):
