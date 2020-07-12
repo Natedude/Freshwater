@@ -1,0 +1,28 @@
+.some-page-wrapper {
+  margin: 15px;
+  background-color: red;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.imgs-column {
+  height: auto;
+  width: auto;
+}
+
+.descript-column {
+  background-color: green;
+  height: auto;
+}
