@@ -47,13 +47,13 @@
           <b-navbar-nav class="ml-auto">
             <b-nav-form>
 
-              <b-form-input size="lg" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input>
+              <b-form-input name="search_string" size="lg" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input>
               <b-form-datalist id="input-list" :options="options"></b-form-datalist>
               <!-- <b-form-input size="auto" class="mx-auto" placeholder="What are you looking for?"></b-form-input>
 
               <b-form-select v-model="housingType" :options="options"></b-form-select> -->
 
-              <b-button size="lg" class="my-2 my-sm-0" type="submit">
+              <b-button size="lg" class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
                 <b-icon icon="search"></b-icon>
               </b-button>
             </b-nav-form>
