@@ -153,13 +153,16 @@ def query():
             print(f"{k}: {v}")
         # access as a dictionary and key = 'search_string'
         s = args['search_string']
-        if s == "":  # and housingType == None:
+        housingType = None
+        if 'HousingType' in args.keys():
+            housingType = args['HousingType']
+        if s == "" and housingType == None:
             all_listings = Listing.query.all()
             results_list_of_dicts = postMaker(all_listings, Image)
         else:
             search = "%{}%".format(s)
             results = backendSearch(numRooms=None, buyOrRent=None, userTypedSearch=search,
-                                    price=None, housingType=None)  # ToDO change price
+                                    price=None, housingType=housingType)  # ToDO change price
             # returns a list of dictionaries matching images with associated posts
             results_list_of_dicts = postMaker(results, Image)
         pretty_print_results_dictionaries_list(results_list_of_dicts)
