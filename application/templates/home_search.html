@@ -24,6 +24,8 @@
     <!-- Required scripts -->
     <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -41,14 +43,16 @@
 
           <b-navbar-nav class="ml-auto">
             <b-nav-form>
-              <b-nav-item-dropdown text="Housing Type">
-                <b-dropdown-item href="#">House</b-dropdown-item>
-                <b-dropdown-item href="#">Apartment</b-dropdown-item>
-                <b-dropdown-item href="#">Room</b-dropdown-item>
-              </b-nav-item-dropdown>
-              <b-form-input size="sm" class="mr-sm-2" placeholder="What are you looking for?"></b-form-input>
 
-              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+              <b-form-input size="lg" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input>
+              <b-form-datalist id="input-list" :options="options"></b-form-datalist>
+              <!-- <b-form-input size="auto" class="mx-auto" placeholder="What are you looking for?"></b-form-input>
+
+              <b-form-select v-model="housingType" :options="options"></b-form-select> -->
+
+              <b-button size="lg" class="my-2 my-sm-0" type="submit">
+                <b-icon icon="search"></b-icon>
+              </b-button>
             </b-nav-form>
           </b-navbar-nav>
 
@@ -61,6 +65,34 @@
 
         </b-collapse>
       </b-navbar>
+
+      <div class="container">
+
+            <!-- Card Template -->
+            <!-- <div class="row">
+                <b-card img-src="https://static.thenounproject.com/png/330148-200.png" img-alt="Card image" img-left
+                    class="mb-3">
+                    <b-card-text>
+                        Some quick example text to build on the card and make up the bulk of the card's content.
+                    </b-card-text>
+                </b-card>
+            </div> -->
+
+            {% for listing in results_list_of_dicts %}
+            <div class="row">
+                <b-card img-src="{{listing.path}}" img-alt="Card image" img-left class="mb-3" img-height="128px">
+                    <b-card-text>
+                        <h2>{{listing.title}}</h2>
+                        <h3>${{listing.price}}</h3>
+                        {{listing.description}}
+                    </b-card-text>
+                </b-card>
+            </div>
+
+            {% endfor %}
+
+      </div>
+
     </div>
 
 
@@ -68,7 +100,13 @@
       window.app = new Vue({
         el: '#app',
         data: {
-          name: ''
+          name: '',
+          options: [
+          { value: 'House', text: 'House' },
+          { value: 'Apartment', text: 'Apartment'},
+          { value: 'Room', text: 'Room'}
+          ]
+
         }
       })
     </script>
