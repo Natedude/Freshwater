@@ -1,115 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>SF State of Code</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-  </head>
-  <body>
-    <nav class = "navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
 
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#bs-team-members" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+<head>
+  <meta charset="utf-8">
+  <title>SF State of Code</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+</head>
 
-
-          <a href="#" class="navbar-brand">SFSC</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-team-members">
-          <!-- <ul class="nav navbar-nav">
-            <li><a href="#">Luis</a></li>
-            <li><a href="#">Nathan</a></li>
-            <li><a href="#">Garret</a></li>
-            <li><a href="#">Zachary</a></li>
-            <li><a href="#">Xinwei</a></li>
-            <li><a href="#">Guori</a></li>
-            <li><a href="#">Katthak</a></li>
-          </ul> -->
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div>
+<body>
+    <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-team-members"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand">SFSC</a>
       </div>
-    </nav>
-    <!--  -->
-    <!--  -->
-<!-- Dropdown --> 
-<form method="POST" class="container2" style="width: 80%;
+
+      <div class="collapse navbar-collapse" id="bs-team-members">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/about">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--  -->
+
+  <!-- Dropdown -->
+  <form method="POST" class="container2" style="width: 80%;
   height: 200px;
   background: aqua;
   margin: auto;
   padding: 10px;">
-    <div class="one" style= "width: 15%;
+    <div class="one" style="width: 15%;
     height: 200px;
     background: red;
     float: left;">
-    <!--
-      <select id='buyOrRent' name="buyOrRent" style='width: 200px;'>
-        <option value='0'>Rent or Buy?</option> 
-        <option value='1'>Rent</option> 
-        <option value='2'>Buy</option> 
-      </select>
-      <br/>
-    -->
-      <!-- Dropdown 2--> 
-      <!--
-      <select id='numRooms' name="numRooms" style='width: 200px;'>
-        <option value='0'># of Bedrooms</option> 
-        <option value='1'>1</option> 
-        <option value='2'>2</option>
-        <option value='3'>3</option> 
-        <option value='4'>4</option>
-        <option value='5'>5</option> 
-        <option value='6'>6 and more</option> 
-      </select> --> 
-      <!-- Dropdown 3-->  
+      <!-- Dropdown Item 1-->
       <select id='housingType' name="housingType" style='width: 200px;'>
-        <option value='0'>Type: House/Apartment/Room</option> 
-        <option value='House'>House</option> 
-        <option value='Apartment'>Apartment</option> 
+        <option value='0'>Type: House/Apartment/Room</option>
+        <option value='House'>House</option>
+        <option value='Apartment'>Apartment</option>
         <option value='Room'>Room</option>
       </select>
 
 
-      <br/>
+      <br />
     </div>
-      <!--  -->
+    <!--  -->
 
 
-    <div class="search" style ="margin-left: 15%;
+    <div class="search" style="margin-left: 15%;
     height: 200px;
     background: black;">
-      
-        <input type="text" autofocus="autofocus" name="search_string" placeholder="Search..">
-        <br>
-        <input type="submit" formaction="/search4" value="Submit">
-      </form>
-    </div>
-  
-    <!-- <div class="container">
-      <h1>CSC 848-648</h1>
-      <h2>Team Members</h2>
-      <ul>
-        <li>Luis</li>
-        <li>Nathan</li>
-        <li>Garret</li>
-        <li>Zachary</li>
-        <li>Xinwei</li>
-        <li>Gouri</li>
-        <li>Katthak</li>
-      </ul>
-    </div> -->
 
-	<h1 style="text-align:center;"> Work in Progress... </h1> 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
-  </body>
+      <input type="text" autofocus="autofocus" name="search_string" placeholder="Search..">
+      <br>
+      <input type="submit" formaction="/search4" value="Submit">
+  </form>
+  </div>
+
+  <h1 style="text-align:center;"> Work in Progress... </h1>
+
+</body>
+
 </html>
