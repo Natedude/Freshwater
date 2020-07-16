@@ -10,7 +10,7 @@ You are free to organize the contents of the folder as you see fit. But remember
 
 # Our Website
 
-* [San Francisco State Of Code](http://35.226.13.177:8000)
+* [Fresh Water Rentals](http://35.226.13.177)
 
 ------------------------------------------------------------
 
@@ -47,7 +47,7 @@ conda activate sfsc
 ## Deployment
 
 ```
-gunicorn --bind 0.0.0.0:8000 wsgi:app
+gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
 
 ---------------------------------------
