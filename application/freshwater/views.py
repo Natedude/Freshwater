@@ -1,5 +1,5 @@
 from flask import render_template
-from app import app
+from freshwater import app
 from .search import search
 
 @app.route('/', methods=['GET', 'POST'])

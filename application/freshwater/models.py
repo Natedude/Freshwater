@@ -1,5 +1,5 @@
 from datetime import datetime
-from app import db
+from freshwater import db
 
 class Users(db.Model):  # Main User Db All registered Users will be stored here
     __tablename__ = "Users"
