@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
@@ -59,33 +58,44 @@
     </b-navbar>
 
     <!-- Search Results -->
-    <div class="container">
-      <!-- Results Count -->
-
-      <!-- Card Template (templated with Jinja below)-->
-      <!-- <div class="row">
-                <b-card img-src="https://static.thenounproject.com/png/330148-200.png" img-alt="Card image" img-left
-                    class="mb-3">
-                    <b-card-text>
-                        Some quick example text to build on the card and make up the bulk of the card's content.
-                    </b-card-text>
-                </b-card>
-            </div> -->
-
-      {% for listing in results_list_of_dicts %}
-      <div class="row">
-        <b-card img-src="{{listing.path}}" img-alt="Card image" img-left class="mb-3" img-height="128px">
+    <b-container class="m-5">
+    <b-row>
+      {% for listing in results_list_of_dicts %} 
+      <b-col>
+        <b-card 
+        no-body
+        img-alt="Card image" 
+        img-top
+        tag="article"
+    
+        style="max-width: 15rem; max-height: 23rem;" 
+        img-height="150px"
+        img-top
+        >
+        <template v-slot:header>
+          <h5 class="mb-0">
+            {{listing.houseType}} for rent</br>
+            Street:{{listing.street}}
+          </h5>
+        </template>
+        <b-card-img src="{{listing.path}}" bottom></b-card-img>
           <b-card-text>
-            <h2>{{listing.title}}</h2>
-            <h3>${{listing.price}}</h3>
-            {{listing.description}}
+            <b-container class="mb-0">
+            ${{listing.price}}/mo</br>
+            {{listing.title}}</br>
+            </b-container>
           </b-card-text>
         </b-card>
-      </div>
-
+      </b-col>
       {% endfor %}
-    </div>
+  </b-container>
+    
+  
+  
   </div>
+
+
+
 
   <script>
     window.app = new Vue({

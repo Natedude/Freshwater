@@ -17,3 +17,4 @@ def about():
 @app.route('/profile/<name>')
 def profile(name):
     return render_template("about/about_" + name + ".html")
+
