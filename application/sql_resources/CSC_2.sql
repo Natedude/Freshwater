@@ -5,7 +5,7 @@ SHOW TABLES;
 
 ############################################################
 
-CREATE TABLE Users (
+CREATE TABLE IF NOT EXISTS Users (
 	email VARCHAR(20), 
 	password VARCHAR(20),
     id INT NOT NULL AUTO_INCREMENT, 
@@ -22,7 +22,7 @@ INSERT INTO Users (email, password)
 
 ########################################################
 
-CREATE TABLE Images (
+CREATE TABLE IF NOT EXISTS Images (
 	fkIdPost INT UNSIGNED NOT NULL,
 	path VARCHAR(200) NULL,
 	id INT NOT NULL AUTO_INCREMENT, 
@@ -37,7 +37,7 @@ INSERT INTO Images (fkIdPost, path)
                         
 ########################################################
 
-CREATE TABLE Messages (
+CREATE TABLE IF NOT EXISTS Messages (
   id INT NOT NULL AUTO_INCREMENT,
   fkSender VARCHAR(45) NOT NULL,
   fkReciever VARCHAR(45) NOT NULL,
@@ -75,14 +75,20 @@ CREATE TABLE IF NOT EXISTS Listings(
   PRIMARY KEY (id));
 
 
-INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum) values (1, "Dan", "First Poster its a deal", "house", "Rent", "SF", "Nice place, you won't ever want to leave", 1000,4);
+INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum) 
+						values (1, "Dan", "First Poster its a deal", "house", "Rent", "SF", "Nice place, you won't ever want to leave", 1000,4);
 
-INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum) values (2, "G", " 4 bedroom, nice view Near SFSU campus", "apartment", "Rent", "SF", "Don't miss out! This gorgeous remodeled Victorian is a renters dream. Fully furnished 3 bedroom 1 bathroom waiting for you. The pictures speak for themselves.", 3000, 4);
+INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum) 
+						values (2, "G", " 4 bedroom, nice view Near SFSU campus", "apartment", "Rent", "SF", "Don't miss out! This gorgeous remodeled Victorian is a renters dream. Fully furnished 3 bedroom 1 bathroom waiting for you. The pictures speak for themselves.", 3000, 4);
 
-INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum, adminAppr, petsAllowed, postalCode) values (4, "Bruce", "Room For Rent/All Utilities Included","room", "Rent", "SF", "Looking for roommate to fill extra room in a large apartment August 1st. $900 all utilities included. No lease/200$ deposit required/street parking only/10 minute walk to BART station and stores, close to freeway. I pay electric and internet but I will include it in the $900 per month, also fully furnished. Room needs to be filled by August1st, text if interested. 
+INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum, adminAppr, petsAllowed, postalCode) 
+						values (4, "Bruce", "Room For Rent/All Utilities Included","room", "Rent", "SF", "Looking for roommate to fill extra room in a large apartment August 1st. $900 all utilities included. No lease/200$ deposit required/street parking only/10 minute walk to BART station and stores, close to freeway. I pay electric and internet but I will include it in the $900 per month, also fully furnished. Room needs to be filled by August1st, text if interested. 
 
 - Two bedroom with Spacious Closets
 - Second Floor Unit
 - New tile kitchen and bathroom flooring
 - Subtle paint colors", 2000, 1, 1, 0, 94070);
+
+INSERT INTO Listings (fkId, fkEmail, title, houseType, sellOrRent, city, description, price, roomNum) 
+						values (3, "Danny", "First Poster its a deal", "house", "Rent", "SF", "Nice place, you won't ever want to leave", 1000,4);
 

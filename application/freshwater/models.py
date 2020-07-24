@@ -59,38 +59,48 @@ class Images(db.Model):  # Db where all Image paths are stored
 class Listings(db.Model):
     __tablename__ = "Listings"
     id = db.Column(db.Integer, primary_key=True)
-    fkId = db.Column(db.Integer)
-    fkEmail = db.Column(db.String)
+    #fkId = db.Column(db.Integer)
+    #fkEmail = db.Column(db.String)
+    timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
     title = db.Column(db.String)
     houseType = db.Column(db.String)
     sellOrRent = db.Column(db.String)
+    petsAllowed = db.Column(db.Integer)
     city = db.Column(db.String)
-    street = db.Column(db.String)
-    houseNum = db.Column(db.Integer)
-    gps = db.Column(db.String)
+    postalCode = db.Column(db.Integer)
+    street_address = db.Column(db.String)
+    distance_from_SFSU = db.Column(db.Float)
+    #houseNum = db.Column(db.Integer)
+    #gps = db.Column(db.String)
     description = db.Column(db.String)
     price = db.Column(db.Integer)
-    roomNum = db.Column(db.Integer)
+    sqft = db.Column(db.Integer)
+    bedroomNum = db.Column(db.Integer)
+    bathroomNum = db.Column(db.Integer)
     adminAppr = db.Column(db.Integer)
-    timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
-    petsAllowed = db.Column(db.Integer)
-    postalCode = db.Column(db.Integer)
+    
+    
 
     def dict(self):
-        return {"id": self.id,
-                "fkId": self.fkId,
-                "fkEmail": self.fkEmail,
+        return {
+                "id": self.id,
+                #"fkId": self.fkId,
+                #"fkEmail": self.fkEmail,
+                "timeCreated": self.timeCreated,
                 "title": self.title,
                 "houseType": self.houseType,
                 "sellOrRent": self.sellOrRent,
+                "petsAllowed": self.petsAllowed,
                 "city": self.city,
-                "street": self.street,
-                "houseNum": self.houseNum,
-                "gps": self.gps,
+                "postalCode": self.postalCode,
+                "street_address": self.street_address,
+                "distance_from_SFSU": self.distance_from_SFSU,
+                #"houseNum": self.houseNum,
+                #"gps": self.gps,
                 "description": self.description,
                 "price": self.price,
-                "roomNum": self.roomNum,
+                "sqft": self.sqft,
+                "bedroomNum": self.bedroomNum,
+                "bathroomNum": self.bathroomNum,
                 "adminAppr": self.adminAppr,
-                "timeCreated": self.timeCreated,
-                "petsAllowed": self.petsAllowed,
-                "postalCode": self.postalCode}
+                }
