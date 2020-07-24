@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -81,42 +82,34 @@
 
     <!-- Search Results -->
     <b-container class="m-5">
-    <b-row>
-      {% for listing in results_list_of_dicts %} 
-      <b-col>
-        <b-card 
-        no-body
-        img-alt="Card image" 
-        img-top
-        tag="article"
-    
-        style="max-width: 15rem; max-height: 23rem;" 
-        img-height="150px"
-        img-top
-        >
-        <template v-slot:header>
-          <h5 class="mb-0">
-            {{listing.houseType}} for rent</br>
-            Street:{{listing.street}}
-          </h5>
-        </template>
-        <b-card-img src="{{listing.path}}" bottom></b-card-img>
-          <b-card-text>
-            <b-container class="mb-0">
-            ${{listing.price}}/mo</br>
-            {{listing.title}}</br>
-            </b-container>
-          </b-card-text>
-        </b-card>
-      </b-col>
-      {% endfor %}
-  </b-container>
-    
-  
-  
+      <b-row >
+        {% for listing in results_list_of_dicts %} 
+        <b-col>
+          <b-card 
+          no-body
+          tag="article"      
+          style="max-width: 120rem" 
+          img-height="250px"
+          img-top
+          >
+          <template v-slot:header>
+            <h5 class="mb-0">
+              {{listing.houseType}} for rent</br>
+              Street:{{listing.street}}
+            </h5>
+          </template>
+          <b-card-img src="{{listing.path}}" img-alt="Card image" img-bottom></b-card-img>
+            <b-card-text>
+              <b-container class="mb-0">
+              ${{listing.price}}/mo</br>
+              {{listing.title}}</br>
+              </b-container>
+            </b-card-text>
+          </b-card>
+        </b-col>
+        {% endfor %}
+    </b-container>
   </div>
-
-
 
 
   <script>
