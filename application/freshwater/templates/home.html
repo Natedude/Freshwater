@@ -70,12 +70,38 @@
 					</b-col>
 				</b-row>
 			</b-form-group>
-			<b-form-group  label-cols-md="5" >
-				<b-row class="p-4 text-center">
-					<!-- Search Dropdown for Housing Type -->
-					<b-col class="col-xs-3" align="center" cols="4"><b-form-select v-model="selected" :options="options" name="Housing Type"></b-form-select></b-col>
-				</b-row>
+			<b-row class="p-4 text-center">
+				<b-col lg="5" ></b-col>
+				<b-col lg="2" cols="1"><b-button block v-b-toggle.collapse-1-inner variant="light" size="lg">Filter</b-button></b-col>
+			</b-row>
+				<b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
+					<b-form-group  id="ss"  label-cols-md="4" >
+					<b-row class="p-4 text-center">
+					<b-col class="col-xs-3 text-center" align="center" cols="3"><b-form-select v-model="selected" :options="options" name="HousingType"></b-form-select></b-col>
+					<b-col class="col-xs-3" align="center" cols="0"><b-button variant="light">Buy</b-button></b-col>
+					<b-col class="col-xs-3" align="center" cols="0"><b-button variant="light">Rent</b-button></b-col>
+					<b-col cols="0" class="pl-2">
+						<b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
+							Save Search <b-icon icon="search"></b-icon>
+						</b-button>
+					</b-col>
+					</b-row>
 			</b-form-group>
+				</b-collapse>
+
+			<b-row class="justify-content-end pr-3">
+				<b-col lg="1" cols="2">
+					<b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
+						<b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Price(Hi-Lo)</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Distance to SFSU</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Bedrooms</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Bathrooms</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
+					</b-dropdown>
+				</b-col>
+			</b-row>
 		</b-form>
 	</b-container>
 
