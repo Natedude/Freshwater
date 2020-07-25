@@ -35,10 +35,11 @@
 <body>
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
-  {{ text[0]|upper}}{{text[1:] }}
+    {{ text[0]|upper}}{{text[1:] }}
   {% endmacro %}
 
   <div id="app">
+
     <!-- Navbar -->
     <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-brand href="/">Fresh Water</br>Rentals</b-navbar-brand>
@@ -57,13 +58,13 @@
       </b-collapse>
     </b-navbar>
 
+    <!-- Jumbotron Container -->
     <b-container fluid class="container1">
       <b-form>
         <b-row class="text-center p-4">
           <b-col>
             <h2 class="text-center font-weight-bold text-white"> Discover a place <br /> nearby SFSU </h2>
           </b-col>
-
         </b-row>
 
         <b-form-group id="ss" label-cols-md="4">
@@ -81,33 +82,42 @@
             </b-col>
           </b-row>
         </b-form-group>
+
+        <!-- Filters button -->
         <b-row class="p-4 text-center">
           <b-col lg="5"></b-col>
           <b-col lg="2" cols="1">
             <b-button block v-b-toggle.collapse-1-inner variant="light" size="lg">Filter</b-button>
           </b-col>
         </b-row>
+
+        <!-- Filter options -->
         <b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
           <b-form-group id="ss" label-cols-md="4">
             <b-row class="p-4 text-center">
               <b-col class="col-xs-3 text-center" align="center" cols="3">
-                <b-form-select v-model="selected" :options="options" name="HousingType"></b-form-select>
+                <!-- Dropdown Housing Type -->
+                <b-form-select v-model="housingType_selected" :options="housingType_options" name="HousingType"></b-form-select>
               </b-col>
-              <b-col class="col-xs-3" align="center" cols="0">
+              <!-- Buy or Sell Buttons -->
+              <b-form-radio-group id="btn-radios-1" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-radio-group>
+              <!-- <b-col class="col-xs-3" align="center" cols="0">
                 <b-button variant="light">Buy</b-button>
               </b-col>
               <b-col class="col-xs-3" align="center" cols="0">
                 <b-button variant="light">Rent</b-button>
-              </b-col>
+              </b-col> -->
               <b-col cols="0" class="pl-2">
                 <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
-                  Save Search <b-icon icon="search"></b-icon>
+                  Apply Filters
+                  <!-- <b-icon icon="search"></b-icon> -->
                 </b-button>
               </b-col>
             </b-row>
           </b-form-group>
         </b-collapse>
 
+        <!-- Sort options -->
         <b-row class="justify-content-end pr-3">
           <b-col lg="1" cols="2">
             <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
