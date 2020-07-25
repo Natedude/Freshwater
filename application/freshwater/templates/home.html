@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -56,120 +57,114 @@
       </b-collapse>
     </b-navbar>
 
-    <!-- Jumbotron Container -->
-    <b-container fluid class="container1">
-      <b-form>
-        <b-row class="text-center p-4">
-          <b-col>
-            <h2 class="text-center font-weight-bold text-white"> Discover a place <br /> nearby SFSU </h2>
-          </b-col>
-        </b-row>
+	<b-container fluid class="container1">
+		<b-form>
+			<b-row class="text-center p-4">
+				<b-col>
+					<h2 class="text-center font-weight-bold text-white"> Discover a place <br/> nearby SFSU </h2>
+				</b-col>
 
-        <b-form-group id="ss" label-cols-md="4">
-          <b-row class="text-center p-2">
-            <!-- Search Text Field -->
-            <b-col class="col-xs-3" align="center" cols="6">
-              <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list"
-                placeholder="What are you looking for?">
-              </b-form-input>
-            </b-col>
-            <!-- Search Button -->
-            <b-col cols="0">
-              <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
-                <b-icon icon="search"></b-icon>
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-form-group>
+			</b-row>
 
-        <!-- Filters button -->
-        <b-row class="p-4 text-center">
-          <b-col lg="5"></b-col>
-          <b-col lg="2" cols="1">
-            <b-button block v-b-toggle.collapse-1-inner variant="light" size="lg">Filter</b-button>
-          </b-col>
-        </b-row>
-        <!-- Filter options -->
-        <b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
-          <b-form-group id="ss" label-cols-md="4">
-            <b-row class="p-4 text-center">
-              <b-col class="col-xs-3 text-center" align="center" cols="3">
-                <!-- Dropdown Housing Type -->
-                <b-form-select v-model="housingType_selected" :options="housingType_options" name="HousingType"></b-form-select>
-              </b-col>
-              <!-- Buy or Sell Buttons -->
-              <b-form-radio-group id="btn-radios-1" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-radio-group>
-              <!-- <b-col class="col-xs-3" align="center" cols="0">
-                <b-button variant="light">Buy</b-button>
-              </b-col>
-              <b-col class="col-xs-3" align="center" cols="0">
-                <b-button variant="light">Rent</b-button>
-              </b-col> -->
-              <b-col cols="0" class="pl-2">
-                <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
-                  Apply Filters 
-                  <!-- <b-icon icon="search"></b-icon> -->
-                </b-button>
-              </b-col>
-            </b-row>
-          </b-form-group>
-        </b-collapse>
+			<b-form-group  id="ss"  label-cols-md="4" >
+				<b-row class="text-center p-2">
+					<!-- Search Text Field -->
+					<b-col class="col-xs-3"  align="center" cols="6"><b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input></b-col>
+					<!-- Search Button -->
+					<b-col cols="0">
+						<b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
+							<b-icon icon="search"></b-icon>
+						</b-button>
+					</b-col>
+				</b-row>
+			</b-form-group>
+			<b-row class="p-4 text-center">
+				<b-col lg="5" ></b-col>
+				<b-col lg="2" cols="1"><b-button block v-b-toggle.collapse-1-inner variant="light" size="lg">Filter</b-button></b-col>
+			</b-row>
+				<b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
+					<b-form-group  id="ss"  label-cols-md="4" >
+					<b-row class="p-4 text-center">
+					<b-col class="col-xs-3 text-center" align="center" cols="3"><b-form-select v-model="selected" :options="options" name="HousingType"></b-form-select></b-col>
+					<b-col class="col-xs-3" align="center" cols="0"><b-button variant="light">Buy</b-button></b-col>
+					<b-col class="col-xs-3" align="center" cols="0"><b-button variant="light">Rent</b-button></b-col>
+					<b-col cols="0" class="pl-2">
+						<b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
+							Save Search <b-icon icon="search"></b-icon>
+						</b-button>
+					</b-col>
+					</b-row>
+			</b-form-group>
+				</b-collapse>
 
-        <!-- Sort options -->
-        <b-row class="justify-content-end pr-3">
-          <b-col lg="1" cols="2">
-            <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
-              <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Price(Hi-Lo)</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Distance to SFSU</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Bedrooms</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Bathrooms</b-dropdown-item>
-              <b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
-            </b-dropdown>
-          </b-col>
-        </b-row>
-      </b-form>
-    </b-container>
+			<b-row class="justify-content-end pr-3">
+				<b-col lg="1" cols="2">
+					<b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
+						<b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Price(Hi-Lo)</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Distance to SFSU</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Bedrooms</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Bathrooms</b-dropdown-item>
+						<b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
+					</b-dropdown>
+				</b-col>
+			</b-row>
+		</b-form>
+  </b-container>
+  
+   <!-- Search Results -->
+   <div class="m-5">
+    <b-row class="mb-4">
+      {% for listing in results_list_of_dicts %} 
+      <b-col class="col-md-auto">
 
-    <!-- Search Results -->
-    <b-container class="m-5">
-      <b-row>
-        {% for listing in results_list_of_dicts %}
-        <!-- <b-col> -->
-          <!-- Card Listings -->
-          <b-card 
-            border-variant="secondary" 
-            no-body img-alt="Card image" 
-            img-top 
-            tag="article" 
-            style="max-width: 15rem; max-height: 23rem; margin: 0.5rem;"
+        <h5 class="mb-2">
+          {{listing.houseType}} for Rent <br>
+          Street:{{listing.street_address}} 
+        </h5>
+        <b-card 
+          img-src="{{listing.path}}"
+          img-alt="Card image"
+          style="max-width: 23rem;"
+          img-height="200px"
+          tag="article" 
+          class="mb-2"
+          img-top
+          no-body>
+          <b-card-text>
+            <h5 class="mb-2">
+              ${{listing.price}}/mo
+            </h5>
             
-            header-bg-variant="secondary"
-            header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}" 
-            header-border-variant="secondary"
-            header-class="p-0"
-            align="center"
-            
-            >
-            <b-card-img src="{{listing.path}}" bottom height="150px"></b-card-img>
-            <b-card-text align="left">
-              <b-container class="mb-0">
-                
-                  
-                  <b style="font-size:20px;">${{listing.price}}</b> <br>
-                  <p>{{listing.title}}</p>
-              </b-container>
-            </b-card-text>
-          </b-card>
-        <!-- </b-col> -->
-        {% endfor %}
-    </b-container>
+            {{listing.title}}</br>
+          </b-card-text>
+          <div>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="heart-fill" variant="danger"></b-icon>
+            </b-button>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="chat-square-dots-fill" variant="primary"></b-icon>
 
-  </div> <!-- end app div -->
+            </b-button>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="arrow-up-right-circle-fill" variant="dark"></b-icon>
+            </b-button>
 
 
+          </div>
 
+        
+
+          <!-- <b-button href="#" class="btn btn-primary glyphicon glyphicon-share"></button>
+          <b-button href="#" class="btn btn-secondary glyphicon glyphicon-envelope"></button> -->
+
+          
+        </b-card>        
+      </b-col>
+      {% endfor %}
+    </b-row>
+  </div>
 
 
   <script>
