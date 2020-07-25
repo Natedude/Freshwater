@@ -104,37 +104,59 @@
 				</b-col>
 			</b-row>
 		</b-form>
-	</b-container>
+  </b-container>
+  
+   <!-- Search Results -->
+   <div class="m-5">
+    <b-row class="mb-4">
+      {% for listing in results_list_of_dicts %} 
+      <b-col class="col-md-auto">
 
-    <!-- Search Results -->
-    <b-container class="m-5">
-      <b-row >
-        {% for listing in results_list_of_dicts %} 
-        <b-col>
-          <b-card 
-          no-body
-          tag="article"      
-          style="max-width: 120rem" 
-          img-height="250px"
+        <h5 class="mb-2">
+          {{listing.houseType}} for Rent <br>
+          Street:{{listing.street_address}} 
+        </h5>
+        <b-card 
+          img-src="{{listing.path}}"
+          img-alt="Card image"
+          style="max-width: 23rem;"
+          img-height="200px"
+          tag="article" 
+          class="mb-2"
           img-top
-          >
-          <template v-slot:header>
-            <h5 class="mb-0">
-              {{listing.houseType}} for rent</br>
-              Street:{{listing.street}}
+          no-body>
+          <b-card-text>
+            <h5 class="mb-2">
+              ${{listing.price}}/mo
             </h5>
-          </template>
-          <b-card-img src="{{listing.path}}" img-alt="Card image" img-bottom></b-card-img>
-            <b-card-text>
-              <b-container class="mb-0">
-              ${{listing.price}}/mo</br>
-              {{listing.title}}</br>
-              </b-container>
-            </b-card-text>
-          </b-card>
-        </b-col>
-        {% endfor %}
-    </b-container>
+            
+            {{listing.title}}</br>
+          </b-card-text>
+          <div>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="heart-fill" variant="danger"></b-icon>
+            </b-button>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="chat-square-dots-fill" variant="primary"></b-icon>
+
+            </b-button>
+            <b-button variant="light" formaction="#" type="submit">
+              <b-icon icon="arrow-up-right-circle-fill" variant="dark"></b-icon>
+            </b-button>
+
+
+          </div>
+
+        
+
+          <!-- <b-button href="#" class="btn btn-primary glyphicon glyphicon-share"></button>
+          <b-button href="#" class="btn btn-secondary glyphicon glyphicon-envelope"></button> -->
+
+          
+        </b-card>        
+      </b-col>
+      {% endfor %}
+    </b-row>
   </div>
 
 
