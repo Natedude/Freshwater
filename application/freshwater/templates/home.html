@@ -93,21 +93,25 @@
 
         <!-- Filter options -->
         <b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
-          <b-form-group id="ss" label-cols-md="4">
+          <b-form-group id="ss" label-cols-md="3">
             <b-row class="p-4 text-center">
-              <b-col class="col-xs-3 text-center" align="center" cols="3">
-                <!-- Dropdown Housing Type -->
-                <b-form-select v-model="housingType_selected" :options="housingType_options" name="HousingType"></b-form-select>
+              <b-col class="text-center" align="center" cols="3">
+                <!-- Checkbox button Housing Type -->
+		<b-form-group>
+			<b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options" buttons button-variant="light" name="HousingType" ></b-form-checkbox-group>
+		</b-form-group>
+
               </b-col>
-              <!-- Buy or Sell Buttons -->
-              <b-form-radio-group id="btn-radios-1" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-radio-group>
-              <!-- <b-col class="col-xs-3" align="center" cols="0">
-                <b-button variant="light">Buy</b-button>
-              </b-col>
-              <b-col class="col-xs-3" align="center" cols="0">
-                <b-button variant="light">Rent</b-button>
-              </b-col> -->
-              <b-col cols="0" class="pl-2">
+              <!-- Rent or Buy Buttons -->
+              <b-col class="mr-4" align="center" cols="1">
+		      <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
+	      </b-col>
+
+              <b-col class="ml-1" align="center" cols="2">
+		      <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
+	      </b-col>
+
+              <b-col cols="0">
                 <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
                   Apply Filters
                   <!-- <b-icon icon="search"></b-icon> -->
@@ -119,7 +123,7 @@
 
         <!-- Sort options -->
         <b-row class="justify-content-end pr-3">
-          <b-col lg="1" cols="2">
+          <b-col lg="1" cols="2" class="py-2">
             <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
               <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
               <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
@@ -187,15 +191,6 @@
             <!-- <b-button href="#" class="btn btn-primary glyphicon glyphicon-share"></button>
           <b-button href="#" class="btn btn-secondary glyphicon glyphicon-envelope"></button> -->
           </b-card>
-
-
-
-
-
-
-
-
-
         </div>
 
         </b-col>
@@ -219,12 +214,14 @@
               value: 'sell'
             },
           ],
+          petsAllowed_selected: 0,
+          petsAllowed_options: [{
+              text: 'PetsAllowed',
+              value: 'PetsAllowedYes'
+            },
+          ],
           housingType_selected: 0,
           housingType_options: [{
-              value: 0,
-              text: "Housing Type",
-              disabled: true
-            }, {
               value: "House",
               text: "House",
             },
