@@ -14,6 +14,14 @@ def query():
 def about():
     return render_template("about/about_team.html")
 
+@app.route('/post')
+def post():
+    return render_template("post.html")
+
+@app.route('/confirm')
+def confirm():
+    return render_template("confirm.html")
+
 @app.route('/profile/<name>')
 def profile(name):
     return render_template("about/about_" + name + ".html")
