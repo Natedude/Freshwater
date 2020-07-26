@@ -20,12 +20,22 @@
       href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')}}"
     />
 
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.css')}}"
+    />
+
     <!-- Load polyfills to support older browsers -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
 
     <!-- Required scripts -->
     <script src="{{ url_for('static', filename='node_modules/vue/dist/vue.min.js')}}"></script>
     <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.js')}}"></script>
+
+
+
     <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
 
   </head>
@@ -55,25 +65,48 @@
               </b-card>
 
               <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-                <b-row no-gutters>
-                  <b-col md="6">
-                    <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
+                <b-row>
+                  <b-col sm="8">
+                    <div class="listing_text">
+                      [[street]], [[city]], [[state]]
+                    </div>
                   </b-col>
-                  <b-col md="6">
-                    <b-card-body title="Horizontal Card">
-                      <b-card-text>
-                        This is a wider card with supporting text as a natural lead-in to additional content.
-                        This content is a little bit longer.
-                      </b-card-text>
-                    </b-card-body>
+                  <b-col sm="4">
+                    <b-button-group>
+                      <b-button variant="outline-primary">
+                        <b-icon icon="heart"></b-icon> Favorite
+                      </b-button>
+                      <b-button variant="outline-primary">
+                        <b-icon icon="upload"></b-icon> Share
+                    </b-button-group>
                   </b-col>
                 </b-row>
+
+                <b-row>
+                  <b-col sm="4">
+                    <div class="listing_text">
+                      [[houseType]] for [[status]]
+                    </div>
+                    <h2> $[[price]]/mo </h2>
+                  </b-col>
+                  <b-col sm="8">
+                    <div class="listing_text">
+                      -[[subtype]]  -Baths: [[baths]]
+                      <br>
+                      - [[area_size]] sqft
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  
+                </b-row>
+
                 <b-row>
 
                   <b-embed type="iframe" class="map"
                       :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
                   </b-embed>
-                <b-row>
+                </b-row>
 
 
 
@@ -141,7 +174,10 @@
           city: "San Francisco",
           state: "CA",
           houseType: "Apartment",
-          area: "570 sqft",
+          status: "rent",
+          subtype: "Studio",
+          baths: 2,
+          area_size: "570 sqft",
           price: 2000
 
 
