@@ -19,6 +19,10 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <style>
+    .col-md {
+	    padding-left: 0px !important;
+	    padding-right: 0px !important;
+    }
     .container1 {
       background-image: url("/static/images/gator_move_in.jpg");
       /* Full height */
@@ -67,16 +71,15 @@
           </b-col>
         </b-row>
 
-        <b-form-group id="ss" label-cols-md="4">
-          <b-row class="text-center p-2">
+        <b-form-group id="ss">
+	  <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
-            <b-col class="col-xs-3" align="center" cols="6">
-              <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list"
-                placeholder="What are you looking for?"></b-form-input>
+            <b-col sm="6" align-self="center">
+              <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input>
             </b-col>
             <!-- Search Button -->
-            <b-col cols="0">
-              <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
+            <b-col class="col-md-auto" align-self="center">
+              <b-button class="my-2 my-sm-2" type="submit" formaction="/query" type="submit">
                 <b-icon icon="search"></b-icon>
               </b-button>
             </b-col>
@@ -84,35 +87,34 @@
         </b-form-group>
 
         <!-- Filters button -->
-        <b-row class="p-4 text-center">
-          <b-col lg="5"></b-col>
-          <b-col lg="2" cols="1">
+        <b-row class="mb-1 justify-content-md-center">
+          <b-col class=" col-md-auto" align-self="center">
             <b-button block v-b-toggle.collapse-1-inner variant="light" size="lg">Filter</b-button>
           </b-col>
         </b-row>
 
         <!-- Filter options -->
-        <b-collapse id="collapse-1-inner" class="mt-2i text-center" align="center">
-          <b-form-group id="ss" label-cols-md="3">
-            <b-row class="p-4 text-center">
-              <b-col class="text-center" align="center" cols="3">
+        <b-collapse id="collapse-1-inner" align="center">
+          <b-form-group id="ss" >
+            <b-row class="p-2 mb-1 justify-content-md-center" >
                 <!-- Checkbox button Housing Type -->
+            <b-col md style="max-width:15rem;">
 		<b-form-group>
 			<b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options" buttons button-variant="light" name="HousingType" ></b-form-checkbox-group>
 		</b-form-group>
 
               </b-col>
               <!-- Rent or Buy Buttons -->
-              <b-col class="mr-4" align="center" cols="1">
+            <b-col md style="max-width:9rem;">
 		      <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
 	      </b-col>
 
-              <b-col class="ml-1" align="center" cols="2">
+            <b-col md style="max-width:7rem;">
 		      <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
 	      </b-col>
 
-              <b-col cols="0">
-                <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
+            <b-col lg style="max-width:10rem;">
+                <b-button type="submit" formaction="/query" type="submit">
                   Apply Filters
                   <!-- <b-icon icon="search"></b-icon> -->
                 </b-button>
