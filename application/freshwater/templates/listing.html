@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>My first BootstrapVue app</title>
+
+    <!-- Required Stylesheets -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')}}"
+    />
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+    <!-- Required scripts -->
+    <script src="{{ url_for('static', filename='node_modules/vue/dist/vue.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.js')}}"></script>
+  </head>
+  <body>
+    <!-- Our application root element -->
+    <div id="app">
+
+      <template>
+        <b-button v-b-modal.listing>Take a look</b-button>
+
+        <b-modal id="listing" size="lg">
+          <template v-slot:modal-header="{ close }">
+            <!-- Emulate built in modal header close button action -->
+            <b-button size="sm" variant="outline-danger" @click="close()">
+              Back to results
+            </b-button>
+            <h5>Modal Header</h5>
+          </template>
+
+
+
+          <template v-slot:default="{ hide }">
+            <p>Modal Body with button</p>
+            <b-button @click="hide()">Hide Modal</b-button>
+
+            <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+              <b-row no-gutters>
+                <b-col md="6">
+                  <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
+                </b-col>
+                <b-col md="6">
+                  <b-card-body title="Horizontal Card">
+                    <b-card-text>
+                      This is a wider card with supporting text as a natural lead-in to additional content.
+                      This content is a little bit longer.
+                    </b-card-text>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+            </b-card>
+
+            <!-- gaah -->
+            <b-card img-src="https://picsum.photos/400/400/?image=41" img-alt="Image" overlay></b-card>
+            <b-card img-src="https://picsum.photos/400/200/?image=41" img-alt="Image" img-top>
+              <b-card-text>
+                This is a wider card with supporting text below as a natural lead-in to additional content.
+                This card has even longer content than the first.
+              </b-card-text>
+              <template v-slot:footer>
+                <small class="text-muted">Footer Text</small>
+              </template>
+            </b-card>
+
+
+          </template>
+
+          <template v-slot:modal-footer="{ ok, cancel, hide }">
+            <b>Custom Footer</b>
+            <!-- Emulate built in modal footer ok and cancel button actions -->
+            <b-button size="sm" variant="success" @click="ok()">
+              OK
+            </b-button>
+            <b-button size="sm" variant="danger" @click="cancel()">
+              Cancel
+            </b-button>
+            <!-- Button with custom close trigger value -->
+            <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
+              Forget it
+            </b-button>
+          </template>
+        </b-modal>
+      </template>
+
+    </div>
+
+    <!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: '#app',
+        data: {
+          name: ''
+        }
+      })
+    </script>
+  </body>
+</html>

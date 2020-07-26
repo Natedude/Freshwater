@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from freshwater import app
 from .search import search
 
@@ -17,3 +17,8 @@ def about():
 @app.route('/profile/<name>')
 def profile(name):
     return render_template("about/about_" + name + ".html")
+
+
+@app.route('/listing')
+def listing():
+    return render_template("listing.html")
