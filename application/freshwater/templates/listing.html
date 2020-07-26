@@ -26,6 +26,8 @@
     <!-- Required scripts -->
     <script src="{{ url_for('static', filename='node_modules/vue/dist/vue.min.js')}}"></script>
     <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
+
   </head>
   <body>
     <!-- Our application root element -->
@@ -34,7 +36,7 @@
       <template>
         <b-button v-b-modal.listing>Take a look</b-button>
 
-        <b-modal id="listing" size="lg">
+        <b-modal id="listing" size="xl">
           <template v-slot:modal-header="{ close }">
             <!-- Emulate built in modal header close button action -->
             <b-button size="sm" variant="outline-danger" @click="close()">
@@ -46,36 +48,39 @@
 
 
           <template v-slot:default="{ hide }">
-            <p>Modal Body with button</p>
-            <b-button @click="hide()">Hide Modal</b-button>
 
-            <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-              <b-row no-gutters>
-                <b-col md="6">
-                  <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
-                </b-col>
-                <b-col md="6">
-                  <b-card-body title="Horizontal Card">
-                    <b-card-text>
-                      This is a wider card with supporting text as a natural lead-in to additional content.
-                      This content is a little bit longer.
-                    </b-card-text>
-                  </b-card-body>
-                </b-col>
-              </b-row>
-            </b-card>
+            <b-card-group>
+              <b-card>
+                <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="200"  :width="600" :height="400" :items="items"/>
+              </b-card>
 
-            <!-- gaah -->
-            <b-card img-src="https://picsum.photos/400/400/?image=41" img-alt="Image" overlay></b-card>
-            <b-card img-src="https://picsum.photos/400/200/?image=41" img-alt="Image" img-top>
-              <b-card-text>
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-                This card has even longer content than the first.
-              </b-card-text>
-              <template v-slot:footer>
-                <small class="text-muted">Footer Text</small>
-              </template>
-            </b-card>
+              <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+                <b-row no-gutters>
+                  <b-col md="6">
+                    <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
+                  </b-col>
+                  <b-col md="6">
+                    <b-card-body title="Horizontal Card">
+                      <b-card-text>
+                        This is a wider card with supporting text as a natural lead-in to additional content.
+                        This content is a little bit longer.
+                      </b-card-text>
+                    </b-card-body>
+                  </b-col>
+                </b-row>
+                <b-row>
+
+                  <b-embed type="iframe" class="map"
+                      :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
+                  </b-embed>
+                <b-row>
+
+
+
+                </b-card>
+              </b-card-group>
+
+
 
 
           </template>
@@ -93,9 +98,17 @@
             <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
               Forget it
             </b-button>
+
+
+
+
+
+
           </template>
         </b-modal>
       </template>
+
+
 
     </div>
 
@@ -103,8 +116,35 @@
     <script>
       window.app = new Vue({
         el: '#app',
+        delimiters: ['[[', ']]'],
         data: {
-          name: ''
+          name: '',
+          items: [
+              {id:'someid1', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
+              caption: 'Front'},
+              {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              caption: 'Other view'},
+              {id:'someid3', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              caption: 'Living room'},
+              {id:'someid4', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              caption: 'Living room 2'},
+              {id:'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              caption: 'Dinnig room'},
+
+          ],
+          street: "212 Howth St",
+          city: "San Francisco",
+          state: "CA",
+          houseType: "Apartment",
+          area: "570 sqft",
+          price: 2000
+
+
         }
       })
     </script>
