@@ -141,44 +141,40 @@
     <!-- Search Results -->
     <div class="m-4">
       <b-row class="mb-1">
-        {% for listing in results_list_of_dicts %}
-        <div class="m-3">
-        <b-col class="col-md-auto">
+      {% for listing in results_list_of_dicts %}
+        <div class="m-2"> 
+          <b-col class="col-md-auto"> 
             <b-card 
-            no-body
-            tag="article"
-            style="max-width: 18rem; height: 26rem;"
-            img-top
-            >
+              border-variant="secondary" 
+              img-alt="Card image" 
+              no-body
+              img-top 
+              tag="article"
+              style="max-width: 21rem; height: 24rem; margin: 0.5rem;" header-bg-variant="secondary"
+              header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
+              header-border-variant="secondary" header-class="text-light p-1" align="center" 
+              footer-class="h-0  p-0 bottom">
 
-            <template v-slot:header>
-              <h5 class="mb-0">
-                {{listing.houseType}} for Rent <br>
-                {{listing.street_address}}
-              </h5>  
-            </template>
+            <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
+            <b-card-body style="padding:0%">
+              <b-card-text align="left" >
+                <b-container class="m-2">
+                  <b-row>
+                    <b-col cols="6">
+                      <h5>${{ listing.price }}{%if listing.sellOrRent == "rent"%} /mo {% endif %}</h5></b-col>
+                    <b-col>{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba |{{listing.sqrt}} sqft</b-col>
+                  </b-row>                  
+                    <p style="margin:0 auto">{{listing.street_address}}</p>
+                    <p>{{listing.distance_from_SFSU}} miles from SFSU</p>
+                </b-container>
+              </b-card-text>
+            </b-card-body>
             
-            <b-card-img 
-            src="{{listing.path}}" 
-            img-alt="Card Image"
-            img-bottom
-            height ="200rem"
-
-            >
-            </b-card-img>
-            <b-card-text>
-
-              <b-container class="mb-0">
-              ${{listing.price}}</br>
-              {{listing.title}}</br>
-              </b-container>
-            </b-card-text>
-
-            <div>
+            <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="heart-fill" variant="danger"></b-icon>
               </b-button>
-              
+
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="chat-square-dots-fill" variant="primary"></b-icon>
               </b-button>
@@ -186,17 +182,17 @@
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="arrow-up-right-circle-fill" variant="dark"></b-icon>
               </b-button>
-            </div>
-
-            <!-- <b-button href="#" class="btn btn-primary glyphicon glyphicon-share"></button>
-          <b-button href="#" class="btn btn-secondary glyphicon glyphicon-envelope"></button> -->
-          </b-card>
+            </template>
+            </b-card>
+          </b-col>
         </div>
+      {% endfor %}
+    </b-row>
+  </div>
+  <!-- </b-card-group> -->
 
-        </b-col>
-        {% endfor %}
-      </b-row>
-    </div>
+
+</div> <!-- end app div -->
 
 
     <script>
