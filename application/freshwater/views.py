@@ -26,3 +26,8 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
+
+# Jinja Templating Global Filters
+@app.template_filter()
+def numberFormat(value):
+    return format(int(value), ',d')
