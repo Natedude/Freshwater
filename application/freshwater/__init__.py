@@ -14,6 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to suppress warning
 #app.config['SQLALCHEMY_ECHO'] = True  # to print out SQL queries
 db = SQLAlchemy(app)#
 
-conn = db.session.get_bind()
-meta = MetaData(conn)
-meta.reflect()
+# conn = db.session.get_bind()
+# meta = MetaData(conn)
+# meta.reflect()
