@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
@@ -34,6 +34,13 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
+@app.route('/listing')
+def listing():
+    return render_template("listing.html")
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("messages.html")
 
 # Jinja Templating Global Filters
 @app.template_filter()
@@ -102,4 +109,3 @@ def invalid_cred(form, field):
         raise ValidationErro("Incorrect username/password")
     elif password_enter != user_object.password:
         raise ValidationError("Incorrect username/password")
-

@@ -1,3 +1,8 @@
 **/.DS_Store
 DS_Store
-Pipfile
+*.DS_Store
+Pipfile.lock
+**/__pycache__
+**/.pyc
+__pycache__/
+ *.pyc

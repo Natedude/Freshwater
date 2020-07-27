@@ -57,7 +57,7 @@
         </a>
         <b-navbar-nav>
           
-          <b-nav-item href="/">
+          <b-nav-item href="/post">
             <b-button pill variant="light" style="border: 1px solid; border-color: #e7e7e7;" class="m-0">
               Post to Rent OR Sell
             </b-button></b-nav-item>
@@ -177,6 +177,21 @@
 
     <!-- Search Results -->
     <div class="m-4">
+	<b-row class="mb-1 bg-success text-white" >
+		{% set count = results_list_of_dicts|length %}
+		{%if count > 0 %}
+		<div class="m-2"> Total Results found {%if saved_options.search_string != ''  %} for {{saved_options.search_string|tojson}} {% endif %}
+			{% if saved_options.HousingType !='' %}
+			{% for housingtypes in saved_options.HousingType %}
+			{%if saved_options.search_string == ''  and loop.index == 1 %} for {% endif %} {{housingtypes}}  {% if (saved_options.HousingType|length ) != loop.index  %} / {% endif %} {% endfor %} {% endif %}
+
+			{% if saved_options.sellOrRent !='' %}
+			{% for sellOrRentType in saved_options.sellOrRent %}
+			to {%if sellOrRentType == "sell" %} Buy {% else %} {{sellOrRentType}} {% endif %} {% if (saved_options.sellOrRent|length ) != loop.index  %} OR {% endif %} {% endfor %} {% endif %}
+			: {{count}}
+			</div>
+		{% endif %}
+	</b-row>
       <b-row class="mb-1">
       {% for listing in results_list_of_dicts %}
         <div class="m-2"> 
@@ -187,7 +202,7 @@
               no-body
               img-top 
               tag="article"
-              style="max-width: 21rem; height: 24rem; margin: 0.5rem;" header-bg-variant="secondary"
+              style="max-width: 21rem; height: 25 drem; margin: 0.4rem;" header-bg-variant="secondary"
               header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
               header-border-variant="secondary" header-class="text-light p-1" align="center" 
               footer-class="h-0  p-0 bottom">
@@ -196,11 +211,9 @@
             <b-card-body style="padding:0%">
               <b-card-text align="left" >
                 <b-container class="m-2">
-                  <b-row>
-                    <b-col cols="6">
-                      <h5>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</h5></b-col>
-                    <b-col >{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba {{listing.sqft}}sqft</b-col>
-                  </b-row>                  
+                      <h5>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</h5>
+                    {{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}}sqft
+                           
                     <p style="margin:0 auto">{{listing.street_address}}</p>
                     <p>{{listing.distance_from_SFSU}} miles from SFSU</p>
                 </b-container>

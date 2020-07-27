@@ -15,6 +15,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to suppress warning
 app.secret_key ='replace later'
 db = SQLAlchemy(app)#
 
-conn = db.session.get_bind()
-meta = MetaData(conn)
-meta.reflect()
+# conn = db.session.get_bind()
+# meta = MetaData(conn)
+# meta.reflect()

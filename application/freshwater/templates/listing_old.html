@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>My first BootstrapVue app</title>
+
+    <!-- Required Stylesheets -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')}}"
+    />
+
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.css')}}"
+    />
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+    <!-- Required scripts -->
+    <script src="{{ url_for('static', filename='node_modules/vue/dist/vue.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.js')}}"></script>
+
+
+
+    <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
+
+  </head>
+  <body>
+    <!-- Our application root element -->
+    <div id="app">
+
+      <template>
+        <b-button v-b-modal.listing>Take a look</b-button>
+
+        <b-modal id="listing" size="xl">
+          <template v-slot:modal-header="{ close }">
+            <!-- Emulate built in modal header close button action -->
+            <b-button size="sm" variant="outline-danger" @click="close()">
+              Back to results
+            </b-button>
+            <h5>Modal Header</h5>
+          </template>
+
+
+
+          <template v-slot:default="{ hide }">
+
+            <b-card-group>
+              <b-card>
+                <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="200"  :width="600" :height="400" :items="items"/>
+              </b-card>
+
+              <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+                <b-row>
+                  <b-col sm="8">
+                    <div class="listing_text">
+                      [[street]], [[city]], [[state]]
+                    </div>
+                  </b-col>
+                  <b-col sm="4">
+                    <b-button-group>
+                      <b-button variant="outline-primary">
+                        <b-icon icon="heart"></b-icon> Favorite
+                      </b-button>
+                      <b-button variant="outline-primary">
+                        <b-icon icon="upload"></b-icon> Share
+                    </b-button-group>
+                  </b-col>
+                </b-row>
+
+                <b-row>
+                  <b-col sm="4">
+                    <div class="listing_text">
+                      [[houseType]] for [[status]]
+                    </div>
+                    <h2> $[[price]]/mo </h2>
+                  </b-col>
+                  <b-col sm="8">
+                    <div class="listing_text">
+                      -[[subtype]]  -Baths: [[baths]]
+                      <br>
+                      - [[area_size]] sqft
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  
+                </b-row>
+
+                <b-row>
+
+                  <b-embed type="iframe" class="map"
+                      :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
+                  </b-embed>
+                </b-row>
+
+
+
+                </b-card>
+              </b-card-group>
+
+
+
+
+          </template>
+
+          <template v-slot:modal-footer="{ ok, cancel, hide }">
+            <b>Custom Footer</b>
+            <!-- Emulate built in modal footer ok and cancel button actions -->
+            <b-button size="sm" variant="success" @click="ok()">
+              OK
+            </b-button>
+            <b-button size="sm" variant="danger" @click="cancel()">
+              Cancel
+            </b-button>
+            <!-- Button with custom close trigger value -->
+            <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
+              Forget it
+            </b-button>
+
+
+
+
+
+
+          </template>
+        </b-modal>
+      </template>
+
+
+
+    </div>
+
+    <!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+          name: '',
+          items: [
+              {id:'someid1', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
+              caption: 'Front'},
+              {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              caption: 'Other view'},
+              {id:'someid3', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              caption: 'Living room'},
+              {id:'someid4', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              caption: 'Living room 2'},
+              {id:'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              caption: 'Dinnig room'},
+
+          ],
+          street: "212 Howth St",
+          city: "San Francisco",
+          state: "CA",
+          houseType: "Apartment",
+          status: "rent",
+          subtype: "Studio",
+          baths: 2,
+          area_size: "570 sqft",
+          price: 2000
+
+
+        }
+      })
+    </script>
+  </body>
+</html>
