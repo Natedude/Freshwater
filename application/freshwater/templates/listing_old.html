@@ -43,18 +43,21 @@
     <!-- Our application root element -->
     <div id="app">
 
+      <template>
+        <b-button v-b-modal.listing>Take a look</b-button>
 
-        <b-container>
-          <template>
+        <b-modal id="listing" size="xl">
+          <template v-slot:modal-header="{ close }">
             <!-- Emulate built in modal header close button action -->
             <b-button size="sm" variant="outline-danger" @click="close()">
               Back to results
             </b-button>
+            <h5>Modal Header</h5>
           </template>
 
 
 
-          <template>
+          <template v-slot:default="{ hide }">
 
             <b-card-group>
               <b-card>
@@ -95,11 +98,7 @@
                   </b-col>
                 </b-row>
                 <b-row>
-
-                  <b-col >
-                    <b-button v-b-modal.contact block variant="primary">Contact Landlord
-                      <b-icon icon="envelope"></b-icon></b-button>
-                  </b-col>
+                  
                 </b-row>
 
                 <b-row>
@@ -114,31 +113,33 @@
                 </b-card>
               </b-card-group>
 
+
+
+
           </template>
 
-
-          <!-- We can add some footer later? -->
-          <!-- <template>
+          <template v-slot:modal-footer="{ ok, cancel, hide }">
             <b>Custom Footer</b>
+            <!-- Emulate built in modal footer ok and cancel button actions -->
             <b-button size="sm" variant="success" @click="ok()">
               OK
             </b-button>
             <b-button size="sm" variant="danger" @click="cancel()">
               Cancel
             </b-button>
+            <!-- Button with custom close trigger value -->
             <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
               Forget it
             </b-button>
-          </template> -->
-
-        </b-container>
 
 
-        <b-modal id="contact" centered title="Contact Landlord">
-          <p class="my-4">Contact will go here</p>
+
+
+
+
+          </template>
         </b-modal>
-
-
+      </template>
 
 
 
