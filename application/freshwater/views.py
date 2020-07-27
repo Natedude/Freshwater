@@ -1,6 +1,5 @@
 from flask import render_template
 from freshwater import app
-from .client import reg
 from .search import search
 from flask_wtf import FlaskForm
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
