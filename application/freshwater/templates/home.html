@@ -177,6 +177,21 @@
 
     <!-- Search Results -->
     <div class="m-4">
+	<b-row class="mb-1 bg-success text-white" >
+		{% set count = results_list_of_dicts|length %}
+		{%if count > 0 %}
+		<div class="m-2"> Total Results found {%if saved_options.search_string != ''  %} for {{saved_options.search_string|tojson}} {% endif %}
+			{% if saved_options.HousingType !='' %}
+			{% for housingtypes in saved_options.HousingType %}
+			{%if saved_options.search_string == ''  and loop.index == 1 %} for {% endif %} {{housingtypes}}  {% if (saved_options.HousingType|length ) != loop.index  %} / {% endif %} {% endfor %} {% endif %}
+
+			{% if saved_options.sellOrRent !='' %}
+			{% for sellOrRentType in saved_options.sellOrRent %}
+			to {%if sellOrRentType == "sell" %} Buy {% else %} {{sellOrRentType}} {% endif %} {% if (saved_options.sellOrRent|length ) != loop.index  %} OR {% endif %} {% endfor %} {% endif %}
+			: {{count}}
+			</div>
+		{% endif %}
+	</b-row>
       <b-row class="mb-1">
       {% for listing in results_list_of_dicts %}
         <div class="m-2"> 
