@@ -122,27 +122,28 @@
         <b-collapse id="collapse-1-inner" align="center">
           <b-form-group id="ss" >
             <b-row class="p-2 mb-1 justify-content-md-center" >
-                <!-- Checkbox button Housing Type -->
-            <b-col md style="max-width:15rem;">
               <!-- Checkbox button Housing Type -->
-              <b-form-group>
-                <b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options"
-                buttons button-variant="light" name="HousingType" ></b-form-checkbox-group>
-              </b-form-group>
-            </b-col>
+              <b-col md style="max-width:15rem;">
+                <!-- Checkbox button Housing Type -->
+                <b-form-group>
+                  <b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options"
+                  buttons button-variant="light" name="HousingType" >
+                  </b-form-checkbox-group>
+                </b-form-group>
+              </b-col>
 
-              <!-- Rent or Buy Buttons -->
-            <b-col md style="max-width:9rem;">
-              <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
-            </b-col>
+                <!-- Rent or Buy Buttons -->
+              <b-col md style="max-width:9rem;">
+                <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
+              </b-col>
 
-            <!-- Pets Allowed Buttons -->
-            <b-col md style="max-width:7rem;">
-              <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form>b-form-checkbox-group>
-            </b-col>
+              <!-- Pets Allowed Buttons -->
+              <b-col md style="max-width:7rem;">
+                <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
+              </b-col>
 
-            <!-- Apply Filters Button -->
-            <b-col md style="max-width:10rem;">
+              <!-- Apply Filters Button -->
+              <b-col md style="max-width:10rem;">
                 <b-button type="submit" formaction="/query" type="submit">
                   Apply Filters
                   <!-- <b-icon icon="search"></b-icon> -->
