@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-
+from wtforms import *
 
 app = Flask(__name__)
 app.debug = True
