@@ -32,11 +32,13 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
-
-
 @app.route('/listing')
 def listing():
     return render_template("listing.html")
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("messages.html")
 
 # Jinja Templating Global Filters
 @app.template_filter()
