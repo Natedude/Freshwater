@@ -52,7 +52,9 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-img left src="/static/images/logo2.png" width=110%></b-img>
+        <a href="/">
+          <b-img left src="/static/images/logo2.png" width=110%></b-img>
+        </a>
         <b-navbar-nav>
           
           <b-nav-item href="/">
@@ -196,8 +198,8 @@
                 <b-container class="m-2">
                   <b-row>
                     <b-col cols="6">
-                      <h5>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%} /mo {% endif %}</h5></b-col>
-                    <b-col>{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba |{{listing.sqrt}} sqft</b-col>
+                      <h5>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</h5></b-col>
+                    <b-col >{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba {{listing.sqft}}sqft</b-col>
                   </b-row>                  
                     <p style="margin:0 auto">{{listing.street_address}}</p>
                     <p>{{listing.distance_from_SFSU}} miles from SFSU</p>
@@ -243,7 +245,7 @@
           //name: "",
           //this.$route.query.sellOrRent
           search_string: {{ saved_options.search_string|tojson }},
-          sellOrRent_selected: [],
+          sellOrRent_selected: {{ saved_options.sellOrRent|tojson}},
           sellOrRent_options: [{
               text: 'Rent',
               value: 'rent'
@@ -253,7 +255,7 @@
               value: 'sell'
             },
           ],
-          petsAllowed_selected: null,
+          petsAllowed_selected: {{ saved_options.petsAllowed|tojson}},
           petsAllowed_options: [{
               text: 'Pets Allowed',
               value: 1

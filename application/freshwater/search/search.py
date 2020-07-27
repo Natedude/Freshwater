@@ -21,38 +21,37 @@ def query():
         # package data to send for backend seaarch and 
         # also persistent search and filters in saved_options
         saved_options = {}  
-        search = args['search_string']
-        saved_options['search_string'] = search
+        search = query_helper(args, saved_options, 'search_string', '', take_first_element=True)
+        housingType = query_helper(args, saved_options, 'HousingType', [])
+        sellOrRent = query_helper(args, saved_options, 'sellOrRent', [])
+        petsAllowed = query_helper(args, saved_options, 'petsAllowed', [])
         
-        housingType = None
-        if 'HousingType' in args.keys():
-            housingType = args.getlist('HousingType')
-            saved_options['HousingType'] = housingType #can be list
-            
-        sellOrRent = None
-        if 'sellOrRent' in args.keys():
-            sellOrRent = args.getlist('sellOrRent')
-            saved_options['sellOrRent'] = sellOrRent # can be list
-            
-        petsAllowed = None
-        if 'petsAllowed' in args.keys():
-            petsAllowed = args['petsAllowed']
-            saved_options['petsAllowed'] = petsAllowed
-            
-        #search
         if not (search or housingType or sellOrRent or petsAllowed):
             all_listings = db.session.query(Listings)
             results_list_of_dicts = postMaker(all_listings)
         else:
-            results = backendSearch2(search_string=search, housingType=housingType, sellOrRent=sellOrRent, petsAllowed=petsAllowed)  
+            results = backendSearch(search_string=search, housingType=housingType, sellOrRent=sellOrRent, petsAllowed=petsAllowed)  
             # returns a list of dictionaries matching images with associated posts
             results_list_of_dicts = postMaker(results)
         #pretty_print_results_dictionaries_list(results_list_of_dicts)
     return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
 
+def query_helper(args, saved_options, str_key, if_not_present, take_first_element:bool = False):
+    t = None
+    if str_key in args.keys():
+        t = args.getlist(str_key)
+        if take_first_element:
+            saved_options[str_key] = t[0]  # can be list
+            return t[0]
+        else:
+            saved_options[str_key] = t  # can be list
+    else:
+        saved_options[str_key] = if_not_present
+    return t
+
 # searches listings for search_string in title and desc
 # and also applies filter options
-def backendSearch2(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
+def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
     results = search_title_and_desc(search_string)
     results = filter_in_list(
         results,Listings.houseType, housingType)

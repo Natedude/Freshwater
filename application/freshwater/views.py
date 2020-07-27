@@ -4,7 +4,13 @@ from .search import search
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    #workaround, pass in saved_options with nothing selected
+    saved_options = {}
+    saved_options['search_string'] = ''
+    saved_options['HousingType'] = []
+    saved_options['sellOrRent'] = []
+    saved_options['petsAllowed'] = []
+    return render_template("home.html", saved_options=saved_options)
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
