@@ -167,7 +167,7 @@
       <p>
           Enter Username & Password & Email into provided fields to create new user.
       </p>
-      <form action = "{{ url_for('signup') }}", method = "POST">
+      <form method = "POST">
           {{ displayField(regForm.usernameR, 'username', autocomplete="off", autofocus=true)}}
           {{ displayField(regForm.passwordR, 'password')}}
           {{ displayField(regForm.email, 'email')}}
@@ -179,12 +179,12 @@
           {{ regForm.csrf_token }}
       </form>
     </div>
-<script>
-window.app = new Vue({
-        el: '#app',
-        delimiters: ['[[', ']]'],
-      })
-</script> 
+    <script>
+        window.app = new Vue({
+                el: '#app',
+                delimiters: ['[[', ']]'],
+              })
+        </script> 
 
 
 </body>
