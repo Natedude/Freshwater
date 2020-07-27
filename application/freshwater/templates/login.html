@@ -42,7 +42,7 @@
       
       // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click();</script>
-      <link rel="stylesheet" href="../static/css/work.css">
+      <link rel="stylesheet" href="../static/css/login.css">
 </head>
 
 <body class="contents">
@@ -113,79 +113,77 @@
     </div>
 </div>
 
-    <button class="tablink" onclick="openPage('Home', this, 'rgba(18, 185, 35, 0.25)')">Login</button>
-    <button class="tablink" onclick="openPage('Signup', this, 'rgba(18, 185, 35, 0.25)')" id="defaultOpen">Signup</button>
+    <div class="bundle">    
+        <button class="tablink" onclick="openPage('Home', this, 'rgba(18, 185, 35, 0.25)')">Login</button>
+        <button class="tablink" onclick="openPage('Signup', this, 'rgba(18, 185, 35, 0.25)')" id="defaultOpen">Signup</button>
+    
+            <div id="Home" class="tabcontent">
+            {% macro displayField(fieldName, placeholderValue) %}
+            <div>
+                {{ fieldName(class ='form-control', placeholder=placeholderValue, **kwargs) }}
+                <ul>
+                    {% for error in fieldName.errors %}
+                    <li>
+                        {{ error }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endmacro %}
+                <h2> Login </h2>
+                <p>
+                    Enter Username & Password in provided fields to Login
+                </p>
+            <form action = " {{ url_for('login') }}", method = "POST">
+                {{ displayField(form.username, 'username', autocomplete="off", autofocus=true)}}
+                {{ displayField(form.password, 'password')}}
 
+                <div>
+                    {{ form.submit_button}}
+                </div>
+                <!-- for later making sure the email is valid?  -->
+                {{ form.csrf_token}}
+            </form>
 
-    <div id="Home" class="tabcontent">
-    {% macro displayField(fieldName, placeholderValue) %}
-    <div>
-        {{ fieldName(class ='form-control', placeholder=placeholderValue, **kwargs) }}
-        <ul>
-            {% for error in fieldName.errors %}
-            <li>
-                {{ error }}
-            </li>
-            {% endfor %}
-        </ul>
+                    
+            </div>
+
+            <div id="Signup" class="tabcontent">
+            {% macro displayField(fieldName, placeholderValue) %}
+            <div>
+                {{ fieldName(class ='form-control', placeholder=placeholderValue, **kwargs) }}
+                <ul>
+                    {% for error in fieldName.errors %}
+                    <li>
+                        {{ error }}
+                    </li>
+                    {% endfor %}
+                </ul>
+        
+            </div>
+            {% endmacro %}
+        
+            <h2> Signup New User </h2>
+            <p>
+                Enter Username & Password & Email into provided fields to create new user.
+            </p>
+            <form method = "POST">
+                {{ displayField(regForm.usernameR, 'username', autocomplete="off", autofocus=true)}}
+                {{ displayField(regForm.passwordR, 'password')}}
+                {{ displayField(regForm.email, 'email')}}
+
+                
+                <!-- for later making sure the email is valid?  -->
+                <button>Register</button>
+            </form>
+            </div>
+            <script>
+                window.app = new Vue({
+                        el: '#app',
+                        delimiters: ['[[', ']]'],
+                    })
+                </script> 
     </div>
-    {% endmacro %}
-        <h2> Login </h2>
-        <p>
-            Enter Username & Password in provided fields to Login
-        </p>
-    <form action = " {{ url_for('login') }}", method = "POST">
-        {{ displayField(form.username, 'username', autocomplete="off", autofocus=true)}}
-        {{ displayField(form.password, 'password')}}
-
-        <div>
-            {{ form.submit_button}}
-        </div>
-        <!-- for later making sure the email is valid?  -->
-        {{ form.csrf_token}}
-    </form>
-
-            
-    </div>
-
-    <div id="Signup" class="tabcontent">
-      {% macro displayField(fieldName, placeholderValue) %}
-      <div>
-          {{ fieldName(class ='form-control', placeholder=placeholderValue, **kwargs) }}
-          <ul>
-              {% for error in fieldName.errors %}
-              <li>
-                  {{ error }}
-              </li>
-              {% endfor %}
-          </ul>
-  
-      </div>
-      {% endmacro %}
-  
-      <h2> Signup New User </h2>
-      <p>
-          Enter Username & Password & Email into provided fields to create new user.
-      </p>
-      <form method = "POST">
-          {{ displayField(regForm.usernameR, 'username', autocomplete="off", autofocus=true)}}
-          {{ displayField(regForm.passwordR, 'password')}}
-          {{ displayField(regForm.email, 'email')}}
-          {{ displayField(regForm.accept_tos, 'accept_tos')}}
-          <div>
-              {{ regForm.submit_buttonR }}
-          </div>
-          <!-- for later making sure the email is valid?  -->
-          {{ regForm.csrf_token }}
-      </form>
-    </div>
-    <script>
-        window.app = new Vue({
-                el: '#app',
-                delimiters: ['[[', ']]'],
-              })
-        </script> 
-
 
 </body>
 

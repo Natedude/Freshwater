@@ -71,12 +71,10 @@ def login():
 
     if login_form.validate_on_submit():
         return "logged in"
-    return render_template("work.html", form = login_form, regForm = reg_form)
+    return render_template("login.html", form = login_form, regForm = reg_form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def loginCheck():
-    return client.login()
+
 
 
 class RegisterForm(FlaskForm):
@@ -85,13 +83,13 @@ class RegisterForm(FlaskForm):
     passwordR = PasswordField('email',[validators.Length(min=1,max=25)])
     email = StringField('password', [validators.Length(min=1,max=25)])
     accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])
-    sumbit_buttonR = SubmitField('Login')
+    sumbitR = SubmitField('Register')
 
 class LoginForm(FlaskForm):
     """ Login """
     username = StringField('username', [validators.Length(min=1,max=25)] )
     password = PasswordField('email', [validators.Length(min=1,max=25)])
-    submit_button = SubmitField('Signup')
+    submit_button = SubmitField('Login')
 
 
 def invalid_cred(form, field):
