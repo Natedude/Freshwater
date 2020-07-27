@@ -75,6 +75,9 @@
       </b-collapse>
     </b-navbar>
 
+    <div>
+	    <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demostration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
+    </div>
     <!-- Jumbotron Container -->
     <b-container fluid class="container1">
       <b-form>
@@ -87,14 +90,17 @@
         <b-form-group id="ss">
 	  <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
-            <b-col sm="6" align-self="center">
+            <b-col md="4" align-self="center" style=" padding-left: 15px !important; padding-right: 5px !important;">
               <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list" placeholder="What are you looking for?"></b-form-input>
             </b-col>
             <!-- Search Button -->
-            <b-col class="col-md-auto" align-self="center">
+
+            <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
+	     <div style="display:flex; justify-content:center">
               <b-button class="my-2 my-sm-2" type="submit" formaction="/query" type="submit">
                 <b-icon icon="search"></b-icon>
               </b-button>
+		    </div>
             </b-col>
           </b-row>
         </b-form-group>
@@ -126,7 +132,7 @@
 		      <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
 	      </b-col>
 
-            <b-col lg style="max-width:10rem;">
+            <b-col md style="max-width:10rem;">
                 <b-button type="submit" formaction="/query" type="submit">
                   Apply Filters
                   <!-- <b-icon icon="search"></b-icon> -->
@@ -137,8 +143,9 @@
         </b-collapse>
 
         <!-- Sort options -->
-        <b-row class="justify-content-end pr-3">
-          <b-col lg="1" cols="2" class="py-2">
+        <b-row class="justify-content-end px-3">
+          <b-col class="col-lg-auto py-2" align-self="center">
+	    <div style="display:flex; justify-content:center">
             <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
               <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
               <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
@@ -149,6 +156,7 @@
               <b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
             </b-dropdown>
           </b-col>
+	    </div>
         </b-row>
       </b-form>
     </b-container>
