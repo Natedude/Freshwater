@@ -110,7 +110,19 @@
 
 <!-- divider line  -->
     <hr/>
+    <b-row >
+      <b-col>
       <h2 style="margin-top: 20px;">My Messages</h2>
+      </b-col>
+      <!-- sort button -->
+      <b-col cols="4" md="2">
+        <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
+          <b-dropdown-item href="#">Sort: Date</b-dropdown-item>
+          <b-dropdown-item href="#">Sort: Title of property</b-dropdown-item>
+        </b-dropdown>
+        </b-col>
+      </b-row>
+
       <!-- message section start -->
       <b-row>
         <!-- style="border: 1px solid; border-color:grey; -->
@@ -170,7 +182,9 @@
         </b-col>
         <!-- message box start from here -->
         <b-col class="p-3" sm=6>
+          <b-row>
           <h5>Ivy</h5>
+          </b-row> 
           <b-row class="p-3 pill bg-light" sm=8>
             Hi, My name is Ivy, I am a student of SFSU. I am interested in your home at 2222 Fruitdale Ave, South San Francisco. You can conntact me by phone and email.
           </b-row>
