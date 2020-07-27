@@ -45,46 +45,46 @@
       <link rel="stylesheet" href="../static/css/login.css">
 </head>
 
-<body class="contents">
+<body>
+<!-- Jinja Macros -->
+{% macro capitalize(text) %}
+  {{ text[0]|upper}}{{text[1:] }}
+{% endmacro %}
+
 <div id="app">
-    <b-navbar toggleable="lg" type="light" variant="light">
-        <b-navbar-brand href="/">Fresh Water</b-navbar-brand>
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+  <!-- Navbar -->
+  <b-navbar toggleable="lg" type="light" variant="light">
+   
+    <b-navbar-brand href="/">Fresh Water</br>Rentals</b-navbar-brand>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-        <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav>
-                <b-nav-item href="/">Buy</b-nav-item>
-                <b-nav-item href="/">Rent</b-nav-item>
-            </b-navbar-nav>
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        
+        <b-nav-item href="/">
+          <b-button pill variant="light" style="border: 1px solid; border-color: #e7e7e7;" class="m-0">
+            Post to Rent OR Sell
+          </b-button></b-nav-item>
+        <b-nav-item href="/about"> 
+          <b-button pill variant="light" style="border: 1px solid; border-color: #e7e7e7;" class="m-0">
+            About
+          </b-button></b-nav-item>
+      </b-navbar-nav>
 
-            <b-navbar-nav class="ml-auto">
-                <b-nav-form>
-                    <!-- Search Dropdown for Housing Type -->
-                    <b-form-select v-model="selected" :options="options" name="HousingType"></b-form-select>
-                    <!-- <b-form-datalist id="input-list" :options="options"></b-form-datalist> -->
-
-                    <!-- Search Text Field -->
-                    <b-form-input name="search_string" list="input-list" id="input-with-list"
-                                  placeholder="What are you looking for?"></b-form-input>
-
-                    <!-- <b-form-input size="auto" class="mx-auto" placeholder="What are you looking for?"></b-form-input> -->
-                    <!-- Search Button -->
-                    <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
-                        <b-icon icon="search"></b-icon>
-                    </b-button>
-                </b-nav-form>
-            </b-navbar-nav>
-
-            <!-- Right aligned nav items -->
-            <b-navbar-nav class="ml-auto">
-                <b-nav-item href="/about">About</b-nav-item>
-                <b-nav-item href="#">Contact</b-nav-item>
-            </b-navbar-nav>
-        </b-collapse>
-    </b-navbar>
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item href="#">
+          <b-button pill style="border-color: #e7e7e7; background-color: #e7e7e7; color:black">
+            Log in / Sign up
+          </b-button></b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+  <!-- End of nav bar -->
 
     <!-- Search Results -->
+    <b-container>
     <div class="container">
         <!-- Results Count -->
 
@@ -177,6 +177,22 @@
                 <button>Register</button>
             </form>
             </div>
+        </b-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <script>
                 window.app = new Vue({
                         el: '#app',
