@@ -1,6 +1,7 @@
 name: sfsc
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - python=3.7
   - mysqlclient
@@ -9,4 +10,5 @@ dependencies:
   - pymysql
   - flask-sqlalchemy
   - marshmallow
+  - nodejs=14.6.0
 prefix: ~/miniconda3/envs/sfsc
