@@ -20,11 +20,12 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <style>
     .col-md {
-	    padding-left: 0px !important;
-	    padding-right: 0px !important;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
     }
+
     .container1 {
-      background-image: url("/static/images/gator_move_in.jpg");
+      /* background-image: url("/static/images/gator_move_in.jpg"); */
       /* Full height */
       height: 100%;
 
@@ -32,6 +33,17 @@
       /*background-position: center; */
       background-repeat: no-repeat;
       background-size: cover;
+
+
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
@@ -39,7 +51,7 @@
 <body>
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
-    {{ text[0]|upper}}{{text[1:] }}
+  {{ text[0]|upper}}{{text[1:] }}
   {% endmacro %}
 
   <div id="app">
@@ -54,11 +66,13 @@
           <b-nav-item href="/post">
             <b-button pill variant="light" style="border: 1px solid; border-color: #e7e7e7;" class="m-2">
               Post to Rent OR Sell
-            </b-button></b-nav-item>
-          <b-nav-item href="/about"> 
+            </b-button>
+          </b-nav-item>
+          <b-nav-item href="/about">
             <b-button pill variant="light" style="border: 1px solid; border-color: #e7e7e7;" class="m-2">
               About
-            </b-button></b-nav-item>
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -66,40 +80,35 @@
           <b-nav-item href="#">
             <b-button pill style="border-color: #e7e7e7; background-color: #e7e7e7; color:black">
               Log in / Sign up
-            </b-button></b-nav-item>
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
 
     <!-- Jumbotron Container -->
-    <b-container fluid class="container1" style="text-align: center; color: #e7e7e7; height: 60%;">
-      <br /><br /><br /><br /><br /><br />
-<div style="background-color: rgba(108, 122, 137, 0.8); top: 50%">
+    <b-container fluid class="container1" class="center" style="text-align: center; color: #e7e7e7;">
 
-<h2>Posting on its way!</h2>
-<h3>Your posting may take up to 24 hours to be approved.
-Thank you for posting with Freshwater Rentals!</h3>
+      <div style="background-color: rgba(108, 122, 137, 1); height: 500px; vertical-align: middle;">
+        <br /><br /><br /><br /><br /><br />
+        <h2>Posting on its way!</h2>
+        <h3>Your posting may take up to 24 hours to be approved.
+          Thank you for posting with Freshwater Rentals!</h3>
 
-</div>
-<div style="display: flex; justify-content: center;">
-  <b-button pill type="submit" href="/" variant="primary">Back to Home Page</b-button>
+        <b-button pill type="submit" href="/" variant="primary">Back to Home Page</b-button>
+      </div>
 
-  </div>
-<br /><br /><br /><br /><br /><br />
+    </b-container>
 
-</b-container>
+  </div> <!-- end app div -->
 
 
+  <script>
+    window.app = new Vue({
+      el: "#app",
 
-</div> <!-- end app div -->
-
-
-    <script>
-      window.app = new Vue({
-        el: "#app",
-
-      });
-    </script>
+    });
+  </script>
 </body>
 
 </html>
