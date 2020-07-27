@@ -134,8 +134,50 @@
         </b-container>
 
 
-        <b-modal id="contact" centered title="Contact Landlord">
-          <p class="my-4">Contact will go here</p>
+        <b-modal id="contact" centered>
+          <template v-slot:modal-title>
+            <div class="title_middle">
+              <p>Contact Landlord</p>
+            </div>
+          </template>
+          <div class="d-block text-center">
+            <p>Thank you for your intertest in
+              <br>
+              [[houseType]] for [[status]] at
+              <br>
+              [[street]],
+              <br>
+              [[city]],   [[state]]
+            </p>
+
+            <form action="#" method="GET">
+              <!-- <label for="user">Username</label> -->
+
+              <input type="text" id= "name" name="name" placeholder="Your first name and last name" required>
+              <br><br>
+              <!-- <label for="email">Email</label> -->
+              <input type="email" id= "email" name="email" placeholder="Email" required>
+              <br><br>
+
+              <textarea id="message" name="message" rows="4" cols="30" required></textarea>
+              <br>
+
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+
+          <template v-slot:modal-footer>
+            <div class="w-100">
+              
+              <b-button
+                variant="primary"
+                size="sm"
+                class="float-right"
+              >
+                Close
+              </b-button>
+            </div>
+          </template>
         </b-modal>
 
 
