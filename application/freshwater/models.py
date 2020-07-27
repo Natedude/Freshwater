@@ -1,6 +1,26 @@
 from datetime import datetime
 from freshwater import db
 
+# This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
+def model_to_list_of_dicts(model):
+    print("**** dbTolst: before query")
+    records_in_model = model.query.all()
+    print("**** dbTolst: after query")
+    # make sure db in use has working dict function within its class
+    lst = [x.dict() for x in records_in_model]
+    # Orders our list of dictionaries with id from smallest to largest
+    lst.sort(key=lambda x: x["id"])
+    return lst  # Remember this needs to be jsonfied to pass it to html
+
+
+def to_dict(model_instance, query_instance=None):
+    if hasattr(model_instance, '__table__'):
+        return {c.name: str(getattr(model_instance, c.name)) for c in model_instance.__table__.columns}
+    else:
+        cols = query_instance.column_descriptions
+        return {cols[i]['name']: model_instance[i] for i in range(len(cols))}
+
+
 class Users(db.Model):  # Main User Db All registered Users will be stored here
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +32,10 @@ class Users(db.Model):  # Main User Db All registered Users will be stored here
 
     def __str__(self):
         return "(s)Username: " + self.email + " : " + self.password
+    
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(Users)
 
 
 class Messages(db.Model):
@@ -28,6 +52,10 @@ class Messages(db.Model):
                 "fkReciever": self.fkReciever,
                 "message": self.message,
                 "timeCreated": self.timeCreated}
+    
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(Messages)
 
 
 class Images(db.Model):  # Db where all Image paths are stored
@@ -54,6 +82,10 @@ class Images(db.Model):  # Db where all Image paths are stored
                 "fkIdPost": self.fkIdPost,
                 # "sellOrRent": self.sellOrRent,
                 "path": self.path}
+        
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(Images)
 
 
 class Listings(db.Model):
@@ -104,3 +136,7 @@ class Listings(db.Model):
                 "bathroomNum": self.bathroomNum,
                 "adminAppr": self.adminAppr,
                 }
+        
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(Listings)

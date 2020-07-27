@@ -18,6 +18,7 @@
   <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+  <script src="https://unpkg.com/vue-router"></script>
   <style>
     .container1 {
       background-image: url("/static/images/gator_move_in.jpg");
@@ -63,7 +64,13 @@
       <b-form>
         <b-row class="text-center p-4">
           <b-col>
-            <h2 class="text-center font-weight-bold text-white"> Discover a place <br /> nearby SFSU </h2>
+            <h2 class="text-center font-weight-bold text-white"> Discover a place <br /> nearby SFSU
+              <!-- Test code to see live vue and jinja values DO NOT REMOVE-->
+              <!-- <br> 
+              [[housingType_selected]] [[sellOrRent_selected]]
+              [[petsAllowed_selected]] <br> '[[search_string]]' <br>
+              {{saved_options|tojson}} -->
+            </h2>
           </b-col>
         </b-row>
 
@@ -72,7 +79,8 @@
             <!-- Search Text Field -->
             <b-col class="col-xs-3" align="center" cols="6">
               <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list"
-                placeholder="What are you looking for?"></b-form-input>
+                placeholder="What are you looking for?"
+                v-model="search_string"></b-form-input>
             </b-col>
             <!-- Search Button -->
             <b-col cols="0">
@@ -96,27 +104,34 @@
           <b-form-group id="ss" label-cols-md="3">
             <b-row class="p-4 text-center">
               <b-col class="text-center" align="center" cols="3">
-                <!-- Checkbox button Housing Type -->
-		<b-form-group>
-			<b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options" buttons button-variant="light" name="HousingType" ></b-form-checkbox-group>
-		</b-form-group>
 
+                <!-- Checkbox button Housing Type -->
+                <b-form-group>
+                  <b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options"
+                  buttons button-variant="light" name="HousingType" ></b-form-checkbox-group>
+                </b-form-group>
               </b-col>
+
               <!-- Rent or Buy Buttons -->
               <b-col class="mr-4" align="center" cols="1">
-		      <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
-	      </b-col>
+                <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" 
+                buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
+	            </b-col>
 
+              <!-- Pets Allowed Buttons -->
               <b-col class="ml-1" align="center" cols="2">
-		      <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
-	      </b-col>
+                <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" 
+                buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
+	            </b-col>
 
+              <!-- Apply Filters Button -->
               <b-col cols="0">
                 <b-button class="my-2 my-sm-0" type="submit" formaction="/query" type="submit">
                   Apply Filters
                   <!-- <b-icon icon="search"></b-icon> -->
                 </b-button>
               </b-col>
+
             </b-row>
           </b-form-group>
         </b-collapse>
@@ -199,12 +214,20 @@
     </div>
 
 
-    <script>
+    <script type="text/javascript">
+      //var router = new VueRouter({
+      //  mode: 'history',
+      //  routes: []
+      //});
       window.app = new Vue({
+        //router,
         el: "#app",
+        delimiters: ['[[', ']]'],
         data: {
           //name: "",
-          sellOrRent_selected: 0,
+          //this.$route.query.sellOrRent
+          search_string: {{ saved_options.search_string|tojson }},
+          sellOrRent_selected: [],
           sellOrRent_options: [{
               text: 'Rent',
               value: 'rent'
@@ -214,13 +237,13 @@
               value: 'sell'
             },
           ],
-          petsAllowed_selected: 0,
+          petsAllowed_selected: null,
           petsAllowed_options: [{
-              text: 'PetsAllowed',
-              value: 'PetsAllowedYes'
+              text: 'Pets Allowed',
+              value: 1
             },
           ],
-          housingType_selected: 0,
+          housingType_selected: {{ saved_options.HousingType|tojson}},
           housingType_options: [{
               value: "House",
               text: "House",
@@ -235,6 +258,21 @@
             },
           ],
         },
+        //methods: {},
+        /*created: function() {
+        /  q = this.$route.query
+          console.log(q)
+          housingType_selected = this.$route.query.housingType
+          sellOrRent_selected = this.$route.query.sellOrRent
+          petsAllowed_selected = this.$route.query.petsAllowed
+          console.log(this.$route.query.sellOrRent)
+          name = this.$route.query.name
+          console.log(name)
+          p = this.$route.query.params
+          console.log("params=" + p)
+          //let housingType =  {{housingType|safe}}
+        },
+        */
       });
     </script>
 </body>
