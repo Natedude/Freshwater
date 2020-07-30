@@ -36,7 +36,7 @@ def profile(name):
 
 @app.route('/listing')
 def listing():
-    return render_template("listing.html")
+    return render_template("listings/listing.html")
 
 @app.route('/dashboard')
 def dashboard():
