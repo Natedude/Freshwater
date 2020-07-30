@@ -1,8 +1,11 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
+from .client import client
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -65,20 +68,38 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('login'))
-    return render_template("register.html", form = newform)
+        return render_template("client/login.html", form = newform)
+    return render_template("client/login.html", form = newform)
 
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-    reg_form = RegisterForm()
-
-    #login if success
-
-    if login_form.validate_on_submit():
-        return "logged in"
-    return render_template("login.html", form = login_form, regForm = reg_form)
+    if request.method == 'GET':
+        login_form = LoginForm()
+        reg_form = RegisterForm()
+        return render_template("client/login.html", form = login_form, regForm = reg_form)
+    
+    if request.method == 'POST':
+        login_form = LoginForm()
+        if login_form.validate_on_submit():
+            user = login_form.username.data
+            print(type(user))
+            print('user is : ', user)
+            password = login_form.password.data
+            return client.login(user, password)
+        #     #result= Users.query.filter(Users.email==user)#result is a Basequery object
+        #     #result = result.first()
+        #     if result==None:
+        #         render_template("client/login.html", title="UserName does not exsit")
+        #     elif login_form.password.data == str(result.password):
+        #         ##session['user'] = user#request.form['username']# Not using Session yet
+        #         #return redirect(url_for('protected'))#TODO login with Sessions
+        #         return "data Base connection, life connection, everything connection, password"
+        #     else:
+        #         render_template("test/testLogin.html", title="Login failed, passwords did not match")
+        # elif "user" in session:#if get request and user is already in session, redircts them
+        #     return redirect(url_for("userLoggedIn"))
+        # return render_template("test/testLogin.html")
 
 
 
