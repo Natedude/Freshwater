@@ -177,7 +177,7 @@
 
     <!-- Search Results -->
     <div class="m-4">
-	<b-row class="mb-1 bg-success text-white" >
+	  <b-row class="mb-1 bg-success text-white" >
 		{% set count = results_list_of_dicts|length %}
 		{%if count > 0 %}
 		<div class="m-2"> Total Results found {%if saved_options.search_string != ''  %} for {{saved_options.search_string|tojson}} {% endif %}
@@ -189,7 +189,7 @@
 			{% for sellOrRentType in saved_options.sellOrRent %}
 			to {%if sellOrRentType == "sell" %} Buy {% else %} {{sellOrRentType}} {% endif %} {% if (saved_options.sellOrRent|length ) != loop.index  %} OR {% endif %} {% endfor %} {% endif %}
 			: {{count}}
-			</div>
+		  </div>
 		{% endif %}
 	</b-row>
       <b-row class="mb-1">
@@ -202,25 +202,29 @@
               no-body
               img-top 
               tag="article"
-              style="max-width: 21rem; height: 25 drem; margin: 0.4rem;" header-bg-variant="secondary"
+              style="max-width: 21rem; height: 30xrem; margin: 0.4rem;font-size:1.2em" 
               header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
-              header-border-variant="secondary" header-class="text-light p-1" align="center" 
-              footer-class="h-0  p-0 bottom">
+              header-bg-variant="Light"
+              fontSize = 0.25
+              align="center"
+              >
+            <!-- header-border-variant="secondary" header-class=" p-1" align="center" 
+            footer-class="h-0  p-0 bottom" -->
 
             <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
             <b-card-body style="padding:0%">
               <b-card-text align="left" >
                 <b-container class="m-2">
-                      <h5>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</h5>
-                    {{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}}sqft
-                           
-                    <p style="margin:0 auto">{{listing.street_address}}</p>
-                    <p>{{listing.distance_from_SFSU}} miles from SFSU</p>
+                    <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5>
+                    <h6>{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}} sqft</h6>
+                    <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>                
+                    <h6 style="margin:0 auto">{{listing.street_address}}</h6>
                 </b-container>
               </b-card-text>
             </b-card-body>
-            
-            <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
+
+            <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact Landlord</b-button>
+            <!-- <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="heart-fill" variant="danger"></b-icon>
               </b-button>
@@ -232,7 +236,7 @@
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="arrow-up-right-circle-fill" variant="dark"></b-icon>
               </b-button>
-            </template>
+            </template> -->
             </b-card>
           </b-col>
         </div>
