@@ -62,8 +62,12 @@
         <b-button pill id="show-btn" @click="$bvModal.show('bv-modal-example')">Log in / Sign up</b-button>
       
         <b-modal id="bv-modal-example" hide-footer >
-          <template class="text-center" v-slot:modal-title>
-            <h3>Login</h3>
+          <template v-slot:modal-title>
+              <!-- <b-row>
+                <p class="mx-auto bg-info" style="width: 200px"> Login</p>
+              </b-row>
+              <p class="mx-auto bg-info" style="width: 200px"> Login</p> -->
+            <h2>Login</h2>
           </template>
 
           <div class="d-block">
@@ -80,7 +84,7 @@
                             <input type="password" class="form-control form-control-lg" />
                         </div>
             
-                        <button type="submit" class="btn btn-dark btn-lg btn-block">Log In</button>
+                        <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
 
                         <b-row>
                             <b-col class="col-md-auto">
