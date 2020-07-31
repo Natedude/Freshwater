@@ -205,13 +205,14 @@
               style="max-width: 21rem; height: 30xrem; margin: 0.4rem;font-size:1.2em" 
               header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
               header-bg-variant="Light"
-              fontSize = 0.25
               align="center"
               >
             <!-- header-border-variant="secondary" header-class=" p-1" align="center" 
             footer-class="h-0  p-0 bottom" -->
-
-            <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
+            <a href="/listing">
+              <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
+            </a>
+            
             <b-card-body style="padding:0%">
               <b-card-text align="left" >
                 <b-container class="m-2">
@@ -223,7 +224,7 @@
               </b-card-text>
             </b-card-body>
 
-            <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact Landlord</b-button>
+            <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact the Landlord</b-button>
             <!-- <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="heart-fill" variant="danger"></b-icon>
