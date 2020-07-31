@@ -40,7 +40,7 @@ def listing():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("messages.html")
+    return render_template("/client/dashboard.html")
 
 # Jinja Templating Global Filters
 @app.template_filter()
