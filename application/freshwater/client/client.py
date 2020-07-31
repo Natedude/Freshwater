@@ -1,6 +1,9 @@
 from flask import render_template, request, session, redirect, url_for
 from ..models import Listings, Images, Users
 from ..models import db
+from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
+from flask_wtf import FlaskForm
+
 
 
 
@@ -12,15 +15,18 @@ def login(user, passwrd):
     user = request.form['username']
     result= Users.query.filter(Users.email==user)#result is a Basequery object
     result = result.first()
-    if result==None:
-       return render_template("client/login.html", title="UserName does not exsit")
+    if result==None: #If username given by client matches db Users
+        login_form = LoginForm()
+        reg_form = RegisterForm()
+        return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
     elif passwrd == str(result.password):
-        #session['user'] = user#request.form['username']# Not using Session yet
-        #return redirect(url_for('protected'))#TODO login with Sessions
+        session['user'] = user# Not using Session yet
         return "Password and Name Match"
     else:
-        render_template("client/login.html", title="Login failed, passwords did not match")
-#elif "user" in session:#if get request and user is already in session, redircts them
+        login_form = LoginForm()
+        reg_form = RegisterForm()
+        return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
+        #elif "user" in session:#if get request and user is already in session, redircts them
 #            return redirect(url_for("userLoggedIn"))
 #return render_template("test/testLogin.html")
 
@@ -84,3 +90,21 @@ def userLoggedIn():
 def logout():
     session.pop("user", None)
     return redirect(url_for("login"))
+
+
+
+
+
+class RegisterForm(FlaskForm):
+    """ Register """
+    usernameR = StringField('username',[validators.Length(min=1,max=25)])
+    passwordR = PasswordField('email',[validators.Length(min=1,max=25)])
+    email = StringField('password', [validators.Length(min=1,max=25)])
+    accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])
+    sumbitR = SubmitField('Register')
+
+class LoginForm(FlaskForm):
+    """ Login """
+    username = StringField('username', [validators.Length(min=1,max=25)] )
+    password = PasswordField('email', [validators.Length(min=1,max=25)])
+    submit_button = SubmitField('Login')

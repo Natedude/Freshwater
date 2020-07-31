@@ -1,5 +1,7 @@
 from datetime import datetime
-from freshwater import db
+from freshwater import db, app
+from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
+
 
 # This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
 def model_to_list_of_dicts(model):
@@ -38,6 +40,10 @@ class Users(db.Model):  # Main User Db All registered Users will be stored here
         return model_to_list_of_dicts(Users)
 
 
+
+
+
+
 class Messages(db.Model):
     __tablename__ = "Messages"
     id = db.Column(db.Integer, primary_key=True)
@@ -58,7 +64,11 @@ class Messages(db.Model):
         return model_to_list_of_dicts(Messages)
 
 
+
+
+
 class Images(db.Model):  # Db where all Image paths are stored
+    #__bind_key__ = 'db1'
     __tablename__ = "Images"  # Name of table
     id = db.Column(db.Integer, primary_key=True)
     # All images must be associted with the Onwer(/User)'s ID
@@ -88,7 +98,10 @@ class Images(db.Model):  # Db where all Image paths are stored
         return model_to_list_of_dicts(Images)
 
 
+
+
 class Listings(db.Model):
+    #__bind_key__ = 'db1'
     __tablename__ = "Listings"
     id = db.Column(db.Integer, primary_key=True)
     #fkId = db.Column(db.Integer)
@@ -140,3 +153,37 @@ class Listings(db.Model):
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Listings)
+
+
+
+
+#Define models
+roles_users = db.Table('roles_users',
+        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')),
+        info={'bind_key': 'user'})
+
+
+
+class Role(db.Model, RoleMixin):
+    __bind_key__ = 'user'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+
+
+class User(db.Model, UserMixin):
+    __bind_key__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
+
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+

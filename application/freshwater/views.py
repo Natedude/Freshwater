@@ -4,7 +4,7 @@ from .search import search
 from flask_wtf import FlaskForm
 from .client import client
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
-
+from flask_security import login_required, current_user
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -72,7 +72,16 @@ def register():
     return render_template("client/login.html", form = newform)
 
 
-@app.route("/login", methods = ['GET', 'POST'])
+@app.route('/protected')
+@login_required
+def protected():
+    email = current_user.email
+    return '<h1>This is protected! Your email is{}</h1>'.format(email)
+
+
+
+
+@app.route("/loginn", methods = ['GET', 'POST'])
 def login():
     if request.method == 'GET':
         login_form = LoginForm()
@@ -115,8 +124,8 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     """ Login """
-    username = StringField('username', [validators.Length(min=1,max=25)] )
-    password = PasswordField('email', [validators.Length(min=1,max=25)])
+    email = StringField('email', [validators.Length(min=1,max=25)] )
+    password = PasswordField('email', [validators.Length(min=6,max=200)])
     submit_button = SubmitField('Login')
 
 
