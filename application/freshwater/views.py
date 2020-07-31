@@ -24,11 +24,11 @@ def about():
 
 @app.route('/post')
 def post():
-    return render_template("post.html")
+    return render_template("listings/post.html")
 
 @app.route('/confirm')
 def confirm():
-    return render_template("confirm.html")
+    return render_template("listings/confirm.html")
 
 @app.route('/profile/<name>')
 def profile(name):
@@ -36,7 +36,7 @@ def profile(name):
 
 @app.route('/listing')
 def listing():
-    return render_template("listing.html")
+    return render_template("listings/listing.html")
 
 @app.route('/dashboard')
 def dashboard():
@@ -78,7 +78,7 @@ def login():
 
     if login_form.validate_on_submit():
         return "logged in"
-    return render_template("login.html", form = login_form, regForm = reg_form)
+    return render_template("client/login.html", form = login_form, regForm = reg_form)
 
 
 
