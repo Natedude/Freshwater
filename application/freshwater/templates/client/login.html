@@ -55,6 +55,23 @@
 <div id="app">
   <navbar-component></navbar-component>
 
+  <!-- new login -->
+  <b-container align="right">
+    <div>
+        <b-button v-b-modal.modal-center>Launch centered modal</b-button>
+      
+        <b-modal id="modal-center" centered title="BootstrapVue">
+          <p class="my-4">Vertically centered modal!</p>
+        </b-modal>
+      </div>
+      
+
+
+  </b-container>
+<!-- new login end -->
+
+
+
     <b-container>
     <div class="container">
         <!-- Results Count -->
@@ -70,7 +87,7 @@
               </div> -->
 
         {% for listing in results_list_of_dicts %}
-        <div class="row">
+        <!-- <div class="row">
             <b-card img-src="{{listing.path}}" img-alt="Card image" img-left class="mb-3" img-height="128px">
                 <b-card-text>
                     <h2>{{listing.title}}</h2>
@@ -78,7 +95,7 @@
                     {{listing.description}}
                 </b-card-text>
             </b-card>
-        </div>
+        </div> -->
 
         {% endfor %}
     </div>
