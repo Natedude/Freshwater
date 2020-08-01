@@ -23,45 +23,45 @@ def to_dict(model_instance, query_instance=None):
         return {cols[i]['name']: model_instance[i] for i in range(len(cols))}
 
 
-class Users(db.Model):  # Main User Db All registered Users will be stored here
-    __tablename__ = "Users"
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String)
-    password = db.Column(db.String)
+# class Users(db.Model):  # Main User Db All registered Users will be stored here
+#     __tablename__ = "Users"
+#     id = db.Column(db.Integer, primary_key=True)
+#     email = db.Column(db.String)
+#     password = db.Column(db.String)
 
-    def __repr__(self):
-        return "(r)Username: " + self.email + " : " + str(self.password)
+#     def __repr__(self):
+#         return "(r)Username: " + self.email + " : " + str(self.password)
 
-    def __str__(self):
-        return "(s)Username: " + self.email + " : " + self.password
+#     def __str__(self):
+#         return "(s)Username: " + self.email + " : " + self.password
     
-    @staticmethod
-    def list_of_dicts():
-        return model_to_list_of_dicts(Users)
+#     @staticmethod
+#     def list_of_dicts():
+#         return model_to_list_of_dicts(Users)
 
 
 
 
 
 
-class Messages(db.Model):
-    __tablename__ = "Messages"
-    id = db.Column(db.Integer, primary_key=True)
-    fkSender = db.Column(db.String)
-    fkReciever = db.Column(db.String)
-    message = db.Column(db.String)
-    timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
+# class Messages(db.Model):
+#     __tablename__ = "Messages"
+#     id = db.Column(db.Integer, primary_key=True)
+#     fkSender = db.Column(db.String)
+#     fkReciever = db.Column(db.String)
+#     message = db.Column(db.String)
+#     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def dict(self):
-        return {"id": self.id,
-                "fkSender": self.fkSender,
-                "fkReciever": self.fkReciever,
-                "message": self.message,
-                "timeCreated": self.timeCreated}
+#     def dict(self):
+#         return {"id": self.id,
+#                 "fkSender": self.fkSender,
+#                 "fkReciever": self.fkReciever,
+#                 "message": self.message,
+#                 "timeCreated": self.timeCreated}
     
-    @staticmethod
-    def list_of_dicts():
-        return model_to_list_of_dicts(Messages)
+#     @staticmethod
+#     def list_of_dicts():
+#         return model_to_list_of_dicts(Messages)
 
 
 
@@ -77,7 +77,7 @@ class Images(db.Model):  # Db where all Image paths are stored
     fkIdPost = db.Column(db.Integer)  # Forgien Key for the associated Post
     # Informs us if a sell or Someone looking to rent our a unit
     # sellOrRent = db.Column(db.String)
-    path = db.Column(db.String)  # Relative file path of image
+    path = db.Column(db.String(255))  # Relative file path of image
 
     # def __repr__(self):
     #     return "(r)fkEmail: " + self.fkEmail + " : " + str(self.path)
@@ -107,17 +107,17 @@ class Listings(db.Model):
     #fkId = db.Column(db.Integer)
     #fkEmail = db.Column(db.String)
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
-    title = db.Column(db.String)
-    houseType = db.Column(db.String)
-    sellOrRent = db.Column(db.String)
+    title = db.Column(db.String(255))
+    houseType = db.Column(db.String(255))
+    sellOrRent = db.Column(db.String(255))
     petsAllowed = db.Column(db.Integer)
-    city = db.Column(db.String)
+    city = db.Column(db.String(255))
     postalCode = db.Column(db.Integer)
-    street_address = db.Column(db.String)
+    street_address = db.Column(db.String(255))
     distance_from_SFSU = db.Column(db.Float)
     #houseNum = db.Column(db.Integer)
     #gps = db.Column(db.String)
-    description = db.Column(db.String)
+    description = db.Column(db.String(255))
     price = db.Column(db.Integer)
     sqft = db.Column(db.Integer)
     bedroomNum = db.Column(db.Integer)
@@ -161,12 +161,13 @@ class Listings(db.Model):
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')),
-        info={'bind_key': 'user'})
+        # info={'bind_key': 'user'}
+        )
 
 
 
 class Role(db.Model, RoleMixin):
-    __bind_key__ = 'user'
+    # __bind_key__ = 'user'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
@@ -174,13 +175,14 @@ class Role(db.Model, RoleMixin):
 
 
 class User(db.Model, UserMixin):
-    __bind_key__ = 'user'
+    # __bind_key__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
-    roles = db.relationship('Role', secondary=roles_users,
+    roles = db.relationship('Role', 
+                            secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
 
 

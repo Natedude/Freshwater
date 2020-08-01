@@ -1,5 +1,5 @@
 from flask import render_template, request, session, redirect, url_for
-from ..models import Listings, Images, Users
+from ..models import Listings, Images, User
 from ..models import db
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_wtf import FlaskForm
@@ -13,9 +13,9 @@ from flask_wtf import FlaskForm
 ###NOTE THIS IS A DEMO for login proccess###
 def login(user, passwrd):
     user = request.form['username']
-    result= Users.query.filter(Users.email==user)#result is a Basequery object
+    result= User.query.filter(User.email==user)#result is a Basequery object
     result = result.first()
-    if result==None: #If username given by client matches db Users
+    if result==None: #If username given by client matches db User
         login_form = LoginForm()
         reg_form = RegisterForm()
         return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
@@ -39,7 +39,7 @@ def login(user, passwrd):
 def login2():
     if request.method == 'POST':
         user = request.form['username']
-        result= Users.query.filter(Users.email==user)#result is a Basequery object
+        result= User.query.filter(User.email==user)#result is a Basequery object
         result = result.first()
         if result==None:
             render_template("test/testLogin.html", title="UserName does not exsit")
@@ -60,7 +60,7 @@ def registration():
         userString = "%{}%".format(user)
         if ("@mail.sfsu.edu" not in userString) and ("@sfsu.edu" not in userString):
             return  "<html><body><H1>Email Must Be associated with SFSU</h1><body><html>"
-        result= Users.query.filter(Users.email==user)#result is a Basequery object
+        result= User.query.filter(User.email==user)#result is a Basequery object
         result = result.first()
         if result!=None:
             return  "<html><body><H1>Email Already Reigstered</h1><body><html>"
@@ -69,7 +69,7 @@ def registration():
         if psw != pswConfirm:
             return  "<html><body><H1>Password do note match</h1><body><html>"
         try:
-            newUser = Users(email=user, password=psw)
+            newUser = User(email=user, password=psw)
             db.session.add(newUser)
             try:
                 db.session.commit()
