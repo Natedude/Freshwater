@@ -67,7 +67,7 @@ if not database_exists(url):
     print("Created database {0}".format(database))
     create_database(url)
 else:
-    print("Did NOT create database, {database} already exists.")
+    print(f"Did NOT create database, {database} already exists.")
 
 #end test code -
 
