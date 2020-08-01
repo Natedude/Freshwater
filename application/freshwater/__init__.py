@@ -36,7 +36,8 @@ host = '127.0.0.1'
 port = '3306'
 
 # This engine just used to query for list of databases
-mysql_engine = create_engine('{0}://{1}:{2}@{3}:{4}'.format(proto, user, password, host, port))
+mysql_url = '{0}://{1}:{2}@{3}:{4}'.format(proto, user, password, host, port)
+mysql_engine = create_engine(mysql_url)
 pprint(mysql_engine)
 
 # Query for existing databases
@@ -55,15 +56,18 @@ url = '{0}://{1}:{2}@{3}:{4}/{5}'.format(proto,
 app.config['SQLALCHEMY_DATABASE_URI'] = url
 
 # Create database if not exists
-if database not in existing_databases:
-    mysql_engine.execute("CREATE DATABASE {0}".format(database))
-    print("Created database {0}".format(database))
-else:
-    print("Did NOT create database, {database} already exists.")
+# if database not in existing_databases:
+#     mysql_engine.execute("CREATE DATABASE {0}".format(database))
+#     print("Created database {0}".format(database))
+# else:
+#     print("Did NOT create database, {database} already exists.")
 #test code - 
 
 if not database_exists(url):
+    print("Created database {0}".format(database))
     create_database(url)
+else:
+    print("Did NOT create database, {database} already exists.")
 
 #end test code -
 
