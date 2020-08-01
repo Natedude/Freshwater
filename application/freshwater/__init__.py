@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from wtforms import *
 from pprint import pprint
 
+print("******** Initializing App & Database ********")
 app = Flask(__name__)
 app.debug = False
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:abc123@127.0.0.1:3306/CSC_5'
@@ -64,8 +65,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = url
 
 
 # Not sure if we even ever use this
-# db_engine = create_engine(url)
-# pprint(db_engine)
+db_engine = create_engine(url)
+pprint(db_engine)
 
 db = SQLAlchemy(app)
 pprint(db)
@@ -81,3 +82,5 @@ else:
     print(f"Did NOT create database, {database} already exists.")
 
 #end test code -
+
+print("******** FINISHED Initializing App & Database ********")

@@ -1,3 +1,4 @@
+import math
 from .scraper import Scraper
 #from freshwater import db
 
@@ -25,30 +26,31 @@ class DevUtils(object):
         print("Results list len: " + str(len(self.listings_dict_list)))
         
         #most popular terms used in real estate listings / ads
-        listing_keywords = ["Granite","countertop","Hardwood","floors","Granite","Pool","spa","Hardwood","floors","Gourmet","kitchen","Stainless steel","appliances","Granite","Stainless steel","appliances","Ocean views","Stainless steel","appliances","Open","floor plan","Wine cellar","Covered","patio","appliances","Vaulted","ceilings","kitchen","dining room","Formal","bar","Guest","house","Vaulted","ceilings","Vaulted","ceilings","dining","room","New","roof","Chef","kitchen","Hardwood","Natural","light","Open","concept","French doors","Media room","Perfect","location","Pool","spa","Open","concept","Move-in","ready","Gas","fireplace","Pool","Dual","sinks", "roomate", "sky", "neighborhood", "mission", "SFSU", "campus","majors", "close", "restaurants", "shopping", "mall", "nearby", "dorm", "walking distance", "walk", "utilities included", "amenities", "class", "apartment", "studio", "looking", "bathroom", "bedroom", "furnished", "furniture"
+        self.listing_keywords_list = ["Granite","countertop","Hardwood","floors","Granite","Pool","spa","Hardwood","floors","Gourmet","kitchen","Stainless steel","appliances","Granite","Stainless steel","appliances","Ocean views","Stainless steel","appliances","Open","floor plan","Wine cellar","Covered","patio","appliances","Vaulted","ceilings","kitchen","dining room","Formal","bar","Guest","house","Vaulted","ceilings","Vaulted","ceilings","dining","room","New","roof","Chef","kitchen","Hardwood","Natural","light","Open","concept","French doors","Media room","Perfect","location","Pool","spa","Open","concept","Move-in","ready","Gas","fireplace","Pool","Dual","sinks", "roomate", "sky", "neighborhood", "mission", "SFSU", "campus","majors", "close", "restaurants", "shopping", "mall", "nearby", "dorm", "walking distance", "walk", "utilities included", "amenities", "class", "apartment", "studio", "looking", "bathroom", "bedroom", "furnished", "furniture"
         ]
+        self.keywords_count = len(self.listing_keywords_list)
+        print(f"Number of keywords: {self.keywords_count}")
         #remove duplicates
-        self.listing_keywords = list(dict.fromkeys(listing_keywords))
+        self.listing_keywords_dict = list(dict.fromkeys(self.listing_keywords_list))
         self.houseType = ["house","apartment", "room"]
         self.sellOrRent = ['rent','sale']
         self.petsAllowed = [0,1]
         self.postalCodes = [ #all SF postal Codes list
             94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114, 94115, 94116, 94117, 94118, 94119, 94120, 94121, 94122, 94123, 94124, 94125, 94126, 94127, 94128, 94129, 94130, 94131, 94132, 94133, 94134, 94137, 94139, 94140, 94141, 94142, 94143, 94144, 94145, 94146, 94147, 94151, 94158, 94159, 94160, 94161, 94163, 94164, 94172, 94177, 94188
         ]
-        print("************\n" + lorem.paragraph() + "\n*****************\n")
+        print("************\n" + self.make_description() + "\n*****************\n")
         
         self.image_paths_list = glob.glob(
-            "application/freshwater/dev_utils/unused_images/*")
+            "freshwater/dev_utils/unused_images/*")
         #pprint(self.image_paths_list)
         print("Image paths = " + str(len(self.image_paths_list)))
         
-    def random_image_to_record(self):
-        pass
         
-    def random_image(self):
+        
+    def random_image_path(self):
         return random.choice(self.image_paths_list)
 
-    def make_listing(self):
+    def make_listing_object(self):
         l = self.models.Listings(
             title=self.make_title(), 
             houseType=random.choice(self.houseType), 
@@ -76,7 +78,10 @@ class DevUtils(object):
         return self.listings_dict_list[self.listings_index]['title']
 
     def make_description(self):
-        pass
+        keywords_to_add_in = random.sample(self.listing_keywords_list, k= ( math.ceil(self.keywords_count / 10.0 )))
+        desc = " ".join(keywords_to_add_in) + " " + lorem.paragraph()
+        #print(f"Description: {desc}")
+        return str(desc)
     
     def make_price(self):
         return self.listings_dict_list[self.listings_index]['price']

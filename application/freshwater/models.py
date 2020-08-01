@@ -1,4 +1,7 @@
 from datetime import datetime
+from sqlalchemy import ForeignKey, Table, Column
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 from freshwater import db, app
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
@@ -47,10 +50,11 @@ class Images(db.Model):  # Db where all Image paths are stored
     #__bind_key__ = 'db1'
     __tablename__ = "Images"  # Name of table
     id = db.Column(db.Integer, primary_key=True)
-    # All images must be associted with the Onwer(/User)'s ID
-    # fkIdUser = db.Column(db.Integer)
-    # fkEmail = db.Column(db.String)  # Email can also be used as a forigen key
-    fkIdPost = db.Column(db.Integer)  # Forgien Key for the associated Post
+    # All images must be associted with the Onwer(/User)'s ID & Listing ID
+    fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for 
+    user = relationship("User")
+    fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for 
+    listing = relationship("Listings")
     # Informs us if a sell or Someone looking to rent our a unit
     # sellOrRent = db.Column(db.String)
     path = db.Column(db.String(255))  # Relative file path of image
@@ -135,8 +139,8 @@ class Listings(db.Model):
 
 #Define models
 roles_users = db.Table('roles_users',
-        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')),
+        db.Column('user_id', db.Integer(), db.ForeignKey('User.id')),
+        db.Column('role_id', db.Integer(), db.ForeignKey('Role.id')),
         # info={'bind_key': 'user'}
         )
 
@@ -144,6 +148,7 @@ roles_users = db.Table('roles_users',
 
 class Role(db.Model, RoleMixin):
     # __bind_key__ = 'user'
+    __tablename__ = "Role"
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
@@ -152,6 +157,7 @@ class Role(db.Model, RoleMixin):
 
 class User(db.Model, UserMixin):
     # __bind_key__ = 'user'
+    __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
