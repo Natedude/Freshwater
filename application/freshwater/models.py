@@ -23,33 +23,12 @@ def to_dict(model_instance, query_instance=None):
         return {cols[i]['name']: model_instance[i] for i in range(len(cols))}
 
 
-# class Users(db.Model):  # Main User Db All registered Users will be stored here
-#     __tablename__ = "Users"
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String)
-#     password = db.Column(db.String)
-
-#     def __repr__(self):
-#         return "(r)Username: " + self.email + " : " + str(self.password)
-
-#     def __str__(self):
-#         return "(s)Username: " + self.email + " : " + self.password
-    
-#     @staticmethod
-#     def list_of_dicts():
-#         return model_to_list_of_dicts(Users)
-
-
-
-
-
-
 class Messages(db.Model):
     __tablename__ = "Messages"
     id = db.Column(db.Integer, primary_key=True)
-    fkSender = db.Column(db.String)
-    fkReciever = db.Column(db.String)
-    message = db.Column(db.String)
+    fkSender = db.Column(db.String(255))
+    fkReciever = db.Column(db.String(255))
+    message = db.Column(db.String(255))
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
 
     def dict(self):
@@ -62,9 +41,6 @@ class Messages(db.Model):
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Messages)
-
-
-
 
 
 class Images(db.Model):  # Db where all Image paths are stored
