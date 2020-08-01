@@ -5,8 +5,8 @@ import os
 from wtforms import *
 
 app = Flask(__name__)
-app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/CSC_4'
+app.debug = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:abc123@127.0.0.1:3306/CSC_5'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3307/CSC'
 # above is same line but with different port, 3307 -----------------^
 # so you can quickly change if your 3306 port is bound 

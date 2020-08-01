@@ -44,24 +44,24 @@ def to_dict(model_instance, query_instance=None):
 
 
 
-# class Messages(db.Model):
-#     __tablename__ = "Messages"
-#     id = db.Column(db.Integer, primary_key=True)
-#     fkSender = db.Column(db.String)
-#     fkReciever = db.Column(db.String)
-#     message = db.Column(db.String)
-#     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
+class Messages(db.Model):
+    __tablename__ = "Messages"
+    id = db.Column(db.Integer, primary_key=True)
+    fkSender = db.Column(db.String)
+    fkReciever = db.Column(db.String)
+    message = db.Column(db.String)
+    timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     def dict(self):
-#         return {"id": self.id,
-#                 "fkSender": self.fkSender,
-#                 "fkReciever": self.fkReciever,
-#                 "message": self.message,
-#                 "timeCreated": self.timeCreated}
+    def dict(self):
+        return {"id": self.id,
+                "fkSender": self.fkSender,
+                "fkReciever": self.fkReciever,
+                "message": self.message,
+                "timeCreated": self.timeCreated}
     
-#     @staticmethod
-#     def list_of_dicts():
-#         return model_to_list_of_dicts(Messages)
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(Messages)
 
 
 

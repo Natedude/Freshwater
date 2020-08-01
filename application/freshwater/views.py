@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
-from .client import client
+from .client import client, messaging
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_security import login_required, current_user
 
@@ -79,6 +79,18 @@ def protected():
     return '<h1>This is protected! Your email is {}</h1>'.format(email)
 
 
+
+@app.route('/messages/getAll')
+@login_required
+def returnAllMess():
+    #Get all messages from messsage db with fk from user
+    if request.method == 'GET':
+        email = current_user.email
+        print(email)#Test print can/should be deleted for more final version
+        print(type(email))
+        return messaging.getAll(email) #return JSON
+    
+    
 
 
 @app.route("/loginn", methods = ['GET', 'POST'])
