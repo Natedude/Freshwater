@@ -1,8 +1,11 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
+from .client import client, messaging
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
+from flask_security import login_required, current_user
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -49,7 +52,7 @@ def numberFormat(value):
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():
-    newform = RegisterForm()
+    newform = client.RegisterForm()
     if newform.validate_on_submit():
         username = newform.username.data
         password = newform.password.data
@@ -65,47 +68,63 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('login'))
-    return render_template("register.html", form = newform)
+        return render_template("client/login.html", form = newform)
+    return render_template("client/login.html", form = newform)
 
 
-@app.route("/login", methods = ['GET', 'POST'])
+@app.route('/protected')
+@login_required
+def protected():
+    email = current_user.email
+    return '<h1>This is protected! Your email is {}</h1>'.format(email)
+
+
+
+@app.route('/messages/getAll')
+@login_required
+def returnAllMess():
+    #Get all messages from messsage db with fk from user
+    if request.method == 'GET':
+        email = current_user.email
+        print(email)#Test print can/should be deleted for more final version
+        print(type(email))
+        return messaging.getAll(email) #return JSON
+    
+    
+
+
+@app.route("/loginn", methods = ['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-    reg_form = RegisterForm()
+    if request.method == 'GET':
+        login_form = client.LoginForm()
+        reg_form = client.RegisterForm()
+        return render_template("client/login.html", form = login_form, regForm = reg_form)
+    
+    if request.method == 'POST':
+        login_form = client.LoginForm()
+        if login_form.validate_on_submit():
+            user = login_form.username.data
+            print(type(user))
+            print('user is : ', user)
+            password = login_form.password.data
+            return client.login(user, password)
+        #     #result= Users.query.filter(Users.email==user)#result is a Basequery object
+        #     #result = result.first()
+        #     if result==None:
+        #         render_template("client/login.html", title="UserName does not exsit")
+        #     elif login_form.password.data == str(result.password):
+        #         ##session['user'] = user#request.form['username']# Not using Session yet
+        #         #return redirect(url_for('protected'))#TODO login with Sessions
+        #         return "data Base connection, life connection, everything connection, password"
+        #     else:
+        #         render_template("test/testLogin.html", title="Login failed, passwords did not match")
+        # elif "user" in session:#if get request and user is already in session, redircts them
+        #     return redirect(url_for("userLoggedIn"))
+        # return render_template("test/testLogin.html")
 
-    #login if success
-
-    if login_form.validate_on_submit():
-        return "logged in"
-    return render_template("login.html", form = login_form, regForm = reg_form)
 
 
 
 
 
-class RegisterForm(FlaskForm):
-    """ Register """
-    usernameR = StringField('username',[validators.Length(min=1,max=25)])
-    passwordR = PasswordField('email',[validators.Length(min=1,max=25)])
-    email = StringField('password', [validators.Length(min=1,max=25)])
-    accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])
-    sumbitR = SubmitField('Register')
 
-class LoginForm(FlaskForm):
-    """ Login """
-    username = StringField('username', [validators.Length(min=1,max=25)] )
-    password = PasswordField('email', [validators.Length(min=1,max=25)])
-    submit_button = SubmitField('Login')
-
-
-def invalid_cred(form, field):
-    """ Username/Password check """
-    username_enter = form.username.data
-    password_enter = field.data
-    #check username valid
-    user_object = User.query.filter_by(username=username_enter).first()
-    if user_object is None:
-        raise ValidationErro("Incorrect username/password")
-    elif password_enter != user_object.password:
-        raise ValidationError("Incorrect username/password")

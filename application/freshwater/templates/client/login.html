@@ -51,6 +51,8 @@
   {{ text[0]|upper}}{{text[1:] }}
 {% endmacro %}
 
+
+
 <div id="app">
 
   <!-- Navbar -->
@@ -96,7 +98,7 @@
                       </b-card-text>
                   </b-card>
               </div> -->
-
+            <h1 style="red">{{ title }}</h1>
         {% for listing in results_list_of_dicts %}
         <div class="row">
             <b-card img-src="{{listing.path}}" img-alt="Card image" img-left class="mb-3" img-height="128px">
@@ -133,15 +135,15 @@
                 <p>
                     Enter Username & Password in provided fields to Login
                 </p>
-            <form action = " {{ url_for('login') }}", method = "POST">
-                {{ displayField(form.username, 'username', autocomplete="off", autofocus=true)}}
+            <form action = "{{ url_for_security('login') }}", method = "POST">
+                {{ displayField(form.email, 'email', autocomplete="off", autofocus=true)}}
                 {{ displayField(form.password, 'password')}}
 
                 <div>
                     {{ form.submit_button}}
                 </div>
                 <!-- for later making sure the email is valid?  -->
-                {{ form.csrf_token}}
+                {{ form.csrf_token }}
             </form>
 
                     
