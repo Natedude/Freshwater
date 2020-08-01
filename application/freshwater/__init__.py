@@ -21,7 +21,7 @@ app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 app.config['ENV'] = 'development'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/CSC_3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to suppress warning
-app.config['SQLALCHEMY_ECHO'] = True  # to print out SQL queries
+app.config['SQLALCHEMY_ECHO'] = False  # to print out SQL queries
 app.secret_key ='replace later'
 # db = SQLAlchemy(app)#
 
@@ -31,7 +31,7 @@ app.secret_key ='replace later'
 
 proto = 'mysql'
 user = 'root'
-password = ''
+password = 'abc123'
 host = '127.0.0.1'
 port = '3306'
 

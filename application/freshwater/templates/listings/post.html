@@ -84,7 +84,7 @@
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
-
+<b-form ref="form" action ="/form_data" method = "POST">
         <b-form-group id="input-group-1" label="Post your property" style="color: #e7e7e7; text-align: left;"
           label-for="input-1" label-class="font-weight-bold pt-0" label-size="lg">
           <input type="radio" id="rent" value="0">
@@ -228,12 +228,16 @@
             <b-form-checkbox value="accept">I Agree to terms</b-form-checkbox>
           </b-form-checkbox-group>
         </b-form-group>
-        <div style="display: flex; justify-content: center;">
-        <b-button pill type="submit" href="/confirm" variant="primary">Submit</b-button>
+  
+        
+        <b-button type="submit" variant="primary">Submit</b-button>
         <b-button pill type="reset" variant="danger">Reset</b-button>
+</b-form>
+        <div style="display: flex; justify-content: center;"></div>
         </div>
         <br />
         <br />
+
       </b-container>
     </div>
 

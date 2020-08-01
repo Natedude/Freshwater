@@ -1,8 +1,8 @@
 from flask import render_template, url_for, request, session, redirect, url_for
-from freshwater import app
+from freshwater import app, db
 from .search import search
 from flask_wtf import FlaskForm
-from .client import client, messaging
+from .client import client, messaging, posting
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_security import login_required, current_user
 
@@ -27,11 +27,16 @@ def about():
 
 @app.route('/post')
 def post():
-    return render_template("post.html")
+    return render_template("listings/post.html")
 
 @app.route('/confirm')
 def confirm():
-    return render_template("confirm.html")
+    if request.method == 'POST':
+        form = request.form
+        print('________________')
+        print(form)
+        print('________________')
+    return render_template("listings/post.html")
 
 @app.route('/profile/<name>')
 def profile(name):
@@ -79,6 +84,28 @@ def protected():
     return '<h1>This is protected! Your email is {}</h1>'.format(email)
 
 
+
+@app.route('/form_data', methods=['GET', 'POST'])#@login_required
+def postingData():
+    print(')))))))_____________')
+    print('Do we get here?1')
+    if request.method == 'GET':
+        print('Do we get here?2')
+        form = request.form
+        print(form)
+        return render_template("listings/post.html")
+    if request.method == 'POST':
+        print('Do we get here?3')
+        form = request.form
+        print(form)
+        d = request.form.to_dict()
+        print('type of d: ', type(d))
+        print(d)
+        return posting.makeListing(d)
+        
+
+
+ 
 
 @app.route('/messages/getAll')
 @login_required
