@@ -1,6 +1,5 @@
 from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app
-from .search import search
 from flask_wtf import FlaskForm
 from .client import client, messaging
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
@@ -19,6 +18,7 @@ def home():
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
+    from .search import search
     return search.query()
 
 @app.route('/about')
