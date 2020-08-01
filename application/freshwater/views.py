@@ -76,7 +76,7 @@ def register():
 @login_required
 def protected():
     email = current_user.email
-    return '<h1>This is protected! Your email is{}</h1>'.format(email)
+    return '<h1>This is protected! Your email is {}</h1>'.format(email)
 
 
 
