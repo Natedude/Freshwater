@@ -27,11 +27,11 @@ def about():
 
 @app.route('/post')
 def post():
-    return render_template("post.html")
+    return render_template("listings/post.html")
 
 @app.route('/confirm')
 def confirm():
-    return render_template("confirm.html")
+    return render_template("listings/confirm.html")
 
 @app.route('/profile/<name>')
 def profile(name):
@@ -39,11 +39,11 @@ def profile(name):
 
 @app.route('/listing')
 def listing():
-    return render_template("listing.html")
+    return render_template("listings/listing.html")
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("messages.html")
+    return render_template("/client/dashboard.html")
 
 # Jinja Templating Global Filters
 @app.template_filter()
@@ -77,7 +77,6 @@ def register():
 def protected():
     email = current_user.email
     return '<h1>This is protected! Your email is {}</h1>'.format(email)
-
 
 
 
