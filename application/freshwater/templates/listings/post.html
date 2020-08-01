@@ -18,7 +18,8 @@
   <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer> </script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async
+    defer> </script>
   <script src="/static/js/navbar.js"></script>
 
   <!-- for validations -->
@@ -31,7 +32,7 @@
     }
 
     .container1 {
-      background-color: rgba(108, 122, 137, 1);
+      background-color: #868e96;
       /* Full height */
       height: 100%;
 
@@ -53,160 +54,141 @@
   <div id="app">
 
     <!-- Navbar -->
-	<navbar-component> </navbar-component>
-   <div style="width: 80%; margin: auto;">
+    <navbar-component> </navbar-component>
+    <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
 
-        <b-form-group id="input-group-1" label="Post your property" style="color: #e7e7e7; text-align: left;"
-          label-for="input-1" label-class="font-weight-bold pt-0" label-size="lg">
-          <input type="radio" id="rent" value="0">
-          <label for="rent">For Rent</label>
-          <br>
-          <input type="radio" id="sale" value="1">
-          <label for="sale">Sale</label>
-          <br>
-        </b-form-group>
-        <b-form-group id="input-group-2" label="Address" label-size="lg" style="color: #e7e7e7; text-align: left;"
-          label-class="font-weight-bold pt-0">
+        <hr style="border: 1px solid #e7e7e7">
 
-          <b-row>
-            <b-col sm="8">
-              <b-form-group label-cols-sm="2" label-align-sm="left" label="Street" label-for="nested-street">
-                <b-form-input v-model="form.street" name="street" id="street" placeholder="ex. 1600 Holloway Ave"
-                  required v-validate="'max:40'" :state="validateState('street')"></b-form-input>
-                <b-form-invalid-feedback id="street-feedback">
-                  street with more than 40 characters
-                </b-form-invalid-feedback>
+        <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+          <div>
+
+            <b-form-group id="address-input-group" label="Listing Type" label-size="lg" style="color: #e7e7e7; text-align: left;"
+              label-class="font-weight-bold pt-0">
+              <b-row>
+
+                <b-col sm="4">
+                  <b-form-radio-group id="btn-radios-1" v-model="selected" :options="options" buttons button-variant="outline-light"
+                    name="radios-btn-default"></b-form-radio-group>
+                </b-col>
+
+              </b-row>
+            </b-form-group>
+            
+          </div>
+        </b-card>
+
+        <hr style="border: 1px solid #e7e7e7">
+
+          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+            <div>
+              <b-form-group id="address-input-group" label="Address" label-size="lg" style="color: #e7e7e7; text-align: left;"
+                label-class="font-weight-bold pt-0">
+                <b-row>
+          
+                  <b-col sm="4">
+                    <b-form-group id="street" label="Street" label-for="street-input">
+                      <b-form-input id="street-input" placeholder="1600 Holloway Ave"></b-form-input>
+                    </b-form-group>
+          
+                    <b-form-group id="country" label="Country" label-for="country-input">
+                      <b-form-input id="country-input" placeholder="United States"></b-form-input>
+                    </b-form-group>
+                  </b-col>
+          
+                  <b-col sm="4">
+                    <b-form-group id="city" label="City" label-for="city-input">
+                      <b-form-input id="city-input" placeholder="San Francisco"></b-form-input>
+                    </b-form-group>
+          
+                    <b-form-group id="zip-code" label="ZIP Code" label-for="zip-code-input">
+                      <b-form-input id="zip-code-input" placeholder="94132" type="number"></b-form-input>
+                    </b-form-group>
+                  </b-col>
+          
+                  <b-col sm="4">
+                    <b-form-group id="state" label="State" label-for="state-input">
+                      <b-form-input id="state-input" placeholder="California"></b-form-input>
+                    </b-form-group>
+                  </b-col>
+          
+                </b-row>
               </b-form-group>
-            </b-col>
+            </div>
+          </b-card>
 
-            <b-col sm="4">
-              <b-form-group label-cols-sm="2" label-align-sm="left" label="City" label-for="nested-city">
-                <b-form-input name="city" id="nested-city" placeholder="San Francisco" required> </b-form-input>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <hr style="border: 1px solid #e7e7e7">
 
-          <b-row>
-            <b-col sm="4">
-              <b-form-group label-cols-sm="4" label-align-sm="left" label="State" label-for="nested-state">
-                <b-form-input name="state" id="nested-state" placeholder="California" required></b-form-input>
-              </b-form-group>
-            </b-col>
+          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+            <div>
+              <b-form-group id="property-input-group" label="Property Details" label-size="lg" style="color: #e7e7e7; text-align: left;"
+                label-class="font-weight-bold pt-0">
+                <b-row>
+          
+                  <b-col sm="4">
+                    <b-form-group id="home-type" label="Home Type" label-for="home-type-input">
+                      <b-form-select id="home-type-input"></b-form-select>
+                    </b-form-group>
+          
+                    <b-form-group id="sq-feet" label="Square Feet" label-for="sq-feet-input">
+                      <b-input-group append="sq. ft.">
+                      <b-form-input id="sq-feet-input" type="number"></b-form-input>
+                    </b-input-group>
+                    </b-form-group>
+                  </b-col>
+          
+                  <b-col sm="4">
+                    <b-form-group id="num-beds" label="# of Beds" label-for="num-beds-input">
+                      <b-form-select id="num-beds-input"></b-form-select>
+                    </b-form-group>
+          
+                    <b-form-group id="price" label="Price (per month)" label-for="price-input">
+                      <b-input-group prepend="$">
+                      <b-form-input id="price-input" type="number"></b-form-input>
+                    </b-input-group>
+                    </b-form-group>
+                  </b-col>
+          
+                  <b-col sm="4">
+                    <b-form-group id="num-baths" label="# of Baths" label-for="num-baths-input">
+                      <b-form-select id="num-baths-input"></b-form-select>
+                    </b-form-group>
+                  </b-col>
+          
+                </b-row>
+                <b-row>
+                  <b-col sm=12>
+                    <b-form-group id="property-description" label="Property Description" label-for="property-description-input">
+                      <b-form-textarea id="property-description-input" rows="4" max-rows="8"></b-form-textarea>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
 
-            <b-col sm="4">
-              <b-form-group label-cols-sm="4" label-align-sm="left" label="Country" label-for="nested-country">
-                <b-form-input name="country" id="nested-country" placeholder="United States" required></b-form-input>
-              </b-form-group>
-            </b-col>
-            <b-col sm="4">
-              <b-form-group label-cols-sm="5" label-align-sm="left" label="Zip code" label-for="nested-area">
-                <b-form-input v-model="form.area" name="area" id="area" type="number" placeholder="94132" required
-                  :state="validateState('area')" v-validate="'digits:5'"></b-form-input>
-                <b-form-invalid-feedback id="area-feedback">Zip code must have 5 numbers
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-          </b-row>
-
-        </b-form-group>
-        <b-form-group>
-          <b-row>
-            <b-col sm="4">
-              <b-form-group id="input-group-6" label="Price" label-for="price" label-size="lg"
-                style="color: #e7e7e7; text-align: left;" label-class="font-weight-bold pt-0">
-                <b-form-input v-model="form.price" name="price" type="number" placeholder="$ per month" id="price" required
-                  :state="validateState('price')"></b-form-input>
-
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </b-form-group>
-        <hr>
-        <b-form-group id="input-group-1" label="Property Details" label-for="input-1" style="color: #e7e7e7; text-align: left;" label-class="font-weight-bold pt-0" label-size="lg">
-          <b-row class="my-1">
-            <b-col sm="6">
-              <b-form-file
-              v-model="file"
-              :state="Boolean(file)"
-              placeholder="Upload listing image here"
-              drop-placeholder="Drop file here..."
-            ></b-form-file>
-
-            </b-col sm="6">
-            <b-col sm="6"/>
-
-          </b-row>
-        </b-form-group>
-        <b-form-group>
-          <b-row>
-            <b-col sm="4">
-              <b-form-select v-model="selected_home">
-                <b-form-select-option :value="null">Home Type: </b-form-select-option>
-                <b-form-select-option value="a">Home</b-form-select-option>
-                <b-form-select-option value="b">Apartment</b-form-select-option>
-                <b-form-select-option value="c">Other: (specified in description)</b-form-select-option>
-              </b-form-select>
-            </b-col>
-            <b-col sm="4">
-              <b-form-select v-model="selected_beds">
-                <b-form-select-option :value="null"># of Beds: </b-form-select-option>
-                <b-form-select-option value="a">1 Beds</b-form-select-option>
-                <b-form-select-option value="b">2 Beds</b-form-select-option>
-                <b-form-select-option value="c">3 Beds</b-form-select-option>
-                <b-form-select-option value="d">4 Beds</b-form-select-option>
-                <b-form-select-option value="e">5 Beds</b-form-select-option>
-                <b-form-select-option value="f">Other: (specified in description)</b-form-select-option>
-              </b-form-select>
-            </b-col>
-            <b-col sm="4">
-              <b-form-select v-model="selected_baths">
-                <b-form-select-option :value="null"># of Baths: </b-form-select-option>
-                <b-form-select-option value="a">1 Baths</b-form-select-option>
-                <b-form-select-option value="b">2 Baths</b-form-select-option>
-                <b-form-select-option value="c">3 Baths</b-form-select-option>
-                <b-form-select-option value="d">4 Baths</b-form-select-option>
-                <b-form-select-option value="e">5 Baths</b-form-select-option>
-                <b-form-select-option value="f">Other: (specified in description)</b-form-select-option>
-              </b-form-select>
-            </b-col>
-            <b-col sm="4">
-<br />
-                <b-form-input v-model="form.number" name="phone" type="number" placeholder="Square feet" id="phone" required
-                  :state="validateState('phone')" v-validate="'digits:7'"></b-form-input>
-
-            </b-col>
-          </b-row>
-        </b-form-group>
-        <b-form-group>
-
-            <b-col sm="4"></b-col>
-              <b-form-group id="input-group-6" label="Property Description" label-for="description" label-size="lg"
-                style="color: #e7e7e7; text-align: left;" label-class="font-weight-bold pt-0">
-                <b-form-textarea
-                id="textarea"
-                v-model="text"
-                placeholder="Enter listing description..."
-                rows="3"
-                max-rows="6"
-              ></b-form-textarea>
+                <b-row>
+                  <b-col sm=4>
+                    <b-form-group id="photo-upload" label="Upload Listing Images" label-for="photo-upload-input">
+                      <b-form-file id="photo-upload-input" multiple="true"></b-form-file>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
 
               </b-form-group>
-            </b-col>
-        </b-form-group>
-        <br />
-        <b-form-group id="input-group-9" style="text-align: center; color: #e7e7e7;" label-class="font-weight-bold pt-0">
-          <b-form-checkbox-group v-model="form.checked" id="checkboxes-4" name="agreement" required>
-            <b-form-checkbox value="accept">I Agree to terms</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-        <div style="display: flex; justify-content: center;">
-        <b-button pill type="submit" href="/confirm" variant="primary">Submit</b-button>
-        <b-button pill type="reset" variant="danger">Reset</b-button>
-        </div>
-        <br />
-        <br />
+            </div>
+          </b-card>
+
+          <hr style="border: 1px solid #e7e7e7">
+
+          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+            <div>
+          
+          
+              <b-button block variant="success">Post Listing</b-button>
+          
+          
+            </div>
+          </b-card>
+
       </b-container>
     </div>
 
@@ -236,15 +218,20 @@
           options: ['High School Diploma', 'Associates Degree', 'Bachelors Degree', 'Masters Degree', 'PhD', 'MPH', 'JD', 'MD'],
           checked: [],
           verify: '',
-        home_options: [
-          { value: null, text: 'Please select an option' },
-          { value: 'a', text: 'This is First option' },
-          { value: 'b', text: 'Selected Option' },
-          { value: { C: '3PO' }, text: 'This is an option with object value' },
-          { value: 'd', text: 'This one is disabled', disabled: true }
-        ]
-      
+          
+          home_options: [
+            { value: null, text: 'Please select an option' },
+            { value: 'a', text: 'This is First option' },
+            { value: 'b', text: 'Selected Option' },
+            { value: { C: '3PO' }, text: 'This is an option with object value' },
+            { value: 'd', text: 'This one is disabled', disabled: true }
+          ]
+
         },
+        options: [
+          { text: 'For Rent', value: 'rent' },
+          { text: 'For Sale', value: 'sale' },
+        ],
         show: true,
         picked: 0,
         selected_home: null,
