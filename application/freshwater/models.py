@@ -30,6 +30,7 @@ class Messages(db.Model):
     fkReciever = db.Column(db.String(255))
     message = db.Column(db.String(255))
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
+    unread = db.Column(db.Integer) #0 is read, 1 is unread
 
     def dict(self):
         return {"id": self.id,
