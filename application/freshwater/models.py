@@ -42,7 +42,6 @@ class Messages(db.Model):
     def list_of_dicts():
         return model_to_list_of_dicts(Messages)
 
-
 class Images(db.Model):  # Db where all Image paths are stored
     #__bind_key__ = 'db1'
     __tablename__ = "Images"  # Name of table
