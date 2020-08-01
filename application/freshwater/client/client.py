@@ -8,6 +8,17 @@ from flask_wtf import FlaskForm
 
 
 
+def invalid_cred(form, field):
+    """ Username/Password check """
+    username_enter = form.username.data
+    password_enter = field.data
+    #check username valid
+    user_object = User.query.filter_by(username=username_enter).first()
+    if user_object is None:
+        raise ValidationErro("Incorrect username/password")
+    elif password_enter != user_object.password:
+        raise ValidationError("Incorrect username/password")
+
 
 
 ###NOTE THIS IS A DEMO for login proccess###
@@ -94,7 +105,6 @@ def logout():
 
 
 
-
 class RegisterForm(FlaskForm):
     """ Register """
     usernameR = StringField('username',[validators.Length(min=1,max=25)])
@@ -105,6 +115,6 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     """ Login """
-    username = StringField('username', [validators.Length(min=1,max=25)] )
-    password = PasswordField('email', [validators.Length(min=1,max=25)])
+    email = StringField('email', [validators.Length(min=1,max=25)] )
+    password = PasswordField('email', [validators.Length(min=6,max=200)])
     submit_button = SubmitField('Login')

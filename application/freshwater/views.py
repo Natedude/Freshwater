@@ -52,7 +52,7 @@ def numberFormat(value):
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():
-    newform = RegisterForm()
+    newform = client.RegisterForm()
     if newform.validate_on_submit():
         username = newform.username.data
         password = newform.password.data
@@ -84,12 +84,12 @@ def protected():
 @app.route("/loginn", methods = ['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        login_form = LoginForm()
-        reg_form = RegisterForm()
+        login_form = client.LoginForm()
+        reg_form = client.RegisterForm()
         return render_template("client/login.html", form = login_form, regForm = reg_form)
     
     if request.method == 'POST':
-        login_form = LoginForm()
+        login_form = client.LoginForm()
         if login_form.validate_on_submit():
             user = login_form.username.data
             print(type(user))
@@ -114,28 +114,5 @@ def login():
 
 
 
-class RegisterForm(FlaskForm):
-    """ Register """
-    usernameR = StringField('username',[validators.Length(min=1,max=25)])
-    passwordR = PasswordField('email',[validators.Length(min=1,max=25)])
-    email = StringField('password', [validators.Length(min=1,max=25)])
-    accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])
-    sumbitR = SubmitField('Register')
-
-class LoginForm(FlaskForm):
-    """ Login """
-    email = StringField('email', [validators.Length(min=1,max=25)] )
-    password = PasswordField('email', [validators.Length(min=6,max=200)])
-    submit_button = SubmitField('Login')
 
 
-def invalid_cred(form, field):
-    """ Username/Password check """
-    username_enter = form.username.data
-    password_enter = field.data
-    #check username valid
-    user_object = User.query.filter_by(username=username_enter).first()
-    if user_object is None:
-        raise ValidationErro("Incorrect username/password")
-    elif password_enter != user_object.password:
-        raise ValidationError("Incorrect username/password")
