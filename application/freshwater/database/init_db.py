@@ -1,3 +1,6 @@
-from freshwater import db
 from freshwater.models import *
-db.create_all()
+
+def run(db):
+    #from freshwater import db
+    db.create_all()
+    print("init_db: tables created")

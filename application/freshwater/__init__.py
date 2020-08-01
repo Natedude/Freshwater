@@ -49,7 +49,7 @@ pprint(existing_databases)
 
 # use this to select the database you want to use
 # it will be created if it does not exist
-database = 'CSC_4'
+database = 'CSC_666'
 url = '{0}://{1}:{2}@{3}:{4}/{5}'.format(proto,
                                          user, password, host, port, database)
 #app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:@127.0.0.1:3306/{database}'
@@ -61,19 +61,23 @@ app.config['SQLALCHEMY_DATABASE_URI'] = url
 #     print("Created database {0}".format(database))
 # else:
 #     print("Did NOT create database, {database} already exists.")
-#test code - 
+
+
+# Not sure if we even ever use this
+# db_engine = create_engine(url)
+# pprint(db_engine)
+
+db = SQLAlchemy(app)
+pprint(db)
+
+#test code -
 
 if not database_exists(url):
     print("Created database {0}".format(database))
     create_database(url)
+    from .database.init_db import run as init_db
+    init_db(db)
 else:
     print(f"Did NOT create database, {database} already exists.")
 
 #end test code -
-
-# Go ahead and use this engine
-db_engine = create_engine(url)
-pprint(db_engine)
-
-db = SQLAlchemy(app)
-pprint(db)
