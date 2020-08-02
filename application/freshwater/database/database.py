@@ -7,6 +7,7 @@ def test_insert():
     img = Images(path="test/path")
     insert_row(img)
 
+#returns first row that fulfills .where expression
 def select_where_value(column, expression):
     conn = db_engine.connect()
     s = select([Images]).where(expression)
