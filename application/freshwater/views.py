@@ -1,8 +1,9 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, request
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
+import yaml
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -34,9 +35,13 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
-@app.route('/listing')
+@app.route('/listing', methods=['POST'])
 def listing():
-    return render_template("listings/listing.html")
+    if request.method == 'POST':
+        # print("-----------------------------------------")
+        data = yaml.safe_load(request.form['listing'])
+        # print(data, type(data))
+        return render_template("listings/listing.html", data=data)
 
 @app.route('/dashboard')
 def dashboard():

@@ -149,66 +149,45 @@
         <div class="w-100">
 
 
-        </div>
-      </template>
-    </b-modal>
-  </div>
+    <!-- Start running your app -->
+    <script>
+      window.app = new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data: {
+          name: '',
+          items: [
+              {id:'someid1', src: "{{ data['path']|safe }}",
+              thumbnail: "{{ data['path']|safe }}",
+              caption: 'Front'},
+              {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
+              caption: 'Other view'},
+              {id:'someid3', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
+              caption: 'Living room'},
+              {id:'someid4', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
+              caption: 'Living room 2'},
+              {id:'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
+              caption: 'Dinnig room'},
+
+          ],
+          street: "{{ data['street_address']}}",
+          city: "{{ data['city'] }}",
+          state: "CA",
+          postalCode: "{{data['postalCode']}}",
+          houseType: "{{ data['houseType'][0]|upper }}{{ data['houseType'][1:]}}",
+          status: "{{data['sellOrRent']}}",
+          subtype: "Studio",
+          baths: "{{data['bathroomNum']}}",
+          area_size: "{{data['sqft']}}",
+          price: "{{data['price']}}"
 
 
-
-
-
-
-
-  <!-- Start running your app -->
-  <script>
-    window.app = new Vue({
-      el: '#app',
-      delimiters: ['[[', ']]'],
-      data: {
-        name: '',
-        items: [
-          {
-            id: 'someid1', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
-            thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
-            caption: 'Front'
-          },
-          {
-            id: 'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
-            thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
-            caption: 'Other view'
-          },
-          {
-            id: 'someid3', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
-            thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580',
-            caption: 'Living room'
-          },
-          {
-            id: 'someid4', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
-            thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666',
-            caption: 'Living room 2'
-          },
-          {
-            id: 'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
-            thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
-            caption: 'Dinnig room'
-          },
-
-        ],
-        street: "212 Howth St",
-        city: "San Francisco",
-        state: "CA",
-        houseType: "Apartment",
-        status: "rent",
-        subtype: "Studio",
-        baths: 2,
-        area_size: "570",
-        price: 2000
-
-
-      }
-    })
-  </script>
-</body>
-
+        }
+      })
+    </script>
+  </body>
 </html>
