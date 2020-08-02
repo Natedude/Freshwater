@@ -66,7 +66,7 @@
           </b-col>
         </b-row>
 
-	<b-container fluid class="bg-white" style="width: 50%; opacity: 90%">
+	<b-container fluid class="bg-white" style="width: 50%; opacity: 87%; border-radius: 25px;">
           <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
             <b-col md="6" align-self="center" style=" padding-left: 15px !important; padding-right: 5px !important;">
@@ -159,8 +159,9 @@
     </b-container>
 
     <!-- Search Results -->
+<b-container fluid>
     <div class="m-4">
-	<b-row class="mb-1 border border-variant" >
+	<b-row class="mb-1" >
    <b-col cols="9" class="py-2 text-secondary" align-self="center">
 		{% set count = results_list_of_dicts|length %}
 		{%if count > 0 %}
@@ -177,7 +178,7 @@
 		{% endif %}
 		</b-col>
    <b-col cols="3" class="py-2">
-	   	<div class="float-right">
+	   	<div class="float-right" style="margin-right: 20px">
               <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="md">
                 <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
                 <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
@@ -189,7 +190,7 @@
               </b-dropdown>
 		</div>
           </b-col>
-	</b-row>
+  </b-row>
 
       <b-row class="mb-1">
       {% for listing in results_list_of_dicts %}
@@ -271,7 +272,7 @@
 
 
 </div> <!-- end app div -->
-
+</b-container>
 
     <script type="text/javascript">
       //var router = new VueRouter({
