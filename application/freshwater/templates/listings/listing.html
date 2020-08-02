@@ -33,7 +33,6 @@
     }
 
     .container1 {
-      background-color: rgba(37, 116, 100, .8);
       height: 100%;
       background-repeat: no-repeat;
       background-size: cover;
@@ -61,24 +60,7 @@
           <b-col sm="7">
             <b-card border-variant="light">
   
-              <b-carousel id="carousel-no-animation" interval="7000" style="text-shadow: 0px 0px 2px #000" controls
-                no-animation indicators img-width=100px img-height="100px">
-                <b-carousel-slide caption="Front"
-                  img-src="https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676">
-                </b-carousel-slide>
-                <b-carousel-slide caption="Other View"
-                  img-src="https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676">
-                </b-carousel-slide>
-                <b-carousel-slide caption="Living Room"
-                  img-src="https://assets.architecturaldesigns.com/plan_assets/324990322/large/Aurora-living-3dedit_1491253655.jpg?1506336580">
-                </b-carousel-slide>
-                <b-carousel-slide caption="Living Room 2"
-                  img-src='https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_interior-001_1491419443.jpg?1506336666'>
-                </b-carousel-slide>
-                <b-carousel-slide caption="Dining Room"
-                  img-src='https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580'>
-                </b-carousel-slide>
-              </b-carousel>
+              <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="200"  :width="600" :height="400" :items="items"/>
             </b-card>
           </b-col>
   
@@ -175,7 +157,7 @@
               caption: 'Living room 2'},
               {id:'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
               thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
-              caption: 'Dinnig room'},
+              caption: 'Dining room'},
 
           ],
           street: "{{ data['street_address']}}",

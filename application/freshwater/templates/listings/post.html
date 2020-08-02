@@ -57,15 +57,15 @@
 
         <hr style="border: 1px solid #e7e7e7">
 
-        <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+        <b-card>
           <div>
 
-            <b-form-group id="address-input-group" label="Listing Type" label-size="lg" style="color: #e7e7e7; text-align: left;"
+            <b-form-group id="address-input-group" label="Listing Type" label-size="lg" style="text-align: left;"
               label-class="font-weight-bold pt-0">
               <b-row>
 
                 <b-col sm="4">
-                  <b-form-radio-group id="btn-radios-1" v-model="selected" :options="listingOptions" buttons button-variant="outline-light"
+                  <b-form-radio-group id="btn-radios-1" v-model="selected" :options="listingOptions" buttons button-variant="outline-primary"
                     name="radios-btn-default" required></b-form-radio-group>
                 </b-col>
 
@@ -77,9 +77,9 @@
 
         <hr style="border: 1px solid #e7e7e7">
 
-          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+          <b-card>
             <div>
-              <b-form-group id="address-input-group" label="Address" label-size="lg" style="color: #e7e7e7; text-align: left;"
+              <b-form-group id="address-input-group" label="Address" label-size="lg" style="text-align: left;"
                 label-class="font-weight-bold pt-0">
                 <b-row>
           
@@ -116,9 +116,9 @@
 
           <hr style="border: 1px solid #e7e7e7">
 
-          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+          <b-card>
             <div>
-              <b-form-group id="property-input-group" label="Property Details" label-size="lg" style="color: #e7e7e7; text-align: left;"
+              <b-form-group id="property-input-group" label="Property Details" label-size="lg" style="text-align: left;"
                 label-class="font-weight-bold pt-0">
                 <b-row>
           
@@ -175,15 +175,19 @@
 
           <hr style="border: 1px solid #e7e7e7">
 
-          <b-card border-variant="light" bg-variant="secondary" text-variant="white">
+          <b-card>
             <div>
               <b-row>
                 <b-col sm="5"></b-col>
                 <b-col sm="3">
                   <b-button v-b-modal.confirm-modal type="submit" variant="success" size="lg">Post Listing</b-button>
-                  <b-modal centered ok-only ok-title="Cancel" button-size="sm" ok-variant="secondary" id="confirm-modal" size="lg" title="Posting on its way!">Your posting may take up to 24 hours to be approved.
-                    Thank you for posting with Freshwater Rentals!<hr>
+                  <b-modal centered hide-footer="true" id="confirm-modal" size="lg" title="Posting on its way!">
+                    <b>Your posting may take up to 24 hours to be approved.
+                    Thank you for posting with Freshwater Rentals!</b>
+                    <hr>
+                    <div class="row justify-content-center">
                     <b-button type="submit" href="/" variant="primary" style="float: right;" size="sm">Back to Home</b-button>
+                  </div>
                   </b-modal>
                 </b-col>
                 <b-col sm="5"></b-col>
