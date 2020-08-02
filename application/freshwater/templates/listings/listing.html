@@ -73,7 +73,7 @@
                 <b-row>
                   <b-col sm="8">
                     <div class="listing_text">
-                      [[street]], [[city]], [[state]]
+                      [[street]], [[city]], [[postalCode]]
                     </div>
                   </b-col>
                   <b-col sm="4">
@@ -92,7 +92,7 @@
                     <div class="listing_text">
                       [[houseType]] for [[status]]
                     </div>
-                    <h2> $[[price]]/mo </h2>
+                    <h2> ${{data['price']}}/mo </h2>
                   </b-col>
                   <b-col sm="8">
                     <div class="listing_text">
@@ -156,7 +156,7 @@
             <br>
             [[street]],
             <br>
-            [[city]],   [[state]]
+            [[city]],   [[postalCode]]
           </p>
 
           <form action="#" method="GET">
@@ -206,8 +206,8 @@
         data: {
           name: '',
           items: [
-              {id:'someid1', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
-              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
+              {id:'someid1', src: "{{ data['path']|safe }}",
+              thumbnail: "{{ data['path']|safe }}",
               caption: 'Front'},
               {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
               thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
@@ -223,14 +223,15 @@
               caption: 'Dinnig room'},
 
           ],
-          street: "212 Howth St",
-          city: "San Francisco",
+          street: "{{ data['street_address']}}",
+          city: "{{ data['city'] }}",
           state: "CA",
-          houseType: "Apartment",
-          status: "rent",
+          postalCode: "{{data['postalCode']}}",
+          houseType: "{{ data['houseType'][0]|upper }}{{ data['houseType'][1:]}}",
+          status: "{{data['sellOrRent']}}",
           subtype: "Studio",
-          baths: 2,
-          area_size: "570 sqft",
+          baths: "{{data['bathroomNum']}}",
+          area_size: "{{data['sqft']}}",
           price: 2000
 
 
