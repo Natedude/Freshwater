@@ -195,23 +195,22 @@
       {% for listing in results_list_of_dicts %}
         <div class="m-2">
           <b-col class="col-md-auto">
-            <b-card
-              border-variant="secondary"
-              img-alt="Card image"
-              no-body
-              img-top
-              tag="article"
-              style="max-width: 21rem; height: 30xrem; margin: 0.4rem;font-size:1.2em"
-              header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
-              header-bg-variant="Light"
-              align="center"
-              >
-            <!-- header-border-variant="secondary" header-class=" p-1" align="center"
-            footer-class="h-0  p-0 bottom" -->
+            <b-card 
+            border-variant="secondary" 
+            img-alt="Card image" 
+            no-body
+            img-top 
+            tag="article"
+            style="max-width: 22rem; height: 23rem; margin: 0.5rem;" header-bg-variant="secondary"
+            header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
+            header-border-variant="secondary" header-class="text-light p-1" align="center" 
+            footer-class="h-0  p-0 bottom"
+            >
+
             <form action="/listing" method="post" role="form">
                 <input type="hidden" name="listing" value="{{listing}}">
-                <b-button  variant="link" type="submit">
-                  <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
+                <b-button style="margin:0; ; padding: 0; border: none" variant="link" type="submit">
+                  <b-card-img src="{{listing.path}}" height ="200rem"></b-card-img>
                 </b-button>
             </form>
 
@@ -219,14 +218,36 @@
               <b-card-text align="left" >
                 <b-container class="m-2">
                     <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5>
-                    <h6>{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}} sqft</h6>
-                    <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>
-                    <h6 style="margin:0 auto">{{listing.street_address}}</h6>
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-1"><b-icon icon="house-door-fill" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6 class="text-bottom">{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}} sqft</h6>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6 style="margin:0 auto">{{listing.street_address}}</h6>
+                      </b-col>
+                    </b-row>
                 </b-container>
               </b-card-text>
             </b-card-body>
 
-            <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact the Landlord</b-button>
+            <!-- <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact the Landlord</b-button> -->
             <!-- <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="heart-fill" variant="danger"></b-icon>
