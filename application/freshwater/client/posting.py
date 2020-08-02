@@ -8,21 +8,34 @@ from ..models import db
 
 def makeListing(dics):
     newListing = Listings(
+                        fkId = dics['fkId'],
                         title = 'new title',
-                        houseType = 'house',
-                        sellOrRent = 'rent', 
-                        petsAllowed = '1',
+                        houseType = dics['typeHome'],
+                        sellOrRent = dics['rentOrSell'], 
+                        petsAllowed = int('1'),
                         city = dics['city'],
-                        postalCode = dics['area'],
+                        postalCode = int(dics['area']),
                         street_address = dics['street'],
-                        distance_from_SFSU = 12,
-                        description = 'testing',
-                        price = dics['price'],
-                        sqft = 123,
-                        bedroomNum = 123,
-                        bathroomNum = 123,
+                        distance_from_SFSU = float(12),
+                        description = dics['description'],
+                        price = int(dics['price']),
+                        sqft = int(123),
+                        bedroomNum = int(dics['numBeds']),
+                        bathroomNum = int(dics['numBaths']),
                         adminAppr = 1
                         )
     db.session.add(newListing)   
     db.session.commit()
+    db.session.refresh(newListing)
+    saveImage(dics['image1'], newListing.id)
+    
     return render_template("listings/post.html")
+
+
+def saveImage(path, usrId):
+    newImage = Images(
+        fkIdPost = usrId,
+        path     = path
+    )
+    db.session.add(newImage)   
+    db.session.commit()

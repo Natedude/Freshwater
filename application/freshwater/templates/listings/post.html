@@ -84,13 +84,13 @@
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
-<b-form ref="form" action ="/form_data" method = "POST">
-        <b-form-group id="input-group-1" label="Post your property" style="color: #e7e7e7; text-align: left;"
+<b-form ref="form" enctype="multipart/form-data" action ="/form_data" method = "POST">
+        <b-form-group  id="input-group-1" label="Post your property" style="color: #e7e7e7; text-align: left;"
           label-for="input-1" label-class="font-weight-bold pt-0" label-size="lg">
-          <input type="radio" id="rent" value="0">
+          <input name="rentOrSell" type="radio" id="rent" value="rent">
           <label for="rent">For Rent</label>
           <br>
-          <input type="radio" id="sale" value="1">
+          <input name="rentOrSell" type="radio" id="sale" value="sell">
           <label for="sale">Sale</label>
           <br>
         </b-form-group>
@@ -155,6 +155,8 @@
           <b-row class="my-1">
             <b-col sm="6">
               <b-form-file
+              name="image1"
+              type="file"
               v-model="file"
               :state="Boolean(file)"
               placeholder="Upload listing image here"
@@ -169,40 +171,40 @@
         <b-form-group>
           <b-row>
             <b-col sm="4">
-              <b-form-select v-model="selected_home">
+              <b-form-select name="typeHome" v-model="selected_home">
                 <b-form-select-option :value="null">Home Type: </b-form-select-option>
-                <b-form-select-option value="a">Home</b-form-select-option>
-                <b-form-select-option value="b">Apartment</b-form-select-option>
-                <b-form-select-option value="c">Other: (specified in description)</b-form-select-option>
+                <b-form-select-option value="Home">Home</b-form-select-option>
+                <b-form-select-option value="Apartment">Apartment</b-form-select-option>
+                <b-form-select-option value="Other">Other: (specified in description)</b-form-select-option>
               </b-form-select>
             </b-col>
             <b-col sm="4">
-              <b-form-select v-model="selected_beds">
+              <b-form-select  name="numBeds" v-model="selected_beds">
                 <b-form-select-option :value="null"># of Beds: </b-form-select-option>
-                <b-form-select-option value="a">1 Beds</b-form-select-option>
-                <b-form-select-option value="b">2 Beds</b-form-select-option>
-                <b-form-select-option value="c">3 Beds</b-form-select-option>
-                <b-form-select-option value="d">4 Beds</b-form-select-option>
-                <b-form-select-option value="e">5 Beds</b-form-select-option>
-                <b-form-select-option value="f">Other: (specified in description)</b-form-select-option>
+                <b-form-select-option value="1">1 Beds</b-form-select-option>
+                <b-form-select-option value="2">2 Beds</b-form-select-option>
+                <b-form-select-option value="3">3 Beds</b-form-select-option>
+                <b-form-select-option value="4">4 Beds</b-form-select-option>
+                <b-form-select-option value="5">5 Beds</b-form-select-option>
+                <b-form-select-option value="6">Other: (specified in description)</b-form-select-option>
               </b-form-select>
             </b-col>
             <b-col sm="4">
-              <b-form-select v-model="selected_baths">
+              <b-form-select name="numBaths" v-model="selected_baths">
                 <b-form-select-option :value="null"># of Baths: </b-form-select-option>
-                <b-form-select-option value="a">1 Baths</b-form-select-option>
-                <b-form-select-option value="b">2 Baths</b-form-select-option>
-                <b-form-select-option value="c">3 Baths</b-form-select-option>
-                <b-form-select-option value="d">4 Baths</b-form-select-option>
-                <b-form-select-option value="e">5 Baths</b-form-select-option>
-                <b-form-select-option value="f">Other: (specified in description)</b-form-select-option>
+                <b-form-select-option value="1">1 Baths</b-form-select-option>
+                <b-form-select-option value="2">2 Baths</b-form-select-option>
+                <b-form-select-option value="3">3 Baths</b-form-select-option>
+                <b-form-select-option value="4">4 Baths</b-form-select-option>
+                <b-form-select-option value="5">5 Baths</b-form-select-option>
+                <b-form-select-option value="6">Other: (specified in description)</b-form-select-option>
               </b-form-select>
             </b-col>
             <b-col sm="4">
 <br />
                 <b-form-input v-model="form.number" name="phone" type="number" placeholder="Square feet" id="phone" required
                   :state="validateState('phone')" v-validate="'digits:7'"></b-form-input>
-
+                <!-- Phone number or sqr feet? It is labeled as sqr feeet, input is type phone? code-->
             </b-col>
           </b-row>
         </b-form-group>
@@ -211,7 +213,8 @@
             <b-col sm="4"></b-col>
               <b-form-group id="input-group-6" label="Property Description" label-for="description" label-size="lg"
                 style="color: #e7e7e7; text-align: left;" label-class="font-weight-bold pt-0">
-                <b-form-textarea
+                <b-form-textarea 
+                name="description"
                 id="textarea"
                 v-model="text"
                 placeholder="Enter listing description..."

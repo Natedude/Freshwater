@@ -80,7 +80,7 @@ class Listings(db.Model):
     #__bind_key__ = 'db1'
     __tablename__ = "Listings"
     id = db.Column(db.Integer, primary_key=True)
-    #fkId = db.Column(db.Integer)
+    fkId = db.Column(db.Integer)
     #fkEmail = db.Column(db.String)
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
     title = db.Column(db.String(255))

@@ -5,6 +5,8 @@ from flask_wtf import FlaskForm
 from .client import client, messaging, posting
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_security import login_required, current_user
+import os
+from werkzeug.utils import secure_filename
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -85,22 +87,44 @@ def protected():
 
 
 
-@app.route('/form_data', methods=['GET', 'POST'])#@login_required
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+@app.route('/form_data', methods=['GET', 'POST'])#
+@login_required
 def postingData():
-    print(')))))))_____________')
-    print('Do we get here?1')
     if request.method == 'GET':
         print('Do we get here?2')
         form = request.form
         print(form)
         return render_template("listings/post.html")
     if request.method == 'POST':
-        print('Do we get here?3')
         form = request.form
         print(form)
         d = request.form.to_dict()
         print('type of d: ', type(d))
         print(d)
+        print(request.files)
+        if 'image1' in request.files:
+            print('Image found')
+            file = request.files['image1']
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            print('file is of type', type(file))
+            if file and allowed_file(file.filename):
+                usrId = current_user.id
+                d["fkId"] = usrId
+                filename = secure_filename(str(usrId) + file.filename)
+                filelocation = os.path.join('freshwater/static/images/client' , filename)
+                print('saving file name here', filelocation)
+                file.save(filelocation)
+        else:
+            filename = ""
+        d["image1"] = filename
         return posting.makeListing(d)
         
 
