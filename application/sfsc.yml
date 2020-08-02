@@ -13,5 +13,6 @@ dependencies:
   - wtforms
   - nodejs=14.6.0
   - flask-wtf
+  - pyyaml
 
 prefix: ~/miniconda3/envs/sfsc

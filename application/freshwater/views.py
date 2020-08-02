@@ -38,9 +38,9 @@ def profile(name):
 @app.route('/listing', methods=['POST'])
 def listing():
     if request.method == 'POST':
-        print("-----------------------------------------")
+        # print("-----------------------------------------")
         data = yaml.safe_load(request.form['listing'])
-        print(data, type(data))
+        # print(data, type(data))
         return render_template("listings/listing.html", data=data)
 
 @app.route('/dashboard')

@@ -88,13 +88,15 @@
                 </b-row>
 
                 <b-row>
-                  <b-col sm="4">
+                  <b-col sm="6">
                     <div class="listing_text">
                       [[houseType]] for [[status]]
                     </div>
-                    <h2> ${{data['price']}}/mo </h2>
+                    <h2> $[[price]]
+                      <span v-if="!(houseType === 'House')"> /month </span>
+                    </h2>
                   </b-col>
-                  <b-col sm="8">
+                  <b-col sm="6">
                     <div class="listing_text">
                       -[[subtype]]  -Baths: [[baths]]
                       <br>
@@ -232,7 +234,7 @@
           subtype: "Studio",
           baths: "{{data['bathroomNum']}}",
           area_size: "{{data['sqft']}}",
-          price: 2000
+          price: "{{data['price']}}"
 
 
         }
