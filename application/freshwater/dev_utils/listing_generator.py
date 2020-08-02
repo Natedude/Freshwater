@@ -1,6 +1,7 @@
 import math
 from .scraper import Scraper
 #from freshwater import db
+from ..database.database import add_image_record
 
 import os
 import lorem
