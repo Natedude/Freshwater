@@ -54,132 +54,132 @@
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
-
+        <h1 style="margin: auto;"><b>Create Listing</b></h1>
         <hr style="border: 1px solid #e7e7e7">
 
         <div class="card border-0">
+          <b-col sm="6">
           <div>
 
             <b-form-group id="address-input-group" label="Listing Type" label-size="lg" style="text-align: left;"
               label-class="font-weight-bold pt-0">
-              <b-row>
 
-                
-                  <b-form-radio-group id="btn-radios-1" v-model="selected" :options="listingOptions" buttons button-variant="outline-primary"
-                    name="radios-btn-default" required></b-form-radio-group>
-                
 
-              </b-row>
+
+                <b-form-radio-group style="margin-right: 0px;" id="btn-radios-1" v-model="selected" :options="listingOptions" buttons
+                  button-variant="outline-primary" name="radios-btn-default" required></b-form-radio-group>
+
+
+
             </b-form-group>
-            
+
           </div>
+        </b-col>
         </div>
 
-        <hr style="border: 1px solid #e7e7e7">
-
         <div class="card border-0">
+          <b-col sm="6">
           <div>
             <b-form-group id="address-input-group" label="Address" label-size="lg" style="text-align: left;"
               label-class="font-weight-bold pt-0">
-        
+
               <b-form-group id="street" label="Street" label-for="street-input">
                 <b-form-input id="street-input" placeholder="1600 Holloway Ave" required v-validate="'max:40'"
                   :state="validateState('street')"></b-form-input>
               </b-form-group>
-        
+
               <b-form-group id="city" label="City" label-for="city-input">
                 <b-form-input id="city-input" placeholder="San Francisco" required></b-form-input>
               </b-form-group>
-        
+
               <b-form-group id="state" label="State" label-for="state-input">
                 <b-form-input id="state-input" placeholder="California" required></b-form-input>
               </b-form-group>
-        
+
               <b-form-group id="country" label="Country" label-for="country-input">
                 <b-form-input id="country-input" placeholder="United States" required></b-form-input>
               </b-form-group>
-        
+
               <b-form-group id="zip-code" label="ZIP Code" label-for="zip-code-input">
                 <b-form-input id="zip-code-input" placeholder="94132" type="number" required></b-form-input>
               </b-form-group>
-        
+
             </b-form-group>
+          </div>
+        </b-col>
+        </div>
+
+        <div class="card border-0">
+          <b-col sm="6">
+          <div>
+            <b-form-group id="property-input-group" label="Property Details" label-size="lg" style="text-align: left;"
+              label-class="font-weight-bold pt-0">
+
+              <b-form-group id="title" label="Post Title" label-for="title-input">
+                <b-form-input id="title-input" required></b-form-input>
+              </b-form-group>
+
+              <b-form-group id="home-type" label="Home Type" label-for="home-type-input">
+                <b-form-select id="home-type-input" required></b-form-select>
+              </b-form-group>
+
+              <b-form-group id="sq-feet" label="Square Feet" label-for="sq-feet-input">
+                <b-input-group append="sq. ft.">
+                  <b-form-input id="sq-feet-input" type="number" required></b-form-input>
+                </b-input-group>
+              </b-form-group>
+
+              <b-form-group id="num-beds" label="# of Beds" label-for="num-beds-input">
+                <b-form-select id="num-beds-input" required></b-form-select>
+              </b-form-group>
+
+              <b-form-group id="price" label="Price" label-for="price-input">
+                <b-input-group prepend="$">
+                  <b-form-input id="price-input" type="number" required></b-form-input>
+                </b-input-group>
+              </b-form-group>
+
+              <b-form-group id="num-baths" label="# of Baths" label-for="num-baths-input">
+                <b-form-select id="num-baths-input" required></b-form-select>
+              </b-form-group>
+            </b-form-group>
+          </div>
+        </b-col>
+        <b-col sm="12">
+              <b-form-group id="property-description" label="Property Description"
+                label-for="property-description-input">
+                <b-form-textarea id="property-description-input" rows="4" max-rows="8"></b-form-textarea>
+              </b-form-group>
+            </b-col>
+              <b-col sm="6">
+              <b-form-group id="photo-upload" label="Upload Listing Images" label-for="photo-upload-input">
+                <b-form-file id="photo-upload-input" multiple="true" required></b-form-file>
+              </b-form-group>
+            </b-col>
+
+            
+        </div>
+
+        <div class="card border-0">
+          <div>
+            <div class="row justify-content-center" style="margin-bottom: 20px;">
+            <b-button v-b-modal.confirm-modal href="/" variant="secondary" style="float: right;" size="lg">Cancel</b-button>
+            <b-button v-b-modal.confirm-modal type="submit" variant="success" style="float: right;" size="lg">Post
+              Listing</b-button>
+              </div>
+            <b-modal centered hide-footer="true" id="confirm-modal" size="lg" title="Posting on its way!">
+              <b>Your posting may take up to 24 hours to be approved.
+                Thank you for posting with Freshwater Rentals!</b>
+              <hr>
+              <div class="row justify-content-center">
+                <b-button type="submit" href="/" variant="primary" style="float: right;" size="sm">Back to Home
+                </b-button>
+              </div>
+            </b-modal>
+
           </div>
         </div>
 
-          <hr style="border: 1px solid #e7e7e7">
-
-          <div class="card border-0">
-            <div>
-              <b-form-group id="property-input-group" label="Property Details" label-size="lg" style="text-align: left;"
-                label-class="font-weight-bold pt-0">
-
-                <b-form-group id="title" label="Post Title" label-for="title-input">
-                  <b-form-input id="title-input" required></b-form-input>
-                </b-form-group>
-                
-
-                    <b-form-group id="home-type" label="Home Type" label-for="home-type-input">
-                      <b-form-select id="home-type-input" required></b-form-select>
-                    </b-form-group>
-          
-                    <b-form-group id="sq-feet" label="Square Feet" label-for="sq-feet-input">
-                      <b-input-group append="sq. ft.">
-                      <b-form-input id="sq-feet-input" type="number" required></b-form-input>
-                    </b-input-group>
-                    </b-form-group>
-                  
-          
-                  
-                    <b-form-group id="num-beds" label="# of Beds" label-for="num-beds-input">
-                      <b-form-select id="num-beds-input" required></b-form-select>
-                    </b-form-group>
-          
-                    <b-form-group id="price" label="Price (per month)" label-for="price-input">
-                      <b-input-group prepend="$">
-                      <b-form-input id="price-input" type="number" required></b-form-input>
-                    </b-input-group>
-                    </b-form-group>
-                  
-          
-                  
-                    <b-form-group id="num-baths" label="# of Baths" label-for="num-baths-input">
-                      <b-form-select id="num-baths-input" required></b-form-select>
-                    </b-form-group>
-                  
-          
-                
-                    <b-form-group id="property-description" label="Property Description" label-for="property-description-input">
-                      <b-form-textarea id="property-description-input" rows="4" max-rows="8"></b-form-textarea>
-                    </b-form-group>
-                  
-                    <b-form-group id="photo-upload" label="Upload Listing Images" label-for="photo-upload-input">
-                      <b-form-file id="photo-upload-input" multiple="true" required></b-form-file>
-                    </b-form-group>
-                  
-
-              </b-form-group>
-            </div>
-          </div>
-
-          <hr style="border: 1px solid #e7e7e7">
-
-          <div class="card border-0">
-            <div>
-              
-                  <b-button v-b-modal.confirm-modal type="submit" variant="success" style="float: right;" size="lg">Post Listing</b-button>
-                  <b-modal centered hide-footer="true" id="confirm-modal" size="lg" title="Posting on its way!">
-                    <b>Your posting may take up to 24 hours to be approved.
-                    Thank you for posting with Freshwater Rentals!</b>
-                    <hr>
-                    <div class="row justify-content-center">
-                    <b-button type="submit" href="/" variant="primary" style="float: right;" size="sm">Back to Home</b-button>
-                  </div>
-                  </b-modal>
-                
-            </div>
-          </div>
-          <hr style="border: 1px solid #e7e7e7">
 
       </b-container>
     </div>
@@ -197,8 +197,8 @@
       el: "#app",
       delimiters: ['[[', ']]'],
       components: {
-            'vee-validate': VeeValidate
-        },
+        'vee-validate': VeeValidate
+      },
       data: {
         name: '',
         form: {
