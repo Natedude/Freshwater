@@ -34,8 +34,8 @@ def makeListing(dics):
 
 def saveImage(path, usrId):
     newImage = Images(
-        fk_user_id = usrId,
-        path       = path
+        fkIdPost = usrId,
+        path     = path
     )
     db.session.add(newImage)   
     db.session.commit()

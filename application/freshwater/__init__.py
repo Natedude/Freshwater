@@ -53,7 +53,7 @@ pprint(existing_databases)
 
 # use this to select the database you want to use
 # it will be created if it does not exist
-database = 'CSC_667'
+database = 'CSC_6610'
 url = '{0}://{1}:{2}@{3}:{4}/{5}'.format(proto,
                                          user, password, host, port, database)
 #app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:@127.0.0.1:3306/{database}'
