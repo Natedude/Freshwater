@@ -67,9 +67,9 @@ class Images(db.Model):  # Db where all Image paths are stored
 
     def dict(self):
         return {"id": self.id,
-                # "fkIdUser": self.fkIdUser,
+                "fk_user_id": self.fkIdUser,
                 # "fkEmail": self.fkEmail,
-                "fkIdPost": self.fkIdPost,
+                "fk_listing_id": self.fk_listing_id,
                 # "sellOrRent": self.sellOrRent,
                 "path": self.path}
         

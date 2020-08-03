@@ -8,14 +8,24 @@ def test_insert():
     insert_row(img)
 
 #returns first row that fulfills .where expression
-def select_where_value(column, expression):
+def select_where_value(table, column_name_str, expression):
     conn = db_engine.connect()
-    s = select([Images]).where(expression)
+    s = select([table]).where(expression)
     result = conn.execute(s)
     row = result.fetchone()
-    value = row[column]
+    # print("select_where_value: Row:")
+    # pprint(row)
+    # print(str(type(row)))
+    value = row[column_name_str]
+    # print(value)
     result.close()
     return value
+
+def row2dict(row):
+    d = {}
+    for column in row.__table__.columns:
+        d[column.name] = str(getattr(row, column.name))
+    return d
 
 #pass in row as a sqlalchemy object returned from model constructor
 #returns id sqlalchemy created for it

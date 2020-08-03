@@ -12,6 +12,6 @@ from freshwater.database.database import test_insert, select_where_value
 if __name__ == "__main__":
     #d = DevUtils(db, models)
     test_insert()
-    value = select_where_value(models.Images.path, models.Images.path == "test/path")
+    value = select_where_value(models.Images, "path", models.Images.path == "test/path")
     print("select_where_value returns: " + str(value)) #TODO error!
 
