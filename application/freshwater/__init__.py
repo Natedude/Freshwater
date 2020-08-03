@@ -2,8 +2,6 @@ from sqlalchemy import create_engine
 from sqlalchemy_utils import create_database, database_exists
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-#from sqlalchemy import MetaData
-#import os
 from wtforms import *
 from pprint import pprint
 
@@ -11,6 +9,9 @@ print("******** Initializing App & Database ********")
 ###########
 
 app = Flask(__name__)
+
+UPLOAD_FOLDER = 'static/images/listings'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.debug = False
 app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_PASSWORD_SALT'] = 'mysalt'
@@ -18,14 +19,13 @@ app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 #TODO comment out next line for production
 app.config['ENV'] = 'development'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to suppress warning
-app.config['SQLALCHEMY_ECHO'] = True  # to print out SQL queries
+app.config['SQLALCHEMY_ECHO'] = False  # to print out SQL queries
 app.secret_key ='replace later'
-# db = SQLAlchemy(app)#
 
 #set db info
 proto = 'mysql'
 user = 'root'
-password = ''
+password = ''#'abc123'
 host = '127.0.0.1'
 port = '3306'
 # NOTE use this to select the database you want to use

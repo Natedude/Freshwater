@@ -17,15 +17,6 @@ def model_to_list_of_dicts(model):
     lst.sort(key=lambda x: x["id"])
     return lst  # Remember this needs to be jsonfied to pass it to html
 
-
-# def to_dict(model_instance, query_instance=None):
-#     if hasattr(model_instance, '__table__'):
-#         return {c.name: str(getattr(model_instance, c.name)) for c in model_instance.__table__.columns}
-#     else:
-#         cols = query_instance.column_descriptions
-#         return {cols[i]['name']: model_instance[i] for i in range(len(cols))}
-
-
 class Messages(db.Model):
     __tablename__ = "Messages"
     id = db.Column(db.Integer, primary_key=True)
@@ -59,12 +50,6 @@ class Images(db.Model):  # Db where all Image paths are stored
     # sellOrRent = db.Column(db.String)
     path = db.Column(db.String(255))  # Relative file path of image
 
-    # def __repr__(self):
-    #     return "(r)fkEmail: " + self.fkEmail + " : " + str(self.path)
-
-    # def __str__(self):
-    #     return "(s)fkEmail: " + self.fkEmail + " : " + self.path
-
     def dict(self):
         return {"id": self.id,
                 "fk_user_id": self.fk_user_id,
@@ -76,8 +61,6 @@ class Images(db.Model):  # Db where all Image paths are stored
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Images)
-
-
 
 
 class Listings(db.Model):
@@ -133,8 +116,6 @@ class Listings(db.Model):
         return model_to_list_of_dicts(Listings)
 
 
-
-
 #Define models
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('User.id')),
@@ -143,14 +124,12 @@ roles_users = db.Table('roles_users',
         )
 
 
-
 class Role(db.Model, RoleMixin):
     # __bind_key__ = 'user'
     __tablename__ = "Role"
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
-
 
 
 class User(db.Model, UserMixin):
