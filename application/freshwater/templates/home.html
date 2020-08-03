@@ -76,7 +76,7 @@
             <!-- Search Button -->
             <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
               <div style="display:flex; justify-content:center">
-                <b-button class="my-2" type="submit" formaction="/query" type="submit">
+                <b-button class="my-2" type="submit" formaction="/query/none" type="submit">
                   <b-icon icon="search"></b-icon>
                 </b-button>
               </div>
@@ -180,13 +180,13 @@
    <b-col cols="3" class="py-2">
 	   	<div class="float-right" style="margin-right: 20px">
               <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="md">
-                <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Price(Hi-Lo)</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Distance to SFSU</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Bedrooms</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Bathrooms</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
+                <!-- <b-dropdown-item href="/">Sort: New Listings</b-dropdown-item> -->
+                <b-dropdown-item :href="'/query/lowhigh?search_string='+search_string">Sort: Price(Lo-Hi)</b-dropdown-item>
+                <b-dropdown-item :href="'/query/highlow?search_string='+search_string">Sort: Price(Hi-Lo)</b-dropdown-item>
+                <b-dropdown-item :href="'/query/distance_from_SFSU?search_string='+search_string">Sort: Distance to SFSU</b-dropdown-item>
+                <b-dropdown-item :href="'/query/bedroomNum?search_string='+search_string">Sort: Bedrooms</b-dropdown-item>
+                <b-dropdown-item :href="'/query/bathroomNum?search_string='+search_string">Sort: Bathrooms</b-dropdown-item>
+                <b-dropdown-item :href="'/query/sqft?search_string='+search_string">Sort: Squarefeet</b-dropdown-item>
               </b-dropdown>
 		</div>
           </b-col>
@@ -196,15 +196,15 @@
       {% for listing in results_list_of_dicts %}
         <div class="m-2">
           <b-col class="col-md-auto">
-            <b-card 
-            border-variant="secondary" 
-            img-alt="Card image" 
+            <b-card
+            border-variant="secondary"
+            img-alt="Card image"
             no-body
-            img-top 
+            img-top
             tag="article"
             style="max-width: 22rem; height: 23rem; margin: 0.5rem;" header-bg-variant="secondary"
             header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
-            header-border-variant="secondary" header-class="text-light p-1" align="center" 
+            header-border-variant="secondary" header-class="text-light p-1" align="center"
             footer-class="h-0  p-0 bottom"
             >
 

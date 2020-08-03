@@ -34,7 +34,8 @@ def query():
             # returns a list of dictionaries matching images with associated posts
             results_list_of_dicts = postMaker(results)
         #pretty_print_results_dictionaries_list(results_list_of_dicts)
-    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+
+    return results_list_of_dicts, saved_options
 
 def query_helper(args, saved_options, str_key, if_not_present, take_first_element:bool = False):
     t = None
