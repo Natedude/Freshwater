@@ -1,0 +1,43 @@
+.modal-content
+{
+  box-shadow: 5px 5px 5px black;
+
+  text-align: center;
+}
+
+
+input[type=text], textarea[id=message], input[type=tel], input[type=email]{
+  border: 1px solid #555555;
+  border-radius: 5px;
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+}
+
+input[type=text]:focus, textarea[id=message]:focus, input[type=tel]:focus, input[type=email]:focus{
+
+  border: 3px solid #555555;
+}
+
+input[type=submit] {
+
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 16px;
+  padding: 14px 25px;
+  border: none;
+
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px #555555;
+  text-align: center;
+}
+
+input[type=submit]:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

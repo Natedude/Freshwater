@@ -1,45 +1,15 @@
 name: sfsc
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
-  - _libgcc_mutex=0.1=main
-  - ca-certificates=2020.6.24=0
-  - certifi=2020.6.20=py37_0
-  - cffi=1.14.0=py37he30daa8_1
-  - click=7.1.2=py_0
-  - cryptography=2.9.2=py37h1ba5d50_0
-  - flask=1.1.2=py_0
-  - flask-sqlalchemy=2.4.3=pyh9f0ad1d_0
-  - gunicorn=20.0.4=py37_0
-  - idna=2.10=py_0
-  - itsdangerous=1.1.0=py37_0
-  - jinja2=2.11.2=py_0
-  - ld_impl_linux-64=2.33.1=h53a641e_7
-  - libedit=3.1.20191231=h7b6447c_0
-  - libffi=3.3=he6710b0_2
-  - libgcc-ng=9.1.0=hdf63c60_0
-  - libstdcxx-ng=9.1.0=hdf63c60_0
-  - markupsafe=1.1.1=py37h7b6447c_0
-  - marshmallow=3.6.1=py_0
-  - mysql-connector-c=6.1.11=h597af5e_1
-  - mysqlclient=2.0.1=py37he6710b0_0
-  - ncurses=6.2=he6710b0_1
-  - openssl=1.1.1g=h7b6447c_0
-  - pip=20.1.1=py37_1
-  - pycparser=2.20=py_0
-  - pymysql=0.9.3=py37_0
-  - python=3.7.7=hcff3b4d_5
-  - python_abi=3.7=1_cp37m
-  - readline=8.0=h7b6447c_0
-  - setuptools=47.3.1=py37_0
-  - six=1.15.0=py_0
-  - sqlalchemy=1.3.18=py37h8f50634_0
-  - sqlite=3.32.3=h62c20be_0
-  - tk=8.6.10=hbc83047_0
-  - werkzeug=1.0.1=py_0
-  - wheel=0.34.2=py37_0
-  - xz=5.2.5=h7b6447c_0
-  - zlib=1.2.11=h7b6447c_3
-prefix: /home/lchumpitaz/miniconda3/envs/sfsc
-
+  - python=3.7
+  - mysqlclient
+  - gunicorn
+  - flask
+  - pymysql
+  - flask-sqlalchemy
+  - marshmallow
+  - wtforms
+  - nodejs=14.6.0
+prefix: ~/miniconda3/envs/sfsc

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+/*use-itty-bitty-template*/
+body{
+    background: #ececec;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5 {
+  border-bottom: 1px solid #ccc;
+  color: black;
+  padding-bottom: 5px
+}
+
+.container {
+  margin: auto;
+  width: 350px;
+  text-align: center;
+}
+
+.left{
+    text-align: left;
+}
+
+.listFlex {
+    display: flex; 
+    justify-content: center;
+}
+
+img {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 10px 5px 5px lightgray;
+}
+
+.button {
+    display: inline;
+    padding: 10px;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+</style>
+
+<body>
+    <div class="container">
+        <h1 style="font-family: Brush Script MT, Brush Script Std, cursive">Gouri Jamakhandi</h1>
+        <img src="../static/images/about/gouri.jpeg" alt="Gouri" style="width:160px;height:200px">
+        <h4>About Me</h4>
+        <p>Hi, I'm Gouri! I'm a computer scientist and I love finding new and innovative solutions to problems!</p>
+        <h4>My Skills</h4> 
+        <div class="listFlex">
+          <div>
+              <ul class="left">
+                <li>Java</li>
+                <li>Javascript</li>
+                <li>HTML/CSS</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="left">
+                <li>Python</li>
+                <li>C++</li>
+                <li>C#</li>
+            </ul>
+          </div>
+        </div>
+        <h4>Social Media</h4> 
+        <div class="container">
+            <a href="https://github.com/gourijamakhandi" id="share-git" class="sharer button"><i class="fa fa-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/gourijamakhandi/" id="share-li" class="sharer button"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="mailto:gjamakhandi@mail.sfsu.edu" id="share-em" class="sharer button"><i class="fa fa fa-envelope-square" aria-hidden="true"></i></a>
+            <!-- <a href="#" id="share-fb" class="sharer button"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
+            <a href="#" id="share-tw" class="sharer button"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" id="share-gp" class="sharer button"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+            <a href="#" id="share-ins" class="sharer button"><i class="fa fa-instagram" aria-hidden="true"></i></a>  -->
+        </div>
+    </div>  
+</body>
+</html>
