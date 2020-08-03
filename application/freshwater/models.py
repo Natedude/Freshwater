@@ -2,6 +2,11 @@ from datetime import datetime
 from freshwater import db, app
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
+from sqlalchemy import ForeignKey, Table, Column
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+
 
 # This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
 def model_to_list_of_dicts(model):
@@ -44,31 +49,32 @@ class Messages(db.Model):
         return model_to_list_of_dicts(Messages)
 
 class Images(db.Model):  # Db where all Image paths are stored
-    #__bind_key__ = 'db1'
-    __tablename__ = "Images"  # Name of table
+    #bind_key = 'db1'
+    tablename = "Images"  # Name of table
     id = db.Column(db.Integer, primary_key=True)
-    # All images must be associted with the Onwer(/User)'s ID
-    # fkIdUser = db.Column(db.Integer)
-    # fkEmail = db.Column(db.String)  # Email can also be used as a forigen key
-    fkIdPost = db.Column(db.Integer)  # Forgien Key for the associated Post
+    # All images must be associted with the Onwer(/User)'s ID & Listing ID
+    fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for 
+    user = relationship("User")
+    fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for 
+    listing = relationship("Listings")
     # Informs us if a sell or Someone looking to rent our a unit
     # sellOrRent = db.Column(db.String)
     path = db.Column(db.String(255))  # Relative file path of image
 
-    # def __repr__(self):
+    # def repr(self):
     #     return "(r)fkEmail: " + self.fkEmail + " : " + str(self.path)
 
-    # def __str__(self):
+    # def str(self):
     #     return "(s)fkEmail: " + self.fkEmail + " : " + self.path
 
     def dict(self):
         return {"id": self.id,
-                # "fkIdUser": self.fkIdUser,
+                "fk_user_id": self.fk_user_id,
                 # "fkEmail": self.fkEmail,
-                "fkIdPost": self.fkIdPost,
+                "fk_listing_id": self.fk_listing_id,
                 # "sellOrRent": self.sellOrRent,
                 "path": self.path}
-        
+
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Images)

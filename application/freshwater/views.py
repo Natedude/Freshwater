@@ -27,9 +27,14 @@ def query():
 def about():
     return render_template("about/about_team.html")
 
+@app.route('/postOld')
+def postOld():
+    return render_template("listings/post.html")
+
 @app.route('/post')
 def post():
-    return render_template("listings/post.html")
+    return render_template("listings/postFinal.html")
+
 
 @app.route('/confirm')
 def confirm():
@@ -117,7 +122,7 @@ def postingData():
             print('file is of type', type(file))
             if file and allowed_file(file.filename):
                 usrId = current_user.id
-                d["fkId"] = usrId
+                d["fk_user_id"] = usrId
                 filename = secure_filename(str(usrId) + file.filename)
                 filelocation = os.path.join('freshwater/static/images/client' , filename)
                 print('saving file name here', filelocation)
