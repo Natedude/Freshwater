@@ -55,7 +55,7 @@ def query_helper(args, saved_options, str_key, if_not_present, take_first_elemen
 def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
     results = search_title_and_desc(search_string)
     results = filter_in_list(
-        results,Listings.houseType, housingType)
+        results, Listings.houseType, housingType)
     results = filter_in_list(
         results, Listings.sellOrRent, sellOrRent)
     results = filter_in_list(
