@@ -2,7 +2,7 @@ import math
 from .scraper import Scraper
 #from freshwater import db
 #from ..database.database import add_image_record
-from flask
+from flask_security.utils import encrypt_password
 
 import shutil
 import os
@@ -175,3 +175,4 @@ class DevUtils(object):
         first_name = chosen[0]
         last_name = chosen[1]
         email = first_name + "@" + random.choice(['random.com', 'sfsu.edu'])
+        pass_hash = encrypt_password('123456')
