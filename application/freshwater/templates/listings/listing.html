@@ -57,11 +57,8 @@
       <b-container fluid class="container1">
         <br>
         <b-row>
-          <b-col sm="7">
-            <b-card border-variant="light">
-  
-              <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="200"  :width="600" :height="400" :items="items"/>
-            </b-card>
+          <b-col sm="7" align-v="stretch">
+              <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
           </b-col>
   
           <b-col sm="5">
@@ -145,7 +142,7 @@
           items: [
               {id:'someid1', src: "{{ data['path']|safe }}",
               thumbnail: "{{ data['path']|safe }}",
-              caption: 'Front'},
+              caption: 'Front',},
               {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
               thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
               caption: 'Other view'},
