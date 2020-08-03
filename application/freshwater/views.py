@@ -4,6 +4,7 @@ from .search import search
 from flask_wtf import FlaskForm
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 import yaml
+import pandas as pd
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -15,9 +16,24 @@ def home():
     saved_options['petsAllowed'] = []
     return render_template("home.html", saved_options=saved_options)
 
-@app.route('/query', methods=['GET', 'POST'])
-def query():
-    return search.query()
+
+
+@app.route('/query/<sorting>', methods=['GET', 'POST'])
+def query(sorting):
+    results_list_of_dicts, saved_options = search.query()
+    df = pd.DataFrame.from_records(results_list_of_dicts)
+    if sorting == 'none':
+        return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+    if sorting=='lowhigh':
+        df = df.sort_values(by='price', ascending = True)
+    elif sorting=='highlow':
+        df = df.sort_values(by='price', ascending = False)
+    else:
+        df = df.sort_values(by=sorting, ascending = True)
+
+    print(df.columns)
+    df_json = df.to_json(orient='records')
+    return render_template("home.html", results_list_of_dicts=yaml.safe_load(df_json), saved_options=saved_options)
 
 @app.route('/about')
 def about():

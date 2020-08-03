@@ -14,5 +14,6 @@ dependencies:
   - nodejs=14.6.0
   - flask-wtf
   - pyyaml
+  - pandas
 
 prefix: ~/miniconda3/envs/sfsc
