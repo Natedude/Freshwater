@@ -6,7 +6,7 @@ from freshwater import db, app
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin
 
 
-# This Function takes in a table from db and returns a list of dictionaries(each row is a dictionary, columns titles are keys ) ordered by primary id in table
+# This Function takes in a table from db and returns a list of dictionaries for each existing record in that table (each row is a dictionary, columns titles are keys ) ordered by primary id in table
 def model_to_list_of_dicts(model):
     print("**** dbTolst: before query")
     records_in_model = model.query.all()
@@ -67,7 +67,7 @@ class Images(db.Model):  # Db where all Image paths are stored
 
     def dict(self):
         return {"id": self.id,
-                "fk_user_id": self.fkIdUser,
+                "fk_user_id": self.fk_user_id,
                 # "fkEmail": self.fkEmail,
                 "fk_listing_id": self.fk_listing_id,
                 # "sellOrRent": self.sellOrRent,
@@ -159,10 +159,12 @@ class User(db.Model, UserMixin):
     # __bind_key__ = 'user'
     __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(255))
-    active = db.Column(db.Boolean())
-    confirmed_at = db.Column(db.DateTime())
+    pass_hash = db.Column(db.String(255))
+    sfsu_confirmed = db.Column(db.Integer()) # 0 no, 1 yes
+    date_registered = db.Column(db.DateTime())
     roles = db.relationship('Role', 
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))

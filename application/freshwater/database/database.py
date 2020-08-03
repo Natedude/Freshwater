@@ -8,6 +8,8 @@ def test_insert():
     insert_row(img)
 
 #returns first row that fulfills .where expression
+# Ex:
+# value = select_where_value(models.Images, "path", models.Images.path == "test/path")
 def select_where_value(table, column_name_str, expression):
     conn = db_engine.connect()
     s = select([table]).where(expression)
@@ -21,44 +23,41 @@ def select_where_value(table, column_name_str, expression):
     result.close()
     return value
 
-def row2dict(row):
-    d = {}
-    for column in row.__table__.columns:
-        d[column.name] = str(getattr(row, column.name))
-    return d
-
 #pass in row as a sqlalchemy object returned from model constructor
 #returns id sqlalchemy created for it
 def insert_row(row):
     print("Row inserted:" + str(row.__tablename__))
-    db.session.add(row)
-    db.session.commit()
-    row_id = row.id
-    print("Inserted: " +str(row.__tablename__)+ " with ID = " + str(row_id))
-    return row.id
+    try:
+        db.session.add(row)
+        db.session.commit()
+        row_id = row.id
+        print("Inserted: " +str(row.__tablename__)+ " with ID = " + str(row_id))
+        return row.id
+    except:
+        return (-1) #failed
 
 # def get_id_by_row(row):
 #     s = select([Images]).where(row.c.id ==
 #     result = db.engine(s)
 
 #returns id if success or -1 if failed
-def add_image_record(path, fk_user_id = None, fk_listing_id=None) -> int:
-    img = Images(path=path, fk_listing_id=fk_listing_id, fk_user_id=fk_user_id)
-    # img = None
-    # if not fk_user_id and fk_listing_id:
-    #     img = Images(path=path, fk_listing_id=fk_listing_id)  
-    # if fk_user_id and not fk_listing_id:
-    #     img = Images(path=path, fk_user_id=fk_user_id)  
-    # if not fk_user_id and not fk_listing_id:
-    #     img = Images(path=path)  
-    if img:
-        print("Img inserted")
-        pprint(img)
-        #insert and return id
-        return insert_row(img)
-        #return img.c.id
-    else:
-        return -1
+# def add_image_record(path, fk_user_id = None, fk_listing_id=None) -> int:
+#     img = Images(path=path, fk_listing_id=fk_listing_id, fk_user_id=fk_user_id)
+#     # img = None
+#     # if not fk_user_id and fk_listing_id:
+#     #     img = Images(path=path, fk_listing_id=fk_listing_id)  
+#     # if fk_user_id and not fk_listing_id:
+#     #     img = Images(path=path, fk_user_id=fk_user_id)  
+#     # if not fk_user_id and not fk_listing_id:
+#     #     img = Images(path=path)  
+#     if img:
+#         print("Img inserted")
+#         pprint(img)
+#         #insert and return id
+#         return insert_row(img)
+#         #return img.c.id
+#     else:
+#         return -1
     
 # def add_listing_record(title, houseType, sellOrRent, petsAllowed, city, postalCode, street_address, distance_from_SFSU, description):
     

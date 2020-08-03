@@ -96,7 +96,7 @@ def postMaker(results):  # Takes in Alchemy objects and returns python list of d
     for postResult in results:  # Loops through all posts
         for dictionImage in Images.list_of_dicts():
             # Note that postResult is not a dictionary, Its an alchemey object
-            if dictionImage['fkIdPost'] == postResult.id:
+            if dictionImage['fk_listing_id'] == postResult.id:
                 # print("******** postMaker: before")
                 frontend_ready_list_of_dicts.append(
                     {
