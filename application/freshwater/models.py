@@ -165,5 +165,5 @@ class User(db.Model, UserMixin):
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
+app.security = Security(app, user_datastore)
 

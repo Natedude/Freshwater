@@ -19,7 +19,7 @@ app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 #TODO comment out next line for production
 app.config['ENV'] = 'development'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #to suppress warning
-app.config['SQLALCHEMY_ECHO'] = False  # to print out SQL queries
+app.config['SQLALCHEMY_ECHO'] = True  # to print out SQL queries
 app.secret_key ='replace later'
 
 #set db info

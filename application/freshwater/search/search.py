@@ -26,6 +26,7 @@ def query():
         sellOrRent = query_helper(args, saved_options, 'sellOrRent', [])
         petsAllowed = query_helper(args, saved_options, 'petsAllowed', [])
 
+        #if they type nothing and choose no filters, show all listings
         if not (search or housingType or sellOrRent or petsAllowed):
             all_listings = db.session.query(Listings)
             results_list_of_dicts = postMaker(all_listings)
