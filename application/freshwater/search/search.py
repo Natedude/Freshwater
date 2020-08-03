@@ -17,24 +17,25 @@ def query():
             args['search_string']
         # access as a dictionary and key = 'search_string'
         # but now because there can be multiple checkboxes, need to use args.getlist('param_name')
-        
-        # package data to send for backend seaarch and 
+
+        # package data to send for backend seaarch and
         # also persistent search and filters in saved_options
-        saved_options = {}  
+        saved_options = {}
         search = query_helper(args, saved_options, 'search_string', '', take_first_element=True)
         housingType = query_helper(args, saved_options, 'HousingType', [])
         sellOrRent = query_helper(args, saved_options, 'sellOrRent', [])
         petsAllowed = query_helper(args, saved_options, 'petsAllowed', [])
-        
+
         if not (search or housingType or sellOrRent or petsAllowed):
             all_listings = db.session.query(Listings)
             results_list_of_dicts = postMaker(all_listings)
         else:
-            results = backendSearch(search_string=search, housingType=housingType, sellOrRent=sellOrRent, petsAllowed=petsAllowed)  
+            results = backendSearch(search_string=search, housingType=housingType, sellOrRent=sellOrRent, petsAllowed=petsAllowed)
             # returns a list of dictionaries matching images with associated posts
             results_list_of_dicts = postMaker(results)
         #pretty_print_results_dictionaries_list(results_list_of_dicts)
-    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+
+    return results_list_of_dicts, saved_options
 
 def query_helper(args, saved_options, str_key, if_not_present, take_first_element:bool = False):
     t = None
@@ -61,7 +62,7 @@ def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAll
         results, Listings.petsAllowed, petsAllowed)
     return results
 
-# searches title and description for search string 
+# searches title and description for search string
 # and if empty, returns all Listings
 def search_title_and_desc(search):
     if search:
@@ -75,7 +76,7 @@ def search_title_and_desc(search):
     print(type(results))
     return results
 
-# returns sqlalchemy BaseQuery object 
+# returns sqlalchemy BaseQuery object
 # that has been filtered to include only records/rows that have values in list
 def filter_in_list(results, table_column, list_):
     if list_:

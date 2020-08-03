@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app, db
-#from .search import search
+from .search import search
 from flask_wtf import FlaskForm
 from .client import client, messaging, posting
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
@@ -8,7 +8,12 @@ from flask_security import login_required, current_user
 import os
 from werkzeug.utils import secure_filename
 import yaml
+import pandas as pd
 
+# Jinja Templating Global Filters
+@app.template_filter()
+def numberFormat(value):
+    return format(int(value), ',d')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -20,10 +25,22 @@ def home():
     saved_options['petsAllowed'] = []
     return render_template("home.html", saved_options=saved_options)
 
-@app.route('/query', methods=['GET', 'POST'])
-def query():
-    from .search import search
-    return search.query()
+@app.route('/query/<sorting>', methods=['GET', 'POST'])
+def query(sorting):
+    results_list_of_dicts, saved_options = search.query()
+    df = pd.DataFrame.from_records(results_list_of_dicts)
+    if sorting == 'none':
+        return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+    if sorting=='lowhigh':
+        df = df.sort_values(by='price', ascending = True)
+    elif sorting=='highlow':
+        df = df.sort_values(by='price', ascending = False)
+    else:
+        df = df.sort_values(by=sorting, ascending = True)
+
+    print(df.columns)
+    df_json = df.to_json(orient='records')
+    return render_template("home.html", results_list_of_dicts=yaml.safe_load(df_json), saved_options=saved_options)
 
 @app.route('/about')
 def about():
@@ -38,15 +55,9 @@ def postOld():
 def post():
     return render_template("listings/post.html")
 
-
 @app.route('/confirm')
 def confirm():
-    if request.method == 'POST':
-        form = request.form
-        print('________________')
-        print(form)
-        print('________________')
-    return render_template("listings/post.html")
+    return render_template("listings/confirm.html")
 
 @app.route('/profile/<name>')
 def profile(name):
@@ -63,12 +74,6 @@ def listing():
 @app.route('/dashboard')
 def dashboard():
     return render_template("/client/dashboard.html")
-
-
-# Jinja Templating Global Filters
-@app.template_filter()
-def numberFormat(value):
-    return format(int(value), ',d')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():
@@ -132,7 +137,7 @@ def postingData():
                 usrId = current_user.id
                 d["fk_user_id"] = usrId
                 filename = secure_filename(str(usrId) + file.filename)
-                filelocation = os.path.join('freshwater/static/images/client' , filename)
+                filelocation = os.path.join('freshwater/static/images/listings' , filename)
                 print('saving file name here', filelocation)
                 file.save(filelocation)
         else:
@@ -140,9 +145,6 @@ def postingData():
         d["image1"] = filename
         return posting.makeListing(d)
         
-
-
- 
 
 @app.route('/messages/getAll')
 @login_required
@@ -154,8 +156,6 @@ def returnAllMess():
         print(type(email))
         return messaging.getAll(email) #return JSON
     
-    
-
 
 @app.route("/loginn", methods = ['GET', 'POST'])
 def login():
@@ -172,19 +172,7 @@ def login():
             print('user is : ', user)
             password = login_form.password.data
             return client.login(user, password)
-        #     #result= Users.query.filter(Users.email==user)#result is a Basequery object
-        #     #result = result.first()
-        #     if result==None:
-        #         render_template("client/login.html", title="UserName does not exsit")
-        #     elif login_form.password.data == str(result.password):
-        #         ##session['user'] = user#request.form['username']# Not using Session yet
-        #         #return redirect(url_for('protected'))#TODO login with Sessions
-        #         return "data Base connection, life connection, everything connection, password"
-        #     else:
-        #         render_template("test/testLogin.html", title="Login failed, passwords did not match")
-        # elif "user" in session:#if get request and user is already in session, redircts them
-        #     return redirect(url_for("userLoggedIn"))
-        # return render_template("test/testLogin.html")
+
 
 
 
