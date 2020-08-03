@@ -49,7 +49,7 @@
   {% endmacro %}
 
   <div id="app">
-  
+
     <!-- Navbar -->
     <navbar-component> </navbar-component>
     <div style="width: 80%; margin: auto;">
@@ -60,14 +60,14 @@
           <b-col sm="7" align-v="stretch">
               <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
           </b-col>
-  
+
           <b-col sm="5">
             <b-card border-variant="light" bg-variant="light">
               <h2>[[street]], [[city]], [[state]]</h2>
               <hr>
               <div style="clear: both">
                 <h3 style="float: left;">[[houseType]] for [[status]]</h3>
-                <h2 style="float: right;">$[[price]]/mo</h2>
+                <h2 style="float: right;">$[[price]]<span v-if="!(houseType === 'House')">/month </span></h2>
               </div>
               <br><br>
               <hr>
@@ -83,12 +83,12 @@
               </b-embed>
             </b-card>
           </b-col>
-  
+
         </b-row>
         <br>
       </b-container>
     </div>
-  
+
     <b-modal id="contact" ok-only ok-title="Cancel" button-size="sm" ok-variant="secondary" centered>
       <template v-slot:modal-header>
         <!-- probably there is better solutions? -->
@@ -96,7 +96,7 @@
         <h2>Contact Landlord</h2>
         <h2></h2>
       </template>
-  
+
       <h6>Thank you for your interest in
         <br>
         [[houseType]] for [[status]] at
@@ -105,25 +105,25 @@
           <br>
           [[city]], [[state]]</b>
       </h5>
-  
+
       <form action="#" method="GET">
         <!-- <label for="user">Username</label> -->
-  
+
         <input type="text" id="name" name="name" placeholder="Your name" required>
         <br><br>
         <!-- <label for="email">Email</label> -->
         <input type="email" id="email" name="email" placeholder="Email" required>
         <br><br>
-  
+
         <input type="tel" id="phone" name="phone" placeholder="Phone" required>
         <br><br>
-  
+
         <textarea id="message" name="message" rows="4" cols="30" placeholder="Your message here" required></textarea>
         <br>
-  
+
         <b-button type="submit" variant="secondary" size="lg">Submit</b-button>
       </form>
-  
+
       <template v-slot:modal-footer>
         <div class="w-100">
         </div>
