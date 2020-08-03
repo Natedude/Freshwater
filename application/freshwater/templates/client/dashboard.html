@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+  <title>SF State of Code</title>
+
+  <!-- Required Stylesheets -->
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+  <link type="text/css" rel="stylesheet" href="/static/css/dashboard.css">
+  
+  <!-- Required scripts -->
+  <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+  <script src="/static/js/navbar.js"></script>
+
+  <style>
+    .col-md {
+	    padding-left: 0px !important;
+	    padding-right: 0px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Jinja Macros -->
+  {% macro capitalize(text) %}
+    {{ text[0]|upper}}{{text[1:] }}
+  {% endmacro %}
+
+  <div id="app">
+    <navbar-component></navbar-component>
+    <!-- Message Container -->
+    <b-container>
+      <h1 style="margin-top: 30px;">Peter's Dashboard</h1>
+      <h2 style="margin-top: 20px;">My Properties</h2>
+
+      <div class="m-4">
+        <b-row class="mb-1">
+        {% for listing in results_list_of_dicts %}
+          <div class="m-2"> 
+            <b-col class="col-md-auto"> 
+              <b-card 
+                border-variant="secondary" 
+                img-alt="Card image" 
+                no-body
+                img-top 
+                tag="article"
+                style="max-width: 24rem; height: 24rem; margin: 0.5rem;" header-bg-variant="secondary"
+                header="House for rent"
+                header-border-variant="secondary" header-class="text-light p-1" align="center" 
+                footer-class="h-0  p-1 bottom">
+  
+              <b-card-img src="https://picsum.photos/600/300/?image=25" height ="200rem" ></b-card-img>
+              <b-card-body style="padding:0%">
+                <b-card-text align="left" >
+                  <b-container class="m-2">
+                    <b-row>
+                      <b-col cols="6">
+                        <h5>$50000</h5></b-col>
+                      <b-col>1 bd | 1 ba |1 sqft</b-col>
+                    </b-row>                  
+                      <p style="margin:0 auto">1600 Holloway Ave, San Francisco, CA 94132</p>
+                      <p>5 miles from SFSU</p>
+                  </b-container>
+                </b-card-text>
+              </b-card-body>  
+              <b-button variant="danger">Delete</b-button>
+              </b-card>
+            </b-col>
+          </div>
+          {% endfor %}
+      </b-row>
+    </div>
+
+<!-- divider line  -->
+    <hr/>
+    <b-row >
+      <b-col>
+      <h2 >My Messages</h2>
+      <h6 style="margin-left: 35px; margin-top: 20px; color:grey">Total messages: 2</h6>
+      </b-col>
+      <!-- sort button -->
+      <b-col style="margin-top: 15px;" cols="4" md="2">
+        <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="lg">
+          <b-dropdown-item href="#">Sort: Date</b-dropdown-item>
+          <b-dropdown-item href="#">Sort: Title of property</b-dropdown-item>
+        </b-dropdown>
+        </b-col>
+      </b-row>
+
+      <!-- scroll bar -->
+      <div id="overflowScroll">
+
+      <!-- message section start -->
+      <b-row>
+        <!-- style="border: 1px solid; border-color:grey; -->
+        <!-- left:house info; right: message start here -->
+        <b-col class="p-5" sm="5">
+          <!-- house info(one line) start from here  -->
+          <b-row>
+            <!-- put icon -->
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="geo-alt" variant="primary"></b-icon></p></b-col>
+            <!-- put info -->
+            <b-col><p class="h6 mb-3">1600 Holloway Ave, San Francisco, CA 94132</p></b-col>
+          </b-row>
+          <!-- house info(one line) end from here  -->
+          <b-row>
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="envelope-fill" variant="dark"></b-icon></p></b-col>
+            <b-col><p class="h6 mb-3">ABC@mail.sfsu.edu</p></b-col>
+          </b-row>
+          <b-row>
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="telephone-fill" variant="success"></b-icon></p></b-col>
+            <b-col><p class="h6 mb-3">(617)622-1234</p></b-col>
+          </b-row>
+          <!-- left:house info; right: message end from here -->
+        </b-col>
+        <!-- message box start from here -->
+        <b-col class="p-3" sm=6>
+          <b-row>
+            <b-col><h5>Ivy</h5></b-col>
+            <b-col cols="auto">17: 30 Jul 31, 2020</b-col>
+          </b-row>
+           
+          <b-row class="p-3 pill bg-light" sm=8>
+            Hi, My name is Ivy, I am a student of SFSU. I am interested in your home at 2222 Fruitdale Ave, South San Francisco. You can conntact me by phone and email.
+          </b-row>
+        </b-col>
+        <!-- message box end from here -->
+      </b-row>
+      <!-- messeage section end -->
+
+      <!-- message section start -->
+      <b-row>
+        <!-- style="border: 1px solid; border-color:grey; -->
+        <!-- left:house info; right: message start here -->
+        <b-col class="p-5" sm="5">
+          <!-- house info(one line) start from here  -->
+          <b-row>
+            <!-- put icon -->
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="geo-alt" variant="primary"></b-icon></p></b-col>
+            <!-- put info -->
+            <b-col><p class="h6 mb-3">1600 Holloway Ave, San Francisco, CA 94132</p></b-col>
+          </b-row>
+          <!-- house info(one line) end from here  -->
+          <b-row>
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="envelope-fill" variant="dark"></b-icon></p></b-col>
+            <b-col><p class="h6 mb-3">ABC@mail.sfsu.edu</p></b-col>
+          </b-row>
+          <b-row>
+            <b-col sm="1"><p class="h6 mb-1"><b-icon icon="mic-fill" variant="success"></b-icon></p></b-col>
+            <b-col><p class="h6 mb-3">(617)622-1234</p></b-col>
+          </b-row>
+          <!-- left:house info; right: message end from here -->
+        </b-col>
+        <!-- message box start from here -->
+        <b-col class="p-3" sm=6>
+          <b-row>
+            <b-row>
+              <b-col>
+                <h5>Ivy</h5>
+              </b-col>
+              <b-col cols="auto">
+                17: 30  Jul 31, 2020
+              </b-col>
+            </b-row>
+          </b-row> 
+          <b-row class="p-3 pill bg-light" sm=8>
+            Hi, My name is Ivy, I am a student of SFSU. I am interested in your home at 2222 Fruitdale Ave, South San Francisco. You can conntact me by phone and email.
+          </b-row>
+        </b-col>
+        <!-- message box end from here -->
+      </b-row>
+      <!-- messeage section end -->
+    </b-container>
+
+    </div>
+
+
+    <script>
+      
+        window.app = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+
+        });
+    </script>
+
+</body>
+</html>

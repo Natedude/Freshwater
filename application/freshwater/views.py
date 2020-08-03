@@ -7,6 +7,7 @@ from wtforms import validators, Form, StringField, PasswordField, validators, Bo
 from flask_security import login_required, current_user
 import os
 from werkzeug.utils import secure_filename
+import yaml
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -28,12 +29,13 @@ def about():
     return render_template("about/about_team.html")
 
 @app.route('/postOld')
+@login_required
 def postOld():
-    return render_template("listings/post.html")
+    return render_template("listings/postOld.html")
 
 @app.route('/post')
 def post():
-    return render_template("listings/postFinal.html")
+    return render_template("listings/post.html")
 
 
 @app.route('/confirm')
@@ -49,13 +51,18 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
-@app.route('/listing')
+@app.route('/listing', methods=['POST'])
 def listing():
-    return render_template("listing.html")
+    if request.method == 'POST':
+        # print("-----------------------------------------")
+        data = yaml.safe_load(request.form['listing'])
+        # print(data, type(data))
+        return render_template("listings/listing.html", data=data)
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("messages.html")
+    return render_template("/client/dashboard.html")
+
 
 # Jinja Templating Global Filters
 @app.template_filter()
