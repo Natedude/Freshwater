@@ -1,10 +1,13 @@
 from flask import render_template, url_for, request, session, redirect, url_for
+
 from freshwater import app
 from .search import search
 from flask_wtf import FlaskForm
 from .client import client
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_security import login_required, current_user
+import yaml
+import pandas as pd
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -17,9 +20,24 @@ def home():
     saved_options['petsAllowed'] = []
     return render_template("home.html", saved_options=saved_options)
 
-@app.route('/query', methods=['GET', 'POST'])
-def query():
-    return search.query()
+
+
+@app.route('/query/<sorting>', methods=['GET', 'POST'])
+def query(sorting):
+    results_list_of_dicts, saved_options = search.query()
+    df = pd.DataFrame.from_records(results_list_of_dicts)
+    if sorting == 'none':
+        return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+    if sorting=='lowhigh':
+        df = df.sort_values(by='price', ascending = True)
+    elif sorting=='highlow':
+        df = df.sort_values(by='price', ascending = False)
+    else:
+        df = df.sort_values(by=sorting, ascending = True)
+
+    print(df.columns)
+    df_json = df.to_json(orient='records')
+    return render_template("home.html", results_list_of_dicts=yaml.safe_load(df_json), saved_options=saved_options)
 
 @app.route('/about')
 def about():
@@ -37,9 +55,13 @@ def confirm():
 def profile(name):
     return render_template("about/about_" + name + ".html")
 
-@app.route('/listing')
+@app.route('/listing', methods=['POST'])
 def listing():
-    return render_template("listings/listing.html")
+    if request.method == 'POST':
+        # print("-----------------------------------------")
+        data = yaml.safe_load(request.form['listing'])
+        # print(data, type(data))
+        return render_template("listings/listing.html", data=data)
 
 @app.route('/dashboard')
 def dashboard():

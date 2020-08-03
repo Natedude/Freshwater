@@ -50,7 +50,7 @@
       <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demostration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
     </div>
 	    <navbar-component-home></navbar-component-home>
-	    
+
     <!-- Jumbotron Container -->
     <b-container fluid class="container1">
       <b-form>
@@ -58,7 +58,7 @@
           <b-col>
             <h2 class="text-center font-weight-bold text-white"> Discover a place <br /> nearby SFSU
               <!-- Test code to see live vue and jinja values DO NOT REMOVE-->
-              <!-- <br> 
+              <!-- <br>
               [[housingType_selected]] [[sellOrRent_selected]]
               [[petsAllowed_selected]] <br> '[[search_string]]' <br>
               {{saved_options|tojson}} -->
@@ -66,7 +66,7 @@
           </b-col>
         </b-row>
 
-	<b-container fluid class="bg-white" style="width: 50%; opacity: 90%">
+	<b-container fluid class="bg-white" style="width: 50%; opacity: 87%; border-radius: 25px;">
           <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
             <b-col md="6" align-self="center" style=" padding-left: 15px !important; padding-right: 5px !important;">
@@ -76,7 +76,7 @@
             <!-- Search Button -->
             <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
               <div style="display:flex; justify-content:center">
-                <b-button class="my-2" type="submit" formaction="/query" type="submit">
+                <b-button class="my-2" type="submit" formaction="/query/none" type="submit">
                   <b-icon icon="search"></b-icon>
                 </b-button>
               </div>
@@ -159,8 +159,9 @@
     </b-container>
 
     <!-- Search Results -->
+<b-container fluid>
     <div class="m-4">
-	<b-row class="mb-1 border border-variant" >
+	<b-row class="mb-1" >
    <b-col cols="9" class="py-2 text-secondary" align-self="center">
 		{% set count = results_list_of_dicts|length %}
 		{%if count > 0 %}
@@ -177,53 +178,77 @@
 		{% endif %}
 		</b-col>
    <b-col cols="3" class="py-2">
-	   	<div class="float-right">
+	   	<div class="float-right" style="margin-right: 20px">
               <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="md">
-                <b-dropdown-item href="#">Sort: New Listings</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Price(Lo-Hi)</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Price(Hi-Lo)</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Distance to SFSU</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Bedrooms</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Bathrooms</b-dropdown-item>
-                <b-dropdown-item href="#">Sort: Squarefeet</b-dropdown-item>
+                <!-- <b-dropdown-item href="/">Sort: New Listings</b-dropdown-item> -->
+                <b-dropdown-item :href="'/query/lowhigh?search_string='+search_string">Sort: Price(Lo-Hi)</b-dropdown-item>
+                <b-dropdown-item :href="'/query/highlow?search_string='+search_string">Sort: Price(Hi-Lo)</b-dropdown-item>
+                <b-dropdown-item :href="'/query/distance_from_SFSU?search_string='+search_string">Sort: Distance to SFSU</b-dropdown-item>
+                <b-dropdown-item :href="'/query/bedroomNum?search_string='+search_string">Sort: Bedrooms</b-dropdown-item>
+                <b-dropdown-item :href="'/query/bathroomNum?search_string='+search_string">Sort: Bathrooms</b-dropdown-item>
+                <b-dropdown-item :href="'/query/sqft?search_string='+search_string">Sort: Squarefeet</b-dropdown-item>
               </b-dropdown>
 		</div>
           </b-col>
-	</b-row>
+  </b-row>
 
       <b-row class="mb-1">
       {% for listing in results_list_of_dicts %}
-        <div class="m-2"> 
-          <b-col class="col-md-auto"> 
-            <b-card 
-              border-variant="secondary" 
-              img-alt="Card image" 
-              no-body
-              img-top 
-              tag="article"
-              style="max-width: 21rem; height: 30xrem; margin: 0.4rem;font-size:1.2em" 
-              header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
-              header-bg-variant="Light"
-              align="center"
-              >
-            <!-- header-border-variant="secondary" header-class=" p-1" align="center" 
-            footer-class="h-0  p-0 bottom" -->
-            <a href="/listing">
-              <b-card-img src="{{listing.path}}" height ="200rem" ></b-card-img>
-            </a>
-            
+        <div class="m-2">
+          <b-col class="col-md-auto">
+            <b-card
+            border-variant="secondary"
+            img-alt="Card image"
+            no-body
+            img-top
+            tag="article"
+            style="max-width: 22rem; height: 23rem; margin: 0.5rem;" header-bg-variant="secondary"
+            header="{{capitalize(listing.houseType)}} for {% if listing.sellOrRent == "rent"%} Rent {% else %} Sale {% endif %}"
+            header-border-variant="secondary" header-class="text-light p-1" align="center"
+            footer-class="h-0  p-0 bottom"
+            >
+
+            <form action="/listing" method="post" role="form">
+                <input type="hidden" name="listing" value="{{listing}}">
+                <b-button style="margin:0; ; padding: 0; border: none" variant="link" type="submit">
+                  <b-card-img src="{{listing.path}}" height ="200rem"></b-card-img>
+                </b-button>
+            </form>
+
             <b-card-body style="padding:0%">
               <b-card-text align="left" >
                 <b-container class="m-2">
                     <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5>
-                    <h6>{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}} sqft</h6>
-                    <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>                
-                    <h6 style="margin:0 auto">{{listing.street_address}}</h6>
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-1"><b-icon icon="house-door-fill" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6 class="text-bottom">{{listing.bedroomNum}} bd | {{listing.bathroomNum}} ba | {{listing.sqft}} sqft</h6>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col sm=1>
+                        <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
+                      </b-col>
+                      <b-col sm=7>
+                        <h6 style="margin:0 auto">{{listing.street_address}}</h6>
+                      </b-col>
+                    </b-row>
                 </b-container>
               </b-card-text>
             </b-card-body>
 
-            <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact the Landlord</b-button>
+            <!-- <b-button variant="success"><b-icon icon="envelope" variant="light"></b-icon> Contact the Landlord</b-button> -->
             <!-- <template v-slot:footer style="position:absolute; bottom:0; width:100%;">
               <b-button variant="light" formaction="#" type="submit">
                 <b-icon icon="heart-fill" variant="danger"></b-icon>
@@ -247,7 +272,7 @@
 
 
 </div> <!-- end app div -->
-
+</b-container>
 
     <script type="text/javascript">
       //var router = new VueRouter({
