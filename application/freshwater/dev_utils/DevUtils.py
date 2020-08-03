@@ -1,4 +1,6 @@
 import math
+
+#from sqlalchemy.sql.expression import insert
 from .scraper import Scraper
 #from freshwater import db
 #from ..database.database import add_image_record
@@ -17,7 +19,8 @@ class DevUtils(object):
     Used to generate fake listings with 
     some scraped, random, and lorem ipsum data
     """
-    def __init__(self, db_, models_, insert, select) -> None:
+    def __init__(self, app, db_, models_, insert, select) -> None:
+        self.app = app
         self.db = db_
         self.models = models_
         self.insert = insert
@@ -62,13 +65,15 @@ class DevUtils(object):
             city = "San Francisco", 
             postalCode=94132,
             street_address="1600 Holloway Ave",
-            distance_from_SFSU=random.uniform(0.01, 7.0),
+            distance_from_SFSU=round(random.uniform(0.01, 7.0),2),
             description = self.make_description(), 
             price = self.make_price(), 
             sqft = self.make_sqft(), 
             bedroomNum = self.make_bedroom_count(),
             bathroomNum = random.choices([1, 2, 3], weights=(4, 2, 1))[0],
-            adminAppr=random.choices([0,1], weights=(1,5))[0])
+            adminAppr=random.choices([0,1], weights=(1,5))[0],
+            fk_user_id = random.randint(1, self.num_users)
+        )
         self.listings_index += 1
         return l
 
@@ -111,15 +116,21 @@ class DevUtils(object):
         return dest_path
     
     #move images given by a list of paths
+    #returns list of new paths
     def image_path_list_mover(self, img_path_list):
+        dest_list = []
         for i in img_path_list:
-            self.image_mover(i, self.get_dest_path(i))
+            dest = self.get_dest_path(i)
+            #create correct path for server
+            dest_list.append(dest.split("freshwater")[1])
+            self.image_mover(i, dest)
         self.delete_source_paths(img_path_list)
+        return dest_list
 
     #get a list of img paths from unused_images with no repeats
     # and with it more likely to have a lower number of images
     def random_image_paths(self):
-        num_images = random.choices([1, 2, 3, 4], weights=(4, 3, 2, 1))[0]
+        num_images = 1#random.choices([1, 2, 3, 4], weights=(4, 3, 2, 1))[0]
         img_path_list = random.sample(self.image_paths_list, num_images)
         return img_path_list
     
@@ -143,36 +154,60 @@ class DevUtils(object):
         #print(dest_path)
         return dest_path
     
-    def generate(self):
+    def generate_listings_multi(self, num_listings_to_make):
+        self.num_users = len(self.models.User.list_of_dicts())
+        for i in range(num_listings_to_make):
+            self.generate_listing()
+    
+    def generate_listing(self):
         # make listing object
+        # auto chooses a user id to associate with listing
         l = self.make_listing_object()
         # insert & get id
         listing_id = self.insert(l)
+        user_id = l.dict()['fk_user_id']
+        print(f"********\nCreating listing with User Id: {user_id}")
+        #pprint(user_id)
         
         # pick 1-4 images
         img_list = self.random_image_paths()
-        # make new dest paths
+        # make new dest paths returned from image_path_list_mover
         # move images from unused_images to dest
         # del moved images from self.image_paths_list (done inside mover)
-        self.image_path_list_mover(img_list)
+        img_list = self.image_path_list_mover(img_list)
         
         # make image objects
+        #user_id = random.randint(1,len(self.models.User.list_of_dicts()))
         for i in img_list:
-            img = Images(path=i, fk_listing_id=listing_id,
-                         fk_user_id=fk_user_id)
+            img = self.models.Images(path=i, fk_listing_id=listing_id, fk_user_id=user_id)
+            self.insert(img)
         
         # insert them with listing id
 
-    def generate_user(self, db_, models_, insert):
-        rand_words = lorem.paragraph()
-        rand_words = rand_words.split(" ")
-        for i in range(len(rand_words)):
-            rand_words[i] = rand_words[i].strip(".,;:'\"")
-            print(rand_words[i])
-            #remove duplicates
-        rand_words = list(dict.fromkeys(rand_words))
-        chosen = random.sample(rand_words, 2)
-        first_name = chosen[0]
-        last_name = chosen[1]
-        email = first_name + "@" + random.choice(['random.com', 'sfsu.edu'])
-        pass_hash = encrypt_password('123456')
+    def generate_user(self, db_, models_):
+        with self.app.app_context():
+            rand_words = lorem.paragraph()
+            rand_words = rand_words.split(" ")
+            for i in range(len(rand_words)):
+                rand_words[i] = rand_words[i].strip(".,;:'\"")
+                #print(rand_words[i])
+                #remove duplicates
+            rand_words = list(dict.fromkeys(rand_words))
+            chosen = random.sample(rand_words, 2)
+            first_name = chosen[0]
+            last_name = chosen[1]
+            email_end = random.choice(['random.com', 'sfsu.edu'])
+            email = first_name + last_name + "@" + email_end
+            #from freshwater import app
+            pass_hash = encrypt_password('123456')
+            if "sfsu.edu" in email_end:
+                sfsu_confirmed = 1
+            else:
+                sfsu_confirmed = 0
+            u = self.models.User(first_name=first_name, last_name=last_name, email=email, password=pass_hash, active=True, sfsu_confirmed=sfsu_confirmed)
+            self.insert(u)
+            pprint(u)
+
+    def generate_users_multi(self, db_, models_, num_users_to_create):
+        for i in range(num_users_to_create):
+            self.generate_user(db_, models_)

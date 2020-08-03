@@ -1,5 +1,5 @@
 from flask import render_template, request
-from ..models import Listings, Images, to_dict
+from ..models import Listings, Images
 import pprint
 from sqlalchemy import or_, and_
 from freshwater import db#, meta

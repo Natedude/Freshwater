@@ -1,5 +1,5 @@
 #from freshwater.dev_utils import package_structure_printer
-from freshwater import db, models
+from freshwater import db, models, app
 import os
 from freshwater.dev_utils.DevUtils import DevUtils
 from freshwater.database.database import test_insert, insert_row, select_where_value
@@ -10,7 +10,7 @@ from freshwater.database.database import test_insert, insert_row, select_where_v
         
 
 if __name__ == "__main__":
-    d = DevUtils(db, models, insert_row, select_where_value)
+    d = DevUtils(app, db, models, insert_row, select_where_value)
     # test_insert()
     # value = select_where_value(models.Images, "path", models.Images.path == "test/path")
     # print("select_where_value returns: " + str(value)) #TODO error!
@@ -27,4 +27,7 @@ if __name__ == "__main__":
     # #print after move
     # print(os.listdir(listings_path))
     
-    d.generate_user(db, models, insert_row)
+    #generate users
+    #d.generate_users_multi(db, models, 50)
+    # generate listings
+    #d.generate_listings_multi(120)

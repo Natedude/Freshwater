@@ -2,6 +2,7 @@ from pprint import pprint
 from ..models import Images
 from freshwater import db, db_engine
 from sqlalchemy.sql import select
+import sys
 
 def test_insert():
     img = Images(path="test/path")
@@ -26,7 +27,7 @@ def select_where_value(table, column_name_str, expression):
 #pass in row as a sqlalchemy object returned from model constructor
 #returns id sqlalchemy created for it
 def insert_row(row):
-    print("Row inserted:" + str(row.__tablename__))
+    #print("Row inserted:" + str(row.__tablename__))
     try:
         db.session.add(row)
         db.session.commit()
@@ -34,6 +35,11 @@ def insert_row(row):
         print("Inserted: " +str(row.__tablename__)+ " with ID = " + str(row_id))
         return row.id
     except:
+        print("insert_row: ERROR:")
+        print("sys.exc_info:\n" +
+        str(sys.exc_info()[0]) + "\n" +
+        str(sys.exc_info()[1]))
+        print("**********ERROR**********")
         return (-1) #failed
 
 # def get_id_by_row(row):

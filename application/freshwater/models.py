@@ -84,7 +84,7 @@ class Listings(db.Model):
     #__bind_key__ = 'db1'
     __tablename__ = "Listings"
     id = db.Column(db.Integer, primary_key=True)
-    #fkId = db.Column(db.Integer)
+    fk_user_id = db.Column(db.Integer)
     #fkEmail = db.Column(db.String)
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
     title = db.Column(db.String(255))
@@ -97,19 +97,17 @@ class Listings(db.Model):
     distance_from_SFSU = db.Column(db.Float)
     #houseNum = db.Column(db.Integer)
     #gps = db.Column(db.String)
-    description = db.Column(db.String(255))
+    description = db.Column(db.String(8000))
     price = db.Column(db.Integer)
     sqft = db.Column(db.Integer)
     bedroomNum = db.Column(db.Integer)
     bathroomNum = db.Column(db.Integer)
     adminAppr = db.Column(db.Integer)
     
-    
-
     def dict(self):
         return {
                 "id": self.id,
-                #"fkId": self.fkId,
+                "fk_user_id": self.fk_user_id,
                 #"fkEmail": self.fkEmail,
                 "timeCreated": self.timeCreated,
                 "title": self.title,
@@ -162,12 +160,29 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
-    pass_hash = db.Column(db.String(255))
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
     sfsu_confirmed = db.Column(db.Integer()) # 0 no, 1 yes
-    date_registered = db.Column(db.DateTime())
+    date_registered = db.Column(db.DateTime(), default=datetime.utcnow)
     roles = db.relationship('Role', 
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    def dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name' : self.last_name,
+            'email': self.email,
+            'password': self.password,
+            'active': self.active,
+            'sfsu_confirmed': self.sfsu_confirmed,
+            'date_registered': self.date_registered,
+            'roles': self.roles
+        }
+    
+    @staticmethod
+    def list_of_dicts():
+        return model_to_list_of_dicts(User)
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

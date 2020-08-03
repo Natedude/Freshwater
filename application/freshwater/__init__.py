@@ -30,7 +30,7 @@ host = '127.0.0.1'
 port = '3306'
 # NOTE use this to select the database you want to use
 # it will be created (and have tables and relationships created)if it does not exist
-database = 'CSC_666'
+database = 'CSC_777'
 
 # This engine just used to query for list of databases
 mysql_url = '{0}://{1}:{2}@{3}:{4}'.format(proto, user, password, host, port)
@@ -61,6 +61,7 @@ if not database_exists(url):
     init_db(db)
 else:
     print(f"Did NOT create database, {database} already exists.")
+
 
 ############
 print("******** FINISHED Initializing App & Database ********")
