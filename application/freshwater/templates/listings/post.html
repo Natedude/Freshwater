@@ -54,29 +54,26 @@
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
-        <h1 style="margin: auto;"><b>Create Listing</b></h1>
-        <hr style="border: 1px solid #e7e7e7">
+        <h1 style="margin-top: 30px;"><b>Create Listing</b></h1>
+        
+        <hr style="border: 0.5px solid #e7e7e7">
 
         <div class="card border-0">
           <b-col sm="6">
-          <div>
-
+          <div >
             <b-form-group id="address-input-group" label="Listing Type" label-size="lg" style="text-align: left;"
               label-class="font-weight-bold pt-0">
-
-
 
                 <b-form-radio-group style="margin-right: 0px;" id="btn-radios-1" v-model="selected" :options="listingOptions" buttons
                   button-variant="outline-primary" name="radios-btn-default" required></b-form-radio-group>
 
-
-
             </b-form-group>
-
           </div>
-        </b-col>
+          </b-col>
         </div>
 
+
+        <hr style="border: 0.5px solid #e7e7e7">
         <div class="card border-0">
           <b-col sm="6">
           <div>
@@ -108,6 +105,8 @@
           </div>
         </b-col>
         </div>
+
+        <hr style="border: 0.5px solid #e7e7e7; margin-top: 5px">
 
         <div class="card border-0">
           <b-col sm="6">
@@ -156,23 +155,21 @@
                 <b-form-file id="photo-upload-input" multiple="true" required></b-form-file>
               </b-form-group>
             </b-col>
-
-            
+  
         </div>
 
         <div class="card border-0">
           <div>
-            <div class="row justify-content-center" style="margin-bottom: 20px;">
+            <div class="row justify-content-center" style="margin-bottom: 20px; margin-top: 40px;">
             <b-button v-b-modal.confirm-modal href="/" variant="secondary" style="float: right;" size="lg">Cancel</b-button>
-            <b-button v-b-modal.confirm-modal type="submit" variant="success" style="float: right;" size="lg">Post
-              Listing</b-button>
+            <b-button style="margin-left:80px" v-b-modal.confirm-modal type="submit" variant="success" style="float: right;" size="lg">Submit</b-button>
               </div>
             <b-modal centered hide-footer="true" id="confirm-modal" size="lg" title="Posting on its way!">
-              <b>Your posting may take up to 24 hours to be approved.
-                Thank you for posting with Freshwater Rentals!</b>
+              <h5 align="center">Your posting may take up to 24 hours to be approved. </br>
+                Thank you for posting with Freshwater Rentals!</h5>
               <hr>
               <div class="row justify-content-center">
-                <b-button type="submit" href="/" variant="primary" style="float: right;" size="sm">Back to Home
+                <b-button type="submit" href="/" variant="primary" style="float: right;" size="lg">Back to Home
                 </b-button>
               </div>
             </b-modal>
