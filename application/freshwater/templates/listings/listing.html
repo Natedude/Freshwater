@@ -15,6 +15,7 @@
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
   <link type="text/css" rel="stylesheet" href="../../static/css/post.css" />
 
+
   <!-- Load polyfills to support older browsers -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
 
@@ -51,15 +52,19 @@
   <div id="app">
 
     <!-- Navbar -->
-    <navbar-component> </navbar-component>
-    <div style="width: 90%; margin: auto; margin-top: 30px">
+    <navbar-component></navbar-component>
+
+    <div style="width: 90%; margin: auto; margin-top: 40px">
       <!-- Jumbotron Container -->
-      <b-container fluid >
+      <b-container fluid>
         <b-row>
           <b-col sm="7" align-v="stretch">
               <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
-          </b-col>
-          <b-col sm="5">
+        </b-col>
+
+        <b-col sm="5">
+          <!-- scroll bar -->
+          <div id="overflowScroll">
             <b-card border-variant="light" bg-variant="light">
           
           <b-row>
@@ -142,7 +147,11 @@
 		  <b-col><p style="text-align: justify;">[[description]]</p></b-col>
           </b-row>
             </b-card>
-          </b-col>
+            
+          </div>
+          <!-- End of scroll bar -->
+          
+        </b-col>
 
         </b-row>
         <br>
