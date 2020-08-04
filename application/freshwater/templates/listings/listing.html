@@ -56,37 +56,35 @@
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
         <br>
-
         <b-row>
           <b-col sm="7" align-v="stretch">
               <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
           </b-col>
-
           <b-col sm="5">
             <b-card border-variant="light" bg-variant="light">
-		    <b-row>
-			    <b-col cols="5">
-			<h5>$[[price]]<span v-if="!(houseType === 'House')">/month </span></h5>
-			    </b-col>
-			    <b-col cols="1">
-		<p class="h5 mb-0"><b-icon icon="house-door-fill" variant="dark"></b-icon></p>
-			    </b-col>
-			    <b-col style="padding-left: 10px !important;">
-				    <h5>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h5>
-			    </b-col>
-        
-       	    </b-row>
-       	    <b-row>
-		<b-col cols="1">
-                 <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
-			    </b-col>
-			    <b-col style="padding-left: 0 !important;">
+          
+          <b-row>
+			      <b-col cols="6">
+			        <h3>$[[price]]<span style="font-size: 20px"  v-if="!(houseType === 'House')">/mo</span></h3>
+			      </b-col>
+			      <!-- <b-col cols="1"> -->
+		          <!-- <p class="h5 mb-0"><b-icon icon="house-door-fill" variant="dark"></b-icon></p> -->
+			      <!-- </b-col> -->
+			      <b-col style="margin-top: 5px">
+				      <h5>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h5>
+            </b-col>
+          </b-row>
+             
+          <b-row>
+		        <b-col cols="1">
+              <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
+			      </b-col>
+			      <b-col style="padding-left: 0 !important;">
               <h6>[[street]], [[city]], [[state]]</h6>
-			    </b-col>
-       	    </b-row>
-	
-              <hr>
-              <div style="clear: both">
+			      </b-col>
+           </b-row>
+           
+          <div style="clear: both">
 		      <b-row class="mb-1">
 			      <b-col>
                 <h5 style="float: left;">[[houseType]] for [[status]]</h5>
