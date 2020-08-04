@@ -70,8 +70,9 @@
           <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
             <b-col md="6" align-self="center" style=" padding-left: 15px !important; padding-right: 5px !important;">
-              <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list" placeholder="What are you looking for?"
+              <b-form-input class="text-center" name="search_string"  maxlength="40" list="input-list" id="input-with-list" placeholder="What are you looking for?"
               v-model="search_string"></b-form-input>
+	      <b-tooltip target="input-with-list" placement="left" triggers="hover" variant="primary"> Max. 40 Characters allowed! </b-tooltip>
             </b-col>
             <!-- Search Button -->
             <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
