@@ -52,10 +52,9 @@
 
     <!-- Navbar -->
     <navbar-component> </navbar-component>
-    <div style="width: 90%; margin: auto;">
+    <div style="width: 90%; margin: auto; margin-top: 30px">
       <!-- Jumbotron Container -->
-      <b-container fluid class="container1">
-        <br>
+      <b-container fluid >
         <b-row>
           <b-col sm="7" align-v="stretch">
               <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
@@ -74,52 +73,74 @@
 				      <h5>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h5>
             </b-col>
           </b-row>
-             
+         
+          <b-row style=" margin: auto;"> 
+            <h5 >[[houseType]] for [[status]]</h5></br>
+          </b-row>
+          
           <b-row>
 		        <b-col cols="1">
               <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
 			      </b-col>
-			      <b-col style="padding-left: 0 !important;">
+			      <b-col >
               <h6>[[street]], [[city]], [[state]]</h6>
 			      </b-col>
-           </b-row>
-           
+          </b-row>
+          
+<!--            
           <div style="clear: both">
-		      <b-row class="mb-1">
-			      <b-col>
+		        <b-row class="mb-1">
+			        <b-col>
                 <h5 style="float: left;">[[houseType]] for [[status]]</h5>
-			      </b-col>
-		      </b-row>
-		      <b-row class="mb-3">
-			      <b-col cols="1">
-                        <p class="h5 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
-			      </b-col>
+			        </b-col>
+		        </b-row>
+		        <b-row class="mb-3">
+			        <b-col cols="1">
+                <p class="h5 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+			        </b-col>
 			      <b-col>
-		<h5 style="float: left;">[[distance]] miles from SFSU</h5>
+		          <h5 style="float: left;">[[distance]] miles from SFSU</h5>
 			      </b-col>
-		      </b-row>
-              </div>
+		        </b-row>
+          </div> -->
 	      
-		      <b-row class="mb-3">
+		      <b-row class="mb-3" style="margin-top: 10px">
 			      <b-col>
-              <b-button v-b-modal.contact block variant="primary">Contact Landlord
-                <b-icon icon="envelope"></b-icon>
+              <b-button v-b-modal.contact block variant="primary">
+                <b-icon icon="envelope"></b-icon> Contact the Landlord
               </b-button>
 			      <b-col>
-		      </b-row>
-              <b-embed type="iframe" class="map"
-                :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
-              </b-embed>
+          </b-row>
 
-              <hr>
+          <!-- seperation line -->
+          <p style="    display: block;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid #ccc;
+          margin-top: 2em 0;
+          padding: 0;"></p>
+
+          <h4>Location Informations</h4>
+          <b-row class="mb-3">
+            <b-col cols="1">
+              <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+            </b-col>
+          <b-col>
+            <h6 style="float: left;">[[distance]] miles from SFSU</h6>
+          </b-col>
+          </b-row>
+      
+          <b-embed type="iframe" class="map"
+                :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
+          </b-embed>
+          
+          <hr>
           <b-row>
             <b-col><h4>Property Description</h4></b-col>
 	  </b-row>
           <b-row>
 		  <b-col><p style="text-align: justify;">[[description]]</p></b-col>
           </b-row>
-    
-
             </b-card>
           </b-col>
 
