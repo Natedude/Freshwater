@@ -24,6 +24,7 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <script src="/static/js/navbar.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
   <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
 
@@ -74,8 +75,8 @@
 			      <!-- <b-col cols="1"> -->
 		          <!-- <p class="h5 mb-0"><b-icon icon="house-door-fill" variant="dark"></b-icon></p> -->
 			      <!-- </b-col> -->
-			      <b-col style="margin-top: 5px">
-				      <h5>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h5>
+			      <b-col style="margin-top: 10px">
+				      <h6>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h6>
             </b-col>
           </b-row>
          
@@ -128,11 +129,12 @@
           <h4>Location Information</h4>
           <b-row class="mb-3">
             <b-col cols="1">
-              <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+              <p class="h6 mb-1" style='font-size:18px'><i class='fas fa-walking'></i></p>
+              <!-- <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p> -->
             </b-col>
-          <b-col>
-            <h6 style="float: left;">[[distance]] miles from SFSU</h6>
-          </b-col>
+            <b-col>
+              <h6 style="margin-top:3px; margin-bottom: 0;">[[distance]] miles from SFSU</h6>
+            </b-col>
           </b-row>
       
           <b-embed type="iframe" class="map"
@@ -141,11 +143,13 @@
           
           <hr>
           <b-row>
-            <b-col><h4>Property Description</h4></b-col>
-	  </b-row>
-          <b-row>
-		  <b-col><p style="text-align: justify;">[[description]]</p></b-col>
-          </b-row>
+            <b-col>
+              <h4>Property Description</h4>
+            </b-col>
+	          </b-row>
+            <b-row>
+		        <b-col><p style="text-align: justify;">[[description]]</p></b-col>
+            </b-row>
             </b-card>
             
           </div>
