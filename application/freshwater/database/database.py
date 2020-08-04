@@ -1,5 +1,5 @@
 from pprint import pprint
-from ..models import Images
+from ..models import Images, Listings
 from freshwater import db, db_engine
 from sqlalchemy.sql import select
 import sys
@@ -23,6 +23,25 @@ def select_where_value(table, column_name_str, expression):
     # print(value)
     result.close()
     return value
+
+# get a listing by an id
+# access variables with:
+# row['description']
+
+def get_listing_by_id(wanted_id):
+    table = Listings
+    expression = (Listings.id == wanted_id)
+    conn = db_engine.connect()
+    s = select([table]).where(expression)
+    result = conn.execute(s)
+    row = result.fetchone()
+    # print("select_where_value: Row:")
+    # pprint(row)
+    # print(str(type(row)))
+    # value = row[column_name_str]
+    # print(value)
+    result.close()
+    return row
 
 #pass in row as a sqlalchemy object returned from model constructor
 #returns id sqlalchemy created for it

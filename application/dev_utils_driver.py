@@ -2,7 +2,8 @@
 from freshwater import db, models, app
 import os
 from freshwater.dev_utils.DevUtils import DevUtils
-from freshwater.database.database import test_insert, insert_row, select_where_value
+from freshwater.database.database import test_insert, insert_row, select_where_value, get_listing_by_id
+from pprint import pprint
 #from freshwater.dev_utils import listing_generator.DevUtils
 
 # class Driver(object):
@@ -10,10 +11,14 @@ from freshwater.database.database import test_insert, insert_row, select_where_v
         
 
 if __name__ == "__main__":
-    d = DevUtils(app, db, models, insert_row, select_where_value)
+    #d = DevUtils(app, db, models, insert_row, select_where_value)
     # test_insert()
-    # value = select_where_value(models.Images, "path", models.Images.path == "test/path")
-    # print("select_where_value returns: " + str(value)) #TODO error!
+    wanted_id = 1
+    row = get_listing_by_id(wanted_id)
+    # value = select_where_value(models.Listings, "id", models.Listings.id == wanted_id)
+    print("get_by_id returns: ") 
+    pprint(row)
+    
     # img_list = d.random_image_paths()
     # source = img_list[0]
     # dest = d.get_dest_path(source)
