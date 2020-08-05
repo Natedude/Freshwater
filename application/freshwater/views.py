@@ -14,7 +14,9 @@ def home():
     saved_options['HousingType'] = []
     saved_options['sellOrRent'] = []
     saved_options['petsAllowed'] = []
-    return render_template("home.html", saved_options=saved_options)
+    results_list_of_dicts, saved_options = search.query()
+
+    return render_template("home.html", saved_options=saved_options, results_list_of_dicts=results_list_of_dicts)
 
 
 
