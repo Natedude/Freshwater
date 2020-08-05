@@ -177,6 +177,10 @@
 			to {%if sellOrRentType == "sell" %} Buy {% else %} {{sellOrRentType}} {% endif %} {% if (saved_options.sellOrRent|length ) != loop.index  %} OR {% endif %} {% endfor %} {% endif %}
 			: {{count}}
 			</div>
+		{% else %}
+		<div class="m-2">
+			No Results found!
+		</div>
 		{% endif %}
 		</b-col>
    <b-col cols="3" class="py-2">
