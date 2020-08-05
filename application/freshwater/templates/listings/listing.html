@@ -115,7 +115,7 @@
 		      <b-row class="mb-3" style="margin-top: 10px">
 			      <b-col>
               <b-button v-b-modal.contact block variant="primary">
-                <b-icon icon="envelope"></b-icon> Contact the Landlord
+                <b-icon icon="envelope"></b-icon> Contact Landlord
               </b-button>
 			      <b-col>
           </b-row>
@@ -164,28 +164,28 @@
       </b-container>
     </div>
 
-	<b-modal id="contact" hide-footer >
+	<b-modal id="contact" modal-header-close hide-footer>
 		<template v-slot:modal-title>
 			<h2>Contact Landlord</h2>
 		</template>
 
-		<h6>Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
-		<h5><b>[[street]], <br> [[city]], [[state]]</b> </h5>
+		<h6 style="text-align: center;">Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
+		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
 		<form action="#" method="GET">
-			<input type="text" id="name" name="name" placeholder="Your name" required>
-			<br><br>
-
-			<input type="email" id="email" name="email" placeholder="Email" required>
-			<br><br>
-
-			<input type="tel" id="phone" name="phone" placeholder="Phone" required>
-			<br><br>
-
-			<textarea id="message" name="message" rows="4" cols="30" placeholder="Your message here" required></textarea>
+			<input type="text" id="name" name="name" placeholder="Your name" required class="form-control form-control-lg" />
 			<br>
 
-			<b-button type="submit" variant="secondary" size="lg">Submit</b-button>
+			<input type="email" id="email" name="email" placeholder="Your Email" required class="form-control form-control-lg" />
+			<br>
+
+			<input type="tel" id="phone" name="phone" placeholder="Your Phone" required class="form-control form-control-lg" />
+			<br>
+
+			<textarea id="message" name="message" class="form-control form-control-lg" rows="4" cols="30" placeholder="Your message here" required></textarea>
+			<br>
+
+			<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button> 
 		</form>
 
 		<template v-slot:modal-footer>
@@ -230,7 +230,7 @@
           baths: "{{data['bathroomNum']}}",
           beds: "{{data['bedroomNum']}}",
           area_size: "{{data['sqft']}}",
-          price: "{{data['price']}}",
+          price: "{{data['price'] | numberFormat}}",
           distance: "{{data['distance_from_SFSU']}}",
           description: "{{data['description']}}"
 
