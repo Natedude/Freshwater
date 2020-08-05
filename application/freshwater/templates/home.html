@@ -20,6 +20,7 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <script src="https://unpkg.com/vue-router"></script>
   <script src="/static/js/navbar.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <style>
     .col-md {
       padding-left: 0px !important;
@@ -47,7 +48,7 @@
 
   <div id="app">
     <div>
-      <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demostration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
+      <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
     </div>
 	    <navbar-component-home></navbar-component-home>
 
@@ -66,12 +67,13 @@
           </b-col>
         </b-row>
 
-	<b-container fluid class="bg-white" style="width: 50%; opacity: 87%; border-radius: 25px;">
+	<b-container fluid class="bg-white" style="margin-bottom: 3rem; width: 50%; opacity: 87%; border-radius: 25px;">
           <b-row class="mb-1 justify-content-md-center">
             <!-- Search Text Field -->
             <b-col md="6" align-self="center" style=" padding-left: 15px !important; padding-right: 5px !important;">
-              <b-form-input class="text-center" name="search_string" list="input-list" id="input-with-list" placeholder="What are you looking for?"
+              <b-form-input class="text-center" name="search_string"  maxlength="40" list="input-list" id="input-with-list" placeholder="What are you looking for?"
               v-model="search_string"></b-form-input>
+	      <b-tooltip target="input-with-list" placement="left" triggers="hover" variant="primary"> Max. 40 Characters allowed! </b-tooltip>
             </b-col>
             <!-- Search Button -->
             <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
@@ -229,7 +231,8 @@
                     </b-row>
                     <b-row>
                       <b-col sm=1>
-                        <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+                        <!-- <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p> -->
+                        <p class="h6 mb-1" style='font-size:18px'><i class='fas fa-walking'></i></p>
                       </b-col>
                       <b-col sm=7>
                         <h6>{{listing.distance_from_SFSU}} miles from SFSU</h6>

@@ -15,6 +15,7 @@
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
   <link type="text/css" rel="stylesheet" href="../../static/css/post.css" />
 
+
   <!-- Load polyfills to support older browsers -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
 
@@ -23,6 +24,7 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <script src="/static/js/navbar.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
   <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
 
@@ -51,85 +53,145 @@
   <div id="app">
 
     <!-- Navbar -->
-    <navbar-component> </navbar-component>
-    <div style="width: 80%; margin: auto;">
+    <navbar-component></navbar-component>
+
+    <div style="width: 90%; margin: auto; margin-top: 40px">
       <!-- Jumbotron Container -->
-      <b-container fluid class="container1">
-        <br>
+      <b-container fluid>
         <b-row>
           <b-col sm="7" align-v="stretch">
               <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
-          </b-col>
+        </b-col>
 
-          <b-col sm="5">
-            <b-card border-variant="light" bg-variant="light">
-              <h2>[[street]], [[city]], [[state]]</h2>
-              <hr>
-              <div style="clear: both">
-                <h3 style="float: left;">[[houseType]] for [[status]]</h3>
-                <h2 style="float: right;">$[[price]]<span v-if="!(houseType === 'House')">/month </span></h2>
-              </div>
-              <br><br>
-              <hr>
-              <hr>
-              <h4>[[subtype]] | [[baths]] Baths | [[area_size]] sq. ft.</h4>
-              <hr>
-              <b-button v-b-modal.contact block variant="primary">Contact Landlord
-                <b-icon icon="envelope"></b-icon>
+        <b-col sm="5">
+          <!-- scroll bar -->
+        <div id="overflowScroll">
+          <b-card border-variant="light" bg-variant="light">
+          <!-- <h4 >Property Details</h4> -->
+          <b-row>
+			      <b-col cols="6">
+			        <h3>$[[price]]<span style="font-size: 20px"  v-if="!(houseType === 'House')">/mo</span></h3>
+			      </b-col>
+			      <!-- <b-col cols="1"> -->
+		          <!-- <p class="h5 mb-0"><b-icon icon="house-door-fill" variant="dark"></b-icon></p> -->
+			      <!-- </b-col> -->
+			      <b-col style="margin-top: 10px">
+				      <h6>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h6>
+            </b-col>
+          </b-row>
+         
+          <b-row style=" margin: auto;"> 
+            <h5 >[[houseType]] for [[status]]</h5></br>
+          </b-row>
+          
+          <b-row>
+		        <b-col cols="1">
+              <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
+			      </b-col>
+			      <b-col >
+              <h6>[[street]], [[city]], [[state]]</h6>
+			      </b-col>
+          </b-row>
+          
+<!--            
+          <div style="clear: both">
+		        <b-row class="mb-1">
+			        <b-col>
+                <h5 style="float: left;">[[houseType]] for [[status]]</h5>
+			        </b-col>
+		        </b-row>
+		        <b-row class="mb-3">
+			        <b-col cols="1">
+                <p class="h5 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+			        </b-col>
+			      <b-col>
+		          <h5 style="float: left;">[[distance]] miles from SFSU</h5>
+			      </b-col>
+		        </b-row>
+          </div> -->
+	      
+		      <b-row class="mb-3" style="margin-top: 10px">
+			      <b-col>
+              <b-button v-b-modal.contact block variant="primary">
+                <b-icon icon="envelope"></b-icon> Contact the Landlord
               </b-button>
-              <hr>
-              <b-embed type="iframe" class="map"
+			      <b-col>
+          </b-row>
+
+          <!-- seperation line -->
+          <p style="    display: block;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid #ccc;
+          margin-top: 2em 0;
+          padding: 0;"></p>
+
+          <h4>Location Information</h4>
+          <b-row class="mb-3">
+            <b-col cols="1">
+              <p class="h6 mb-1" style='font-size:18px'><i class='fas fa-walking'></i></p>
+              <!-- <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p> -->
+            </b-col>
+            <b-col>
+              <h6 style="margin-top:3px; margin-bottom: 0;">[[distance]] miles from SFSU</h6>
+            </b-col>
+          </b-row>
+      
+          <b-embed type="iframe" class="map"
                 :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
-              </b-embed>
+          </b-embed>
+          
+          <hr>
+          <b-row>
+            <b-col>
+              <h4>Property Description</h4>
+            </b-col>
+	          </b-row>
+            <b-row>
+		        <b-col><p style="text-align: justify;">[[description]]</p></b-col>
+            </b-row>
             </b-card>
-          </b-col>
+            
+          </div>
+          <!-- End of scroll bar -->
+          
+        </b-col>
 
         </b-row>
         <br>
       </b-container>
     </div>
 
-    <b-modal id="contact" ok-only ok-title="Cancel" button-size="sm" ok-variant="secondary" centered>
-      <template v-slot:modal-header>
-        <!-- probably there is better solutions? -->
-        <h2></h2>
-        <h2>Contact Landlord</h2>
-        <h2></h2>
-      </template>
+	<b-modal id="contact" hide-footer >
+		<template v-slot:modal-title>
+			<h2>Contact Landlord</h2>
+		</template>
 
-      <h6>Thank you for your interest in
-        <br>
-        [[houseType]] for [[status]] at
-        <br></h6>
-      <h5><b>[[street]],
-          <br>
-          [[city]], [[state]]</b>
-      </h5>
+		<h6>Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
+		<h5><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
-      <form action="#" method="GET">
-        <!-- <label for="user">Username</label> -->
+		<form action="#" method="GET">
+			<input type="text" id="name" name="name" placeholder="Your name" required>
+			<br><br>
 
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-        <br><br>
-        <!-- <label for="email">Email</label> -->
-        <input type="email" id="email" name="email" placeholder="Email" required>
-        <br><br>
+			<input type="email" id="email" name="email" placeholder="Email" required>
+			<br><br>
 
-        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
-        <br><br>
+			<input type="tel" id="phone" name="phone" placeholder="Phone" required>
+			<br><br>
 
-        <textarea id="message" name="message" rows="4" cols="30" placeholder="Your message here" required></textarea>
-        <br>
+			<textarea id="message" name="message" rows="4" cols="30" placeholder="Your message here" required></textarea>
+			<br>
 
-        <b-button type="submit" variant="secondary" size="lg">Submit</b-button>
-      </form>
+			<b-button type="submit" variant="secondary" size="lg">Submit</b-button>
+		</form>
 
-      <template v-slot:modal-footer>
-        <div class="w-100">
-        </div>
-      </template>
-    </b-modal>
-  </div>
+		<template v-slot:modal-footer>
+			<div class="w-100">
+			</div>
+		</template>
+	</b-modal>
+</div>
 
 
     <!-- Start running your app -->
@@ -163,10 +225,12 @@
           postalCode: "{{data['postalCode']}}",
           houseType: "{{ data['houseType'][0]|upper }}{{ data['houseType'][1:]}}",
           status: "{{data['sellOrRent']}}",
-          subtype: "Studio",
           baths: "{{data['bathroomNum']}}",
+          beds: "{{data['bedroomNum']}}",
           area_size: "{{data['sqft']}}",
-          price: "{{data['price']}}"
+          price: "{{data['price']}}",
+          distance: "{{data['distance_from_SFSU']}}",
+          description: "{{data['description']}}"
 
 
         }
