@@ -61,6 +61,10 @@ def insert_row(row):
         print("**********ERROR**********")
         return (-1) #failed
 
+# TODO Add Listing
+
+# TODO Add Message
+
 # def get_id_by_row(row):
 #     s = select([Images]).where(row.c.id ==
 #     result = db.engine(s)
@@ -70,11 +74,11 @@ def insert_row(row):
 #     img = Images(path=path, fk_listing_id=fk_listing_id, fk_user_id=fk_user_id)
 #     # img = None
 #     # if not fk_user_id and fk_listing_id:
-#     #     img = Images(path=path, fk_listing_id=fk_listing_id)  
+#     #     img = Images(path=path, fk_listing_id=fk_listing_id)
 #     # if fk_user_id and not fk_listing_id:
-#     #     img = Images(path=path, fk_user_id=fk_user_id)  
+#     #     img = Images(path=path, fk_user_id=fk_user_id)
 #     # if not fk_user_id and not fk_listing_id:
-#     #     img = Images(path=path)  
+#     #     img = Images(path=path)
 #     if img:
 #         print("Img inserted")
 #         pprint(img)
@@ -83,13 +87,13 @@ def insert_row(row):
 #         #return img.c.id
 #     else:
 #         return -1
-    
+
 # def add_listing_record(title, houseType, sellOrRent, petsAllowed, city, postalCode, street_address, distance_from_SFSU, description):
-    
-    
-    
-    
-    
+
+
+
+
+
 #     title = db.Column(db.String(255))
 #     houseType = db.Column(db.String(255))
 #     sellOrRent = db.Column(db.String(255))
