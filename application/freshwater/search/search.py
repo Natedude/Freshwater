@@ -1,5 +1,5 @@
 from flask import render_template, request
-from ..models import Listings, Images, to_dict
+from ..models import Listings, Images
 import pprint
 from sqlalchemy import or_, and_
 from freshwater import db#, meta
@@ -26,6 +26,7 @@ def query():
         sellOrRent = query_helper(args, saved_options, 'sellOrRent', [])
         petsAllowed = query_helper(args, saved_options, 'petsAllowed', [])
 
+        #if they type nothing and choose no filters, show all listings
         if not (search or housingType or sellOrRent or petsAllowed):
             all_listings = db.session.query(Listings)
             results_list_of_dicts = postMaker(all_listings)
@@ -55,7 +56,7 @@ def query_helper(args, saved_options, str_key, if_not_present, take_first_elemen
 def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
     results = search_title_and_desc(search_string)
     results = filter_in_list(
-        results,Listings.houseType, housingType)
+        results, Listings.houseType, housingType)
     results = filter_in_list(
         results, Listings.sellOrRent, sellOrRent)
     results = filter_in_list(
@@ -97,7 +98,7 @@ def postMaker(results):  # Takes in Alchemy objects and returns python list of d
     for postResult in results:  # Loops through all posts
         for dictionImage in Images.list_of_dicts():
             # Note that postResult is not a dictionary, Its an alchemey object
-            if dictionImage['fkIdPost'] == postResult.id:
+            if dictionImage['fk_listing_id'] == postResult.id:
                 # print("******** postMaker: before")
                 frontend_ready_list_of_dicts.append(
                     {
