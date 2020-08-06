@@ -67,7 +67,7 @@
 												class="form-control form-control-lg" />
 										</div>
 										<!-- <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button> -->
-										<input id="submit_button" name="submit_button" type="submit" value="Login" class="btn btn-dark btn-lg">
+										<input id="submit_button" name="submit_button" type="submit" value="Login" class="btn btn-dark btn-lg btn-block">
 										{{ form.csrf_token }}
 									</form>
 								</div>
@@ -78,29 +78,30 @@
 						<div class="d-block">
 							<template>
 								<div class="vue-template">
-									<form>
-										<b-row>
-											<b-col cols="12">
-												<div>
-													<b-form-group>
-													</b-form-group>
-												</div>
-											</b-col>
-										</b-row>
+									<form action="{{ url_for_security('register') }}" method="POST">
 										<div class="form-group">
 											<label>Email address</label>
-											<input type="email" class="form-control form-control-lg" />
+											<input id="email" name="email" type="email" required
+												class="form-control form-control-lg" />
 										</div>
 										<div class="form-group">
 											<label>Password</label>
-											<input type="password" class="form-control form-control-lg" />
+											<input id="password" name="password" type="password" required
+												class="form-control form-control-lg" />
+										</div>
+										<div class="form-group">
+											<label>Repeat Password</label>
+											<input id="password_confirm" name="password_confirm" type="password" required
+												class="form-control form-control-lg" />
 										</div>
 										<div class="form-group pb-2">
-											<b-form-checkbox id="checkbox-1" name="checkbox-1" value="accepted"
+											<b-form-checkbox id="accept_tos" name="accept_tos" value="accepted" required
 												unchecked-value="not_accepted"> I accept the terms and use
 											</b-form-checkbox>
 										</div>
-										<button type="submit" class="btn btn-dark btn-lg btn-block">Submit </button>
+										<!--<button type="submit" class="btn btn-dark btn-lg btn-block">Submit </button>-->
+										<input id="submit" name="submit" type="submit" value="Register" class="btn btn-dark btn-lg btn-block"> 
+										{{ form.csrf_token }}
 									</form>
 								</div>
 							</template>
