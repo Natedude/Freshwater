@@ -80,17 +80,16 @@ def dashboard():
 def register():
     newform = client.RegisterForm()
     if newform.validate_on_submit():
-        username = newform.username.data
         password = newform.password.data
         email = newform.email.data
 
-        #username exits check
-        user_object = User.query.filter_by(username=username).first()
+        #emailexits check
+        user_object = User.query.filter_by(email=email).first()
         if user_object:
-            return "Username already taken"
+            return "email already taken"
 
         #add user to DB
-        user = User(username = username, password = password, email = email)
+        user = User( password = password, email = email)
         db.session.add(user)
         db.session.commit()
 
@@ -168,7 +167,7 @@ def login():
     if request.method == 'POST':
         login_form = client.LoginForm()
         if login_form.validate_on_submit():
-            user = login_form.username.data
+            email = login_form.email.data
             print(type(user))
             print('user is : ', user)
             password = login_form.password.data

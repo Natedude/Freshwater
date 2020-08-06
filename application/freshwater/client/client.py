@@ -107,7 +107,6 @@ def logout():
 
 class RegisterForm(FlaskForm):
     """ Register """
-    usernameR = StringField('username',[validators.Length(min=1,max=25)])
     passwordR = PasswordField('email',[validators.Length(min=1,max=25)])
     email = StringField('password', [validators.Length(min=1,max=25)])
     accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])
