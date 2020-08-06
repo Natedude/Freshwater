@@ -41,9 +41,9 @@
 
 {% extends 'navbar.html' %}
 
-{% block content %}
 
 <body>
+{% block content %}
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
     {{ text[0]|upper}}{{text[1:] }}
@@ -283,10 +283,13 @@
   <!-- </b-card-group> -->
 
 
-</div> <!-- end app div -->
+</div>
 </b-container>
+</div> <!-- end app div -->
 
-    <script type="text/javascript">
+{% endblock %}
+{% block script %}
+    <script type="application/javascript">
       //var router = new VueRouter({
       //  mode: 'history',
       //  routes: []
@@ -347,7 +350,7 @@
         */
       });
     </script>
+{% endblock %}
 </body>
 
-{% endblock %} 
 </html>
