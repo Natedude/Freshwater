@@ -8,9 +8,11 @@ from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMix
 
 # This Function takes in a table from db and returns a list of dictionaries for each existing record in that table (each row is a dictionary, columns titles are keys ) ordered by primary id in table
 def model_to_list_of_dicts(model):
-    print("**** dbTolst: before query")
+    # print("**** dbTolst: before query")
+    print(".",end='')
+    print()
     records_in_model = model.query.all()
-    print("**** dbTolst: after query")
+    # print("**** dbTolst: after query")
     # make sure db in use has working dict function within its class
     lst = [x.dict() for x in records_in_model]
     # Orders our list of dictionaries with id from smallest to largest
@@ -32,7 +34,7 @@ class Messages(db.Model):
                 "fkReciever": self.fkReciever,
                 "message": self.message,
                 "timeCreated": self.timeCreated}
-    
+
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Messages)
@@ -42,9 +44,9 @@ class Images(db.Model):  # Db where all Image paths are stored
     __tablename__ = "Images"  # Name of table
     id = db.Column(db.Integer, primary_key=True)
     # All images must be associted with the Onwer(/User)'s ID & Listing ID
-    fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for 
+    fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for
     user = relationship("User")
-    fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for 
+    fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for
     listing = relationship("Listings")
     # Informs us if a sell or Someone looking to rent our a unit
     # sellOrRent = db.Column(db.String)
@@ -57,7 +59,7 @@ class Images(db.Model):  # Db where all Image paths are stored
                 "fk_listing_id": self.fk_listing_id,
                 # "sellOrRent": self.sellOrRent,
                 "path": self.path}
-        
+
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Images)
@@ -86,7 +88,7 @@ class Listings(db.Model):
     bedroomNum = db.Column(db.Integer)
     bathroomNum = db.Column(db.Integer)
     adminAppr = db.Column(db.Integer)
-    
+
     def dict(self):
         return {
                 "id": self.id,
@@ -110,7 +112,7 @@ class Listings(db.Model):
                 "bathroomNum": self.bathroomNum,
                 "adminAppr": self.adminAppr,
                 }
-        
+
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(Listings)
@@ -143,7 +145,7 @@ class User(db.Model, UserMixin):
     active = db.Column(db.Boolean())
     sfsu_confirmed = db.Column(db.Integer()) # 0 no, 1 yes
     date_registered = db.Column(db.DateTime(), default=datetime.utcnow)
-    roles = db.relationship('Role', 
+    roles = db.relationship('Role',
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
     def dict(self):
@@ -158,7 +160,7 @@ class User(db.Model, UserMixin):
             'date_registered': self.date_registered,
             'roles': self.roles
         }
-    
+
     @staticmethod
     def list_of_dicts():
         return model_to_list_of_dicts(User)

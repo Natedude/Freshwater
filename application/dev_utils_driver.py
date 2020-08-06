@@ -8,31 +8,30 @@ from pprint import pprint
 
 # class Driver(object):
 #     def __init__(self) -> None:
-        
+
 
 if __name__ == "__main__":
-    #d = DevUtils(app, db, models, insert_row, select_where_value)
-    # test_insert()
-    wanted_id = 1
-    row = get_listing_by_id(wanted_id)
-    # value = select_where_value(models.Listings, "id", models.Listings.id == wanted_id)
-    print("get_by_id returns: ") 
-    pprint(row)
-    
+    d = DevUtils(app, db, models, insert_row, select_where_value)
+
+    #get_listing_by_id usage example
+    # wanted_id = 1
+    # row = get_listing_by_id(wanted_id)
+    # print("get_by_id returns: ")
+    # pprint(row)
+    # print("\nTitle ONLY: "+row['title'])
+
+    #Image mover testing
     # img_list = d.random_image_paths()
     # source = img_list[0]
     # dest = d.get_dest_path(source)
-    
     # #print before move
     # listings_path = 'freshwater/static/images/listings/'
     # print(os.listdir(listings_path))
-    
     # d.image_mover(source, dest)
-
     # #print after move
     # print(os.listdir(listings_path))
-    
+
     #generate users
-    #d.generate_users_multi(db, models, 50)
+    d.generate_users_multi(db, models, 50)
     # generate listings
-    #d.generate_listings_multi(120)
+    d.generate_listings_multi(50)
