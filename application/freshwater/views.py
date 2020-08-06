@@ -1,3 +1,4 @@
+from pprint import pprint
 from flask import render_template, url_for, request, session, redirect, url_for
 from freshwater import app, db
 from .search import search
@@ -17,6 +18,7 @@ def numberFormat(value):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    print("views: home():")
     #workaround, pass in saved_options with nothing selected
     saved_options = {}
     saved_options['search_string'] = ''
@@ -24,7 +26,27 @@ def home():
     saved_options['sellOrRent'] = []
     saved_options['petsAllowed'] = []
     results_list_of_dicts, saved_options_2 = search.query()
-    return render_template("home.html", results_list_of_dicts=results_list_of_dicts,saved_options=saved_options)
+
+    # if request.method == 'POST':
+    #     form = client.LoginForm()
+    #     if form.validate_on_submit():
+    #         email = form.email.data
+    #         print("views.py: home():\nuser type is: " + str(type(user)))
+    #         print('user is:')
+    #         pprint(user)
+    #         password = form.password.data
+    #         #goes to client.login()
+    #         return client.login(user, password)
+
+        #login stuff (copied from /loginn route)
+    # if request.method == 'GET':
+    form = client.LoginForm()
+    print("login form:")
+    pprint(form)
+    regForm = client.RegisterForm()
+    #return render_template("client/login.html", form = login_form, regForm = reg_form)
+
+    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options, form=form, regForm=regForm)
 
 @app.route('/query/<sorting>', methods=['GET', 'POST'])
 def query(sorting):

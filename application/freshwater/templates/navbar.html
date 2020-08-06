@@ -66,7 +66,9 @@
 											<input id="password" name="password" required type="password"
 												class="form-control form-control-lg" />
 										</div>
-										<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
+										<!-- <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button> -->
+										<input id="submit_button" name="submit_button" type="submit" value="Login" class="btn btn-dark btn-lg">
+										{{ form.csrf_token }}
 									</form>
 								</div>
 							</template>

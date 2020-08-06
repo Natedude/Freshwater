@@ -1,4 +1,5 @@
 from flask import render_template, request, session, redirect, url_for
+from wtforms.validators import ValidationError
 from ..models import Listings, Images, User
 from ..models import db
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
@@ -15,7 +16,7 @@ def invalid_cred(form, field):
     #check username valid
     user_object = User.query.filter_by(username=username_enter).first()
     if user_object is None:
-        raise ValidationErro("Incorrect username/password")
+        raise ValidationError("Incorrect username/password")
     elif password_enter != user_object.password:
         raise ValidationError("Incorrect username/password")
 
@@ -26,10 +27,17 @@ def login(user, passwrd):
     user = request.form['username']
     result= User.query.filter(User.email==user)#result is a Basequery object
     result = result.first()
-    if result==None: #If username given by client matches db User
+
+    #If username given by client does NOT match db User
+    if result==None:
         login_form = LoginForm()
         reg_form = RegisterForm()
+
+        # redirect if user not found
         return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
+
+    #if user found in db &
+    # passed in pass hash matches db record pass hash
     elif passwrd == str(result.password):
         session['user'] = user# Not using Session yet
         return "Password and Name Match"
@@ -85,7 +93,7 @@ def registration():
             try:
                 db.session.commit()
             except:
-                return "<html><body><H1>Something went wrong in commit, try again</h1><body><html>"    
+                return "<html><body><H1>Something went wrong in commit, try again</h1><body><html>"
         except:
             return "<html><body><H1>Something went wrong, try again</h1><body><html>"
         return "<html><body><H1>Successful Registratioin</h1><body><html>"
