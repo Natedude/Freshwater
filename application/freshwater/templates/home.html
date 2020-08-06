@@ -19,7 +19,6 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <script src="https://unpkg.com/vue-router"></script>
-  <script src="/static/js/navbar.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <style>
     .col-md {
@@ -40,6 +39,10 @@
   </style>
 </head>
 
+{% extends 'navbar.html' %}
+
+{% block content %}
+
 <body>
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
@@ -50,8 +53,9 @@
     <div>
       <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
     </div>
+    <!--
 	    <navbar-component-home></navbar-component-home>
-
+    -->
     <!-- Jumbotron Container -->
     <b-container fluid class="container1">
       <b-form>
@@ -345,4 +349,5 @@
     </script>
 </body>
 
+{% endblock %} 
 </html>
