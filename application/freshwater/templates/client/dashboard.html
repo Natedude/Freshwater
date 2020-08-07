@@ -42,7 +42,7 @@
     <navbar-component></navbar-component>
     <!-- Message Container -->
     <b-container>
-      <h1 style="margin-top: 30px;">Peter's Dashboard</h1>
+      <h1 style="margin-top: 30px;">{{reciever}}'s Dashboard</h1>
       <h2 style="margin-top: 20px;">My Properties</h2>
 
       <div class="m-4">
@@ -87,8 +87,8 @@
     <hr/>
     <b-row >
       <b-col>
-      <h2 >My Messages</h2>
-      <h6 style="margin-left: 35px; margin-top: 20px; color:grey">Total messages: 2</h6>
+      <h2 >My Messages{{messages}}</h2>
+      <h6 style="margin-left: 35px; margin-top: 20px; color:grey">Total messages: {{numMessages}}</h6>
       </b-col>
       <!-- sort button -->
       <b-col style="margin-top: 15px;" cols="4" md="2">
@@ -98,10 +98,11 @@
         </b-dropdown>
         </b-col>
       </b-row>
-
       <!-- scroll bar -->
       <div id="overflowScroll">
-
+        {% for mess in messages %}
+    
+      
       <!-- message section start -->
       <b-row>
         <!-- style="border: 1px solid; border-color:grey; -->
@@ -117,7 +118,7 @@
           <!-- house info(one line) end from here  -->
           <b-row>
             <b-col sm="1"><p class="h6 mb-1"><b-icon icon="envelope-fill" variant="dark"></b-icon></p></b-col>
-            <b-col><p class="h6 mb-3">ABC@mail.sfsu.edu</p></b-col>
+            <b-col><p class="h6 mb-3">{{mess['email']}}</p></b-col>
           </b-row>
           <b-row>
             <b-col sm="1"><p class="h6 mb-1"><b-icon icon="telephone-fill" variant="success"></b-icon></p></b-col>
@@ -128,17 +129,18 @@
         <!-- message box start from here -->
         <b-col class="p-3" sm=6>
           <b-row>
-            <b-col><h5>Ivy</h5></b-col>
-            <b-col cols="auto">17: 30 Jul 31, 2020</b-col>
+            <b-col><h5>{{mess['fkSender']}}</h5></b-col>
+            <b-col cols="auto">17: 30 Jul 31, 2020mess['timeCreated']</b-col>
           </b-row>
            
           <b-row class="p-3 pill bg-light" sm=8>
-            Hi, My name is Ivy, I am a student of SFSU. I am interested in your home at 2222 Fruitdale Ave, South San Francisco. You can conntact me by phone and email.
+            {{mess['message']}}
           </b-row>
         </b-col>
         <!-- message box end from here -->
       </b-row>
-      <!-- messeage section end -->
+      <!-- messeage section end --><!--Thank you for your commenting, this savved me soo much time-->
+      {% endfor %}
 
       <!-- message section start -->
       <b-row>

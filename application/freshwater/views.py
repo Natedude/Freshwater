@@ -94,9 +94,23 @@ def listing():
         # print(data, type(data))
         return render_template("listings/listing.html", data=data)
 
+
+
+
+
 @app.route('/dashboard')
-def dashboard():
-    return render_template("/client/dashboard.html")
+@login_required
+def getDashboard():
+    #Get all messages from messsage db with fk from user
+    if request.method == 'GET':
+        email = current_user.email
+        print(email)#Test print can/should be deleted for more final version
+        print(type(email))
+        return messaging.getAll(email) #return JSON
+        #    return render_template("/client/dashboard.html")\
+
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():

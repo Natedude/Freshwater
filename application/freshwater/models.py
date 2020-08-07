@@ -44,7 +44,7 @@ class Images(db.Model):  # Db where all Image paths are stored
     __tablename__ = "Images"  # Name of table
     id = db.Column(db.Integer, primary_key=True)
     # All images must be associted with the Onwer(/User)'s ID & Listing ID
-    #fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for
+    fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for
     #user = relationship("User")
     fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for
     #listing = relationship("Listings")
