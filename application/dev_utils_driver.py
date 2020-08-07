@@ -32,6 +32,6 @@ if __name__ == "__main__":
     # print(os.listdir(listings_path))
 
     #generate users
-    d.generate_users_multi(db, models, 20)
+    d.generate_users_multi(db, models, 10)
     # generate listings
     d.generate_listings_multi(20)
