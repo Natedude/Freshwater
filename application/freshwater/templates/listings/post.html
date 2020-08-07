@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +59,7 @@
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
-        <b-form ref="form" enctype="multipart/form-data" action="/form_data" method="POST">
+        <b-form ref="form" @submit.stop.prevent="onSubmit" enctype="multipart/form-data" action="/form_data" method="POST">
           <h1 style="margin-top: 30px;"><b>Create Listing</b></h1>
 
           <hr style="border: 0.5px solid #e7e7e7">
@@ -76,7 +78,7 @@
                   </h5>
 
                   </p>
-                  <b-form-radio-group style="margin-right: 0px;" id="btn-radios-1" v-model="selected"
+                  <b-form-radio-group name="sellOrRent" style="margin-right: 0px;" id="btn-radios-1" v-model="selected"
                     :options="listingOptions" buttons button-variant="outline-primary" name="rentOrSell"
                     required>
                   </b-form-radio-group>
@@ -103,7 +105,7 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-input id="street-input" placeholder="1600 Holloway Ave" required v-validate="'max:40'"
+                    <b-form-input name="street_address" id="street-input" placeholder="1600 Holloway Ave" required v-validate="'max:40'"
                       :state="validateState('street')"></b-form-input>
                   </b-form-group>
 
@@ -116,7 +118,7 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-input id="city-input" name="city" placeholder="San Francisco" required></b-form-input>
+                    <b-form-input name="city" id="city-input" name="city" placeholder="San Francisco" required></b-form-input>
                   </b-form-group>
 
                   <b-form-group id="state">
@@ -152,7 +154,7 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-input id="zip-code-input" placeholder="94132" type="number" required></b-form-input>
+                    <b-form-input name="postalCode" id="zip-code-input" placeholder="94132" type="number" required></b-form-input>
                   </b-form-group>
 
                 </b-form-group>
@@ -177,27 +179,24 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-input id="title-input" required></b-form-input>
+                    <b-form-input name="title" id="title-input" required></b-form-input>
                   </b-form-group>
-<b-col sm="4">
-  <b-form-select name="typeHome" v-model="selected_home">
-    <b-form-select-option :value="null">Home Type: </b-form-select-option>
-    <b-form-select-option value="Home">Home</b-form-select-option>
-    <b-form-select-option value="Apartment">Apartment</b-form-select-option>
-    <b-form-select-option value="Other">Other: (specified in description)</b-form-select-option>
-  </b-form-select>
-</b-col>
-<b-col sm="4">
-  <b-form-select  name="numBeds" v-model="selected_beds">
-    <b-form-select-option :value="null"># of Beds: </b-form-select-option>
-    <b-form-select-option value="1">1 Beds</b-form-select-option>
-    <b-form-select-option value="2">2 Beds</b-form-select-option>
-    <b-form-select-option value="3">3 Beds</b-form-select-option>
-    <b-form-select-option value="4">4 Beds</b-form-select-option>
-    <b-form-select-option value="5">5 Beds</b-form-select-option>
-    <b-form-select-option value="6">Other: (specified in description)</b-form-select-option>
-  </b-form-select>
-</b-col>
+
+                  <b-form-group id="home-type">
+                    <p>
+                    <h6>
+                      <b-icon-asterisk font-scale="0.5" variant="danger" shift-v="8"></b-icon-asterisk><b>
+                        Home Type</b>
+
+                      </b-icon>
+                    </h6>
+                    </p>
+                    <b-form-select name="houseType" id="home-type-input" required>
+                      <b-form-select-option value="House">House</b-form-select-option>
+                      <b-form-select-option value="Apartment">Apartment</b-form-select-option>
+                      <b-form-select-option value="Room">Room</b-form-select-option>
+                    </b-form-select>
+                  </b-form-group>
 
                   <b-form-group id="sq-feet">
                     <p>
@@ -209,21 +208,21 @@
                     </h6>
                     </p>
                     <b-input-group append="sq. ft.">
-                      <b-form-input id="sq-feet-input" type="number" required></b-form-input>
+                      <b-form-input name="sqft" id="sq-feet-input" type="number" required></b-form-input>
                     </b-input-group>
                   </b-form-group>
-<b-col sm="4">
-  <b-form-select name="numBaths" v-model="selected_baths">
-    <b-form-select-option :value="null"># of Baths: </b-form-select-option>
-    <b-form-select-option value="1">1 Baths</b-form-select-option>
-    <b-form-select-option value="2">2 Baths</b-form-select-option>
-    <b-form-select-option value="3">3 Baths</b-form-select-option>
-    <b-form-select-option value="4">4 Baths</b-form-select-option>
-    <b-form-select-option value="5">5 Baths</b-form-select-option>
-    <b-form-select-option value="6">Other: (specified in description)</b-form-select-option>
-  </b-form-select>
-</b-col>
-<b-col sm="4">
+
+                  <b-form-group id="num-beds">
+                    <p>
+                    <h6>
+                      <b-icon-asterisk font-scale="0.5" variant="danger" shift-v="8"></b-icon-asterisk><b>
+                        # of Beds</b>
+
+                      </b-icon>
+                    </h6>
+                    </p>
+                    <b-form-input name="bedroomNum" id="num-beds-input" type="number" required></b-form-input>
+                  </b-form-group>
 
                   <b-form-group id="price">
                     <p>
@@ -235,18 +234,28 @@
                     </h6>
                     </p>
                     <b-input-group prepend="$">
-                      <b-form-input id="price-input" type="number" required></b-form-input>
+                      <b-form-input name="price" id="price-input" type="number" required></b-form-input>
                     </b-input-group>
                   </b-form-group>
 
+                  <b-form-group id="num-baths">
+                    <p>
+                    <h6>
+                      <b-icon-asterisk font-scale="0.5" variant="danger" shift-v="8"></b-icon-asterisk><b>
+                        # of Baths</b>
 
-                
+                      </b-icon>
+                    </h6>
+                    </p>
+                    <b-form-input name="bathroomNum" id="num-baths-input" type="number" required></b-form-input>
+                  </b-form-group>
+                </b-form-group>
               </div>
             </b-col>
             <b-col sm="12">
               <b-form-group id="property-description" label="Property Description"
                 label-for="property-description-input">
-                <b-form-textarea id="property-description-input" rows="4" max-rows="8"></b-form-textarea>
+                <b-form-textarea name="description" id="property-description-input" rows="4" max-rows="8"></b-form-textarea>
               </b-form-group>
             </b-col>
             <b-col sm="6">
@@ -259,18 +268,24 @@
                   </b-icon>
                 </h6>
                 </p>
-                <b-form-file name="image1" id="photo-upload-input" multiple="true" required></b-form-file>
+                <b-form-file id="photo-upload-input" multiple="true" required></b-form-file>
               </b-form-group>
             </b-col>
 
           </div>
 
-                <b-button v-b-modal.confirm-modal variant="secondary" style="float: right;" size="lg">Cancel
+          <div class="card border-0">
+            <div>
+              <div class="row justify-content-center" style="margin-bottom: 20px; margin-top: 40px;">
+                <b-button href="/" variant="secondary" style="float: right;" size="lg">Cancel
                 </b-button>
-                <b-button style="margin-left:80px" v-b-modal.confirm-modal type="submit" variant="success"
-                  style="float: right;" size="lg">Submit</b-button>
+                <b-button style="margin-left:80px" type="submit" variant="success"
+                  style="float: right;" size="lg" formmethod="POST">Submit</b-button>
+              </div>
               
 
+            </div>
+          </div>
          
 
         </b-form>
@@ -326,7 +341,7 @@
               return;
             }
 
-            alert("Form submitted!");
+            alert("Your posting may take up to 24 hours to be approved. Thank you for posting with Freshwater Rentals!");
             this.$refs.form.submit();
           });
         },
