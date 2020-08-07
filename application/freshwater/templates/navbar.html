@@ -64,7 +64,7 @@
 					{% if current_user.is_authenticated %}
 						<b-dropdown id="dropdown-right" right text=" Hi {{ current_user.email }}" class="m-md-2">
 							<b-dropdown-item href="/dashboard">Dashboard</b-dropdown-item>
-							<b-dropdown-item > <a href="{{ url_for_security('logout') }}">Logout</a></b-dropdown-item>
+							<b-dropdown-item > <a href="#" onclick="logout()">Logout</a></b-dropdown-item>
 						</b-dropdown>
 						{% else %}
 						<b-button pill id="show-btn" v-b-modal.modal-center
@@ -143,6 +143,14 @@
 	</div>
 	{% block script %}
 	{% endblock %}
+
+<script>
+	function logout(){
+			location.replace("/logout")}
+</script>
+
 </body>
 
 </html>
+
+
