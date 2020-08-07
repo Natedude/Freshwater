@@ -24,6 +24,11 @@
 
 <body>
 	<div id="app">
+		<div>
+			<b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">
+				This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1"</b>
+			</b-alert>
+		</div>
 		<b-navbar toggleable="lg" type="light" variant="light">
 			<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 			<b-collapse id="nav-collapse" is-nav> <a href="/">
@@ -86,8 +91,11 @@
 										</div>
 										<div class="form-group">
 											<label>Password</label>
-											<input id="password" name="password" type="password" required
-												class="form-control form-control-lg" />
+											<input id="password" name="password" type="password" required minlength="6"
+												class="form-control form-control-lg" aria-describedby="password-help-block" />
+											<b-form-text id="password-help-block">
+												Your password must be at least 6 characters long.
+											</b-form-text>
 										</div>
 										<div class="form-group">
 											<label>Repeat Password</label>
