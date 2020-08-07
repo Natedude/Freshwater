@@ -63,7 +63,8 @@
 					<b-nav-item>
 					{% if current_user.is_authenticated %}
 						<b-dropdown id="dropdown-right" right text=" Hi {{ current_user.email }}" class="m-md-2">
-							<b-dropdown-item href="/dashboard">Dashboard</b-dropdown-item>
+							<b-dropdown-item> <a href= {{ url_for('getDashboard') }} onclick="getDashboard()">Dashboard</a>
+							</b-dropdown-item>
 							<b-dropdown-item > <a href="#" onclick="logout()">Logout</a></b-dropdown-item>
 						</b-dropdown>
 						{% else %}
@@ -147,6 +148,8 @@
 <script>
 	function logout(){
 			location.replace("/logout")}
+	function getDashboard(){
+		location.replace("/dashboard")}
 </script>
 
 </body>

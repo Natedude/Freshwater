@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 
 ###NOTE THIS IS A DEMO for login proccess###
 def login(user, passwrd):
-    user = request.form['username']
+    user = request.form['email']
     result= User.query.filter(User.email==user)#result is a Basequery object
     result = result.first()
 
@@ -18,7 +18,8 @@ def login(user, passwrd):
         reg_form = RegisterForm()
 
         # redirect if user not found
-        return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
+        print("client.py: login: login failed 1")
+        return render_template("client/dashboard.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
 
     #if user found in db &
     # passed in pass hash matches db record pass hash
@@ -28,7 +29,8 @@ def login(user, passwrd):
     else:
         login_form = LoginForm()
         reg_form = RegisterForm()
-        return render_template("client/login.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
+        print("client.py: login: login failed 2")
+        return render_template("client/dashboard.html", form = login_form, regForm = reg_form, title="Login failed, passwords did not match")
         #elif "user" in session:#if get request and user is already in session, redircts them
 #            return redirect(url_for("userLoggedIn"))
 #return render_template("test/testLogin.html")

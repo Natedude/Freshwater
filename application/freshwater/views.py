@@ -40,7 +40,7 @@ def home():
     print("login form:")
     pprint(form)
     regForm = client.RegisterForm()
-    #return render_template("client/login.html", form = login_form, regForm = reg_form)
+    #return render_template("client/dashboard.html", form = login_form, regForm = reg_form)
 
     return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options_2, form=form, regForm=regForm)
 
@@ -134,12 +134,12 @@ def contactLandlord():
 @login_required
 def getDashboard():
     #Get all messages from messsage db with fk from user
-    if request.method == 'GET':
-        email = current_user.email
-        print(email)#Test print can/should be deleted for more final version
-        print(type(email))
-        return messaging.getAll(email) #return JSON
-        #    return render_template("/client/dashboard.html")\
+    #if request.method == 'GET':
+    email = current_user.email
+    print(email)#Test print can/should be deleted for more final version
+    print(type(email))
+    return messaging.getAll(email) #return JSON
+    #    return render_template("/client/dashboard.html")\
 
 
 
@@ -161,8 +161,8 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return render_template("client/login.html", form = newform)
-    return render_template("client/login.html", form = newform)
+        return render_template("client/dashboard.html", form = newform)
+    return render_template("client/dashboard.html", form = newform)
 
 
 @app.route('/protected')
@@ -231,7 +231,7 @@ def login():
     if request.method == 'GET':
         login_form = client.LoginForm()
         reg_form = client.RegisterForm()
-        return render_template("client/login.html", form = login_form, regForm = reg_form)
+        return render_template("client/dashboard.html", form = login_form, regForm = reg_form)
 
     if request.method == 'POST':
         login_form = client.LoginForm()
