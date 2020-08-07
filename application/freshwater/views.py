@@ -46,8 +46,11 @@ def home():
 
 @app.route('/query/<sorting>', methods=['GET', 'POST'])
 def query(sorting):
+
     results_list_of_dicts, saved_options = search.query()
     df = pd.DataFrame.from_records(results_list_of_dicts)
+    print("Number of listings:")
+    print(len(df))
 
     form = client.LoginForm()
     print("login form:")
@@ -63,7 +66,8 @@ def query(sorting):
     else:
         df = df.sort_values(by=sorting, ascending = True)
 
-    print(df.columns)
+
+    #print(df.columns)
     df_json = df.to_json(orient='records')
 
 

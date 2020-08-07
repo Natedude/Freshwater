@@ -50,9 +50,9 @@ def logout():
 
 class RegisterForm(FlaskForm):
     """ Register """
-    first_name = StringField('first_name', [validators.Length(min=1, max=25)])
-    last_name = StringField('last_name', [validators.Length(min=1, max=25)])
-    phone = StringField('phone', [validators.Length(min=1, max=25)])
+    # first_name = StringField('first_name', [validators.Length(min=1, max=25)])
+    # last_name = StringField('last_name', [validators.Length(min=1, max=25)])
+    # phone = StringField('phone', [validators.Length(min=1, max=25)])
     passwordR = PasswordField('password',[validators.Length(min=1,max=25)])
     email = StringField('email', [validators.Length(min=1,max=25)])
     accept_tos = BooleanField('I agree to Terms and Conditions', [validators.DataRequired()])

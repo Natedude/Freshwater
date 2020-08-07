@@ -195,17 +195,17 @@ class DevUtils(object):
             rand_words = list(dict.fromkeys(rand_words))
             chosen = random.sample(rand_words, 2)
             first_name = chosen[0]
-            last_name = chosen[1]
-            phone_number = "(415) 338-1111"
+            #last_name = chosen[1]
+            # phone_number = "(415) 338-1111"
             email_end = random.choice(['random.com', 'sfsu.edu'])
-            email = first_name + last_name + "@" + email_end
+            email = first_name + "@" + email_end
             #from freshwater import app
             pass_hash = encrypt_password('123456')
             if "sfsu.edu" in email_end:
                 sfsu_confirmed = 1
             else:
                 sfsu_confirmed = 0
-            u = self.models.User(first_name=first_name, last_name=last_name, phone_number=phone_number, email=email, password=pass_hash, active=True, sfsu_confirmed=sfsu_confirmed)
+            u = self.models.User(email=email, password=pass_hash, active=True, sfsu_confirmed=sfsu_confirmed)
             self.insert(u)
             pprint(u)
 

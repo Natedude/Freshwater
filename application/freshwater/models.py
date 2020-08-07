@@ -142,9 +142,9 @@ class User(db.Model, UserMixin):
     # __bind_key__ = 'user'
     __tablename__ = "User"
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
-    phone_number = db.Column(db.String(25))
+    # first_name = db.Column(db.String(255))
+    # last_name = db.Column(db.String(255))
+    # phone_number = db.Column(db.String(25))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
@@ -156,9 +156,9 @@ class User(db.Model, UserMixin):
     def dict(self):
         return {
             'id': self.id,
-            'first_name': self.first_name,
-            'last_name' : self.last_name,
-            'phone_number': self.phone_number,
+            # 'first_name': self.first_name,
+            # 'last_name' : self.last_name,
+            # 'phone_number': self.phone_number,
             'email': self.email,
             'password': self.password,
             'active': self.active,
