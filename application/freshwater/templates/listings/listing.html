@@ -176,11 +176,12 @@
 		<h6 style="text-align: center;">Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
 		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
+		{% if current_user.is_authenticated and '@sfsu.edu' in current_user.email   %}
 		<form action="#" method="GET">
 			<input type="text" id="name" name="name" placeholder="Your name" required class="form-control form-control-lg" />
 			<br>
 
-			<input type="email" id="email" name="email" placeholder="Your Email" required class="form-control form-control-lg" />
+			<input type="email" id="email" name="email" value={{current_user.email}}  required class="form-control form-control-lg" />
 			<br>
 
 			<input type="tel" id="phone" name="phone" placeholder="Your Phone" required class="form-control form-control-lg" />
@@ -191,6 +192,11 @@
 
 			<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button> 
 		</form>
+
+		{% else %}
+		<br><br>
+			<h6 style="text-align: center;"> You dont have permission to send message to the Landlord. Please login or if already logged in, you are not a valid SFSU member..</h6> 
+		{% endif %}
 
 		<template v-slot:modal-footer>
 			<div class="w-100">
