@@ -3,6 +3,7 @@ from ..models import Listings, Images
 import pprint
 from sqlalchemy import or_, and_
 from freshwater import db#, meta
+from sqlalchemy_filters import apply_filters
 
 def query():
     if request.method == 'GET':
@@ -55,15 +56,45 @@ def query_helper(args, saved_options, str_key, if_not_present, take_first_elemen
 # searches listings for search_string in title and desc
 # and also applies filter options
 def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
-    results = search_title_and_desc(search_string)
+    # results = search_title_and_desc(search_string)
+    results = db.session.query(Listings)
+    # print("Session query:")
+    # pprint.pprint(results.all())
+
+    results = filter_search_string_title_desc_city_zip_street(results, search_string)
+    # print("Filter by city zip street address:")
+    # pprint.pprint(results.all())
+
     results = filter_in_list(
         results, Listings.houseType, housingType)
     results = filter_in_list(
         results, Listings.sellOrRent, sellOrRent)
     results = filter_in_list(
         results, Listings.petsAllowed, petsAllowed)
+
     results = results.filter(Listings.adminAppr == 1)
     return results
+
+def filter_search_string_title_desc_city_zip_street( query, search_string=None):
+    filter_spec = [
+        {
+            'or': [
+                {'model': 'Listings', 'field': 'title',
+                'op': 'ilike', 'value': search_string},
+                {'model': 'Listings', 'field': 'description',
+                'op': 'ilike', 'value': search_string},
+                {'model': 'Listings', 'field': 'city',
+                    'op': 'ilike', 'value': search_string},
+                {'model': 'Listings', 'field': 'postalCode',
+                    'op': 'ilike', 'value': search_string},
+                {'model': 'Listings', 'field': 'street_address',
+                    'op': 'ilike', 'value': search_string}
+            ]
+        }
+    ]
+    filtered_query = apply_filters(query, filter_spec)
+    return filtered_query
+
 
 # searches title and description for search string
 # and if empty, returns all Listings
@@ -127,6 +158,7 @@ def postMaker(results):  # Takes in Alchemy objects and returns python list of d
                         'path': dictionImage['path']
                     })
                 # print("******** postMaker: after")
+    print()
     return frontend_ready_list_of_dicts
 
 

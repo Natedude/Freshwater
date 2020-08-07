@@ -10,7 +10,7 @@ from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMix
 def model_to_list_of_dicts(model):
     # print("**** dbTolst: before query")
     print(".",end='')
-    print()
+    #print()
     records_in_model = model.query.all()
     # print("**** dbTolst: after query")
     # make sure db in use has working dict function within its class
