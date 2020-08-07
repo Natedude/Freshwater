@@ -15,8 +15,8 @@ import random
 
 class DevUtils(object):
     """
-    Run from dev_utils_driver.py in freshwater/ 
-    Used to generate fake listings with 
+    Run from dev_utils_driver.py in freshwater/
+    Used to generate fake listings with
     some scraped, random, and lorem ipsum data
     """
     def __init__(self, app, db_, models_, insert, select) -> None:
@@ -32,7 +32,7 @@ class DevUtils(object):
         self.listings_dict_list = scraper.run()
         self.listings_index = 0
         print("Results list len: " + str(len(self.listings_dict_list)))
-        
+
         #most popular terms used in real estate listings / ads
         self.listing_keywords_list = ["Granite","countertop","Hardwood","floors","Granite","Pool","spa","Hardwood","floors","Gourmet","kitchen","Stainless steel","appliances","Granite","Stainless steel","appliances","Ocean views","Stainless steel","appliances","Open","floor plan","Wine cellar","Covered","patio","appliances","Vaulted","ceilings","kitchen","dining room","Formal","bar","Guest","house","Vaulted","ceilings","Vaulted","ceilings","dining","room","New","roof","Chef","kitchen","Hardwood","Natural","light","Open","concept","French doors","Media room","Perfect","location","Pool","spa","Open","concept","Move-in","ready","Gas","fireplace","Pool","Dual","sinks", "roomate", "sky", "neighborhood", "mission", "SFSU", "campus","majors", "close", "restaurants", "shopping", "mall", "nearby", "dorm", "walking distance", "walk", "utilities included", "amenities", "class", "apartment", "studio", "looking", "bathroom", "bedroom", "furnished", "furniture"
         ]
@@ -53,22 +53,22 @@ class DevUtils(object):
         #pprint(self.image_paths_list)
         print("Image paths = " + str(len(self.image_paths_list)))
         print("***********************************")
-        
+
 
 
     def make_listing_object(self):
         l = self.models.Listings(
-            title=self.make_title(), 
-            houseType=random.choice(self.houseType), 
+            title=self.make_title(),
+            houseType=random.choice(self.houseType),
             sellOrRent=random.choice(self.sellOrRent),
             petsAllowed=random.choices(self.petsAllowed, weights=(2,1))[0],
-            city = "San Francisco", 
+            city = "San Francisco",
             postalCode=94132,
             street_address="1600 Holloway Ave",
             distance_from_SFSU=round(random.uniform(0.01, 7.0),2),
-            description = self.make_description(), 
-            price = self.make_price(), 
-            sqft = self.make_sqft(), 
+            description = self.make_description(),
+            price = self.make_price(),
+            sqft = self.make_sqft(),
             bedroomNum = self.make_bedroom_count(),
             bathroomNum = random.choices([1, 2, 3], weights=(4, 2, 1))[0],
             adminAppr=random.choices([0,1], weights=(1,5))[0],
@@ -82,7 +82,7 @@ class DevUtils(object):
     #     # street_name = random.choice(lorem.sentence().split(" ")).capitalize()
     #     # return str(num) + " " + street_name + " St"
 
-               
+
     def make_title(self):
         return self.listings_dict_list[self.listings_index]['title']
 
@@ -91,10 +91,10 @@ class DevUtils(object):
         desc = " ".join(keywords_to_add_in) + " " + lorem.paragraph()
         print(f"Description: {desc}")
         return str(desc)
-    
+
     def make_price(self):
         return self.listings_dict_list[self.listings_index]['price']
-    
+
     def make_sqft(self):
         if 'sqft' in self.listings_dict_list[self.listings_index]:
             return self.listings_dict_list[self.listings_index]['sqft']
@@ -114,7 +114,7 @@ class DevUtils(object):
         print('source_path: ' + src_path)
         print('dest_path: ' + dest_path)
         return dest_path
-    
+
     #move images given by a list of paths
     #returns list of new paths
     def image_path_list_mover(self, img_path_list):
@@ -133,7 +133,7 @@ class DevUtils(object):
         num_images = 1#random.choices([1, 2, 3, 4], weights=(4, 3, 2, 1))[0]
         img_path_list = random.sample(self.image_paths_list, num_images)
         return img_path_list
-    
+
     #deletes img paths from self.image_paths_list so they aren't later used again after being moved
     def delete_source_paths(self, img_path_list):
         for x in img_path_list:
@@ -142,7 +142,7 @@ class DevUtils(object):
             except ValueError:
                 print("lisintg_generator: delete_source_paths: ERROR deleting")
         return self.image_paths_list
-    
+
     #takes in source path and returns dest path
     def get_dest_path(self, source_path):
         dest_dir = "freshwater/static/images/listings/"
@@ -153,12 +153,12 @@ class DevUtils(object):
         dest_path = dest_dir + filename
         #print(dest_path)
         return dest_path
-    
+
     def generate_listings_multi(self, num_listings_to_make):
         self.num_users = len(self.models.User.list_of_dicts())
         for i in range(num_listings_to_make):
             self.generate_listing()
-    
+
     def generate_listing(self):
         # make listing object
         # auto chooses a user id to associate with listing
@@ -168,20 +168,20 @@ class DevUtils(object):
         user_id = l.dict()['fk_user_id']
         print(f"********\nCreating listing with User Id: {user_id}")
         #pprint(user_id)
-        
+
         # pick 1-4 images
         img_list = self.random_image_paths()
         # make new dest paths returned from image_path_list_mover
         # move images from unused_images to dest
         # del moved images from self.image_paths_list (done inside mover)
         img_list = self.image_path_list_mover(img_list)
-        
+
         # make image objects
         #user_id = random.randint(1,len(self.models.User.list_of_dicts()))
         for i in img_list:
             img = self.models.Images(path=i, fk_listing_id=listing_id, fk_user_id=user_id)
             self.insert(img)
-        
+
         # insert them with listing id
 
     def generate_user(self, db_, models_):
@@ -196,6 +196,7 @@ class DevUtils(object):
             chosen = random.sample(rand_words, 2)
             first_name = chosen[0]
             last_name = chosen[1]
+            phone_number = "(415) 338-1111"
             email_end = random.choice(['random.com', 'sfsu.edu'])
             email = first_name + last_name + "@" + email_end
             #from freshwater import app
@@ -204,7 +205,7 @@ class DevUtils(object):
                 sfsu_confirmed = 1
             else:
                 sfsu_confirmed = 0
-            u = self.models.User(first_name=first_name, last_name=last_name, email=email, password=pass_hash, active=True, sfsu_confirmed=sfsu_confirmed)
+            u = self.models.User(first_name=first_name, last_name=last_name, phone_number=phone_number, email=email, password=pass_hash, active=True, sfsu_confirmed=sfsu_confirmed)
             self.insert(u)
             pprint(u)
 
