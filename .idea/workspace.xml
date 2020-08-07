@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="37d7470b-5309-4a00-a843-cbcdb10efda4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/freshwater/client/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/freshwater/client/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/freshwater/static/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/freshwater/static/js/navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/freshwater/templates/client/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/freshwater/templates/client/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/freshwater/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/freshwater/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/freshwater/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/freshwater/templates/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1596439698287</updated>
       <workItem from="1596439700090" duration="853000" />
+      <workItem from="1596788869099" duration="595000" />
     </task>
     <servers />
   </component>

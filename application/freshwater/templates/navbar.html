@@ -105,6 +105,21 @@
 								<div class="vue-template">
 									<form action="{{ url_for_security('register') }}" method="POST">
 										<div class="form-group">
+											<label>Firstname</label>
+											<input id="first_name" name=first_name" type="text" required
+												   class="form-control form-control-lg" />
+										</div>
+										<div class="form-group">
+											<label>LastName</label>
+											<input id="last_name" name="last_name" type="text" required
+												   class="form-control form-control-lg" />
+										</div>
+										<div class="form-group">
+											<label>Phone Number</label>
+											<input id="phone_number" name="phone_number" type="text" required
+												   class="form-control form-control-lg" />
+										</div>
+										<div class="form-group">
 											<label>Email address</label>
 											<input id="email" name="email" type="email" required
 												class="form-control form-control-lg" />
@@ -119,7 +134,7 @@
 										</div>
 										<div class="form-group">
 											<label>Repeat Password</label>
-											<input id="password_confirm" name="password_confirm" type="password" required
+											<input id="password_confirm" name="password_confirm" type="password" required minlength="6"
 												class="form-control form-control-lg" />
 										</div>
 										<div class="form-group pb-2">
