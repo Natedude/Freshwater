@@ -67,7 +67,10 @@ def query(sorting):
 
 @app.route('/about')
 def about():
-    return render_template("about/about_team.html")
+    form = client.LoginForm()
+    pprint(form)
+    regForm = client.RegisterForm()
+    return render_template("about/about_team.html", form=form, regForm=regForm)
 
 @app.route('/postOld')
 @login_required
@@ -76,7 +79,10 @@ def postOld():
 
 @app.route('/post')
 def post():
-    return render_template("listings/post.html")
+    form = client.LoginForm()
+    pprint(form)
+    regForm = client.RegisterForm()
+    return render_template("listings/post.html", form=form, regForm=regForm)
 
 @app.route('/confirm')
 def confirm():

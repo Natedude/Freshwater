@@ -21,7 +21,14 @@
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
   <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async
     defer> </script>
-  <script src="/static/js/navbar.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174684984-1"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-174684984-1');
+  </script>
 
   <!-- for validations -->
   <script src="https://unpkg.com/vee-validate@<3.0.0"></script>
@@ -41,18 +48,15 @@
   </style>
 </head>
 
+{% extends 'navbar.html' %}
 <body>
+{% block content %}
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
   {{ text[0]|upper}}{{text[1:] }}
   {% endmacro %}
 
   <div id="app">
-    <div>
-      <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
-    </div>
-    <!-- Navbar -->
-    <navbar-component> </navbar-component>
     <div style="width: 80%; margin: auto;">
       <!-- Jumbotron Container -->
       <b-container fluid class="container1">
@@ -186,6 +190,8 @@
 
   </div> <!-- end app div -->
 
+{% endblock %}
+{% block script %}
 
   <script>
     Vue.use(VeeValidate, {
@@ -265,6 +271,7 @@
       },
     })
   </script>
+{% endblock %}
 </body>
 
 </html>
