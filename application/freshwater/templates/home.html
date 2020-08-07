@@ -205,8 +205,23 @@
             <b-card-body style="padding:0%">
               <b-card-text align="left" >
                 <b-container class="m-2">
-                    <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5>
-		     <b-row>
+                  <b-row>
+                    <b-col sm=8>
+                      <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5>
+                    </b-col>
+
+                    <b-col sm=1>
+                    {% if listing.petsAllowed == 1 %}
+			                <b-badge pill variant="success">Pets OK</b-badge>
+			              {% else %}
+			                <b-badge pill variant="secondary">No Pets</b-badge>
+			              {% endif %}
+                    </b-col>
+                    </b-row>
+                  </b-row>
+                  
+                    <!-- <h5><b>${{ listing.price | numberFormat}}{%if listing.sellOrRent == "rent"%}/mo {% endif %}</b></h5> -->
+                    <b-row>
                       <b-col sm=1>
                         <p class="h6 mb-1"><b-icon icon="house-door-fill" variant="dark"></b-icon></p>
                       </b-col>
@@ -232,11 +247,11 @@
                         <h6 style="margin:0 auto">{{listing.street_address}}</h6>
                       </b-col>
 		   <b-col sm=1 class="float-right">
-			{% if listing.petsAllowed == 1 %}
+			<!-- {% if listing.petsAllowed == 1 %}
 			   <b-badge pill variant="success">Pets OK</b-badge>
 			{% else %}
 			   <b-badge pill variant="secondary">No Pets</b-badge>
-			{% endif %}
+			{% endif %} -->
 		      </b-col>
                     </b-row>
                 </b-container>
