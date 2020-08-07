@@ -19,6 +19,7 @@ def model_to_list_of_dicts(model):
     lst.sort(key=lambda x: x["id"])
     return lst  # Remember this needs to be jsonfied to pass it to html
 
+
 class Messages(db.Model):
     __tablename__ = "Messages"
     id = db.Column(db.Integer, primary_key=True)

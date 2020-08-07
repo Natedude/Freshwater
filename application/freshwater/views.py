@@ -112,12 +112,37 @@ def listing():
         regForm = client.RegisterForm()
         return render_template("listings/listing.html", data=data, form=form, regForm=regForm)
 
+
+
+@app.route('/contactLandlord', methods=['GET', 'POST'])
+def contactLandlord():
+    if request.method == 'POST':
+        if current_user.is_authenticated:
+            form = request.form
+            d = request.form.to_dict()
+            print('type of d: ', type(d))
+            print(d)
+            return messaging.contactLandlord(d)
+        else:
+            #send the to login with a message why
+            #TODO
+            return "<h1>Not Logged in</h1>"
+
+
+
 @app.route('/dashboard')
-def dashboard():
-    form = client.LoginForm()
-    pprint(form)
-    regForm = client.RegisterForm()
-    return render_template("/client/dashboard.html", form=form, regForm=regForm)
+@login_required
+def getDashboard():
+    #Get all messages from messsage db with fk from user
+    if request.method == 'GET':
+        email = current_user.email
+        print(email)#Test print can/should be deleted for more final version
+        print(type(email))
+        return messaging.getAll(email) #return JSON
+        #    return render_template("/client/dashboard.html")\
+
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():
@@ -178,7 +203,8 @@ def postingData():
             print('file is of type', type(file))
             if file and allowed_file(file.filename):
                 usrId = current_user.id
-                d["fk_user_id"] = usrId
+                print(usrId)
+                d['fk_user_id'] = usrId
                 filename = secure_filename(str(usrId) + file.filename)
                 filelocation = os.path.join('freshwater/static/images/listings' , filename)
                 print('saving file name here', filelocation)

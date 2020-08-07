@@ -85,11 +85,11 @@
 				      <h6>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h6>
             </b-col>
           </b-row>
-         
-          <b-row style=" margin: auto;"> 
+
+          <b-row style=" margin: auto;">
             <h5 >[[houseType]] for [[status]]</h5></br>
           </b-row>
-          
+
           <b-row>
 		        <b-col cols="1">
               <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
@@ -98,8 +98,8 @@
               <h6>[[street]], [[city]], [[state]]</h6>
 			      </b-col>
           </b-row>
-          
-<!--            
+
+<!--
           <div style="clear: both">
 		        <b-row class="mb-1">
 			        <b-col>
@@ -115,7 +115,7 @@
 			      </b-col>
 		        </b-row>
           </div> -->
-	      
+
 		      <b-row class="mb-3" style="margin-top: 10px">
 			      <b-col>
               <b-button v-b-modal.contact block variant="primary">
@@ -142,11 +142,11 @@
               <h6 style="margin-top:3px; margin-bottom: 0;">[[distance]] miles from SFSU</h6>
             </b-col>
           </b-row>
-      
+
           <b-embed type="iframe" class="map"
                 :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
           </b-embed>
-          
+
           <hr>
           <b-row>
             <b-col>
@@ -157,10 +157,10 @@
 		        <b-col><p style="text-align: justify;">[[description]]</p></b-col>
             </b-row>
             </b-card>
-            
+
           </div>
           <!-- End of scroll bar -->
-          
+
         </b-col>
 
         </b-row>
@@ -177,19 +177,20 @@
 		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
 		{% if current_user.is_authenticated and '@sfsu.edu' in current_user.email   %}
-		<form action="#" method="GET">
-			<input type="email" id="email" name="email" value={{current_user.email}}  required class="form-control form-control-lg" />
+    <form action="/contactLandlord" method="POST">
+      <input type="hidden" name="idType" :value="id">
+			<input type="email" id="email" name="senderEmail" value={{current_user.email}}  required class="form-control form-control-lg" />
 			<br>
 
 			<textarea id="message" name="message" class="form-control form-control-lg" rows="4" cols="30" placeholder="Your message here" required></textarea>
 			<br>
 
-			<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button> 
+			<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
 		</form>
 
 		{% else %}
 		<br><br>
-			<h6 style="text-align: center;"> You dont have permission to send message to the Landlord. Please login or if already logged in, you are not a valid SFSU member..</h6> 
+			<h6 style="text-align: center;"> You dont have permission to send message to the Landlord. Please login or if already logged in, you are not a valid SFSU member..</h6>
 		{% endif %}
 
 		<template v-slot:modal-footer>
@@ -228,6 +229,7 @@
               caption: 'Dining room'},
 
           ],
+          id:     "{{ data['id']}}",
           street: "{{ data['street_address']}}",
           city: "{{ data['city'] }}",
           state: "CA",
