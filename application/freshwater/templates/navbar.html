@@ -105,12 +105,12 @@
 								<div class="vue-template">
 									<form action="{{ url_for_security('register') }}" method="POST">
 										<div class="form-group">
-											<label>Firstname</label>
+											<label>First Name</label>
 											<input id="first_name" name=first_name" type="text" required
 												   class="form-control form-control-lg" />
 										</div>
 										<div class="form-group">
-											<label>LastName</label>
+											<label>Last Name</label>
 											<input id="last_name" name="last_name" type="text" required
 												   class="form-control form-control-lg" />
 										</div>
@@ -143,7 +143,7 @@
 											</b-form-checkbox>
 										</div>
 										<!--<button type="submit" class="btn btn-dark btn-lg btn-block">Submit </button>-->
-										<input id="submit" name="submit" type="submit" value="Register" class="btn btn-dark btn-lg btn-block"> 
+										<input id="submit" name="submit" type="submit" value="Register" class="btn btn-dark btn-lg btn-block">
 										{{ form.csrf_token }}
 									</form>
 								</div>
