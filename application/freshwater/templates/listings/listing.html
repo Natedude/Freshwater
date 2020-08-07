@@ -178,13 +178,7 @@
 
 		{% if current_user.is_authenticated and '@sfsu.edu' in current_user.email   %}
 		<form action="#" method="GET">
-			<input type="text" id="name" name="name" placeholder="Your name" required class="form-control form-control-lg" />
-			<br>
-
 			<input type="email" id="email" name="email" value={{current_user.email}}  required class="form-control form-control-lg" />
-			<br>
-
-			<input type="tel" id="phone" name="phone" placeholder="Your Phone" required class="form-control form-control-lg" />
 			<br>
 
 			<textarea id="message" name="message" class="form-control form-control-lg" rows="4" cols="30" placeholder="Your message here" required></textarea>
