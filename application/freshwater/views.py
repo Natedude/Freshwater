@@ -157,7 +157,8 @@ def postingData():
             print('file is of type', type(file))
             if file and allowed_file(file.filename):
                 usrId = current_user.id
-                d["fk_user_id"] = usrId
+                print(usrId)
+                d['fk_user_id'] = usrId
                 filename = secure_filename(str(usrId) + file.filename)
                 filelocation = os.path.join('freshwater/static/images/listings' , filename)
                 print('saving file name here', filelocation)

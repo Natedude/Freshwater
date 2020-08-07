@@ -25,12 +25,12 @@ app.secret_key ='replace later'
 #set db info
 proto = 'mysql'
 user = 'root'
-password = ''#'abc123'
+password = 'abc123'#'abc123'
 host = '127.0.0.1'
 port = '3306'
 # NOTE use this to select the database you want to use
 # it will be created (and have tables and relationships created)if it does not exist
-database = 'CSC_777'
+database = 'CSC_7774444'
 
 # This engine just used to query for list of databases
 mysql_url = '{0}://{1}:{2}@{3}:{4}'.format(proto, user, password, host, port)
