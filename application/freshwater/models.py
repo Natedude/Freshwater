@@ -27,13 +27,17 @@ class Messages(db.Model):
     message = db.Column(db.String(400))
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
     unread = db.Column(db.Integer) #0 is read, 1 is unread
+    fk_listing_id = db.Column(db.Integer)
 
     def dict(self):
         return {"id": self.id,
                 "fkSender": self.fkSender,
                 "fkReciever": self.fkReciever,
                 "message": self.message,
-                "timeCreated": self.timeCreated}
+                "timeCreated": self.timeCreated,
+                "fk_listing_id": self.fk_listing_id
+                }
+
 
     @staticmethod
     def list_of_dicts():
