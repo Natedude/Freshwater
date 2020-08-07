@@ -105,60 +105,32 @@
           <b-form-group id="ss" >
             <b-row class="p-2 mb-1 justify-content-md-center" >
               <!-- Checkbox button Housing Type -->
-		<b-col lg="3" style="max-width:9rem;">
-			<b-dropdown id="dropdown-1" class="my-2 my-sm-2" text="Home Type" variant="outline-primary">
-				<div class="dropdown-item bg-white text-body">
-					<b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" stacked :options="housingType_options" name="HousingType" > </b-form-checkbox-group>
-				</div>
-			</b-dropdown>
+          		<b-col lg="3" style="max-width:9rem;">
+          			<b-dropdown id="dropdown-1" class="my-2 my-sm-2" text="Home Type" variant="outline-primary">
+          				<div class="dropdown-item bg-white text-body">
+          					<b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" stacked :options="housingType_options" name="HousingType" > </b-form-checkbox-group>
+          				</div>
+          			</b-dropdown>
               </b-col>
-		<b-col md="3" style="max-width:9rem;">
-			<b-dropdown id="dropdown-1" class="my-2 my-sm-2" text="Rent / Buy" variant="outline-primary">
-				<div class="dropdown-item bg-white text-body">
-					<b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" stacked :options="sellOrRent_options" name="sellOrRent"></b-form-checkbox-group>
-				</div>
-			</b-dropdown>
-              </b-col>
-
-            <b-col md="3" align-self="center" style="max-width:10rem; padding-left: 5px !important; padding-right: 5px !important;">
-                <b-form-checkbox-group id="checkbox-group-3" class="my-2 my-sm-2" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="outline-primary" name="petsAllowed"></b-form-checkbox-group>
+          		<b-col md="3" style="max-width:9rem;">
+          			<b-dropdown id="dropdown-1" class="my-2 my-sm-2" text="Rent / Buy" variant="outline-primary">
+          				<div class="dropdown-item bg-white text-body">
+          					<b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" stacked :options="sellOrRent_options" name="sellOrRent"></b-form-checkbox-group>
+          				</div>
+          			</b-dropdown>
               </b-col>
 
+              <b-col md="3" align-self="center" style="max-width:10rem; padding-left: 5px !important; padding-right: 5px !important;">
+                  <b-form-checkbox-group id="checkbox-group-3" class="my-2 my-sm-2" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="outline-primary" name="petsAllowed"></b-form-checkbox-group>
+                </b-col>
 
-            <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
-              <div style="display:flex; justify-content:center">
-                <b-button class="my-2 my-sm-2" type="submit" formaction="#" type="submit"> Apply Filter
-                </b-button>
-              </div>
-            </b-col>
-	    <!--
-              <b-col md="3" style="max-width:10rem;">
-                <b-button class="my-2 my-sm-2" type="submit" formaction="/query" type="submit">
-                  Apply Filters
-                </b-button>
-	      </b-col>
-	    -->
-              <!--
-                <b-form-group>
-                  <b-form-checkbox-group id="checkbox-group-1" v-model="housingType_selected" :options="housingType_options" buttons button-variant="light" name="HousingType" > </b-form-checkbox-group>
-                </b-form-group>
+
+              <b-col class="col-md-auto"  align-self="center" style=" padding-left: 5px !important; padding-right: 15px !important;">
+                <div style="display:flex; justify-content:center">
+                  <b-button class="my-2 my-sm-2" type="submit" formaction="#" type="submit"> Apply Filter
+                  </b-button>
+                </div>
               </b-col>
-
-              <b-col md style="max-width:9rem;">
-                <b-form-checkbox-group id="checkbox-group-2" v-model="sellOrRent_selected" :options="sellOrRent_options" buttons button-variant="light" name="sellOrRent"></b-form-checkbox-group>
-              </b-col>
-
-              <b-col md style="max-width:7rem;">
-                <b-form-checkbox-group id="checkbox-group-3" v-model="petsAllowed_selected" :options="petsAllowed_options" buttons button-variant="light" name="petsAllowed"></b-form-checkbox-group>
-              </b-col>
-
-              <b-col md style="max-width:10rem;">
-                <b-button type="submit" formaction="/query" type="submit">
-                  Apply Filters
-                   <b-icon icon="search"></b-icon>
-                </b-button>
-                -->
-
             </b-row>
 	</b-container>
 
@@ -195,12 +167,12 @@
       <div class="float-right" style="margin-right: 20px">
         <b-dropdown id="dropdown-right" right variant="light" text="Sort" size="md">
           <!-- <b-dropdown-item href="/">Sort: New Listings</b-dropdown-item> -->
-          <b-dropdown-item :href="'/query/lowhigh?search_string='+search_string">Sort: Price(Lo-Hi)</b-dropdown-item>
-          <b-dropdown-item :href="'/query/highlow?search_string='+search_string">Sort: Price(Hi-Lo)</b-dropdown-item>
-          <b-dropdown-item :href="'/query/distance_from_SFSU?search_string='+search_string">Sort: Distance to SFSU</b-dropdown-item>
-          <b-dropdown-item :href="'/query/bedroomNum?search_string='+search_string">Sort: Bedrooms</b-dropdown-item>
-          <b-dropdown-item :href="'/query/bathroomNum?search_string='+search_string">Sort: Bathrooms</b-dropdown-item>
-          <b-dropdown-item :href="'/query/sqft?search_string='+search_string">Sort: Squarefeet</b-dropdown-item>
+          <b-dropdown-item :href="'/query/lowhigh?search_string='+search_string+options">Sort: Price(Lo-Hi)</b-dropdown-item>
+          <b-dropdown-item :href="'/query/highlow?search_string='+search_string+options">Sort: Price(Hi-Lo)</b-dropdown-item>
+          <b-dropdown-item :href="'/query/distance_from_SFSU?search_string='+search_string+options">Sort: Distance to SFSU</b-dropdown-item>
+          <b-dropdown-item :href="'/query/bedroomNum?search_string='+search_string+options">Sort: Bedrooms</b-dropdown-item>
+          <b-dropdown-item :href="'/query/bathroomNum?search_string='+search_string+options">Sort: Bathrooms</b-dropdown-item>
+          <b-dropdown-item :href="'/query/sqft?search_string='+search_string+options">Sort: Squarefeet</b-dropdown-item>
         </b-dropdown>
       </div>
     </b-col>
@@ -335,6 +307,25 @@
               text: "Room",
             },
           ],
+        },
+        computed:{
+          options(){
+            let options_string = ''
+
+            console.log(this.petsAllowed_selected)
+            this.petsAllowed_selected.forEach((element)=>{
+              options_string += '&petsAllowed='+element
+            })
+            console.log(this.housingType_selected)
+            this.housingType_selected.forEach((element)=>{
+              options_string += '&HousingType='+element
+            })
+            console.log(this.sellOrRent_selected)
+            this.sellOrRent_selected.forEach((element)=>{
+              options_string += '&sellOrRent='+element
+            })
+            return options_string
+          }
         },
         //methods: {},
         /*created: function() {

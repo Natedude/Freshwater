@@ -52,8 +52,14 @@ def home():
 def query(sorting):
     results_list_of_dicts, saved_options = search.query()
     df = pd.DataFrame.from_records(results_list_of_dicts)
+
+    form = client.LoginForm()
+    print("login form:")
+    pprint(form)
+    regForm = client.RegisterForm()
+
     if sorting == 'none':
-        return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options)
+        return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options, form=form, regForm=regForm)
     if sorting=='lowhigh':
         df = df.sort_values(by='price', ascending = True)
     elif sorting=='highlow':
@@ -63,7 +69,10 @@ def query(sorting):
 
     print(df.columns)
     df_json = df.to_json(orient='records')
-    return render_template("home.html", results_list_of_dicts=yaml.safe_load(df_json), saved_options=saved_options)
+
+
+
+    return render_template("home.html", results_list_of_dicts=yaml.safe_load(df_json), saved_options=saved_options, form=form, regForm=regForm)
 
 @app.route('/about')
 def about():
@@ -194,11 +203,3 @@ def login():
             print('user is : ', user)
             password = login_form.password.data
             return client.login(user, password)
-
-
-
-
-
-
-
-

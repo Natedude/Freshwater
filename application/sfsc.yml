@@ -15,5 +15,6 @@ dependencies:
   - flask-wtf
   - pyyaml
   - pandas
+  - sqlalchemy-utils
 
 prefix: ~/miniconda3/envs/sfsc
