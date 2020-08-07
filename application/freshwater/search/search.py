@@ -58,13 +58,13 @@ def query_helper(args, saved_options, str_key, if_not_present, take_first_elemen
 def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAllowed=None):
     # results = search_title_and_desc(search_string)
     results = db.session.query(Listings)
-    # print("Session query:")
-    # pprint.pprint(results.all())
+    print("Session query:")
+    pprint.pprint(results.all())
 
     if search_string:
         results = filter_search_string_title_desc_city_zip_street(results, search_string)
-    # print("Filter by city zip street address:")
-    # pprint.pprint(results.all())
+    print("Filter by city zip street address:")
+    pprint.pprint(results.all())
 
     results = filter_in_list(
         results, Listings.houseType, housingType)
@@ -81,9 +81,9 @@ def filter_search_string_title_desc_city_zip_street( query, search_string=None):
         {
             'or': [
                 {'model': 'Listings', 'field': 'title',
-                'op': 'ilike', 'value': search_string},
+                    'op': 'ilike', 'value': search_string},
                 {'model': 'Listings', 'field': 'description',
-                'op': 'ilike', 'value': search_string},
+                    'op': 'ilike', 'value': search_string},
                 {'model': 'Listings', 'field': 'city',
                     'op': 'ilike', 'value': search_string},
                 {'model': 'Listings', 'field': 'postalCode',
