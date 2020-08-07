@@ -61,6 +61,7 @@ def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAll
     print("Session query:")
     pprint.pprint(results.all())
 
+    print("search_string: " + search_string)
     if search_string:
         results = filter_search_string_title_desc_city_zip_street(results, search_string)
     print("Filter by city zip street address:")
@@ -77,20 +78,21 @@ def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAll
     return results
 
 def filter_search_string_title_desc_city_zip_street( query, search_string=None):
+    f_search_string = "%{}%".format(search_string)
     filter_spec = [
         {
             'or': [
                 {'model': 'Listings', 'field': 'title',
-                    'op': 'ilike', 'value': search_string},
+                    'op': 'ilike', 'value': f_search_string},
                 {'model': 'Listings', 'field': 'description',
-                    'op': 'ilike', 'value': search_string},
+                    'op': 'ilike', 'value': f_search_string},
                 {'model': 'Listings', 'field': 'city',
                     'op': 'ilike', 'value': search_string},
                 {'model': 'Listings', 'field': 'postalCode',
                     'op': 'ilike', 'value': search_string},
                 {'model': 'Listings', 'field': 'street_address',
-                    'op': 'ilike', 'value': search_string}
-            ]
+                    'op': 'ilike', 'value': search_string},
+            ],
         }
     ]
     filtered_query = apply_filters(query, filter_spec)
