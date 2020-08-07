@@ -34,8 +34,6 @@ def getAll(name):
             for usr in allUsers:
                 if mess['fkSender']  == usr['email']:
                     mess = dicMerge(mess, usr)
-                    startDate=datetime.datetime(2013, 9, 20,13,00)
-                    mess['timeCreated']=random_date(startDate,10)
                     mess.pop(password)
                     myMessages.append(mess)
                     print(type(myMessages))
