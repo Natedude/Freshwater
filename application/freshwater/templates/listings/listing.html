@@ -176,7 +176,7 @@
 		<h6 style="text-align: center;">Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
 		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
-		{% if current_user.is_authenticated and '@sfsu.edu' in current_user.email   %}
+		{% if current_user.is_authenticated and ('@sfsu.edu' in current_user.email or '@mail.sfsu.edu' in current_user.email )   %}
     <form action="/contactLandlord" method="POST">
       <input type="hidden" name="idType" :value="id">
 			<input type="email" id="email" name="senderEmail" value={{current_user.email}}  required class="form-control form-control-lg" />

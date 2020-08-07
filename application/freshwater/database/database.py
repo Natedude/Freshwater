@@ -1,5 +1,5 @@
 from pprint import pprint
-from ..models import Images, Listings
+from ..models import Images, Listings, User
 from freshwater import db, db_engine
 from sqlalchemy.sql import select
 import sys
@@ -42,6 +42,28 @@ def get_listing_by_id(wanted_id):
     # print(value)
     result.close()
     return row
+
+def get_user_email_by_id(wanted_id):
+    table = User
+    expression = (User.id == wanted_id)
+    conn = db_engine.connect()
+    s = select([table]).where(expression)
+    result = conn.execute(s)
+    row = result.fetchone()
+    # print("select_where_value: Row:")
+    # pprint(row)
+    # print(str(type(row)))
+    # value = row[column_name_str]
+    # print(value)
+    result.close()
+    return row['email']
+
+def get_user_email_from_listing_id(listing_id):
+    listing = get_listing_by_id(listing_id)
+    user_id = listing['fk_user_id']
+    email = get_user_email_by_id(user_id)
+    print(f"User id: {user_id} - Email: {email}")
+    return email
 
 #pass in row as a sqlalchemy object returned from model constructor
 #returns id sqlalchemy created for it

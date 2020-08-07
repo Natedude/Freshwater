@@ -1,5 +1,7 @@
 
+from freshwater.database.database import get_user_email_from_listing_id
 from freshwater import client
+
 from flask import render_template, request, session, redirect, url_for
 from ..models import Listings, Images, Messages, User
 from ..models import db
@@ -36,16 +38,19 @@ def getAll(name):
     return render_template("client/dashboard.html", messages=myMessages, reciever=name, numMessages=len(myMessages), form=form, regForm=regForm)
 
 def contactLandlord(d):
+    #TODO get receiver from listing id
+    reciever = get_user_email_from_listing_id(d['idType'])
     newMessage = Messages(
-        fkSender = d['senderName'],
-        fkListing = d['id'],
-        fkReciever = d['senderEmail'],
+        fkSender=d['senderEmail'],
+        fk_listing_id = d['idType'],
+        fkReciever=reciever,
         message = d['message'],
         unread = 0)
     db.session.add(newMessage)
     db.session.commit()
     db.session.refresh(newMessage)
-    return render_template("client/login.html")
+    #TODO what to do after successful sending message
+    return redirect(url_for('home'))
 
 
 def dicMerge(dict1, dict2):
