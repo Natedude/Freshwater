@@ -19,14 +19,17 @@ def model_to_list_of_dicts(model):
     lst.sort(key=lambda x: x["id"])
     return lst  # Remember this needs to be jsonfied to pass it to html
 
+
 class Messages(db.Model):
     __tablename__ = "Messages"
     id = db.Column(db.Integer, primary_key=True)
+    fkListing = db.Column(db.String(10)) 
     fkSender = db.Column(db.String(255))
     fkReciever = db.Column(db.String(255))
     message = db.Column(db.String(400))
     timeCreated = db.Column(db.DateTime, default=datetime.utcnow)
     unread = db.Column(db.Integer) #0 is read, 1 is unread
+    
 
     def dict(self):
         return {"id": self.id,
@@ -45,9 +48,9 @@ class Images(db.Model):  # Db where all Image paths are stored
     id = db.Column(db.Integer, primary_key=True)
     # All images must be associted with the Onwer(/User)'s ID & Listing ID
     fk_user_id = db.Column(db.Integer, ForeignKey('User.id')) # Forgien Key for
-    #user = relationship("User")
+    user = relationship("User")
     fk_listing_id = db.Column(db.Integer, ForeignKey('Listings.id')) # Forgien Key for
-    #listing = relationship("Listings")
+    listing = relationship("Listings")
     # Informs us if a sell or Someone looking to rent our a unit
     # sellOrRent = db.Column(db.String)
     path = db.Column(db.String(255))  # Relative file path of image
@@ -140,6 +143,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
+    #phone_number = db.Column(db.String(25))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())

@@ -26,12 +26,12 @@ def makeListing(dics):
     db.session.refresh(newListing)
     saveImage(dics['image1'], newListing.id)
     
-    return render_template("listings/post.html")
+    return render_template("/")
 
 
-def saveImage(path, usrId):
+def saveImage(path, listId):
     newImage = Images(
-        fk_listing_id = usrId,
+        fk_listing_id = listId,
         path       = path
     )
     db.session.add(newImage)   

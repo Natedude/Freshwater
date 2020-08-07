@@ -172,14 +172,14 @@
 		<h6 style="text-align: center;">Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
 		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
 
-		<form action="#" method="GET">
-			<input type="text" id="name" name="name" placeholder="Your name" required class="form-control form-control-lg" />
+		<form action="/contactLandlord" method="POST">
+			<input type="text" id="name" name="senderName" placeholder="Your name" required class="form-control form-control-lg" />
+			<br>
+      <input type="hidden" name ="idType"  :value="id">
+			<input type="email" id="email" name="senderEmail" placeholder="Your Email" required class="form-control form-control-lg" />
 			<br>
 
-			<input type="email" id="email" name="email" placeholder="Your Email" required class="form-control form-control-lg" />
-			<br>
-
-			<input type="tel" id="phone" name="phone" placeholder="Your Phone" required class="form-control form-control-lg" />
+			<input type="tel" id="phone" name="senderPhone" placeholder="Your Phone" required class="form-control form-control-lg" />
 			<br>
 
 			<textarea id="message" name="message" class="form-control form-control-lg" rows="4" cols="30" placeholder="Your message here" required></textarea>
@@ -221,6 +221,7 @@
               caption: 'Dining room'},
 
           ],
+          id:     "{{ data['id']}}",
           street: "{{ data['street_address']}}",
           city: "{{ data['city'] }}",
           state: "CA",

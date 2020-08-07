@@ -96,6 +96,20 @@ def listing():
 
 
 
+@app.route('/contactLandlord', methods=['GET', 'POST'])
+def contactLandlord():
+    if request.method == 'POST':
+        if current_user.is_authenticated:
+            form = request.form
+            d = request.form.to_dict()
+            print('type of d: ', type(d))
+            print(d)
+            return messaging.contactLandlord(d)
+        else:
+            #send the to login with a message why
+            #TODO
+            return "<h1>Not Logged in</h1>"
+
 
 
 @app.route('/dashboard')
