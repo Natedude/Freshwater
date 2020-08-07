@@ -10,12 +10,14 @@ You are free to organize the contents of the folder as you see fit. But remember
 
 # Our Website
 
-* [Fresh Water Rentals](http://35.226.13.177)
+* [Fresh Water, were the gators live](http://www.freshwater.city)
 
 ------------------------------------------------------------
 
 ## Built With
 
+* [VueJS](https://vuejs.org) - Used to make our website reactive
+* [BootstrapVue](https://bootstrap-vue.org) - Used for the templating for our site
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Used to serve as REST API server
 * [Gunicorn](https://gunicorn.org) - Used to handle our HTTP server
 * [NGINX](https://nginx.org/en/) - Used to handle our HTTP proxy server
