@@ -49,10 +49,11 @@
     <b-container>
       <h1 style="margin-top: 30px;">{{reciever}}'s Dashboard</h1>
       <h2 style="margin-top: 20px;">My Properties</h2>
+      {% for lis in listings %}
       <b-container>
         <b-row>
           <b-col>
-            <p class="h6 mb-3" style="margin-top:8px">1600 Holloway Ave, San Francisco, CA 94132</p></b-col>
+            <p class="h6 mb-3" style="margin-top:8px">{{lis['street_address']}}, {{lis['city']}}, {{lis['postalCode']}} </p></b-col>
           </b-col>
           <b-col>
             <b-button variant="danger" size="sm">Delete</b-button>
@@ -60,7 +61,7 @@
         </b-row>
 
       </b-container>
-
+      {% endfor %}
 
 
 <!-- divider line  -->

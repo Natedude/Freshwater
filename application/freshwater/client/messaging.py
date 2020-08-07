@@ -1,7 +1,6 @@
 
 from freshwater.database.database import get_user_email_from_listing_id
 from freshwater import client
-
 from flask import render_template, request, session, redirect, url_for
 from ..models import Listings, Images, Messages, User
 from ..models import db
@@ -18,6 +17,7 @@ def getAll(name):
     #lstMessages = Messages.query(filter(Messages.fkReciever == name)).all()
     allMessages = dbTolst(Messages)
     allUsers = dbTolst(User)
+    allListings = dbTolst(Listings)
     # lstMessages = Messages.query.filter_by(fkReciever=name)
     # print('______________________')
     # print(lstMessages)
@@ -26,7 +26,9 @@ def getAll(name):
     # print(type(allmess))
     # print(allmess)
     myMessages = []
+    listing=[]
     numMess = 0
+    usrId = None
     for mess in allMessages:
         if mess['fkReciever'] == name:
             for usr in allUsers:
@@ -34,8 +36,20 @@ def getAll(name):
                     mess = dicMerge(mess, usr)
                     startDate=datetime.datetime(2013, 9, 20,13,00)
                     mess['timeCreated']=random_date(startDate,10)
+                    mess.pop(password)
                     myMessages.append(mess)
-    return render_template("client/dashboard.html", messages=myMessages, reciever=name, numMessages=len(myMessages), form=form, regForm=regForm)
+                    print(type(myMessages))
+    for usr in allUsers:
+        if name == usr['email']:
+            usrId =usr['id']
+            print(usr['id'])
+    if usrId != None:
+        print('should get here everytime:', usrId)
+        for lst in allListings:
+            if lst['fk_user_id'] == usrId:
+                listing.append(lst)
+
+    return render_template("client/dashboard.html", listings=listing, messages=myMessages, reciever=name, numMessages=len(myMessages), form=form, regForm=regForm)
 
 def contactLandlord(d):
     #TODO get receiver from listing id
