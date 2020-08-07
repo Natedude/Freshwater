@@ -46,7 +46,7 @@ def home():
     regForm = client.RegisterForm()
     #return render_template("client/login.html", form = login_form, regForm = reg_form)
 
-    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options, form=form, regForm=regForm)
+    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options_2, form=form, regForm=regForm)
 
 @app.route('/query/<sorting>', methods=['GET', 'POST'])
 def query(sorting):
