@@ -56,7 +56,11 @@
             <p class="h6 mb-3" style="margin-top:8px">{{lis['street_address']}}, {{lis['city']}}, {{lis['postalCode']}} </p></b-col>
           </b-col>
           <b-col>
-            <b-button variant="danger" size="sm">Delete</b-button>
+	   {% if lis['adminAppr'] == 1%}
+            <b-button variant="success" size="sm">Approved</b-button>
+	    {% else %} 
+            <b-button variant="danger" size="sm">Pending</b-button>
+	    {% endif %}
           </b-col>
         </b-row>
 
