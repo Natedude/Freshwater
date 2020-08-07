@@ -194,7 +194,7 @@ class DevUtils(object):
                 #remove duplicates
             rand_words = list(dict.fromkeys(rand_words))
             chosen = random.sample(rand_words, 2)
-            first_name = chosen[0]
+            first_name = chosen[0] + str(random.randint(1, 777))
             #last_name = chosen[1]
             # phone_number = "(415) 338-1111"
             email_end = random.choice(['random.com', 'sfsu.edu'])
