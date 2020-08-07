@@ -45,13 +45,26 @@
 					</b-nav-item>
 
 				</b-navbar-nav>
+				{% if active_page == "index" %}
+				{% else %}
+				<b-navbar-nav class="m-auto">
+					<b-nav-form> <!-- Search Text Field -->
+						<b-form-input name="search_string" class="col-md-auto" list="input-list" maxlength="40" id="input-with-list"
+							placeholder="What are you looking for?" style="min-width:20rem; margin-right: 1rem;"></b-form-input>
+						<b-tooltip target="input-with-list" placement="bottom" triggers="hover" variant="primary"> Max. 40 Characters allowed!
+						</b-tooltip> <!-- Search Button -->
+						<b-button class="my-2 my-sm-0 col-md-auto" formaction="/query/none" type="submit">
+							<b-icon icon="search"></b-icon> </b-button>
+					</b-nav-form>
+					{% endif %}
+				</b-navbar-nav>
 				<!-- Right aligned nav items -->
 				<b-navbar-nav class="ml-auto">
 					<b-nav-item>
 					{% if current_user.is_authenticated %}
 						<b-dropdown id="dropdown-right" right text=" Hi {{ current_user.email }}" class="m-md-2">
 							<b-dropdown-item href="/dashboard">Dashboard</b-dropdown-item>
-							<b-dropdown-item > <a href="/logout">Logout</a></b-dropdown-item>
+							<b-dropdown-item > <a href="{{ url_for_security('logout') }}">Logout</a></b-dropdown-item>
 						</b-dropdown>
 						{% else %}
 						<b-button pill id="show-btn" v-b-modal.modal-center
