@@ -6,6 +6,14 @@ from freshwater import db#, meta
 from sqlalchemy_filters import apply_filters
 
 def query():
+    """
+    Returns saved options like search string and filters so they persist through page reloads.
+    Also, returns listings results to be displayed on frontend.
+
+    :return: results_list_of_dicts is a list of dictionaries, one for each listing returned with search and filter options
+    also returns saved_options with gets args from the url
+    :rtype: tuple (list of dictionaries, dictionary)
+    """
     if request.method == 'GET':
         print("**************************query**************************")
         args = request.args
