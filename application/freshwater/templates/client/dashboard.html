@@ -19,7 +19,14 @@
   <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
-  <script src="/static/js/navbar.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174684984-1"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-174684984-1');
+  </script>
 
   <style>
     .col-md {
@@ -29,17 +36,15 @@
   </style>
 </head>
 
+{% extends 'navbar.html' %}
 <body>
+{% block content %}
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
     {{ text[0]|upper}}{{text[1:] }}
   {% endmacro %}
 
   <div id="app">
-    <div>
-      <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
-    </div>
-    <navbar-component></navbar-component>
     <!-- Message Container -->
     <b-container>
       <h1 style="margin-top: 30px;">Peter's Dashboard</h1>
@@ -186,6 +191,8 @@
 
     </div>
 
+{% endblock %}
+{% block script %}
 
     <script>
       
@@ -196,5 +203,6 @@
         });
     </script>
 
+{% endblock %}
 </body>
 </html>
