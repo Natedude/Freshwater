@@ -189,7 +189,11 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-select id="home-type-input" required></b-form-select>
+                    <b-form-select id="home-type-input" required>
+                      <b-form-select-option value="House">House</b-form-select-option>
+                      <b-form-select-option value="Apartment">Apartment</b-form-select-option>
+                      <b-form-select-option value="Room">Room</b-form-select-option>
+                    </b-form-select>
                   </b-form-group>
 
                   <b-form-group id="sq-feet">
@@ -215,7 +219,7 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-select id="num-beds-input" required></b-form-select>
+                    <b-form-input id="num-beds-input" type="number" required></b-form-input>
                   </b-form-group>
 
                   <b-form-group id="price">
@@ -241,7 +245,7 @@
                       </b-icon>
                     </h6>
                     </p>
-                    <b-form-select id="num-baths-input" required></b-form-select>
+                    <b-form-input id="num-baths-input" type="number" required></b-form-input>
                   </b-form-group>
                 </b-form-group>
               </div>
