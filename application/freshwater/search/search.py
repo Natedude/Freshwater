@@ -29,6 +29,7 @@ def query():
         #if they type nothing and choose no filters, show all listings
         if not (search or housingType or sellOrRent or petsAllowed):
             all_listings = db.session.query(Listings)
+            all_listings = all_listings.filter(Listings.adminAppr == 1)
             results_list_of_dicts = postMaker(all_listings)
         else:
             results = backendSearch(search_string=search, housingType=housingType, sellOrRent=sellOrRent, petsAllowed=petsAllowed)
@@ -61,6 +62,7 @@ def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAll
         results, Listings.sellOrRent, sellOrRent)
     results = filter_in_list(
         results, Listings.petsAllowed, petsAllowed)
+    results = results.filter(Listings.adminAppr == 1)
     return results
 
 # searches title and description for search string
@@ -81,7 +83,7 @@ def search_title_and_desc(search):
 # that has been filtered to include only records/rows that have values in list
 def filter_in_list(results, table_column, list_):
     if list_:
-        results = results = results.filter(table_column.in_(list_))
+        results = results.filter(table_column.in_(list_))
     pprint.pprint(results.all())
     print(type(results))
     return results
