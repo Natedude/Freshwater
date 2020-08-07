@@ -6,4 +6,6 @@ Pipfile.lock
 **/.pyc
 __pycache__/
  *.pyc
+sqltools_20200731004925_97501.log
 .vscode
+
