@@ -4,6 +4,7 @@ from freshwater import app, db
 from .search import search
 from flask_wtf import FlaskForm
 from .client import client, messaging, posting
+from .database import database
 from wtforms import validators, Form, StringField, PasswordField, validators, BooleanField, SubmitField
 from flask_security import login_required, current_user
 import os
@@ -15,6 +16,13 @@ import pandas as pd
 @app.template_filter()
 def numberFormat(value):
     return format(int(value), ',d')
+
+@app.template_filter()
+def get_address_by_id(lid):
+    row = database.get_listing_by_id(lid)
+    address = ""
+    address = address + row['street_address'] + ", " + row['city'] + ", CA, " + str(row['postalCode'])
+    return address
 
 @app.route('/', methods=['GET', 'POST'])
 def home():

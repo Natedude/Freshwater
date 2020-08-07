@@ -34,7 +34,7 @@ def getAll(name):
             for usr in allUsers:
                 if mess['fkSender']  == usr['email']:
                     mess = dicMerge(mess, usr)
-                    mess.pop(password)
+                    mess.pop('password')
                     myMessages.append(mess)
                     print(type(myMessages))
     for usr in allUsers:
