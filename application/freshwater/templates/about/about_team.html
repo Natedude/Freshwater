@@ -14,28 +14,34 @@
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
   <link rel="stylesheet" type="text/css" href="/static/css/about_team.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Required scripts -->
   <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
-  <script src="/static/js/navbar.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://unpkg.com/vue-router"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174684984-1"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-174684984-1');
+  </script>
+
+
 </head>
+{% extends 'navbar.html' %}
 
 <body>
+{% block content %}
   <!-- Jinja Macros -->
   {% macro capitalize(text) %}
     {{ text[0]|upper}}{{text[1:] }}
   {% endmacro %}
 
   <div id="app">
-    <div>
-      <b-alert show dismissible variant="info" style="margin-bottom: 0rem !important;">This website is for demonstration purposes only. <b>"San Francisco State University, Summer 2020, CSC 648/848, Team 1<b>"</b-alert>
-    </div>
-
-	<navbar-component> </navbar-component>
-  
     <!-- Message Container -->
     <div class="about">
     <div class="page_title">
@@ -174,16 +180,21 @@
     </div>
 
     </div>
+    </div>
+    </div>
+    </div>
 
 
-
-    <script>
+{% endblock %}
+{% block script %}
+    <script type="application/javascript">
         window.app = new Vue({
         el: "#app",
         delimiters: ['[[', ']]'],
 
         });
     </script>
+{% endblock %}
 
 </body>
 </html>

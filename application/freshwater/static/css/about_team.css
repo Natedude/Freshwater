@@ -40,13 +40,13 @@ a {
 	margin-top: 10px; */
 }
 .card {
-	float: left;
-	width : 200px;
-	height: 400px;
-	margin-bottom: 16px;
-	padding:8px;
-	background: #ececec;
-	border: 0px;
+	float: left !important;
+	width : 200px !important;
+	height: 400px !important;
+	margin-bottom: 16px !important;
+	padding:8px !important;
+	background: #ececec !important;
+	border: 0px !important;
 }
 
 /* Display the columns below each other instead of side by side on small screens */

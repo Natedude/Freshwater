@@ -76,7 +76,10 @@ def query(sorting):
 
 @app.route('/about')
 def about():
-    return render_template("about/about_team.html")
+    form = client.LoginForm()
+    pprint(form)
+    regForm = client.RegisterForm()
+    return render_template("about/about_team.html", form=form, regForm=regForm)
 
 @app.route('/postOld')
 @login_required
@@ -85,7 +88,10 @@ def postOld():
 
 @app.route('/post')
 def post():
-    return render_template("listings/post.html")
+    form = client.LoginForm()
+    pprint(form)
+    regForm = client.RegisterForm()
+    return render_template("listings/post.html", form=form, regForm=regForm)
 
 @app.route('/confirm')
 def confirm():
@@ -101,11 +107,17 @@ def listing():
         # print("-----------------------------------------")
         data = yaml.safe_load(request.form['listing'])
         # print(data, type(data))
-        return render_template("listings/listing.html", data=data)
+        form = client.LoginForm()
+        pprint(form)
+        regForm = client.RegisterForm()
+        return render_template("listings/listing.html", data=data, form=form, regForm=regForm)
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("/client/dashboard.html")
+    form = client.LoginForm()
+    pprint(form)
+    regForm = client.RegisterForm()
+    return render_template("/client/dashboard.html", form=form, regForm=regForm)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def register():
