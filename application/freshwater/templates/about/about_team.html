@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/css/about_team.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+  <title>SF State of Code</title>
+
+  <!-- Required Stylesheets -->
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/about_team.css">
+
+  <!-- Required scripts -->
+  <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://unpkg.com/vue-router"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174684984-1"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-174684984-1');
+  </script>
+
+
 </head>
+{% extends 'navbar.html' %}
+
 <body>
+{% block content %}
+  <!-- Jinja Macros -->
+  {% macro capitalize(text) %}
+    {{ text[0]|upper}}{{text[1:] }}
+  {% endmacro %}
+
+  <div id="app">
+    <!-- Message Container -->
+    <div class="about">
     <div class="page_title">
 	    <h1> Software Engineering class SFSU - Summer 2020 </h1>
 	    <h2> Team - 01 </h2>
         <h1>Who Are We</h1>
     </div>
 
+    <div class="cards">
     <div class="team_intro">
         <p>
             We are a small team of web developers and designers based in San Francisco State University. We are specialized in Python, JavaScript and MySQL.
         </p>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-left: 5%">
         <div class="column">
             <div class="card">
-                <img src="/static/images/about/luis.jpg"
+                <img src="/static/images/about/luis.jpg" style= "object-fit: contain; width: 180px; height: 180px;"
                         alt="Luis">
                 <div class="container">
                     <h4 center>
@@ -39,8 +79,8 @@
 
             
             <div class="card">
-                <img src="/static/images/about/garrett.jpeg"
-                        alt="Garrett" style="width:100%">
+                <img src="/static/images/about/garrett.jpeg" style= "object-fit: contain; width: 180px; height: 180px;"
+                        alt="Garrett">
                 <div class="container">
 			<h4 center><a href="/profile/garrett">Garrett</a></h4>
                     <p class="title">Database &amp; Backend</p>
@@ -54,8 +94,8 @@
             </div>
 
             <div class="card">
-                <img src="/static/images/about/nathan.png"
-                        alt="Nathan Hildum" style="width:100%">
+                <img src="/static/images/about/nathan.png" style= "object-fit: contain; width: 180px; height: 180px;"
+                        alt="Nathan Hildum">
                 <div class="container">
                     <h4 center><a href="/profile/nathan">Nathan Hildum</a></h4>
                     <p class="title">Backend, Discord Manager, &amp; Documentation Editor</p>
@@ -71,10 +111,10 @@
 
 
             <div class="card">
-                <img src="/static/images/about/zachary.jpg"
-                        alt="Zachary Ma" style="width:100%">
+                <img src="/static/images/about/zachary.jpg" style= "object-fit: contain; width: 180px; height: 180px;"
+                        alt="Zachary Ma">
                 <div class="container">
-                    <h4 center><a href="/profile/zachary"> Zachary</h4>
+			<h4 center><a href="/profile/zachary"> Zachary</a></h4>
                     <p class="title">Backend, SQL &amp; Member</p>
                     <a href="https://github.com/Area-Turtle" id="share-git" class="sharer button"><i class="fa fa-github" aria-hidden="true"></i></a>
                     <a href="https://www.linkedin.com/in/zachary-ma/" id="share-li" class="sharer button"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -88,7 +128,7 @@
 
 
             <div class="card">
-                <img src="/static/images/about/gouri.jpeg" alt="Gouri" style="width:100%">
+                <img src="/static/images/about/gouri.jpeg" alt="Gouri" style= "object-fit: contain; width: 180px; height: 180px;">
                 <div class="container">
 			<h4 center><a href="/profile/gouri">Gouri Jamakhandi</a></h4>
                     <p class="title">Front End Developer</p>
@@ -104,8 +144,8 @@
 
 
             <div class="card">
-                <img src="/static/images/about/xinwei.jpeg"
-                        alt="Xinwei" style="width:100%">
+                <img src="/static/images/about/xinwei.jpeg" style= "object-fit: contain; width: 180px; height: 180px;"
+                        alt="Xinwei">
                 <div class="container">
                     <h4 center><a href="/profile/xinwei">Xinwei Fan</a></h4>
                     <p class="title">Front End Developer</p>
@@ -121,8 +161,8 @@
 
 
             <div class="card">
-                <img src="/static/images/about/katthak_shah_image.jpeg"
-                        alt="katthak_shah" style="width:100%">
+                <img src="/static/images/about/katthak_shah_image.jpeg" style= "object-fit: contain; width: 180px; height: 180px;"
+                        alt="katthak_shah">
                 <div class="container">
 			              <h4 center><a href="/profile/katthak">Katthak Shah</a></h4>
                     <p class="title">Full Stack Developer &amp; Github Master</p>
@@ -136,7 +176,25 @@
                 </div>
             </div>
 
-        </div>
+
     </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+{% block script %}
+    <script type="application/javascript">
+        window.app = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+
+        });
+    </script>
+{% endblock %}
+
 </body>
 </html>

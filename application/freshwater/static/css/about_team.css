@@ -1,75 +1,82 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    text-align: center;
-    font-size: 18px;
-    margin-left:20%;
-    margin-right:20%;
-    background: #ececec;
+.about {
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	text-align: center;
+	font-size: 18px;
+	background: #ececec;
+}
+
+.cards {
+	margin-left:20%;
+	margin-right:20%;
+	background: #ececec;
+}
+
+h4 {
+	margin-block-end: 1rem;
+	margin-block-start: 1rem;
+}
+
+a {
+	text-decoration: revert;
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 .page_title{
-    margin-top: 30px;
-    color: black;
-    margin-bottom: 30px;
+	color: black;
+	margin-bottom: 30px;
 }
 
 .team_intro{
-    margin-bottom: 60px;
-    color: grey;
+	margin-bottom: 60px;
+	color: grey;
 
 }
 
 .row{
-    display: flex;
-    justify-content: center;
-    /* margin:20%;
-    margin-top: 10px; */
+	display: flex;
+	justify-content: center;
+	/* margin:20%;
+	margin-top: 10px; */
 }
 .card {
-    float: left;
-    width : 200px;
-    height: 400px;
-    margin-bottom: 16px;
-    padding:8px;
-  }
+	float: left !important;
+	width : 200px !important;
+	height: 400px !important;
+	margin-bottom: 16px !important;
+	padding:8px !important;
+	background: #ececec !important;
+	border: 0px !important;
+}
 
+/* Display the columns below each other instead of side by side on small screens */
+@media screen and (max-width: 650px) {
+	.column {
+		width: 100%;
+		display: block;
+	}
+}
 
-  /* Display the columns below each other instead of side by side on small screens */
-  @media screen and (max-width: 650px) {
-    .column {
-      width: 100%;
-      display: block;
-    }
-  }
-
-
-  /* Some left and right padding inside the container */
-  .container {
-    padding: 0 16px;
-  }
-
+/* Some left and right padding inside the container */
+.container {
+	padding: 0 16px;
+}
 
 .card .title {
-    color: grey;
-    font-size: 18px;
-  }
+	color: grey;
+	font-size: 18px;
+	line-height: 1rem;
+}
 
-  .button {
-    display: inline;
-    padding: 5px;
-    color: grey;
-    text-align: center;
-    cursor: pointer;
-  }
+.button {
+	display: inline;
+	padding: 5px;
+	color: grey;
+	text-align: center;
+	cursor: pointer;
+}
 
-  .button:hover {
-    background-color: lightgrey;
-    border-radius: 10px;
-  }
-
-  img {
-     object-fit: contain;
-
-     width: 180px;
-     height: 180px;
-  }
+.button:hover {
+	background-color: lightgrey;
+	border-radius: 10px;
+}

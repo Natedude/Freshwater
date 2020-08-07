@@ -1,202 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-    <title>Listing</title>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-    <!-- Required Stylesheets -->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/listing.css')}}"
-    />
+  <title>Listing</title>
 
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css')}}"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')}}"
-    />
-
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.css')}}"
-    />
-
-    <!-- Load polyfills to support older browsers -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
-
-    <!-- Required scripts -->
-    <script src="{{ url_for('static', filename='node_modules/vue/dist/vue.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='node_modules/bootstrap-vue/dist/bootstrap-vue-icons.min.js')}}"></script>
+  <!-- Required Stylesheets -->
+  <link type="text/css" rel="stylesheet" href="../../static/css/listing.css" />
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+  <link type="text/css" rel="stylesheet" href="../../static/css/post.css" />
 
 
 
-    <script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
+  <!-- Required scripts -->
+  <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <!-- Load polyfills to support older browsers -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
 
-  </head>
-  <body>
-    <!-- Our application root element -->
-    <div id="app">
-
-
-        <b-container>
-          <template>
-            <!-- Emulate built in modal header close button action -->
-            <b-button size="sm" variant="outline-danger" @click="close()">
-              Back to results
-            </b-button>
-          </template>
-
-
-
-          <template>
-
-            <b-card-group>
-              <b-card>
-                <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="200"  :width="600" :height="400" :items="items"/>
-              </b-card>
-
-              <b-card no-body class="overflow-hidden" style="max-width: 540px;">
-                <b-row>
-                  <b-col sm="8">
-                    <div class="listing_text">
-                      [[street]], [[city]], [[state]]
-                    </div>
-                  </b-col>
-                  <b-col sm="4">
-                    <b-button-group>
-                      <b-button variant="outline-primary">
-                        <b-icon icon="heart"></b-icon> Favorite
-                      </b-button>
-                      <b-button variant="outline-primary">
-                        <b-icon icon="upload"></b-icon> Share
-                    </b-button-group>
-                  </b-col>
-                </b-row>
-
-                <b-row>
-                  <b-col sm="4">
-                    <div class="listing_text">
-                      [[houseType]] for [[status]]
-                    </div>
-                    <h2> $[[price]]/mo </h2>
-                  </b-col>
-                  <b-col sm="8">
-                    <div class="listing_text">
-                      -[[subtype]]  -Baths: [[baths]]
-                      <br>
-                      - [[area_size]] sqft
-                    </div>
-                  </b-col>
-                </b-row>
-                <b-row>
-
-                  <b-col >
-                    <b-button v-b-modal.contact block variant="primary">Contact Landlord
-                      <b-icon icon="envelope"></b-icon></b-button>
-                  </b-col>
-                </b-row>
-
-                <b-row>
-
-                  <b-embed type="iframe" class="map"
-                      :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
-                  </b-embed>
-                </b-row>
+<script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174684984-1"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-174684984-1');
+  </script>
 
 
 
-                </b-card>
-              </b-card-group>
+  <style>
+    .col-md {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
 
-          </template>
+    .container1 {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
 
+    }
+  </style>
 
-          <!-- We can add some footer later? -->
-          <!-- <template>
-            <b>Custom Footer</b>
-            <b-button size="sm" variant="success" @click="ok()">
-              OK
-            </b-button>
-            <b-button size="sm" variant="danger" @click="cancel()">
-              Cancel
-            </b-button>
-            <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
-              Forget it
-            </b-button>
-          </template> -->
+</head>
 
-        </b-container>
+{% extends 'navbar.html' %}
+<body>
+{% block content %}
+  <!-- Jinja Macros -->
+  {% macro capitalize(text) %}
+  {{ text[0]|upper}}{{text[1:] }}
+  {% endmacro %}
 
+    <div style="width: 90%; margin: auto; margin-top: 40px">
+      <!-- Jumbotron Container -->
+      <b-container fluid>
+        <b-row>
+          <b-col sm="7" align-v="stretch">
+              <lingallery  :addons="{ enableLargeView: true }" :mobileHeight="700" :width="900" :height="500":items="items"/>
+        </b-col>
 
-        <b-modal id="contact" centered>
-          <template v-slot:modal-header>
-            <!-- probably there is better solutions? -->
-              <h2></h2>
-              <h2>Contact Landlord</h2>
-              <h2></h2>
-          </template>
+        <b-col sm="5">
+          <!-- scroll bar -->
+        <div id="overflowScroll">
+          <b-card border-variant="light" bg-variant="light">
+          <!-- <h4 >Property Details</h4> -->
+          <b-row>
+			      <b-col cols="6">
+			        <h3>$[[price]]<span style="font-size: 20px"  v-if="!(houseType === 'House')">/mo</span></h3>
+			      </b-col>
+			      <!-- <b-col cols="1"> -->
+		          <!-- <p class="h5 mb-0"><b-icon icon="house-door-fill" variant="dark"></b-icon></p> -->
+			      <!-- </b-col> -->
+			      <b-col style="margin-top: 10px">
+				      <h6>[[beds]] bd | [[baths]] ba | [[area_size]] sqft</h6>
+            </b-col>
+          </b-row>
 
-          <p>Thank you for your intertest in
-            <br>
-            [[houseType]] for [[status]] at
-            <br>
-            [[street]],
-            <br>
-            [[city]],   [[state]]
-          </p>
+          <b-row style=" margin: auto;">
+            <h5 >[[houseType]] for [[status]]</h5></br>
+          </b-row>
 
-          <form action="#" method="GET">
-            <!-- <label for="user">Username</label> -->
+          <b-row>
+		        <b-col cols="1">
+              <p class="h6 mb-0"><b-icon icon="geo-alt" variant="dark"></b-icon></p>
+			      </b-col>
+			      <b-col >
+              <h6>[[street]], [[city]], [[state]]</h6>
+			      </b-col>
+          </b-row>
 
-            <input type="text" id= "name" name="name" placeholder="Your name" required>
-            <br><br>
-            <!-- <label for="email">Email</label> -->
-            <input type="email" id= "email" name="email" placeholder="Email" required>
-            <br><br>
+<!--
+          <div style="clear: both">
+		        <b-row class="mb-1">
+			        <b-col>
+                <h5 style="float: left;">[[houseType]] for [[status]]</h5>
+			        </b-col>
+		        </b-row>
+		        <b-row class="mb-3">
+			        <b-col cols="1">
+                <p class="h5 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p>
+			        </b-col>
+			      <b-col>
+		          <h5 style="float: left;">[[distance]] miles from SFSU</h5>
+			      </b-col>
+		        </b-row>
+          </div> -->
 
-            <input type="tel" id="phone" name="phone" placeholder="Phone" required>
-            <br><br>
-
-            <textarea id="message" name="message" rows="4" cols="30" placeholder="Your message here"required></textarea>
-            <br>
-
-            <input type="submit" value="Submit">
-          </form>
-
-          <template v-slot:modal-footer>
-            <div class="w-100">
-
-              <b-button
-                variant="primary"
-                size="sm"
-                class="float-right"
-              >
-                Close
+		      <b-row class="mb-3" style="margin-top: 10px">
+			      <b-col>
+              <b-button v-b-modal.contact block variant="primary">
+                <b-icon icon="envelope"></b-icon> Contact Landlord
               </b-button>
-            </div>
-          </template>
-        </b-modal>
-        </div>
+			      <b-col>
+          </b-row>
+
+          <!-- seperation line -->
+          <p style="    display: block;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid #ccc;
+          margin-top: 2em 0;
+          padding: 0;"></p>
+
+          <h4>Location Information</h4>
+          <b-row class="mb-3">
+            <b-col cols="1">
+              <p class="h6 mb-1" style='font-size:18px'><i class='fas fa-walking'></i></p>
+              <!-- <p class="h6 mb-1"><b-icon icon="book-fill" variant="dark"></b-icon></p> -->
+            </b-col>
+            <b-col>
+              <h6 style="margin-top:3px; margin-bottom: 0;">[[distance]] miles from SFSU</h6>
+            </b-col>
+          </b-row>
+
+          <b-embed type="iframe" class="map"
+                :src="'https://www.google.com/maps/embed/v1/search?q=+'+street+'+&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8'">
+          </b-embed>
+
+          <hr>
+          <b-row>
+            <b-col>
+              <h4>Property Description</h4>
+            </b-col>
+	          </b-row>
+            <b-row>
+		        <b-col><p style="text-align: justify;">[[description]]</p></b-col>
+            </b-row>
+            </b-card>
+
+          </div>
+          <!-- End of scroll bar -->
+
+        </b-col>
+
+        </b-row>
+        <br>
+      </b-container>
+    </div>
+
+	<b-modal id="contact" modal-header-close hide-footer>
+		<template v-slot:modal-title>
+			<h2>Contact Landlord</h2>
+		</template>
+
+		<h6 style="text-align: center;">Thank you for your interest in <br> [[houseType]] for [[status]] at <br></h6>
+		<h5 style="text-align: center;"><b>[[street]], <br> [[city]], [[state]]</b> </h5>
+
+		{% if current_user.is_authenticated and ('@sfsu.edu' in current_user.email or '@mail.sfsu.edu' in current_user.email )   %}
+    <form action="/contactLandlord" method="POST">
+      <input type="hidden" name="idType" :value="id">
+			<input type="email" id="email" name="senderEmail" value={{current_user.email}}  required class="form-control form-control-lg" />
+			<br>
+
+			<textarea id="message" name="message" class="form-control form-control-lg" rows="4" cols="30" placeholder="Your message here" required></textarea>
+			<br>
+
+			<button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
+		</form>
+
+		{% else %}
+		<br><br>
+			<h6 style="text-align: center;"> You dont have permission to send message to the Landlord. Please login or if already logged in, you are not a valid SFSU member..</h6>
+		{% endif %}
+
+		<template v-slot:modal-footer>
+			<div class="w-100">
+			</div>
+		</template>
+	</b-modal>
+</div>
 
 
-
-
-
-
-
+{% endblock %}
+{% block script %}
     <!-- Start running your app -->
+<script src="{{ url_for('static', filename='node_modules/lingallery/dist/lingallery.umd.js')}}"></script>
     <script>
       window.app = new Vue({
         el: '#app',
@@ -204,9 +212,9 @@
         data: {
           name: '',
           items: [
-              {id:'someid1', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
-              thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_1465395223_1479217896.jpg?1506334676',
-              caption: 'Front'},
+              {id:'someid1', src: "{{ data['path']|safe }}",
+              thumbnail: "{{ data['path']|safe }}",
+              caption: 'Front',},
               {id:'someid2', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
               thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/12945kn_rear_1465395225_1479217896.jpg?1506334676',
               caption: 'Other view'},
@@ -218,22 +226,27 @@
               caption: 'Living room 2'},
               {id:'someid5', src: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
               thumbnail: 'https://assets.architecturaldesigns.com/plan_assets/324990322/large/Auror-kitchen-3dedit_1491253661.jpg?1506336580',
-              caption: 'Dinnig room'},
+              caption: 'Dining room'},
 
           ],
-          street: "212 Howth St",
-          city: "San Francisco",
+          id:     "{{ data['id']}}",
+          street: "{{ data['street_address']}}",
+          city: "{{ data['city'] }}",
           state: "CA",
-          houseType: "Apartment",
-          status: "rent",
-          subtype: "Studio",
-          baths: 2,
-          area_size: "570 sqft",
-          price: 2000
+          postalCode: "{{data['postalCode']}}",
+          houseType: "{{ data['houseType'][0]|upper }}{{ data['houseType'][1:]}}",
+          status: "{{data['sellOrRent']}}",
+          baths: "{{data['bathroomNum']}}",
+          beds: "{{data['bedroomNum']}}",
+          area_size: "{{data['sqft']}}",
+          price: "{{data['price'] | numberFormat}}",
+          distance: "{{data['distance_from_SFSU']}}",
+          description: "{{data['description']}}"
 
 
         }
       })
     </script>
+{% endblock %}
   </body>
 </html>
