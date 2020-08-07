@@ -20,6 +20,12 @@
 	<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 	<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
 	<script src="https://unpkg.com/vue-router"></script>
+	<script>
+	function logout(){
+			location.replace("/logout")}
+	function getDashboard(){
+		location.replace("/dashboard")}
+	</script>
 </head>
 
 <body>
@@ -144,13 +150,6 @@
 	</div>
 	{% block script %}
 	{% endblock %}
-
-<script>
-	function logout(){
-			location.replace("/logout")}
-	function getDashboard(){
-		location.replace("/dashboard")}
-</script>
 
 </body>
 
