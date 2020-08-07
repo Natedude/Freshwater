@@ -19,12 +19,8 @@ def numberFormat(value):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     print("views: home():")
-    #workaround, pass in saved_options with nothing selected
-    saved_options = {}
-    saved_options['search_string'] = ''
-    saved_options['HousingType'] = []
-    saved_options['sellOrRent'] = []
-    saved_options['petsAllowed'] = []
+    # query gets saved options from url args
+    # and gets listings to display
     results_list_of_dicts, saved_options_2 = search.query()
 
     # if request.method == 'POST':
