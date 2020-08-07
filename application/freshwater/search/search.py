@@ -61,7 +61,8 @@ def backendSearch(search_string=None, housingType=None, sellOrRent=None, petsAll
     # print("Session query:")
     # pprint.pprint(results.all())
 
-    results = filter_search_string_title_desc_city_zip_street(results, search_string)
+    if search_string:
+        results = filter_search_string_title_desc_city_zip_street(results, search_string)
     # print("Filter by city zip street address:")
     # pprint.pprint(results.all())
 
