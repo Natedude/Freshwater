@@ -19,12 +19,8 @@ def numberFormat(value):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     print("views: home():")
-    #workaround, pass in saved_options with nothing selected
-    saved_options = {}
-    saved_options['search_string'] = ''
-    saved_options['HousingType'] = []
-    saved_options['sellOrRent'] = []
-    saved_options['petsAllowed'] = []
+    # query gets saved options from url args
+    # and gets listings to display
     results_list_of_dicts, saved_options_2 = search.query()
 
     # if request.method == 'POST':
@@ -46,7 +42,7 @@ def home():
     regForm = client.RegisterForm()
     #return render_template("client/login.html", form = login_form, regForm = reg_form)
 
-    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options, form=form, regForm=regForm)
+    return render_template("home.html", results_list_of_dicts=results_list_of_dicts, saved_options=saved_options_2, form=form, regForm=regForm)
 
 @app.route('/query/<sorting>', methods=['GET', 'POST'])
 def query(sorting):
