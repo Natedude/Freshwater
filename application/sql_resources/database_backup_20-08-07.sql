@@ -1,4 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `CSC_777` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `CSC_777`;
 --
 -- Host: localhost    Database: CSC_777
 -- ------------------------------------------------------
