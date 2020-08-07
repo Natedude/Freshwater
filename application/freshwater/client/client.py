@@ -6,22 +6,6 @@ from wtforms import validators, Form, StringField, PasswordField, validators, Bo
 from flask_wtf import FlaskForm
 
 
-
-
-
-def invalid_cred(form, field):
-    """ Username/Password check """
-    username_enter = form.username.data
-    password_enter = field.data
-    #check username valid
-    user_object = User.query.filter_by(username=username_enter).first()
-    if user_object is None:
-        raise ValidationError("Incorrect username/password")
-    elif password_enter != user_object.password:
-        raise ValidationError("Incorrect username/password")
-
-
-
 ###NOTE THIS IS A DEMO for login proccess###
 def login(user, passwrd):
     user = request.form['username']
