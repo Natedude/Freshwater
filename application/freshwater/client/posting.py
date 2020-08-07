@@ -6,27 +6,26 @@ from ..models import db
 def makeListing(dics):
     newListing = Listings(
                         fk_user_id = dics['fk_user_id'],
-                        title = 'new title',
-                        houseType = 'rent', #dics['typeHome'],
-                        sellOrRent = 'myType', #dics['rentOrSell'], 
+                        title = dics['title'],
+                        houseType = dics['houseType'], #dics['typeHome'],
+                        sellOrRent = dics['sellOrRent'], #dics['rentOrSell'], 
                         petsAllowed = 1, #int('1'),
-                        city = 'LoveDoc', #dics['city'],
-                        postalCode = 123,#int(dics['area']),
-                        street_address = 123,#dics['street'],
+                        city = dics['city'], #dics['city'],
+                        postalCode = int(dics['postalCode']),#int(dics['area']),
+                        street_address = dics['street_address'],
                         distance_from_SFSU = float(12),
-                        description = "Here", #dics['description'],
-                        price = 123,#int(dics['price']),
-                        sqft = int(123),
-                        bedroomNum =123123,# int(dics['numBeds']),
-                        bathroomNum =123,# int(dics['numBaths']),
+                        description = dics['description'],
+                        price = int(dics['price']),
+                        sqft = int(dics['sqft']),
+                        bedroomNum =int(dics['bedroomNum']),# int(dics['numBeds']),
+                        bathroomNum =int(dics['bathroomNum']),# int(dics['numBaths']),
                         adminAppr = 0
                         )
     db.session.add(newListing)   
     db.session.commit()
     db.session.refresh(newListing)
     saveImage(dics['image1'], newListing.id)
-    
-    return render_template("/")
+    return redirect(url_for('home'))
 
 
 def saveImage(path, listId):
