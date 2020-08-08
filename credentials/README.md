@@ -3,7 +3,7 @@
 
 1. Server URL or IP
 ```
-35.226.13.177
+23.251.148.241
 ```
 2. SSH username
 
@@ -14,12 +14,12 @@ souza
 
 ```
 chmod 400 ssh_keys/souza
-ssh -i ssh_keys/souza -l souza 35.226.13.177
+ssh -i ssh_keys/souza -l souza 23.251.148.241
 ```
 
 4. Database URL or IP and port used.
 ```
-35.226.13.177:3306
+23.251.148.241:3306
 ```
 5. Database username: root
 6. Database password: None
@@ -27,4 +27,10 @@ ssh -i ssh_keys/souza -l souza 35.226.13.177
 8. This database can only be accessed while logged in to the cloud
 ```
 sudo mysql
+```
+
+9. Port forward to your computer
+
+```
+ssh -i ssh_keys/souza -N -f -L localhost:3306:localhost:3306 23.251.148.241
 ```
