@@ -9,6 +9,7 @@ dependencies:
   - flask
   - pymysql
   - flask-sqlalchemy
+  - sqlalchemy
   - marshmallow
   - wtforms
   - nodejs=14.6.0
@@ -16,5 +17,9 @@ dependencies:
   - pyyaml
   - pandas
   - sqlalchemy-utils
+  - flask-security
+  - email_validator
+  - pip:
+    - sqlalchemy-filters
 
 prefix: ~/miniconda3/envs/sfsc
